@@ -17,6 +17,8 @@ import Signup from '../pages/Signup';
 import Signout from '../pages/Signout';
 import ManageDatabase from '../pages/ManageDatabase';
 import { ROLE } from '../../api/role/Role';
+// new page
+import VolunteerSignup from '../pages/VolunteerSignup';
 
 /** Top-level layout component for this application. Called in imports/startup/client/startup.jsx. */
 class App extends React.Component {
@@ -28,6 +30,7 @@ class App extends React.Component {
           <Switch>
             <Route exact path="/" component={Landing}/>
             <Route path="/signin" component={Signin}/>
+            <Route path="/volunteer_signup" component={VolunteerSignup}/>
             <Route path="/signup" component={Signup}/>
             <Route path="/signout" component={Signout}/>
             <ProtectedRoute path="/list" component={ListStuff}/>

@@ -1,3 +1,5 @@
+import VolunteerSignup from '../pages/VolunteerSignup';
+
 /** Define ids for each page. */
 export const PAGE_IDS = {
   ADD_STUFF: 'add-stuff',
@@ -10,4 +12,5 @@ export const PAGE_IDS = {
   SIGN_IN: 'sigin-in',
   SIGN_OUT: 'sign-out',
   SIGN_UP: 'sign-up',
+  VOLUNTEER_SIGNUP: 'volunteer-signup',
 };
