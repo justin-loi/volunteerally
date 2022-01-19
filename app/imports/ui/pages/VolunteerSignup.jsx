@@ -20,6 +20,8 @@ const VolunteerSignup = ({ location }) => {
   // reference: https://stackoverflow.com/questions/6177975/how-to-validate-date-with-format-mm-dd-yyyy-in-javascript
   // Validates that the input string is a valid date formatted as "mm/dd/yyyy"
   function isValidDate(dateString) {
+    // declare and initialize variables
+    const today = new Date();
     // First check for the pattern
     if (!/^\d{1,2}\/\d{1,2}\/\d{4}$/.test(dateString)) {
       setError('Please enter the correct date format mm/dd/yyyy');
@@ -31,7 +33,7 @@ const VolunteerSignup = ({ location }) => {
     const month = parseInt(parts[0], 10);
     const year = parseInt(parts[2], 10);
     // Check the ranges of month and year
-    if (year < 1000 || year > 3000 || month === 0 || month > 12) {
+    if (year < (today.getFullYear() - 600) || year > (today.getFullYear() + 600) || month === 0 || month > 12) {
       setError('Invalid date');
       return false;
     }
@@ -46,7 +48,6 @@ const VolunteerSignup = ({ location }) => {
       return false;
     }
     // Checks are volunteers over 16
-    const today = new Date();
     if ((today.getFullYear() - year) <= 16) {
       if (today.getMonth() <= month) {
         if (today.getDate() < day) {

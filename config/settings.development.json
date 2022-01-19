@@ -11,6 +11,22 @@
     { "name": "Banana", "quantity": 2, "owner": "admin@foo.com", "condition": "good" },
     { "name": "Boogie Board", "quantity": 2, "owner": "admin@foo.com", "condition": "excellent" }
   ],
+
+  "defaultVolunteer": [
+    { "owner": "john@foo.com",
+      "firstName": "temmo",
+      "lastName": "temmo",
+      "gender": "Male",
+      "primaryAddress": "2444 Dole St",
+      "city": "Honolulu",
+      "state": "Hawaii",
+      "zipCode_postalCode": "96822",
+      "phoneNumber": "123456789",
+      "interests": "",
+      "specialSkill": "",
+      "environmentalPreference": "",
+      "availability": ""}
+  ],
   "public": {
     "development": true
   }
