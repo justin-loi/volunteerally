@@ -27,10 +27,13 @@ class VolunteerCollection extends BaseCollection {
       state: String,
       zipCode_postalCode: String,
       phoneNumber: String,
-      interests: { type: String, required: false },
-      specialSkill: { type: String, required: false },
+      interests: { type: Array, required: false },
+      'interests.$': { type: String, required: false },
+      specialSkill: { type: Array, required: false },
+      'specialSkill.$': { type: String, required: false },
       environmentalPreference: { type: String, required: false },
-      availability: { type: String, required: false },
+      availability: { type: Array, required: false },
+      'availability.$': { type: String, required: false },
     }));
   }
 

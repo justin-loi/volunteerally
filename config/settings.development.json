@@ -14,18 +14,18 @@
 
   "defaultVolunteer": [
     { "owner": "john@foo.com",
-      "firstName": "temmo",
-      "lastName": "temmo",
+      "firstName": "john",
+      "lastName": "foo",
       "gender": "Male",
       "primaryAddress": "2444 Dole St",
       "city": "Honolulu",
       "state": "Hawaii",
       "zipCode_postalCode": "96822",
       "phoneNumber": "123456789",
-      "interests": "",
-      "specialSkill": "",
+      "interests": [],
+      "specialSkill": [],
       "environmentalPreference": "",
-      "availability": ""}
+      "availability": []}
   ],
   "public": {
     "development": true
