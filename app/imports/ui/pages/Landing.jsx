@@ -18,9 +18,9 @@ const Landing = () => (
         We connect passionate volunteers with charitable organizations in order to build community.<br/> Let us help you easily find service opportunities for organizations in your area of interest.
       </p>
     </Grid.Row>
-  </Grid>
-  <Grid>
+    <Grid.Row className="landing-white-background">
 
+    </Grid.Row>
   </Grid>
 );
 
