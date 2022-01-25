@@ -1,6 +1,6 @@
 .landing-background-top {
   background-image: url("/images/landing-page-top-image.png");
-  background-size: cover;
+  background-size: auto;
 }
 
 .landing-volunteer-ally-logo {
@@ -22,6 +22,16 @@
 
 .landing-white-background {
   background-color: white;
+}
+
+.landing-header-3 {
+  color: darkcyan;
+  font-size: x-large;
+  font-family: Accordion;
+}
+
+.landing-descriptions {
+  font-size: large;
 }
 
 
