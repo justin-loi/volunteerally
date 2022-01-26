@@ -3,14 +3,21 @@
   background-size: cover;
 }
 
+.landing-background-bottom {
+  background-image: url("/images/landing-bottom-background.png");
+  background-size: cover;
+}
+
 .landing-volunteer-ally-logo {
-  padding-top: 10px;
+  padding-top: 100px;
+  padding-bottom: 100px;
 }
 
 .landing-header-1 {
   color: white;
   font-family: Accordion;
   font-size: xxx-large;
+  padding-bottom: 100px;
 }
 
 .landing-header-2 {
@@ -30,5 +37,17 @@
   font-size: x-large;
   font-family: Accordian;
 }
+
+.landing-bottom-header-1 {
+  font-size: xxx-large;
+  color: white;
+  padding-top:50px;
+}
+
+.landing-bottom-header-2 {
+  font-size: large;
+  color: white;
+}
+
 
 
