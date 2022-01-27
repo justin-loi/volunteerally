@@ -1,4 +1,5 @@
 import React from 'react';
+import { Icon } from 'semantic-ui-react';
 
 /** The Footer appears at the bottom of every page. Rendered by the App Layout component. */
 const Footer = () => {
@@ -7,10 +8,9 @@ const Footer = () => {
     <footer>
       <div style={divStyle} className="ui center aligned container">
         <hr />
-        Department of Information and Computer Sciences <br />
-        University of Hawaii<br />
-        Honolulu, HI 96822 <br />
-        <a href="http://ics-software-engineering.github.io/matrp">Template Home Page</a>
+        <Icon name='copyright'/> 2021-2022 VolunteerAlly. All rights reserved. <br />
+        <a> Privacy Policy.</a> <br />
+        <a> Terms & Conditions.</a> <br />
       </div>
     </footer>
   );
