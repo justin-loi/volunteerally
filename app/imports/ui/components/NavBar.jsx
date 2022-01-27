@@ -29,14 +29,15 @@ const NavBar = ({ currentUser }) => {
           </Dropdown>]
       ) : ''}
       <Menu.Item position="right">
-        {currentUser === '' ? (
-          <Dropdown id={COMPONENT_IDS.NAVBAR_LOGIN_DROPDOWN} text="Login" pointing="top right" icon={'user'}>
+        {currentUser === '' ? ([
+          <Menu.Item id={COMPONENT_IDS.NAVBAR_VOLUNTEER_SIGNUP} as={NavLink} activeClassName="active" exact to="/volunteer_signup" key='volunteer_signup'>Volunteer Sign Up</Menu.Item>,
+          <Dropdown id={COMPONENT_IDS.NAVBAR_LOGIN_DROPDOWN} text="Login" pointing="top right" icon={'user'} key='SignIn_SignOut'>
             <Dropdown.Menu>
               <Dropdown.Item id={COMPONENT_IDS.NAVBAR_LOGIN_DROPDOWN_SIGN_IN} icon="user" text="Sign In" as={NavLink} exact to="/signin" />
               <Dropdown.Item id={COMPONENT_IDS.NAVBAR_LOGIN_DROPDOWN_SIGN_UP} icon="add user" text="Sign Up" as={NavLink} exact to="/signup" />
             </Dropdown.Menu>
-          </Dropdown>
-        ) : (
+          </Dropdown>,
+        ]) : (
           <Dropdown id={COMPONENT_IDS.NAVBAR_CURRENT_USER} text={currentUser} pointing="top right" icon={'user'}>
             <Dropdown.Menu>
               <Dropdown.Item id={COMPONENT_IDS.NAVBAR_SIGN_OUT} icon="sign out" text="Sign Out" as={NavLink} exact to="/signout" />
