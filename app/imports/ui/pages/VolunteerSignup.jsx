@@ -422,7 +422,7 @@ const VolunteerSignup = ({ location }) => {
               <label>Interests: </label>
               <Form.Group>
                 <Grid columns={2}>
-                  <Grid.Row >
+                  <Grid.Row style={{ paddingLeft: '8px' }}>
                     <Grid.Column>
                       <Form.Checkbox
                         label='Animal Welfare/Rescue'
@@ -518,7 +518,7 @@ const VolunteerSignup = ({ location }) => {
               <label>Special Skills (optional): </label>
               <Form.Group>
                 <Grid columns={2}>
-                  <Grid.Row >
+                  <Grid.Row style={{ paddingLeft: '8px' }}>
                     <Grid.Column>
                       <Form.Checkbox
                         label='Agriculture'
@@ -653,7 +653,7 @@ const VolunteerSignup = ({ location }) => {
               <label>Availability: </label>
               <Form.Group>
                 <Grid columns={2}>
-                  <Grid.Row >
+                  <Grid.Row style={{ paddingLeft: '8px' }}>
                     <Grid.Column>
                       <Form.Checkbox
                         label='One-Time'
