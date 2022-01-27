@@ -381,8 +381,7 @@ const VolunteerSignup = ({ location }) => {
                 onChange={handleChange}
                 error={ isValueEmpty[7] }
               />
-              <br/>
-              <Grid divided='vertically'>
+              <Grid divided='vertically' style={{ paddingTop: '8px', paddingBottom: '16px' }}>
                 <Form.Input
                   label="City"
                   id={COMPONENT_IDS.VOLUNTEER_SIGNUP_FORM_CITY}
@@ -418,8 +417,7 @@ const VolunteerSignup = ({ location }) => {
                   error={ isValueEmpty[11] }
                 />
               </Grid>
-              <br/>
-              <label>Interests: </label>
+              <label style={{ paddingTop: '20px' }}>Interests: </label>
               <Form.Group>
                 <Grid columns={2}>
                   <Grid.Row style={{ paddingLeft: '8px' }}>
@@ -514,8 +512,7 @@ const VolunteerSignup = ({ location }) => {
                   </Grid.Row>
                 </Grid>
               </Form.Group>
-              <br/>
-              <label>Special Skills (optional): </label>
+              <label style={{ paddingTop: '20px' }}>Special Skills (optional): </label>
               <Form.Group>
                 <Grid columns={2}>
                   <Grid.Row style={{ paddingLeft: '8px' }}>
@@ -618,8 +615,7 @@ const VolunteerSignup = ({ location }) => {
                   </Grid.Row>
                 </Grid>
               </Form.Group>
-              <br/>
-              <label>Environmental Preference: </label>
+              <label style={{ paddingTop: '20px' }}>Environmental Preference: </label>
               <Form.Group inline>
                 <Form.Radio
                   label='Indoor'
