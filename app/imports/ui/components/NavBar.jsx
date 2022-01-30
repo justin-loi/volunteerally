@@ -31,6 +31,7 @@ const NavBar = ({ currentUser }) => {
       <Menu.Item position="right">
         {currentUser === '' ? ([
           <Menu.Item id={COMPONENT_IDS.NAVBAR_VOLUNTEER_SIGNUP} as={NavLink} activeClassName="active" exact to="/volunteer_signup" key='volunteer_signup'>Volunteer Sign Up</Menu.Item>,
+          <Menu.Item id={COMPONENT_IDS.NAVBAR_ABOUT_US} as={NavLink} activeClassName="active" exact to="/about_us" key='about_us'>About Us</Menu.Item>,
           <Dropdown id={COMPONENT_IDS.NAVBAR_LOGIN_DROPDOWN} text="Login" pointing="top right" icon={'user'} key='SignIn_SignOut'>
             <Dropdown.Menu>
               <Dropdown.Item id={COMPONENT_IDS.NAVBAR_LOGIN_DROPDOWN_SIGN_IN} icon="user" text="Sign In" as={NavLink} exact to="/signin" />

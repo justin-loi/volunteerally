@@ -30,4 +30,5 @@ export const COMPONENT_IDS = {
   VOLUNTEER_SIGNUP_FORM_PASSWORD: 'volunteer-signup-form-password',
   VOLUNTEER_SIGNUP_FORM_SUBMIT: 'volunteer-signup-form-submit',
   NAVBAR_VOLUNTEER_SIGNUP: 'navbar-volunteer-signup',
+  NAVBAR_ABOUT_US: 'navbar-about-us',
 };
