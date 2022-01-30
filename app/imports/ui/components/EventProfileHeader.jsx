@@ -11,7 +11,7 @@ import { PAGE_IDS } from '../utilities/PageIDs';
 const EventProfileHeader = () => {
   const gridStyle = { height: '500px', fontSize: '75px' };
   return (
-    <div className="top-landing-background">
+    <div className="event-profile-top-background">
       <Grid container verticalAlign="bottom" textAlign='center' style={gridStyle} columns={3}>
         <Grid.Row>
           <Grid.Column>
