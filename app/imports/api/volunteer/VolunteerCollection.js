@@ -11,7 +11,7 @@ export const volunteerPublications = {
 };
 export const volunteerGender = ['Female', 'Male', 'Other', 'Prefer Not To Say'];
 
-// firstName, lastName, gender, primaryAddress, city, state, zipCode_postalCode, phoneNumber, interests, specialSkill, environmentalPreference, availability
+// firstName, lastName, gender, address, city, state, zipCode_postalCode, phoneNumber, interests, specialSkills, environmentalPreference, availability
 class VolunteerCollection extends BaseCollection {
   constructor() {
     super('Volunteers', new SimpleSchema({
@@ -21,16 +21,20 @@ class VolunteerCollection extends BaseCollection {
       gender: {
         type: String,
         allowedValues: volunteerGender,
+        required: false,
       },
-      primaryAddress: String,
+      address: String,
       city: String,
       state: String,
       zipCode_postalCode: String,
       phoneNumber: String,
-      interests: { type: String, required: false },
-      specialSkill: { type: String, required: false },
+      interests: { type: Array, required: false },
+      'interests.$': { type: String, required: false },
+      specialSkills: { type: Array, required: false },
+      'specialSkills.$': { type: String, required: false },
       environmentalPreference: { type: String, required: false },
-      availability: { type: String, required: false },
+      availability: { type: Array, required: false },
+      'availability.$': { type: String, required: false },
     }));
   }
 
@@ -40,29 +44,29 @@ class VolunteerCollection extends BaseCollection {
    * @param firstName volunteer's first name.
    * @param lastName volunteer's last name.
    * @param gender volunteer's gender.
-   * @param primaryAddress volunteer's address.
+   * @param address volunteer's address.
    * @param city volunteer's city.
    * @param state volunteer's state.
    * @param zipCode_postalCode volunteer's zip/postal code.
    * @param phoneNumber volunteer's phone number.
    * @param interests volunteer's interests.
-   * @param specialSkill volunteer's special skill
+   * @param specialSkills volunteer's special skill
    * @param environmentalPreference volunteer's environmental preference
    * @param availability volunteer's availability
    * @return {String} the docID of the new document.
    */
-  define({ owner, firstName, lastName, gender, primaryAddress, city, state, zipCode_postalCode, phoneNumber, interests, specialSkill, environmentalPreference, availability }) {
+  define({ owner, firstName, lastName, gender, address, city, state, zipCode_postalCode, phoneNumber, interests, specialSkills, environmentalPreference, availability }) {
     const docID = this._collection.insert({
       owner,
       firstName,
       lastName, gender,
-      primaryAddress,
+      address,
       city,
       state,
       zipCode_postalCode,
       phoneNumber,
       interests,
-      specialSkill,
+      specialSkills,
       environmentalPreference,
       availability,
     });
@@ -76,17 +80,17 @@ class VolunteerCollection extends BaseCollection {
    * @param firstName volunteer's first name (optional).
    * @param lastName volunteer's last name (optional).
    * @param gender volunteer's gender (optional).
-   * @param primaryAddress volunteer's address (optional).
+   * @param address volunteer's address (optional).
    * @param city volunteer's city (optional).
    * @param state volunteer's state (optional).
    * @param zipCode_postalCode volunteer's zip/postal code (optional).
    * @param phoneNumber volunteer's phone number (optional).
    * @param interests volunteer's interests (optional).
-   * @param specialSkill volunteer's special skill (optional).
+   * @param specialSkills volunteer's special skill (optional).
    * @param environmentalPreference volunteer's environmental preference (optional).
    * @param availability volunteer's availability (optional).
    */
-  update(docID, { firstName, lastName, gender, primaryAddress, city, state, zipCode_postalCode, phoneNumber, interests, specialSkill, environmentalPreference, availability }) {
+  update(docID, { firstName, lastName, gender, address, city, state, zipCode_postalCode, phoneNumber, interests, specialSkills, environmentalPreference, availability }) {
     const updateData = {};
     if (firstName) {
       updateData.firstName = firstName;
@@ -97,8 +101,8 @@ class VolunteerCollection extends BaseCollection {
     if (gender) {
       updateData.gender = gender;
     }
-    if (primaryAddress) {
-      updateData.primaryAddress = primaryAddress;
+    if (address) {
+      updateData.address = address;
     }
     if (city) {
       updateData.city = city;
@@ -115,8 +119,8 @@ class VolunteerCollection extends BaseCollection {
     if (interests) {
       updateData.interests = interests;
     }
-    if (specialSkill) {
-      updateData.specialSkill = specialSkill;
+    if (specialSkills) {
+      updateData.specialSkills = specialSkills;
     }
     if (environmentalPreference) {
       updateData.environmentalPreference = environmentalPreference;
@@ -208,18 +212,27 @@ class VolunteerCollection extends BaseCollection {
     const firstName = doc.firstName;
     const lastName = doc.lastName;
     const gender = doc.gender;
-    const primaryAddress = doc.primaryAddress;
+    const address = doc.address;
     const city = doc.city;
     const state = doc.state;
     const zipCode_postalCode = doc.zipCode_postalCode;
     const phoneNumber = doc.phoneNumber;
     const interests = doc.interests;
-    const specialSkill = doc.specialSkill;
+    const specialSkills = doc.specialSkills;
     const environmentalPreference = doc.environmentalPreference;
     const availability = doc.availability;
-    return { owner, firstName, lastName, gender, primaryAddress, city, state, zipCode_postalCode, phoneNumber, interests, specialSkill, environmentalPreference, availability };
+    return { owner, firstName, lastName, gender, address, city, state, zipCode_postalCode, phoneNumber, interests, specialSkills, environmentalPreference, availability };
   }
 }
+
+Meteor.methods({
+  // eslint-disable-next-line meteor/audit-argument-checks
+  fixVolunteerRole() {
+    const role = ROLE.USER;
+    Roles.createRole(role, { unlessExists: true });
+    Roles.addUsersToRoles(Meteor.user(), [role]);
+  },
+});
 
 /**
  * Provides the singleton instance of this class to all other entities.
