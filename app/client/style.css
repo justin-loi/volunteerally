@@ -49,5 +49,8 @@
   color: white;
 }
 
-
-
+.event-profile-top-background {
+  background: url('images/red-cross.jpeg') no-repeat center center fixed;
+  background-size: cover;
+  height: 500px;
+}
