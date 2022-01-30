@@ -51,7 +51,7 @@ const Signin = ({ location }) => {
   }
   // Otherwise return the Login form.
   return (
-    <Container id={PAGE_IDS.SIGN_IN}>
+    <Container id={PAGE_IDS.SIGN_IN} style={{ paddingLeft: '130px', paddingRight: '130px', marginTop: '50px', marginBottom: '95px' }}>
       <Grid textAlign="center" verticalAlign="middle" centered columns={2}>
         <Grid.Column>
           <Header as="h2" textAlign="center">

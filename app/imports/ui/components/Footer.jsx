@@ -1,6 +1,7 @@
 import React from 'react';
 import { Container, Grid, List, Icon, Header, Button } from 'semantic-ui-react';
 import PropTypes from 'prop-types';
+import { Meteor } from 'meteor/meteor';
 import { withTracker } from 'meteor/react-meteor-data';
 import { NavLink, withRouter } from 'react-router-dom';
 
