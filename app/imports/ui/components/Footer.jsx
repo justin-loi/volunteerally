@@ -17,9 +17,9 @@ class Footer extends React.Component {
             <List size={'large'} inverted>
               <List.Item><a href={'/#/about'}><Icon name={'users'}/> About Us
               </a></List.Item>
-              <List.Item><a href={'/#/terms'}><Icon name={'privacy'}/> Terms & Conditions</a></List.Item>
+              <List.Item><a href={'/#/terms'}><Icon name={'file'}/> Terms & Conditions</a></List.Item>
               <List.Item>
-                <a href={'https://manoalist.github.io/'}><Icon name={'github'}/> More Information</a>
+                <a href={'/#/privacy'}><Icon name={'privacy'}/> Privacy Policy</a>
               </List.Item>
             </List>
           </Grid.Column>
