@@ -303,7 +303,7 @@ const VolunteerSignup = ({ location }) => {
               />
               <Form.Input
                 label="Confirm Password"
-                id={COMPONENT_IDS.VOLUNTEER_SIGNUP_FORM_PASSWORD}
+                id={COMPONENT_IDS.VOLUNTEER_SIGNUP_FORM_CONFIRM_PASSWORD}
                 icon="lock"
                 iconPosition="left"
                 name="confirmPassword"
@@ -314,7 +314,7 @@ const VolunteerSignup = ({ location }) => {
               />
               <Form.Input
                 label="Date Of Birth (You must be at least 16 years old to join Volunteer Ally)"
-                id={COMPONENT_IDS.VOLUNTEER_SIGNUP_FORM_BRITH}
+                id={COMPONENT_IDS.VOLUNTEER_SIGNUP_FORM_BIRTH}
                 icon="calendar alternate outline"
                 iconPosition="left"
                 name="dateOfBirth"
@@ -343,6 +343,7 @@ const VolunteerSignup = ({ location }) => {
               <Form.Group inline>
                 <label>Gender: </label>
                 <Form.Radio
+                  id={COMPONENT_IDS.VOLUNTEER_SIGNUP_FORM_MALE}
                   label='Male'
                   name='gender'
                   value='Male'
@@ -350,6 +351,7 @@ const VolunteerSignup = ({ location }) => {
                   onChange={handleChange}
                 />
                 <Form.Radio
+                  id={COMPONENT_IDS.VOLUNTEER_SIGNUP_FORM_FEMALE}
                   label='Female'
                   name='gender'
                   value='Female'
@@ -357,6 +359,7 @@ const VolunteerSignup = ({ location }) => {
                   onChange={handleChange}
                 />
                 <Form.Radio
+                  id={COMPONENT_IDS.VOLUNTEER_SIGNUP_FORM_OTHER}
                   label='Other'
                   name='gender'
                   value='Other'
@@ -364,6 +367,7 @@ const VolunteerSignup = ({ location }) => {
                   onChange={handleChange}
                 />
                 <Form.Radio
+                  id={COMPONENT_IDS.VOLUNTEER_SIGNUP_FORM_NO_SAY}
                   label='Prefer Not to Say'
                   name='gender'
                   value='Prefer Not to Say'
@@ -423,6 +427,7 @@ const VolunteerSignup = ({ location }) => {
                   <Grid.Row style={{ paddingLeft: '8px' }}>
                     <Grid.Column>
                       <Form.Checkbox
+                        id={COMPONENT_IDS.VOLUNTEER_SIGNUP_FORM_ANIMALS}
                         label='Animal Welfare/Rescue'
                         name='interests'
                         value='Animal Welfare/Rescue'
@@ -518,6 +523,7 @@ const VolunteerSignup = ({ location }) => {
                   <Grid.Row style={{ paddingLeft: '8px' }}>
                     <Grid.Column>
                       <Form.Checkbox
+                        id={COMPONENT_IDS.VOLUNTEER_SIGNUP_FORM_AGRICULTURE}
                         label='Agriculture'
                         name='specialSkills'
                         value='Agriculture'
@@ -618,6 +624,7 @@ const VolunteerSignup = ({ location }) => {
               <label style={{ paddingTop: '20px' }}>Environmental Preference: </label>
               <Form.Group inline>
                 <Form.Radio
+                  id={COMPONENT_IDS.VOLUNTEER_SIGNUP_FORM_INDOOR}
                   label='Indoor'
                   name='environmentalPreference'
                   value='Indoor'
@@ -660,6 +667,7 @@ const VolunteerSignup = ({ location }) => {
                     </Grid.Column>
                     <Grid.Column>
                       <Form.Checkbox
+                        id={COMPONENT_IDS.VOLUNTEER_SIGNUP_FORM_MONTHLY}
                         label='Once a month'
                         name='availability'
                         value='Once a month'
@@ -710,13 +718,14 @@ const VolunteerSignup = ({ location }) => {
                 </Grid>
               </Form.Group>
               <Form.Checkbox
+                id={COMPONENT_IDS.VOLUNTEER_SIGNUP_FORM_POLICY}
                 label='Please confirm that you agree to our privacy policy'
                 name = 'privacyPolicy'
                 value = 'agree'
                 onChange={handleChange}
                 error={ isValueEmpty[12] }
               />
-              <Form.Button id={COMPONENT_IDS.SIGN_UP_FORM_SUBMIT} content="Submit" />
+              <Form.Button id={COMPONENT_IDS.VOLUNTEER_SIGNUP_FORM_SUBMIT} content="Submit" />
             </Segment>
           </Form>
           <Message>
