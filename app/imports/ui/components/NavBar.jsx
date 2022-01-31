@@ -10,7 +10,7 @@ import { COMPONENT_IDS } from '../utilities/ComponentIDs';
 
 /** The NavBar appears at the top of every page. Rendered by the App Layout component. */
 const NavBar = ({ currentUser }) => {
-  const menuStyle = { marginBottom: '10px', backgroundColor: '#024731', flexShrink: 0};
+  const menuStyle = { marginBottom: '10px', backgroundColor: '#024731', flexShrink: 0 };
   return (
     <Menu style={menuStyle} attached="top" borderless inverted>
       <Menu.Item id={COMPONENT_IDS.NAVBAR_LANDING_PAGE} as={NavLink} activeClassName="" exact to="/">
@@ -37,6 +37,8 @@ const NavBar = ({ currentUser }) => {
         <Menu.Item id={COMPONENT_IDS.NAVBAR_BROWSE_OPPORTUNITY} as={NavLink} activeClassName="active" exact to="/" key='browse_opportunity'>Browse Opportunity</Menu.Item>
         <Menu.Item id={COMPONENT_IDS.NAVBAR_ORGANIZATION_LIBRARY} as={NavLink} activeClassName="active" exact to="/" key='organization_library'>Organization Library</Menu.Item>
         {currentUser === '' ? ([
+          <Menu.Item id={COMPONENT_IDS.NAVBAR_ABOUT_US} as={NavLink} activeClassName="active" exact to="/about_us" key='about_us'>About Us</Menu.Item>,
+          <Menu.Item id={COMPONENT_IDS.NAVBAR_VOLUNTEER_SIGNUP} as={NavLink} activeClassName="active" exact to="/volunteer_signup" key='volunteer_signup'>Volunteer Sign Up</Menu.Item>,
           <Dropdown id={COMPONENT_IDS.NAVBAR_LOGIN_DROPDOWN} text="Login" pointing="top right" icon={'user'} key='SignIn_SignOut'>
             <Dropdown.Menu>
               <Dropdown.Item id={COMPONENT_IDS.NAVBAR_LOGIN_DROPDOWN_SIGN_IN} icon="user" text="Sign In" as={NavLink} exact to="/signin" />
