@@ -18,6 +18,12 @@ class NavBar {
     await t.click(`#${COMPONENT_IDS.NAVBAR_LOGIN_DROPDOWN_SIGN_IN}`);
   }
 
+  async gotoVolunteerSignupPage() {
+    await this.ensureLogout();
+    await t.click(`#${COMPONENT_IDS.NAVBAR_LOGIN_DROPDOWN}`);
+    await t.click(`#${COMPONENT_IDS.NAVBAR_VOLUNTEER_SIGNUP}`);
+  }
+
   /** Check that the specified user is currently logged in. */
   async isLoggedIn(username) {
     const loggedInUser = await Selector(`#${COMPONENT_IDS.NAVBAR_CURRENT_USER}`).innerText;
@@ -29,13 +35,6 @@ class NavBar {
     await t.expect(Selector(`#${COMPONENT_IDS.NAVBAR_CURRENT_USER}`).exists).ok();
     await t.click(`#${COMPONENT_IDS.NAVBAR_CURRENT_USER}`);
     await t.click(`#${COMPONENT_IDS.NAVBAR_SIGN_OUT}`);
-  }
-
-  /** Pull down login menu, go to sign up page. */
-  async gotoSignupPage() {
-    await this.ensureLogout();
-    await t.click(`#${COMPONENT_IDS.NAVBAR_LOGIN_DROPDOWN}`);
-    await t.click(`#${COMPONENT_IDS.NAVBAR_LOGIN_DROPDOWN_SIGN_UP}`);
   }
 
   /** Go to the add stuff page. */

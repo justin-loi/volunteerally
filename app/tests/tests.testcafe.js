@@ -2,7 +2,7 @@ import { Selector, t } from 'testcafe';
 import { addStuffPage, editStuffPage, listStuffPage, listStuffAdminPage, manageDatabasePage, signOutPage } from './simple.page';
 import { signInPage } from './signin.page';
 import { navBar } from './navbar.component';
-import { signUpPage } from './signup.page';
+import { volunteerSignupPage } from './volunteersignup.page';
 import { landingPage } from './landing.page';
 import { COMPONENT_IDS } from '../imports/ui/utilities/ComponentIDs';
 
@@ -11,7 +11,7 @@ import { COMPONENT_IDS } from '../imports/ui/utilities/ComponentIDs';
 /** Credentials for one of the sample users defined in settings.development.json. */
 const credentials = { username: 'john@foo.com', password: 'changeme' };
 const adminCredentials = { username: 'admin@foo.com', password: 'changeme' };
-const newCredentials = { username: 'jane@foo.com', password: 'changeme' };
+const newCredentials = { username: 'janeVolunteers', password: 'changeme' };
 
 fixture('matrp localhost test with default db')
   .page('http://localhost:3000');
@@ -28,12 +28,12 @@ test('Test that sign in and sign out work', async () => {
   await signOutPage.isDisplayed();
 });
 
-test('Test that sign up and sign out work', async () => {
-  await navBar.gotoSignupPage();
-  await signUpPage.signupUser(newCredentials.username, newCredentials.password);
-  await navBar.isLoggedIn(newCredentials.username);
+test('Test that volunteer sign up and sign out work', async () => {
+  await navBar.gotoVolunteerSignupPage();
+  await volunteerSignupPage.signupVolunteer(newCredentials.username, newCredentials.password);
+  /** await navBar.isLoggedIn(newCredentials.username);
   await navBar.logout();
-  await signOutPage.isDisplayed();
+  await signOutPage.isDisplayed(); */
 });
 
 test('Test that user pages show up', async () => {
