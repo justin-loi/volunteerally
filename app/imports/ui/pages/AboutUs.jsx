@@ -6,7 +6,12 @@ import { PAGE_IDS } from '../utilities/PageIDs';
 const AboutUs = () => (
   <Grid id={PAGE_IDS.ABOUT_US} container centered>
     <Grid.Column>
-      <Header as="h2" textAlign="center">Add Stuff</Header>
+      <div className="row">
+        <Header as="h1" textAlign="center">About VolunteerAlly</Header>
+      </div>
+      <div className="row">
+        <Header as="h5" textAlign="center"> About VolunteerAlly </Header>
+      </div>
     </Grid.Column>
   </Grid>
 );
