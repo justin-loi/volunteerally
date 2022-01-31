@@ -16,11 +16,11 @@ class Footer extends React.Component {
             <Header as={'h3'} inverted>INFORMATION</Header>
             <hr/>
             <List size={'large'} inverted>
-              <List.Item><a href={'/#/about'}><Icon name={'users'}/> About Us
+              <List.Item><a href={'/#/about_us'}><Icon name={'users'}/> About Us
               </a></List.Item>
               <List.Item><a href={'/#/terms'}><Icon name={'file'}/> Terms & Conditions</a></List.Item>
               <List.Item>
-                <a href={'/#/privacy'}><Icon name={'privacy'}/> Privacy Policy</a>
+                <a href={'/#/privacy_policy'}><Icon name={'privacy'}/> Privacy Policy</a>
               </List.Item>
             </List>
           </Grid.Column>
