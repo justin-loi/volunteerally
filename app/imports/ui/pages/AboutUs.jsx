@@ -1,6 +1,8 @@
 import React from 'react';
 import { Grid, Header } from 'semantic-ui-react';
 import { PAGE_IDS } from '../utilities/PageIDs';
+import GoogleMap from '../components/GoogleMap';
+
 
 /** Renders the Page for adding a document. */
 const AboutUs = () => (
@@ -42,6 +44,9 @@ const AboutUs = () => (
                 Jonathan Turner<br/>
           <br/>
                 Founder: Allyson Wo</p>
+      </div>
+      <div className="row, about-us-middle-section">
+        <GoogleMap/>
       </div>
     </Grid.Column>
   </Grid>
