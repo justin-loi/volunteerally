@@ -1,5 +1,6 @@
 import React from 'react';
 import { Grid, Button } from 'semantic-ui-react';
+import { NavLink } from 'react-router-dom';
 import { PAGE_IDS } from '../utilities/PageIDs';
 
 /** The Footer appears at the bottom of every page. Rendered by the App Layout component. */
@@ -16,7 +17,8 @@ const LandingBottomSection = () => (
       </p>
     </Grid.Row>
     <Grid.Row>
-      <Button size='massive' color='blue'>Join Now!</Button>
+      <Button size='massive' color='blue' as={NavLink}
+        exact to={'/volunteer_signup'}>Join Now!</Button>
     </Grid.Row>
   </Grid>
 );

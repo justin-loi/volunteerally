@@ -44,7 +44,7 @@ class Footer extends React.Component {
                   size={'small'}
                   style={{ color: 'white', backgroundColor: '#8EA4D2' }}
                   as={NavLink}
-                  exact to={'/signup'}/>
+                  exact to={'/volunteer_signup'}/>
               </Container>
             )}
           </Grid.Column>
