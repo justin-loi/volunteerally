@@ -29,6 +29,8 @@
       "availability": []}
   ],
   "public": {
-    "development": true
+    "development": true,
+    "googleMaps": "AIzaSyCOp28hodQNkXTNF0UOrUsOhFEpEU4UuxY",
+    "googleMapsKEY":  "AIzaSyCOp28hodQNkXTNF0UOrUsOhFEpEU4UuxY"
   }
 }
