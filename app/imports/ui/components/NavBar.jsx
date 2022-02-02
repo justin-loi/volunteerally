@@ -22,7 +22,7 @@ const NavBar = ({ currentUser }) => {
         />
       </Menu.Item>
       {currentUser ? (
-        [<Menu.Item id={COMPONENT_IDS.NAVBAR_ADD_STUFF} as={NavLink} activeClassName="active" exact to="/add" key='add'>Add Stuff</Menu.Item>,
+        [//<Menu.Item id={COMPONENT_IDS.NAVBAR_ADD_STUFF} as={NavLink} activeClassName="active" exact to="/add" key='add'>Add Stuff</Menu.Item>,
           <Menu.Item id={COMPONENT_IDS.NAVBAR_LIST_STUFF} as={NavLink} activeClassName="active" exact to="/list" key='list'>List Stuff</Menu.Item>]
       ) : ''}
       {Roles.userIsInRole(Meteor.userId(), [ROLE.ADMIN]) ? (
@@ -34,6 +34,7 @@ const NavBar = ({ currentUser }) => {
           </Dropdown>]
       ) : ''}
       <Menu.Item position="right">
+        <Menu.Item id={COMPONENT_IDS.NAVBAR_ADD_EVENT} as={NavLink} activeClassName="active" exact to="/add" key='add_event'>Add Event</Menu.Item>
         <Menu.Item id={COMPONENT_IDS.NAVBAR_BROWSE_OPPORTUNITY} as={NavLink} activeClassName="active" exact to="/" key='browse_opportunity'>Browse Opportunity</Menu.Item>
         <Menu.Item id={COMPONENT_IDS.NAVBAR_ORGANIZATION_LIBRARY} as={NavLink} activeClassName="active" exact to="/" key='organization_library'>Organization Library</Menu.Item>
         {currentUser === '' ? ([

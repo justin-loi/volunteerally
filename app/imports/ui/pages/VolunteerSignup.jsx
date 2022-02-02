@@ -19,11 +19,11 @@ const VolunteerSignup = ({ location }) => {
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
   const [redirectToReferer, setRedirectToReferer] = useState(false);
-  const [dateOfBirth, setDateOfBrith] = useState('');
+  const [dateOfBirth, setDateOfBirth] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
   // volunteer information/date
-  const [firstName, setfirstName] = useState('');
-  const [lastName, setlastName] = useState('');
+  const [firstName, setFirstName] = useState('');
+  const [lastName, setLastName] = useState('');
   const [gender, setGender] = useState('');
   const [address, setAddress] = useState('');
   const [city, setCity] = useState('');
@@ -149,15 +149,15 @@ const VolunteerSignup = ({ location }) => {
       break;
     case 'dateOfBirth':
       setIsValueEmptyHelper(4, isNotEmpty(value));
-      setDateOfBrith(value);
+      setDateOfBirth(value);
       break;
     case 'firstName':
       setIsValueEmptyHelper(5, isNotEmpty(value));
-      setfirstName(value);
+      setFirstName(value);
       break;
     case 'lastName':
       setIsValueEmptyHelper(6, isNotEmpty(value));
-      setlastName(value);
+      setLastName(value);
       break;
     case 'gender':
       setGender(value);
