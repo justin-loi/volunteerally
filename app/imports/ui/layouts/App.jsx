@@ -20,6 +20,7 @@ import { ROLE } from '../../api/role/Role';
 // new page
 import VolunteerSignup from '../pages/VolunteerSignup';
 import AboutUs from '../pages/AboutUs';
+import BrowseOpportunities from '../pages/BrowseOpportunities';
 
 /** Top-level layout component for this application. Called in imports/startup/client/startup.jsx. */
 class App extends React.Component {
@@ -31,6 +32,7 @@ class App extends React.Component {
           <Switch>
             <Route exact path="/" component={Landing}/>
             <Route path="/signin" component={Signin}/>
+            <Route path="/browse_opportunities" component={BrowseOpportunities}/>
             <Route path="/volunteer_signup" component={VolunteerSignup}/>
             <Route path="/about_us" component={AboutUs}/>
             <Route path="/signup" component={Signup}/>

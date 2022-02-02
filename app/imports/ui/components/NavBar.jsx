@@ -22,8 +22,7 @@ const NavBar = ({ currentUser }) => {
         />
       </Menu.Item>
       {currentUser ? (
-        [//<Menu.Item id={COMPONENT_IDS.NAVBAR_ADD_STUFF} as={NavLink} activeClassName="active" exact to="/add" key='add'>Add Stuff</Menu.Item>,
-          <Menu.Item id={COMPONENT_IDS.NAVBAR_LIST_STUFF} as={NavLink} activeClassName="active" exact to="/list" key='list'>List Stuff</Menu.Item>]
+        [<Menu.Item id={COMPONENT_IDS.NAVBAR_LIST_STUFF} as={NavLink} activeClassName="active" exact to="/list" key='list'>List Stuff</Menu.Item>]
       ) : ''}
       {Roles.userIsInRole(Meteor.userId(), [ROLE.ADMIN]) ? (
         [<Menu.Item id={COMPONENT_IDS.NAVBAR_LIST_STUFF_ADMIN} as={NavLink} activeClassName="active" exact to="/admin" key='admin'>Admin</Menu.Item>,
@@ -36,9 +35,10 @@ const NavBar = ({ currentUser }) => {
       <Menu.Item position="right">
         <Menu.Item id={COMPONENT_IDS.NAVBAR_ADD_EVENT} as={NavLink} activeClassName="active" exact to="/add" key='add_event'>Add Event</Menu.Item>
         <Menu.Item id={COMPONENT_IDS.NAVBAR_BROWSE_OPPORTUNITY} as={NavLink} activeClassName="active" exact to="/" key='browse_opportunity'>Browse Opportunity</Menu.Item>
+        <Menu.Item id={COMPONENT_IDS.NAVBAR_BROWSE_OPPORTUNITY} as={NavLink} activeClassName="active" exact to="/browse_opportunities" key='browse_opportunity'>Browse Opportunity</Menu.Item>
         <Menu.Item id={COMPONENT_IDS.NAVBAR_ORGANIZATION_LIBRARY} as={NavLink} activeClassName="active" exact to="/" key='organization_library'>Organization Library</Menu.Item>
+        <Menu.Item id={COMPONENT_IDS.NAVBAR_ABOUT_US} as={NavLink} activeClassName="active" exact to="/about_us" key='about_us'>About Us</Menu.Item>
         {currentUser === '' ? ([
-          <Menu.Item id={COMPONENT_IDS.NAVBAR_ABOUT_US} as={NavLink} activeClassName="active" exact to="/about_us" key='about_us'>About Us</Menu.Item>,
           <Dropdown id={COMPONENT_IDS.NAVBAR_LOGIN_DROPDOWN} text="Login/SignUp" pointing="top right" icon={'user'} key='SignIn_SignOut'>
             <Dropdown.Menu>
               <Dropdown.Item id={COMPONENT_IDS.NAVBAR_LOGIN_DROPDOWN_SIGN_IN} icon="user" text="Sign In" as={NavLink} exact to="/signin" />
