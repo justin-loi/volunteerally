@@ -43,5 +43,5 @@ export const COMPONENT_IDS = {
   VOLUNTEER_SIGNUP_FORM_CONFIRM_PASSWORD: 'volunteer-signup-confirm-password',
   NAVBAR_ORGANIZATION_LIBRARY: 'navbar-organization-library',
   NAVBAR_BROWSE_OPPORTUNITY: 'navbar-browse-opportunity',
-
+  NAVBAR_ADD_EVENT: 'navbar-add-event',
 };
