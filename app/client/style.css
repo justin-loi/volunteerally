@@ -71,3 +71,9 @@
   background-size: cover;
   height: 500px;
 }
+
+.organization-signup-background {
+    background: url('images/young-people.jpg') no-repeat center center fixed;
+    background-size: cover;
+    height: 400px;
+}

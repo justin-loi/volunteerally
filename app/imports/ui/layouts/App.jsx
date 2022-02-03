@@ -24,6 +24,7 @@ import AboutUs from '../pages/AboutUs';
 import Privacy from '../pages/Privacy';
 import TermsAndConditions from '../pages/TermsAndConditions';
 import BrowseOpportunities from '../pages/BrowseOpportunities';
+import OrganizationSignup from '../pages/OrganizationSignup';
 
 /** Top-level layout component for this application. Called in imports/startup/client/startup.jsx. */
 class App extends React.Component {
@@ -37,6 +38,7 @@ class App extends React.Component {
             <Route path="/signin" component={Signin}/>
             <Route path="/browse_opportunities" component={BrowseOpportunities}/>
             <Route path="/volunteer_signup" component={VolunteerSignup}/>
+            <Route path="/organization_signup" component={OrganizationSignup}/>
             <Route path="/about_us" component={AboutUs}/>
             <Route path="/privacy" component={Privacy}/>
             <Route path="/eprofile" component={EventProfile}/>
