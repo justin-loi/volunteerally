@@ -12,7 +12,6 @@ import ListStuffAdmin from '../pages/ListStuffAdmin';
 import AddStuff from '../pages/AddStuff';
 import EditStuff from '../pages/EditStuff';
 import NotFound from '../pages/NotFound';
-import OrganizationLibrary from '../pages/OrganizationLibrary';
 import Signin from '../pages/Signin';
 import Signup from '../pages/Signup';
 import Signout from '../pages/Signout';
@@ -21,6 +20,7 @@ import { ROLE } from '../../api/role/Role';
 // new page
 import VolunteerSignup from '../pages/VolunteerSignup';
 import AboutUs from '../pages/AboutUs';
+import OrganizationLibrary from '../pages/OrganizationLibrary';
 
 /** Top-level layout component for this application. Called in imports/startup/client/startup.jsx. */
 class App extends React.Component {
@@ -34,7 +34,7 @@ class App extends React.Component {
             <Route path="/signin" component={Signin}/>
             <Route path="/volunteer_signup" component={VolunteerSignup}/>
             <Route path="/about_us" component={AboutUs}/>
-            <Route path= "/find_volunteer" component={OrganizationLibrary}/>
+            <Route path="/find_volunteer" component={OrganizationLibrary}/>
             <Route path="/signup" component={Signup}/>
             <Route path="/signout" component={Signout}/>
             <ProtectedRoute path="/list" component={ListStuff}/>
