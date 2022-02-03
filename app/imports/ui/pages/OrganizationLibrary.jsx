@@ -89,10 +89,11 @@ const OrganizationLibrary = () => (
         <p>
         Here are some of the great features you’ll find with Volunteer Ally:
         </p>
-        <p> <Icon color='blue' name ='check'/> </p>
-        <p> <Icon color='blue' name ='check'/> </p>
-        <p> <Icon color='blue' name ='check'/> </p>
-        <p> <Icon color='blue' name ='check'/> </p>
+        <p> <Icon color='blue' name ='check'/> Access to hundreds of volunteers with a wide range of skills
+          and availability </p>
+        <p> <Icon color='blue' name ='check'/> Direct opportunity RSVPs to your inbox </p>
+        <p> <Icon color='blue' name ='check'/> Database of volunteers and opportunities </p>
+        <p> <Icon color='blue' name ='check'/> Integration-ready </p>
       </Grid.Row>
 
       <Grid.Row>
