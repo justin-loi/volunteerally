@@ -26,4 +26,4 @@ class EventsCollection {
     this.adminPublicationName = `${this.name}.publication.admin`;
   }
 }
-export const Contacts = new EventsCollection();
+export const Events = new EventsCollection();

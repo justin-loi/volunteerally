@@ -1,6 +1,6 @@
 import React from 'react';
 import { Grid, Image } from 'semantic-ui-react';
-import { PAGE_IDS } from '../utilities/PageIDs';
+import { PAGE_IDS } from '../../utilities/PageIDs';
 
 /** The Footer appears at the bottom of every page. Rendered by the App Layout component. */
 const LandingTopSection = () => (
