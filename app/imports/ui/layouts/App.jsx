@@ -20,6 +20,14 @@ import EventProfile from '../pages/EventProfile';
 import { ROLE } from '../../api/role/Role';
 // new page
 import VolunteerSignup from '../pages/VolunteerSignup';
+<<<<<<< Updated upstream
+=======
+import AboutUs from '../pages/AboutUs';
+import Privacy from '../pages/Privacy';
+import TermsAndConditions from '../pages/TermsAndConditions';
+import BrowseOpportunities from '../pages/BrowseOpportunities';
+import EventProfile from '../pages/EventProfile';
+>>>>>>> Stashed changes
 
 /** Top-level layout component for this application. Called in imports/startup/client/startup.jsx. */
 class App extends React.Component {
@@ -32,6 +40,13 @@ class App extends React.Component {
             <Route exact path="/" component={Landing}/>
             <Route path="/signin" component={Signin}/>
             <Route path="/volunteer_signup" component={VolunteerSignup}/>
+<<<<<<< Updated upstream
+=======
+            <Route path="/about_us" component={AboutUs}/>
+            <Route path="/privacy" component={Privacy}/>
+            <Route path="/eprofile" component={EventProfile}/>
+            <Route path="/terms" component={TermsAndConditions}/>
+>>>>>>> Stashed changes
             <Route path="/signup" component={Signup}/>
             <Route path="/signout" component={Signout}/>
             <Route path="/eprofile" component={EventProfile}/>
