@@ -24,7 +24,6 @@ import AboutUs from '../pages/AboutUs';
 import Privacy from '../pages/Privacy';
 import TermsAndConditions from '../pages/TermsAndConditions';
 import BrowseOpportunities from '../pages/BrowseOpportunities';
-import EventProfile from '../pages/EventProfile';
 
 /** Top-level layout component for this application. Called in imports/startup/client/startup.jsx. */
 class App extends React.Component {
