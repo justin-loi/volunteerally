@@ -1,5 +1,5 @@
 import React from 'react';
-import { Grid, Image, Button, Icon } from 'semantic-ui-react';
+import { Grid, Image, Button, Icon, Header } from 'semantic-ui-react';
 import { PAGE_IDS } from '../utilities/PageIDs';
 
 /** The Footer appears at the bottom of every page. Rendered by the App Layout component. */
@@ -7,12 +7,10 @@ const OrganizationLibrary = () => (
   <Grid id={PAGE_IDS.ORGANIZATION_LIB} container centered>
     <Grid verticalAlign='middle' textAlign='center' rows='equal' container>
       <Grid.Row>
-        <p className="Landing-header-1">
-        Organization Library
-        </p>
-        <p className="landing-header-3">
-        Browse the organizations we work with
-        </p>
+        <div className = "org-lib-header">
+          <Header as="h1" textAlign="center">Organization Library</Header>
+          <Header as="h2" textAlign="center">Browse the organizations we work with</Header>
+        </div>
       </Grid.Row>
       <Grid.Row columns='equal'>
         <Grid.Column>
@@ -59,7 +57,7 @@ const OrganizationLibrary = () => (
         </Grid.Column>
       </Grid.Row>
 
-      <Grid.Row columns={5} colums='equal'>
+      <Grid.Row columns={4} colums='equal'>
         <Grid.Column>
           <Image size='small' circular src="/images/red-cross-logo.png"/>
         </Grid.Column>
@@ -75,29 +73,29 @@ const OrganizationLibrary = () => (
       </Grid.Row>
 
       <Grid.Row>
-        <Image size = 'large' src='/image/org-help-image.jpg'/>
+        <Image size = 'huge' src= "/images/org-help-image.jpg"/>
         <p>
         Join over 20 organizations already finding the help they need with Volunteer Ally.
         </p>
       </Grid.Row>
 
-      <Grid.Row>
+      <Grid.Row textAlign="left align" >
         <p>There are thousands of active volunteers waiting for opportunities to work with qualified organizations.
         Make sure your organization is volunteer-ready with Volunteer Ally.
         Our system allows you to easily post your volunteer opportunities and have them easily found
-        by qualified volunteers – all for free! </p>
-        <p>
-        Here are some of the great features you’ll find with Volunteer Ally:
+        by qualified volunteers – all for free! <br/> </p>
+        <p>Here are some of the great features you’ll find with Volunteer Ally <br/>
+          <div>
+            <Icon color='blue' name ='check'/> Access to hundreds of volunteers with a wide range of skills and availability <br/>
+            <Icon color='blue' name ='check'/> Direct opportunity RSVPs to your inbox <br/>
+            <Icon color='blue' name ='check'/> Database of volunteers and opportunities <br/>
+            <Icon color='blue' name ='check'/> Integration-ready <br/>
+          </div>
         </p>
-        <p> <Icon color='blue' name ='check'/> Access to hundreds of volunteers with a wide range of skills
-          and availability </p>
-        <p> <Icon color='blue' name ='check'/> Direct opportunity RSVPs to your inbox </p>
-        <p> <Icon color='blue' name ='check'/> Database of volunteers and opportunities </p>
-        <p> <Icon color='blue' name ='check'/> Integration-ready </p>
       </Grid.Row>
 
       <Grid.Row>
-        <Button size='massive' color='blue'>Sign Up Today</Button>
+        <Button size='massive' color='green'>Sign Up Today</Button>
       </Grid.Row>
     </Grid>
   </Grid>
