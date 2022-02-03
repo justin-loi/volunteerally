@@ -9,7 +9,7 @@ import Footer from '../components/Footer';
 import Landing from '../pages/Landing';
 import ListStuff from '../pages/ListStuff';
 import ListStuffAdmin from '../pages/ListStuffAdmin';
-import AddStuff from '../pages/AddStuff';
+import AddEvent from '../pages/AddEvent';
 import EditStuff from '../pages/EditStuff';
 import NotFound from '../pages/NotFound';
 import Signin from '../pages/Signin';
@@ -20,14 +20,11 @@ import EventProfile from '../pages/EventProfile';
 import { ROLE } from '../../api/role/Role';
 // new page
 import VolunteerSignup from '../pages/VolunteerSignup';
-<<<<<<< Updated upstream
-=======
 import AboutUs from '../pages/AboutUs';
 import Privacy from '../pages/Privacy';
 import TermsAndConditions from '../pages/TermsAndConditions';
 import BrowseOpportunities from '../pages/BrowseOpportunities';
 import EventProfile from '../pages/EventProfile';
->>>>>>> Stashed changes
 
 /** Top-level layout component for this application. Called in imports/startup/client/startup.jsx. */
 class App extends React.Component {
@@ -39,19 +36,22 @@ class App extends React.Component {
           <Switch>
             <Route exact path="/" component={Landing}/>
             <Route path="/signin" component={Signin}/>
+            <Route path="/browse_opportunities" component={BrowseOpportunities}/>
             <Route path="/volunteer_signup" component={VolunteerSignup}/>
-<<<<<<< Updated upstream
-=======
             <Route path="/about_us" component={AboutUs}/>
             <Route path="/privacy" component={Privacy}/>
             <Route path="/eprofile" component={EventProfile}/>
             <Route path="/terms" component={TermsAndConditions}/>
->>>>>>> Stashed changes
             <Route path="/signup" component={Signup}/>
             <Route path="/signout" component={Signout}/>
             <Route path="/eprofile" component={EventProfile}/>
+            <Route path="/about_us" component={AboutUs}/>
+            <Route path="/privacy" component={Privacy}/>
+            <Route path="/terms" component={TermsAndConditions}/>
+            <Route path="/signup" component={Signup}/>
+            <Route path="/signout" component={Signout}/>
+            <ProtectedRoute path="/add" component={AddEvent}/>
             <ProtectedRoute path="/list" component={ListStuff}/>
-            <ProtectedRoute path="/add" component={AddStuff}/>
             <ProtectedRoute path="/edit/:_id" component={EditStuff}/>
             <AdminProtectedRoute path="/admin" component={ListStuffAdmin}/>
             <AdminProtectedRoute path="/manage-database" component={ManageDatabase}/>

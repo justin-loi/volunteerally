@@ -16,7 +16,7 @@ class Footer extends React.Component {
             <Header as={'h3'} inverted>INFORMATION</Header>
             <hr/>
             <List size={'large'} inverted>
-              <List.Item><a href={'/#/about'}><Icon name={'users'}/> About Us
+              <List.Item><a href={'/#/about_us'}><Icon name={'users'}/> About Us
               </a></List.Item>
               <List.Item><a href={'/#/terms'}><Icon name={'file'}/> Terms & Conditions</a></List.Item>
               <List.Item>
@@ -44,7 +44,7 @@ class Footer extends React.Component {
                   size={'small'}
                   style={{ color: 'white', backgroundColor: '#8EA4D2' }}
                   as={NavLink}
-                  exact to={'/signup'}/>
+                  exact to={'/volunteer_signup'}/>
               </Container>
             )}
           </Grid.Column>

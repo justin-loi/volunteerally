@@ -49,8 +49,6 @@
   color: white;
 }
 
-<<<<<<< Updated upstream
-=======
 .about-us-header {
   background-color: darkolivegreen;
   background-image: url("/images/volunteer.jpeg");
@@ -68,15 +66,8 @@
   padding-bottom: 50px;
 }
 
->>>>>>> Stashed changes
 .event-profile-top-background {
   background: url('images/red-cross.jpeg') no-repeat center center fixed;
   background-size: cover;
   height: 500px;
-<<<<<<< Updated upstream
 }
-=======
-}
-
-
->>>>>>> Stashed changes
