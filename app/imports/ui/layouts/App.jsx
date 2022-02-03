@@ -25,6 +25,7 @@ import Privacy from '../pages/Privacy';
 import TermsAndConditions from '../pages/TermsAndConditions';
 import BrowseOpportunities from '../pages/BrowseOpportunities';
 import OrganizationSignup from '../pages/OrganizationSignup';
+import OrganizationLibrary from '../pages/OrganizationLibrary';
 
 /** Top-level layout component for this application. Called in imports/startup/client/startup.jsx. */
 class App extends React.Component {
@@ -43,6 +44,7 @@ class App extends React.Component {
             <Route path="/privacy" component={Privacy}/>
             <Route path="/eprofile" component={EventProfile}/>
             <Route path="/terms" component={TermsAndConditions}/>
+            <Route path="/find_volunteers" component={OrganizationLibrary}/>
             <Route path="/signup" component={Signup}/>
             <Route path="/signout" component={Signout}/>
             <Route path="/eprofile" component={EventProfile}/>
