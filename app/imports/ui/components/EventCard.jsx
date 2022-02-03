@@ -1,14 +1,14 @@
 import React from 'react';
 import { Card, Image } from 'semantic-ui-react';
 import PropTypes from 'prop-types';
-import { withRouter } from 'react-router-dom';
+import { NavLink, withRouter } from 'react-router-dom';
 
 /** Renders a single row in the List Stuff table. See pages/ListStuff.jsx. */
 const EventCard = ({ event }) => (
-  <Card>
-    <Image src='images/event_card_image_volunteer.jpg' wrapped ui={false} />
+  <Card>=
+    <Image src='images/event_card_image_volunteer.jpg' wrapped ui={false}/>
     <Card.Content>
-      <Card.Header>{event.eventName}</Card.Header>
+      <Card.Header as={NavLink} exact to={"/eprofile"}> {event.eventName}</Card.Header>
       <Card.Meta>
         <span>Date: {event.date}</span>
         <br/>
