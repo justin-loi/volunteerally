@@ -17,7 +17,7 @@ class VolunteerSignup {
   /** Signs up a new user, then checks to see that they are logged in by checking the navbar. */
   async signupVolunteer(username, password) {
     await this.isDisplayed();
-    await t.typeText(`#${COMPONENT_IDS.VOLUNTEER_SIGNUP_FORM_EMAIL}`, 'joeceefus@foo.com');
+    await t.typeText(`#${COMPONENT_IDS.VOLUNTEER_SIGNUP_FORM_EMAIL}`, username);
     await t.typeText(`#${COMPONENT_IDS.VOLUNTEER_SIGNUP_FORM_USERNAME}`, username);
     await t.typeText(`#${COMPONENT_IDS.VOLUNTEER_SIGNUP_FORM_PASSWORD}`, password);
     await t.typeText(`#${COMPONENT_IDS.VOLUNTEER_SIGNUP_FORM_CONFIRM_PASSWORD}`, password);

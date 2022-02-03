@@ -4,6 +4,7 @@ import { Meteor } from 'meteor/meteor';
 import { withTracker } from 'meteor/react-meteor-data';
 import { withRouter, NavLink } from 'react-router-dom';
 import { Menu, Dropdown, Search, Image } from 'semantic-ui-react';
+import { Roles } from 'meteor/alanning:roles';
 import { COMPONENT_IDS } from '../utilities/ComponentIDs';
 import { ROLE } from '../../api/role/Role';
 
@@ -21,7 +22,7 @@ const NavBar = ({ currentUser }) => {
         />
       </Menu.Item>
       {currentUser ? (
-        [<Menu.Item id={COMPONENT_IDS.NAVBAR_LIST_STUFF} as={NavLink} activeClassName="active" exact to="/list" key='list'>List Stuff</Menu.Item>]
+        [<Menu.Item id={COMPONENT_IDS.NAVBAR_LIST_STUFF} as={NavLink} activeClassName="active" exact to="/list" key='list'></Menu.Item>]
       ) : ''}
       {Roles.userIsInRole(Meteor.userId(), [ROLE.ADMIN]) ? (
         [<Menu.Item id={COMPONENT_IDS.NAVBAR_LIST_STUFF_ADMIN} as={NavLink} activeClassName="active" exact to="/admin" key='admin'>Admin</Menu.Item>,
