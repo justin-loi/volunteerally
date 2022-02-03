@@ -1,21 +1,19 @@
 import React from 'react';
-import { Grid, Image } from 'semantic-ui-react';
-import { PAGE_IDS } from '../utilities/PageIDs';
+import LandingTopSection from '../components/landing/LandingTopSection';
+import LandingMiddleSection from '../components/landing/LandingMiddleSection';
+import LandingEventCalendarSection from '../components/landing/LandingEventCalendarSection';
+import LandingOpportunitiesByCategorySection from '../components/landing/LandingOpportunitiesByCategorySection';
+import LandingBottomSection from '../components/landing/LandingBottomSection';
 
 /** A simple static component to render some text for the landing page. */
 const Landing = () => (
-  <Grid id={PAGE_IDS.LANDING} verticalAlign='middle' textAlign='center' container>
-
-    <Grid.Column width={4}>
-      <Image size='small' circular src="/images/meteor-logo.png" />
-    </Grid.Column>
-
-    <Grid.Column width={8}>
-      <h1>Welcome to this template</h1>
-      <p>Now get to work and modify this app!</p>
-    </Grid.Column>
-
-  </Grid>
+  <div>
+    <LandingTopSection/>
+    <LandingMiddleSection/>
+    <LandingEventCalendarSection/>
+    <LandingOpportunitiesByCategorySection/>
+    <LandingBottomSection/>
+  </div>
 );
 
 export default Landing;
