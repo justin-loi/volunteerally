@@ -12,6 +12,7 @@ import ListStuffAdmin from '../pages/ListStuffAdmin';
 import AddStuff from '../pages/AddStuff';
 import EditStuff from '../pages/EditStuff';
 import NotFound from '../pages/NotFound';
+import OrganizationLibrary from '../pages/OrganizationLibrary';
 import Signin from '../pages/Signin';
 import Signup from '../pages/Signup';
 import Signout from '../pages/Signout';
@@ -33,6 +34,7 @@ class App extends React.Component {
             <Route path="/signin" component={Signin}/>
             <Route path="/volunteer_signup" component={VolunteerSignup}/>
             <Route path="/about_us" component={AboutUs}/>
+            <Route path= "/find_volunteer" component={OrganizationLibrary}/>
             <Route path="/signup" component={Signup}/>
             <Route path="/signout" component={Signout}/>
             <ProtectedRoute path="/list" component={ListStuff}/>
