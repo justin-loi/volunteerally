@@ -8,7 +8,7 @@ const EventCard = ({ event }) => (
   <Card>=
     <Image src='images/event_card_image_volunteer.jpg' wrapped ui={false}/>
     <Card.Content>
-      <Card.Header as={NavLink} exact to={"/eprofile"}> {event.eventName}</Card.Header>
+      <Card.Header as={NavLink} exact to={'/eprofile'}> {event.eventName}</Card.Header>
       <Card.Meta>
         <span>Date: {event.date}</span>
         <br/>

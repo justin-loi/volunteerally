@@ -8,7 +8,6 @@ import SimpleSchema from 'simpl-schema';
 import { Events } from '../../api/event/Events';
 import { PAGE_IDS } from '../utilities/PageIDs';
 
-
 // Create a schema to specify the structure of the data to appear in the form.
 const formSchema = new SimpleSchema({
   eventName: String,

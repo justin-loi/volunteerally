@@ -1,11 +1,6 @@
 import React from 'react';
 import { Grid, Header } from 'semantic-ui-react';
-import { withTracker } from 'meteor/react-meteor-data';
 import PropTypes from 'prop-types';
-import { NavLink } from 'react-router-dom';
-import { Stuffs } from '../../api/stuff/StuffCollection';
-import StuffItem from '../components/StuffItem';
-import { PAGE_IDS } from '../utilities/PageIDs';
 
 /** The EventProfileHeader appears at the top of every page. Rendered by the App Layout component. */
 const EventProfileHeader = () => {

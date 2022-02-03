@@ -2,9 +2,7 @@ import React from 'react';
 import { Container, Button, Header, Loader, Grid, Icon, Segment, Image } from 'semantic-ui-react';
 import { withTracker } from 'meteor/react-meteor-data';
 import PropTypes from 'prop-types';
-import { NavLink } from 'react-router-dom';
 import { Stuffs } from '../../api/stuff/StuffCollection';
-import { PAGE_IDS } from '../utilities/PageIDs';
 import EventProfileHeader from '../components/EventProfileHeader';
 
 /** Renders a table containing all of the Stuff documents. Use <StuffItem> to render each row. */
@@ -36,7 +34,13 @@ const EventProfile = ({ ready }) => ((ready) ? (
               <Icon name="write"/> Description
             </Header>
             <p>
-              This event requires orientation and training, please revert to website for additional information.* Disaster Action Team volunteers help local families cope with emergencies. Home fires and other disasters can occur at any time, any place. As a Disaster Action Team volunteer, you'll provide emotional support, financial assistance, and information to help families begin the process of recovery. After your initial training, your shifts will include responding to emergencies within 2 hours, night or day, rain or shine, either on the scene or coordinating remotely to provide immediate compassion and care. Location will vary base on the situation.
+              This event requires orientation and training, please revert to website for additional information.*
+              Disaster Action Team volunteers help local families cope with emergencies. Home fires and other
+              disasters can occur at any time, any place. As a Disaster Action Team volunteer, you&apos;ll provide
+              emotional support, financial assistance, and information to help families begin the process of
+              recovery. After your initial training, your shifts will include responding to emergencies within 2
+              hours, night or day, rain or shine, either on the scene or coordinating remotely to provide immediate
+              compassion and care. Location will vary base on the situation.
             </p>
           </Segment>
           <Segment>
