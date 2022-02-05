@@ -2,8 +2,11 @@
   "defaultAccounts": [
     { "email": "admin@foo.com", "password": "changeme", "role": "ADMIN", "firstName": "Admin", "lastName": "MATRP"
     },
-    { "email": "john@foo.com", "password": "changeme", "role": "USER" , "firstName": "John", "lastName": "Doe" },
-    { "email": "test@foo.com", "password": "changeme", "role": "USER" , "firstName": "test", "lastName": "test" }
+    { "email": "john@foo.com", "password": "changeme", "role": "USER" , "firstName": "John", "lastName": "Doe" }
+  ],
+
+  "defaultVolunteers": [
+    { "username": "test","email": "test@foo.com", "password": "changeme", "role": "VOLUNTEER", "firstName": "Hello", "lastName": "World"}
   ],
 
   "defaultData": [
