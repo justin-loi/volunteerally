@@ -11,18 +11,36 @@ class VolunteerProfileCollection extends BaseProfileCollection {
 
   /**
    * Defines the profile associated with an Volunteer and the associated Meteor account.
-   * @param email The email associated with this profile. Will be the username.
+   * @param username volunteer account's username.
+   * @param email The email associated with this profile. Can also be username
    * @param password The password for this user.
+   * @param timeTracker volunteer's trackTime
+   * @param dob volunteer's date of birth
    * @param firstName The first name.
    * @param lastName The last name.
+   * @param gender volunteer's gender.
+   * @param address volunteer's address.
+   * @param city volunteer's city.
+   * @param state volunteer's state.
+   * @param zipCode_postalCode volunteer's zip/postal code.
+   * @param phoneNumber volunteer's phone number.
+   * @param interests volunteer's interests.
+   * @param specialSkills volunteer's special skill
+   * @param environmentalPreference volunteer's environmental preference
+   * @param availability volunteer's availability
    */
-  // firstName, lastName, gender, address, city, state, zipCode_postalCode, phoneNumber, interests, specialSkills, environmentalPreference, availability
-  define({ username, email, password, firstName, lastName }) {
+  // timeTracker, dob, firstName, lastName, gender, address, city, state, zipCode_postalCode, phoneNumber, interests, specialSkills, environmentalPreference, availability
+  define({ username, email, password, timeTracker, dob, firstName, lastName, gender,
+    address, city, state, zipCode_postalCode, phoneNumber,
+    interests, specialSkills, environmentalPreference, availability }) {
     if (Meteor.isServer) {
       const user = this.findOne({ email, firstName, lastName });
       if (!user) {
         const role = ROLE.VOLUNTEER;
-        const profileID = this._collection.insert({ email, firstName, lastName, userID: this.getFakeUserId(), role });
+        const profileID = this._collection.insert({ email, timeTracker, dob, firstName, lastName, gender,
+          address, city, state, zipCode_postalCode, phoneNumber,
+          interests, specialSkills, environmentalPreference, availability,
+          userID: this.getFakeUserId(), role });
         const userID = Volunteers.define({ username, email, password, role });
         this._collection.update(profileID, { $set: { userID } });
         return profileID;
@@ -33,19 +51,69 @@ class VolunteerProfileCollection extends BaseProfileCollection {
   }
 
   /**
-   * Updates the UserProfile. You cannot change the email or role.
+   * Updates the VolunteerProfile. You cannot change the email or role.
    * @param docID the id of the UserProfile
-   * @param firstName new first name (optional).
-   * @param lastName new last name (optional).
+   * @param timeTracker volunteer's trackTime
+   * @param dob volunteer's date of birth
+   * @param firstName The first name.
+   * @param lastName The last name.
+   * @param gender volunteer's gender.
+   * @param address volunteer's address.
+   * @param city volunteer's city.
+   * @param state volunteer's state.
+   * @param zipCode_postalCode volunteer's zip/postal code.
+   * @param phoneNumber volunteer's phone number.
+   * @param interests volunteer's interests.
+   * @param specialSkills volunteer's special skill
+   * @param environmentalPreference volunteer's environmental preference
+   * @param availability volunteer's availability
    */
-  update(docID, { firstName, lastName }) {
+  update(docID, { timeTracker, dob, firstName, lastName, gender,
+    address, city, state, zipCode_postalCode, phoneNumber,
+    interests, specialSkills, environmentalPreference, availability }) {
     this.assertDefined(docID);
     const updateData = {};
+    if (timeTracker) {
+      updateData.timeTracker = timeTracker;
+    }
+    if (dob) {
+      updateData.dob = dob;
+    }
     if (firstName) {
       updateData.firstName = firstName;
     }
     if (lastName) {
       updateData.lastName = lastName;
+    }
+    if (gender) {
+      updateData.gender = gender;
+    }
+    if (address) {
+      updateData.address = address;
+    }
+    if (city) {
+      updateData.city = city;
+    }
+    if (state) {
+      updateData.state = state;
+    }
+    if (zipCode_postalCode) {
+      updateData.zipCode_postalCode = zipCode_postalCode;
+    }
+    if (phoneNumber) {
+      updateData.phoneNumber = phoneNumber;
+    }
+    if (interests) {
+      updateData.interests = interests;
+    }
+    if (specialSkills) {
+      updateData.specialSkills = specialSkills;
+    }
+    if (environmentalPreference) {
+      updateData.environmentalPreference = environmentalPreference;
+    }
+    if (availability) {
+      updateData.availability = availability
     }
     this._collection.update(docID, { $set: updateData });
   }

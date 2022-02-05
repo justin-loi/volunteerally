@@ -15,10 +15,17 @@ function createUser(email, role, firstName, lastName, password) {
   }
 }
 
-function createVolunteer(username, email, password, role, firstName, lastName) {
+// timeTracker, dob, firstName, lastName, gender, address, city, state, zipCode_postalCode, phoneNumber, interests, specialSkills, environmentalPreference, availability
+function createVolunteer(username, email, password, role,
+  timeTracker, dob, firstName, lastName, gender,
+  address, city, state, zipCode_postalCode, phoneNumber,
+  interests, specialSkills, environmentalPreference, availability) {
   console.log(`  Creating user username: ${username} email: ${email} with role ${role}.`);
   if (role === ROLE.VOLUNTEER) {
-    VolunteerProfiles.define({ username, email, password, firstName, lastName });
+    VolunteerProfiles.define({ username, email, password,
+      timeTracker, dob, firstName, lastName, gender,
+      address, city, state, zipCode_postalCode, phoneNumber,
+      interests, specialSkills, environmentalPreference, availability });
   }
 }
 
@@ -32,7 +39,13 @@ if (Meteor.users.find().count() === 0) {
   }
   if (Meteor.settings.defaultVolunteers) {
     console.log('Creating the default volunteer(s)');
-    Meteor.settings.defaultVolunteers.map(({ username, email, password, role, firstName, lastName }) => createVolunteer(username, email, password, role, firstName, lastName));
+    Meteor.settings.defaultVolunteers.map(({ username, email, password, role,
+      timeTracker, dob, firstName, lastName, gender,
+      address, city, state, zipCode_postalCode, phoneNumber,
+      interests, specialSkills, environmentalPreference, availability }) => createVolunteer(username, email, password, role,
+      timeTracker, dob, firstName, lastName, gender,
+      address, city, state, zipCode_postalCode, phoneNumber,
+      interests, specialSkills, environmentalPreference, availability));
   } else {
     console.log('Cannot initialize the database!  Please invoke meteor with a settings file.');
   }

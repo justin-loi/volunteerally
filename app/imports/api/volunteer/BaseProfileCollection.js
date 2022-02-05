@@ -9,13 +9,28 @@ const rolesToCollectionNames = {};
 rolesToCollectionNames[ROLE.ADMIN] = 'AdminProfileCollection';
 rolesToCollectionNames[ROLE.VOLUNTEER] = 'VolunteerProfileCollection';
 
-// track_time, firstName, lastName, dob, gender, address, city, state, zipCode_postalCode, phoneNumber, interests, specialSkills, environmentalPreference, availability
+// timeTracker, dob, firstName, lastName, gender, address, city, state, zipCode_postalCode, phoneNumber, interests, specialSkills, environmentalPreference, availability
 class BaseProfileCollection extends BaseCollection {
   constructor(type, schema) {
     super(type, schema.extend(new SimpleSchema({
       email: String,
+      timeTracker: { type: String, required: false },
+      dob: { type: String, required: false },
       firstName: String,
       lastName: String,
+      gender: { type: String, required: false },
+      address: String,
+      city: String,
+      state: String,
+      zipCode_postalCode: String,
+      phoneNumber: String,
+      interests: { type: Array, required: false },
+      'interests.$': { type: String, required: false },
+      specialSkills: { type: Array, required: false },
+      'specialSkills.$': { type: String, required: false },
+      environmentalPreference: { type: String, required: false },
+      availability: { type: Array, required: false },
+      'availability.$': { type: String, required: false },
       role: String,
       userID: SimpleSchema.RegEx.Id,
     })));
