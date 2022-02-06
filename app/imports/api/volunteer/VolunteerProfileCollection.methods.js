@@ -11,7 +11,8 @@ export const signUpNewVolunteerMethod = new ValidatedMethod({
     address, city, state, zipCode_postalCode, phoneNumber,
     interests, specialSkills, environmentalPreference, availability }) {
     if (Meteor.isServer) {
-      VolunteerProfiles.define({ username, email, password,
+      VolunteerProfiles.define({
+        username, email, password,
         timeTracker, dob, firstName, lastName, gender,
         address, city, state, zipCode_postalCode, phoneNumber,
         interests, specialSkills, environmentalPreference, availability });
