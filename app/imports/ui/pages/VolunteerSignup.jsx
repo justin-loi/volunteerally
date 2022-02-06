@@ -10,10 +10,13 @@ import { PAGE_IDS } from '../utilities/PageIDs';
 import { COMPONENT_IDS } from '../utilities/ComponentIDs';
 import { signUpNewVolunteerMethod } from '../../api/volunteer/VolunteerProfileCollection.methods';
 
+const genderAllowValues = ['Male', 'Female', 'Other', 'Prefer Not to Say'];
+const genderComponentID = [COMPONENT_IDS.VOLUNTEER_SIGNUP_FORM_GENDER_MALE, COMPONENT_IDS.VOLUNTEER_SIGNUP_FORM_GENDER_FEMALE,
+  COMPONENT_IDS.VOLUNTEER_SIGNUP_FORM_GENDER_OTHER, COMPONENT_IDS.VOLUNTEER_SIGNUP_FORM_GENDER_NO_SAY];
+
 // username, email, password, timeTracker, dob, firstName, lastName, gender,
 // address, city, state, zipCode_postalCode, phoneNumber,
 // interests, specialSkills, environmentalPreference, availability
-const genderAllowValues = ['Male', 'Female', 'Other', 'Prefer Not to Say'];
 const formSchema = new SimpleSchema({
   username: String,
   email: String,
@@ -45,7 +48,7 @@ const bridge = new SimpleSchema2Bridge(formSchema);
 const Signup = ({ location }) => {
   const [redirectToReferer, setRedirectToReferer] = useState(false);
   const [gender, setGender] = useState('');
-  const [er, setEr] = useState('');
+  const [signUpError, setSignUpError] = useState(false);
 
   const handleChange = (e, { name, value }) => {
     switch (name) {
@@ -62,13 +65,13 @@ const Signup = ({ location }) => {
     console.log(data);
     signUpNewVolunteerMethod.callPromise(data)
       .catch(error => {
-        setEr(error);
+        setSignUpError(true);
         swal('Error', error.message, 'error');
         console.error(error);
       })
       .then(() => {
         // Not sure why it catches the error but still executes
-        if (er) {
+        if (!signUpError) {
           formRef.reset();
           setGender('');
           swal({
@@ -79,7 +82,7 @@ const Signup = ({ location }) => {
           });
           setRedirectToReferer(false);
         }
-        setEr('');
+        setSignUpError(false); // reset no matter what
       });
   };
 
@@ -102,77 +105,58 @@ const Signup = ({ location }) => {
             fRef = ref;
           }} schema={bridge} onSubmit={data => submit(data, fRef)}>
             <Segment>
-              <TextField name='username'/>
-              <TextField name='email' type='email' label='E-mail' id={COMPONENT_IDS.SIGN_UP_FORM_EMAIL}/>
-              <TextField name='password' type='password' id={COMPONENT_IDS.SIGN_UP_FORM_PASSWORD}/>
+              <TextField name='username'id={COMPONENT_IDS.VOLUNTEER_SIGNUP_FORM_USERNAME}/>
+              <TextField name='email' type='email' label='E-mail' id={COMPONENT_IDS.VOLUNTEER_SIGNUP_FORM_EMAIL}/>
+              <TextField name='password' type='password' id={COMPONENT_IDS.VOLUNTEER_SIGNUP_FORM_PASSWORD}/>
               <HiddenField name='timeTracker' value='0'/>
-              <TextField name='dob' label='Date of Birth'/>
+              <TextField name='dob' label='Date of Birth' id={COMPONENT_IDS.VOLUNTEER_SIGNUP_FORM_BIRTH}/>
               <div className="two fields">
                 <div className="field">
-                  <TextField name='firstName' label='First Name' id={COMPONENT_IDS.SIGN_UP_FORM_FIRST_NAME}/>
+                  <TextField name='firstName' label='First Name' id={COMPONENT_IDS.VOLUNTEER_SIGNUP_FORM_FIRST}/>
                 </div>
                 <div className="field">
-                  <TextField name='lastName' label='Last Name' id={COMPONENT_IDS.SIGN_UP_FORM_LAST_NAME}/>
+                  <TextField name='lastName' label='Last Name' id={COMPONENT_IDS.VOLUNTEER_SIGNUP_FORM_LAST}/>
                 </div>
               </div>
               <HiddenField name='gender' value={gender}/>
               <Form.Group inline>
                 <label>Gender: </label>
-                <Form.Radio
-                  id={COMPONENT_IDS.VOLUNTEER_SIGNUP_FORM_MALE}
-                  label='Male'
-                  name='gender'
-                  value='Male'
-                  checked={gender === 'Male'}
-                  onChange={handleChange}
-                />
-                <Form.Radio
-                  id={COMPONENT_IDS.VOLUNTEER_SIGNUP_FORM_FEMALE}
-                  label='Female'
-                  name='gender'
-                  value='Female'
-                  checked={gender === 'Female'}
-                  onChange={handleChange}
-                />
-                <Form.Radio
-                  id={COMPONENT_IDS.VOLUNTEER_SIGNUP_FORM_OTHER}
-                  label='Other'
-                  name='gender'
-                  value='Other'
-                  checked={gender === 'Other'}
-                  onChange={handleChange}
-                />
-                <Form.Radio
-                  id={COMPONENT_IDS.VOLUNTEER_SIGNUP_FORM_NO_SAY}
-                  label='Prefer Not to Say'
-                  name='gender'
-                  value='Prefer Not to Say'
-                  checked={gender === 'Prefer Not to Say'}
-                  onChange={handleChange}
-                />
+                {genderAllowValues.map((value, index) => (
+                  <Form.Radio
+                    key={index}
+                    id={genderComponentID[index]}
+                    label={value}
+                    name='gender'
+                    value={value}
+                    checked={gender === value}
+                    onChange={handleChange}
+                  />
+                ))}
               </Form.Group>
-              <TextField name='address'/>
+              <TextField name='address' id={COMPONENT_IDS.VOLUNTEER_SIGNUP_FORM_ADDRESS}/>
               <div className="two fields">
                 <div className="field">
-                  <TextField name='city'/>
+                  <TextField name='city' id={COMPONENT_IDS.VOLUNTEER_SIGNUP_FORM_CITY}/>
                 </div>
                 <div className="field">
-                  <TextField name='state'/>
+                  <TextField name='state' id={COMPONENT_IDS.VOLUNTEER_SIGNUP_FORM_STATE}/>
                 </div>
               </div>
               <div className="two fields">
                 <div className="field">
-                  <TextField name='zipCode_postalCode' label='Zip/Postal Code'/>
+                  <TextField name='zipCode_postalCode' label='Zip/Postal Code'
+                    id={COMPONENT_IDS.VOLUNTEER_SIGNUP_FORM_ZIPCODE}/>
                 </div>
                 <div className="field">
-                  <TextField name='phoneNumber' label='Phone Number'/>
+                  <TextField name='phoneNumber' label='Phone Number'
+                    id={COMPONENT_IDS.VOLUNTEER_SIGNUP_FORM_PHONE}/>
                 </div>
               </div>
               <TextField name='interests'/>
               <TextField name='specialSkills' label='Special Skills'/>
               <TextField name='environmentalPreference' label='Environmental Preference'/>
               <TextField name='availability'/>
-              <SubmitField value='Sign up' id={COMPONENT_IDS.SIGN_UP_FORM_SUBMIT}/>
+              <SubmitField value='Sign up' id={COMPONENT_IDS.VOLUNTEER_SIGNUP_FORM_SUBMIT}/>
               <ErrorsField />
             </Segment>
           </AutoForm>
