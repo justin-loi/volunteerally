@@ -5,7 +5,7 @@ import { Container, Grid, Header, Message, Segment } from 'semantic-ui-react';
 import SimpleSchema from 'simpl-schema';
 import SimpleSchema2Bridge from 'uniforms-bridge-simple-schema-2';
 import swal from 'sweetalert';
-import { AutoForm, ErrorsField, SubmitField, TextField } from 'uniforms-semantic';
+import { AutoForm, ErrorsField, SubmitField, TextField, HiddenField, RadioField } from 'uniforms-semantic';
 import { PAGE_IDS } from '../utilities/PageIDs';
 import { COMPONENT_IDS } from '../utilities/ComponentIDs';
 import { signUpNewVolunteerMethod } from '../../api/volunteer/VolunteerProfileCollection.methods';
@@ -13,12 +13,13 @@ import { signUpNewVolunteerMethod } from '../../api/volunteer/VolunteerProfileCo
 // username, email, password, timeTracker, dob, firstName, lastName, gender,
 // address, city, state, zipCode_postalCode, phoneNumber,
 // interests, specialSkills, environmentalPreference, availability
+const genderAllowValues = ['Male', 'Female', 'Other', 'Prefer Not to Say'];
 const formSchema = new SimpleSchema({
   username: String,
   email: String,
   password: String,
   timeTracker: { type: String, required: false },
-  dob: { type: String, required: false },
+  dob: { type: String, allowedValues: genderAllowValues },
   firstName: String,
   lastName: String,
   gender: { type: String, required: false },
@@ -83,21 +84,39 @@ const Signup = ({ location }) => {
           }} schema={bridge} onSubmit={data => submit(data, fRef)}>
             <Segment>
               <TextField name='username'/>
-              <TextField name='email' type='email' id={COMPONENT_IDS.SIGN_UP_FORM_EMAIL}/>
+              <TextField name='email' type='email' label='E-mail' id={COMPONENT_IDS.SIGN_UP_FORM_EMAIL}/>
               <TextField name='password' type='password' id={COMPONENT_IDS.SIGN_UP_FORM_PASSWORD}/>
-              <TextField name='timeTracker'/>
-              <TextField name='dob'/>
-              <TextField name='firstName' id={COMPONENT_IDS.SIGN_UP_FORM_FIRST_NAME}/>
-              <TextField name='lastName' id={COMPONENT_IDS.SIGN_UP_FORM_LAST_NAME}/>
-              <TextField name='gender'/>
+              <HiddenField name='timeTracker' value='0'/>
+              <TextField name='dob' label='Date of Birth'/>
+              <div className="two fields">
+                <div className="field">
+                  <TextField name='firstName' label='First Name' id={COMPONENT_IDS.SIGN_UP_FORM_FIRST_NAME}/>
+                </div>
+                <div className="field">
+                  <TextField name='lastName' label='Last Name' id={COMPONENT_IDS.SIGN_UP_FORM_LAST_NAME}/>
+                </div>
+              </div>
+              <RadioField name='gender' allowedValues={genderAllowValues} inline='true'/>
               <TextField name='address'/>
-              <TextField name='city'/>
-              <TextField name='state'/>
-              <TextField name='zipCode_postalCode'/>
-              <TextField name='phoneNumber'/>
+              <div className="two fields">
+                <div className="field">
+                  <TextField name='city'/>
+                </div>
+                <div className="field">
+                  <TextField name='state'/>
+                </div>
+              </div>
+              <div className="two fields">
+                <div className="field">
+                  <TextField name='zipCode_postalCode' label='Zip/Postal Code'/>
+                </div>
+                <div className="field">
+                  <TextField name='phoneNumber' label='Phone Number'/>
+                </div>
+              </div>
               <TextField name='interests'/>
-              <TextField name='specialSkills'/>
-              <TextField name='environmentalPreference'/>
+              <TextField name='specialSkills' label='Special Skills'/>
+              <TextField name='environmentalPreference' label='Environmental Preference'/>
               <TextField name='availability'/>
               <SubmitField value='Sign up' id={COMPONENT_IDS.SIGN_UP_FORM_SUBMIT}/>
               <ErrorsField />
