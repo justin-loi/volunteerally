@@ -6,14 +6,14 @@
   ],
 
   "defaultVolunteers": [
-    { "username": "test1","email": "test1@foo.com", "password": "changeme", "role": "VOLUNTEER", "timeTracker": "20",
+    { "username": "tom","email": "tom@foo.com", "password": "changeme", "role": "VOLUNTEER", "timeTracker": "20",
       "firstName": "Tom", "lastName": "Tom", "dob": "1/1/1999", "gender": "Male",
       "address": "2444 Dole St", "city": "Honolulu", "state": "Hawaii", "zipCode_postalCode": "96822", "phoneNumber": "123456789",
       "interests": [],
       "specialSkill": [],
       "environmentalPreference": "",
       "availability": []},
-    { "username": "test2","email": "test2@foo.com", "password": "changeme", "role": "VOLUNTEER", "timeTracker": "0",
+    { "username": "jerry","email": "jerry@foo.com", "password": "changeme", "role": "VOLUNTEER", "timeTracker": "0",
       "firstName": "Jerry", "lastName": "Jerry", "dob": "1/1/1998", "gender": "Male",
       "address": "2444 Dole St", "city": "Honolulu", "state": "Hawaii", "zipCode_postalCode": "96822", "phoneNumber": "123456789",
       "interests": [],
