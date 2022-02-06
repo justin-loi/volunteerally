@@ -113,7 +113,7 @@ class VolunteerProfileCollection extends BaseProfileCollection {
       updateData.environmentalPreference = environmentalPreference;
     }
     if (availability) {
-      updateData.availability = availability
+      updateData.availability = availability;
     }
     this._collection.update(docID, { $set: updateData });
   }

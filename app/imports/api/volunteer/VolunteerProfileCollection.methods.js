@@ -3,8 +3,8 @@ import { CallPromiseMixin } from 'meteor/didericis:callpromise-mixin';
 import { ValidatedMethod } from 'meteor/mdg:validated-method';
 import { VolunteerProfiles } from './VolunteerProfileCollection';
 
-export const signUpNewUserMethod = new ValidatedMethod({
-  name: 'VolunteerProfiles.SignupNewUser',
+export const signUpNewVolunteerMethod = new ValidatedMethod({
+  name: 'VolunteerProfiles.SignUpNewUser',
   mixins: [CallPromiseMixin],
   validate: null,
   run({ username, email, password, timeTracker, dob, firstName, lastName, gender,

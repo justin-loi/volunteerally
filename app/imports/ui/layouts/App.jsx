@@ -19,7 +19,7 @@ import ManageDatabase from '../pages/ManageDatabase';
 import EventProfile from '../pages/EventProfile';
 import { ROLE } from '../../api/role/Role';
 // new page
-import VolunteerSignup from '../pages/VolunteerSignup';
+import VolunteerSignup from '../pages/VolunteerSignUp';
 import AboutUs from '../pages/AboutUs';
 import Privacy from '../pages/Privacy';
 import TermsAndConditions from '../pages/TermsAndConditions';
