@@ -34,7 +34,7 @@ class VolunteerProfileCollection extends BaseProfileCollection {
     address, city, state, zipCode_postalCode, phoneNumber,
     interests, specialSkills, environmentalPreference, availability }) {
     if (Meteor.isServer) {
-      const user = this.findOne({ email, firstName, lastName });
+      const user = this._collection.findOne({ username, email, firstName, lastName });
       if (!user) {
         const role = ROLE.VOLUNTEER;
         const profileID = this._collection.insert({ email, timeTracker, dob, firstName, lastName, gender,
