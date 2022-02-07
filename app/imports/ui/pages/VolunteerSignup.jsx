@@ -49,9 +49,9 @@ const formSchema = new SimpleSchema({
 const bridge = new SimpleSchema2Bridge(formSchema);
 
 /**
- * Signup component is similar to signin component, but we create a new user instead.
+ * VolunteerSignUp component is similar to signin component, but we create a new user instead.
  */
-const Signup = ({ location }) => {
+const VolunteerSignUp = ({ location }) => {
   const [redirectToReferer, setRedirectToReferer] = useState(false);
   const [confirmPassword, setConfirmPassword] = useState('');
   const [dateOfBirth, setDateOfBirth] = useState('');
@@ -197,7 +197,7 @@ const Signup = ({ location }) => {
     }
   };
 
-  /* Handle Signup submission. Create user account and a profile entry, then redirect to the home page. */
+  /* Handle SignUp submission. Create user account and a profile entry, then redirect to the home page. */
   const submit = (data, formRef) => {
     if (isValidDate(data.dob) && checkPassword(data.password, confirmPassword) && agreePolicyAndTerm(privacyPolicy) && checkEmail(data.email)) {
       signUpNewVolunteerMethod.callPromise(data)
@@ -451,8 +451,8 @@ const Signup = ({ location }) => {
 };
 
 /* Ensure that the React Router location object is available in case we need to redirect. */
-Signup.propTypes = {
+VolunteerSignUp.propTypes = {
   location: PropTypes.object,
 };
 
-export default Signup;
+export default VolunteerSignUp;

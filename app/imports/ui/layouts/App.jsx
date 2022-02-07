@@ -19,7 +19,7 @@ import ManageDatabase from '../pages/ManageDatabase';
 import EventProfile from '../pages/EventProfile';
 import { ROLE } from '../../api/role/Role';
 // new page
-import VolunteerSignup from '../pages/VolunteerSignUp';
+import VolunteerSignUp from '../pages/VolunteerSignup';
 import AboutUs from '../pages/AboutUs';
 import Privacy from '../pages/Privacy';
 import TermsAndConditions from '../pages/TermsAndConditions';
@@ -37,8 +37,8 @@ class App extends React.Component {
           <Switch>
             <Route exact path="/" component={Landing}/>
             <Route path="/signin" component={Signin}/>
+            <Route path="/volunteer_signup" component={VolunteerSignUp}/>
             <Route path="/browse_opportunities" component={BrowseOpportunities}/>
-            <Route path="/volunteer_signup" component={VolunteerSignup}/>
             <Route path="/organization_signup" component={OrganizationSignup}/>
             <Route path="/about_us" component={AboutUs}/>
             <Route path="/privacy" component={Privacy}/>
