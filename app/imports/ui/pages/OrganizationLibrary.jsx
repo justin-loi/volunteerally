@@ -95,7 +95,7 @@ const OrganizationLibrary = () => (
       </Grid.Row>
 
       <Grid.Row>
-        {/**what is the purpose of this button?*/}
+        {/** what is the purpose of this button? */}
         <Button size='massive' color='green'>Sign Up Today</Button>
       </Grid.Row>
     </Grid>
