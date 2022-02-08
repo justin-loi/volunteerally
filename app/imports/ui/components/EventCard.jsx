@@ -18,12 +18,12 @@ const EventCard = ({ event }) => (
         <br/>
       </Card.Meta>
       <Card.Description>
-          Categories: {event.categories.map((category) => `${category}, `)}
+          <p>Placeholder for special skill</p>
       </Card.Description>
     </Card.Content>
     <Card.Content extra>
       <a>
-        {event.organizationName}
+          {event.categories.map((category) => `${category}, `)}
       </a>
     </Card.Content>
   </Card>
