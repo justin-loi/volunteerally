@@ -242,9 +242,9 @@ const VolunteerSignUp = ({ location }) => {
             fRef = ref;
           }} schema={bridge} onSubmit={data => submit(data, fRef)}>
             <Segment>
-              <TextField name='username' id={COMPONENT_IDS.VOLUNTEER_SIGNUP_FORM_USERNAME}/>
-              <TextField name='email' type='email' label='E-mail' id={COMPONENT_IDS.VOLUNTEER_SIGNUP_FORM_EMAIL}/>
-              <TextField name='password' type='password' id={COMPONENT_IDS.VOLUNTEER_SIGNUP_FORM_PASSWORD}/>
+              <TextField name='username' placeholder='Username' id={COMPONENT_IDS.VOLUNTEER_SIGNUP_FORM_USERNAME}/>
+              <TextField name='email' type='email' label='E-mail Address' placeholder='E-mail Address' id={COMPONENT_IDS.VOLUNTEER_SIGNUP_FORM_EMAIL}/>
+              <TextField name='password' type='password' placeholder='Password' id={COMPONENT_IDS.VOLUNTEER_SIGNUP_FORM_PASSWORD}/>
               <Form.Input
                 label="Confirm Password"
                 id={COMPONENT_IDS.VOLUNTEER_SIGNUP_FORM_CONFIRM_PASSWORD}
@@ -264,19 +264,20 @@ const VolunteerSignUp = ({ location }) => {
                 name="dateOfBirth"
                 placeholder="mm/dd/yyyy"
                 onChange={handleChange}
+                required
                 error={ isValueEmpty[0] }
               />
               <div className="two fields">
                 <div className="field">
-                  <TextField name='firstName' label='First Name' id={COMPONENT_IDS.VOLUNTEER_SIGNUP_FORM_FIRST}/>
+                  <TextField name='firstName' label='First Name' placeholder='First Name' id={COMPONENT_IDS.VOLUNTEER_SIGNUP_FORM_FIRST}/>
                 </div>
                 <div className="field">
-                  <TextField name='lastName' label='Last Name' id={COMPONENT_IDS.VOLUNTEER_SIGNUP_FORM_LAST}/>
+                  <TextField name='lastName' label='Last Name' placeholder='Last Name' id={COMPONENT_IDS.VOLUNTEER_SIGNUP_FORM_LAST}/>
                 </div>
               </div>
               <HiddenField name='gender' value={gender}/>
               <Form.Group inline>
-                <label>Gender: </label>
+                <label>Gender </label>
                 {genderAllowValues.map((value, index) => (
                   <Form.Radio
                     key={`volunteer-signup-gender-${index}`}
@@ -289,27 +290,27 @@ const VolunteerSignUp = ({ location }) => {
                   />
                 ))}
               </Form.Group>
-              <TextField name='address' id={COMPONENT_IDS.VOLUNTEER_SIGNUP_FORM_ADDRESS}/>
+              <TextField name='address' placeholder='1234 Example Street' id={COMPONENT_IDS.VOLUNTEER_SIGNUP_FORM_ADDRESS}/>
               <div className="two fields">
                 <div className="field">
-                  <TextField name='city' id={COMPONENT_IDS.VOLUNTEER_SIGNUP_FORM_CITY}/>
+                  <TextField name='city' placeholder='Honolulu' id={COMPONENT_IDS.VOLUNTEER_SIGNUP_FORM_CITY}/>
                 </div>
                 <div className="field">
-                  <TextField name='state' id={COMPONENT_IDS.VOLUNTEER_SIGNUP_FORM_STATE}/>
+                  <TextField name='state' placeholder='Hawaii' id={COMPONENT_IDS.VOLUNTEER_SIGNUP_FORM_STATE}/>
                 </div>
               </div>
               <div className="two fields">
                 <div className="field">
-                  <TextField name='zipCode_postalCode' label='Zip/Postal Code'
+                  <TextField name='zipCode_postalCode' placeholder='96822' label='Zip/Postal Code'
                     id={COMPONENT_IDS.VOLUNTEER_SIGNUP_FORM_ZIPCODE}/>
                 </div>
                 <div className="field">
-                  <TextField name='phoneNumber' label='Phone Number'
+                  <TextField name='phoneNumber' placeholder='18081234567' label='Phone Number'
                     id={COMPONENT_IDS.VOLUNTEER_SIGNUP_FORM_PHONE}/>
                 </div>
               </div>
               <HiddenField name='interests' value={interests}/>
-              <label style={{ paddingTop: '20px' }}>Interests: </label>
+              <label style={{ paddingTop: '20px' }}>Interests </label>
               <Form.Group>
                 <Grid columns={2}>
                   <Grid.Row style={{ paddingLeft: '8px' }}>
@@ -367,7 +368,7 @@ const VolunteerSignUp = ({ location }) => {
                 </Grid>
               </Form.Group>
               <HiddenField name='environmentalPreference' label='Environmental Preference' value={environmentalPreference}/>
-              <label>Environmental Preference: </label>
+              <label>Environmental Preference </label>
               <Form.Group inline>
                 <Form.Radio
                   id={COMPONENT_IDS.VOLUNTEER_SIGNUP_FORM_INDOOR}
