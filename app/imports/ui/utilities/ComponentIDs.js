@@ -44,4 +44,5 @@ export const COMPONENT_IDS = {
   VOLUNTEER_SIGNUP_FORM_INDOOR: 'volunteer-signup-indoor',
   VOLUNTEER_SIGNUP_FORM_MONTHLY: 'volunteer-signup-monthly',
   VOLUNTEER_SIGNUP_FORM_POLICY: 'volunteer-signup-policy',
+  VOLUNTEER_PROFILE: 'volunteer-profile',
 };
