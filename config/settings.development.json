@@ -22,6 +22,18 @@
       "availability": []}
   ],
 
+  "defaultOrganizations": [
+    { "username": "redCross","email": "sup@foo.com", "password": "changeme", "role": "ORGANIZATION",
+      "firstName": "Sup", "lastName": "Foo", "eventBackgroundImage": "images/red-cross-map.jpeg",
+      "logoImage": "images/red-cross-logo.png", "organizationName": "The Red Cross", "missionStatement": "To help everyone and cure everything!", "phoneNumber": "808-123-0420"
+    },
+    {
+      "username": "helpingHands","email": "nah@foo.com", "password": "changeme", "role": "ORGANIZATION",
+      "firstName": "Nah", "lastName": "Foo", "eventBackgroundImage": "images/young-people.jpg",
+      "logoImage": "images/helping-hands-logo.png", "organizationName": "Helping Hands", "missionStatement": "You know what the say about idle hands, we are helping hands!", "phoneNumber": "808-999-8888"
+    }
+  ],
+
   "defaultData": [
     { "name": "Basket", "quantity": 3, "owner": "john@foo.com", "condition": "excellent" },
     { "name": "Bicycle", "quantity": 2, "owner": "john@foo.com", "condition": "poor" },
