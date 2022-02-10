@@ -5,22 +5,23 @@ import { withTracker } from 'meteor/react-meteor-data';
 import { PAGE_IDS } from '../utilities/PageIDs';
 import { Volunteers } from '../../api/volunteer/VolunteerCollection';
 import { VolunteerProfiles } from '../../api/volunteer/VolunteerProfileCollection';
+import StuffItem from "../components/StuffItem";
 
 /** Renders the Page for adding a document. */
 const VolunteerProfile = ({ ready, volunteers }) => ((ready) ? (
   <Grid id={PAGE_IDS.VOLUNTEER_PROFILE} container centered>
     <Grid.Column>
       <div className="about-us-header">
-        <Header as="h1" textAlign="center"> Welcome {volunteers.firstName} </Header>
+        <Header as="h1" textAlign="center">{volunteers.map((volunteer) => <volunteerProfile key={volunteer._id} volunteer={volunteer} />)}
+        </Header>
+        <Header as="h2" textAlign="center"> Welcome </Header>
       </div>
     </Grid.Column>
   </Grid>
 ) : <Loader active>Getting data</Loader>);
 
 VolunteerProfile.propTypes = {
-  volunteers: PropTypes.shape({
-    firstName: PropTypes.string,
-  }).isRequired,
+  volunteers: PropTypes.array.isRequired,
   ready: PropTypes.bool.isRequired,
 };
 
