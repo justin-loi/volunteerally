@@ -1,14 +1,7 @@
 import { Meteor } from 'meteor/meteor';
 import SimpleSchema from 'simpl-schema';
 import { check } from 'meteor/check';
-import { Roles } from 'meteor/alanning:roles';
 import BaseCollection from '../base/BaseCollection';
-import { ROLE } from '../role/Role';
-
-export const eventCategories = ['animal welfare', 'environmental', 'food security', 'family services', 'crisis relief', 'education', 'elderly care', 'other'];
-export const eventPublications = {
-  event: 'Event',
-};
 
 class EventCollection extends BaseCollection {
   constructor() {
@@ -18,11 +11,7 @@ class EventCollection extends BaseCollection {
       time: String,
       location: String,
       orgName: String,
-      categories: {
-        type: String,
-        allowedValues: eventCategories,
-        defaultValue: 'other',
-      },
+      categories: String,
     }));
   }
 
@@ -98,40 +87,23 @@ class EventCollection extends BaseCollection {
 
   /**
    * Default publication method for entities.
-   * It publishes the entire collection for admin, volunteers and organizations.
+   * It publishes the entire collection. This should be overridden in subclasses.
    */
-  publish() {
+  publishEvents() {
     if (Meteor.isServer) {
-      // get the EventCollection instance.
-      const instance = this;
-      /** This subscription publishes all events regardless of user. */
-      Meteor.publish(eventPublications.event, function publish() {
-        if (this.userId) {
-          return instance._collection.find();
-        }
-        return this.ready();
-      });
+      Meteor.publish(this._collectionName, () => this._collection.find());
     }
   }
 
   /**
-   * Subscription method for all events.
+   * Default subscription method for entities.
+   * It subscribes to the entire collection. Should be overridden in subclass
    */
   subscribeEvents() {
     if (Meteor.isClient) {
-      return Meteor.subscribe(eventPublications.event);
+      return Meteor.subscribe(this._collectionName);
     }
-    return null;
-  }
-
-  /**
-   * Default implementation of assertValidRoleForMethod. Asserts that userId is logged in as an Admin or User.
-   * This is used in the define, update, and removeIt Meteor methods associated with each class.
-   * @param userId The userId of the logged in user. Can be null or undefined
-   * @throws { Meteor.Error } If there is no logged in user, or the user is not an Admin or User.
-   */
-  assertValidRoleForMethod(userId) {
-    this.assertRole(userId, [ROLE.ADMIN, ROLE.USER, ROLE.ORGANIZATION, ROLE.USER]);
+    return undefined;
   }
 
   /**
