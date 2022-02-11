@@ -10,17 +10,17 @@ const EventProfileHeader = () => {
       <Grid container verticalAlign="bottom" textAlign='center' style={gridStyle} columns={3}>
         <Grid.Row>
           <Grid.Column>
-            <Header as='h2' inverted>
+            <Header as='h2' inverted block>
                 The American Red Cross of Hawaii: Disaster Response - Disaster Action Team
             </Header>
           </Grid.Column>
           <Grid.Column>
-            <Header as='h3' inverted>
+            <Header as='h3' inverted block>
                 Opportunity Date: November 9, 2021 8:00 am - 2:09 pm
             </Header>
           </Grid.Column>
           <Grid.Column>
-            <Header as='h3' inverted>
+            <Header as='h3' inverted block>
                 Contact Email: volunteerpacific@redcross.org
             </Header>
           </Grid.Column>

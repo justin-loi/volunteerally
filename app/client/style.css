@@ -72,6 +72,13 @@
   height: 500px;
 }
 
+.event-profile-lower-background {
+  background: url('images/black-background.png') bottom;
+  width: 100%;
+  height: 50px;
+
+}
+
 .organization-signup-background {
     background: url('images/young-people.jpg') no-repeat center center fixed;
     background-size: cover;

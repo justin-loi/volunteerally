@@ -47,7 +47,7 @@ class App extends React.Component {
             <Route path="/find_volunteers" component={OrganizationLibrary}/>
             <Route path="/signup" component={Signup}/>
             <Route path="/signout" component={Signout}/>
-            <Route path="/eprofile" component={EventProfile}/>
+            <Route path="/details/:id" component={EventProfile}/>
             <Route path="/about_us" component={AboutUs}/>
             <Route path="/privacy" component={Privacy}/>
             <Route path="/terms" component={TermsAndConditions}/>
