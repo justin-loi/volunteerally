@@ -10,7 +10,7 @@ import { Events } from '../../api/event/EventCollection';
 const BrowseOpportunities = ({ ready, events }) => ((ready) ? (
   <Container id={PAGE_IDS.LIST_EVENTS}>
     <Header as="h2" textAlign="center">Browse Opportunities</Header>
-    <Card.Group>
+    <Card.Group centered>
       {events.map((event) => <EventCard key={event._id} event={event}/>)}
     </Card.Group>
   </Container>

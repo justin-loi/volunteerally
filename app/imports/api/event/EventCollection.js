@@ -8,7 +8,6 @@ import { ROLE } from '../role/Role';
 export const eventCategories = ['animal welfare', 'environmental', 'food security', 'family services', 'crisis relief', 'education', 'elderly care', 'other'];
 export const eventPublications = {
   event: 'Event',
-  eventAll: 'EventAdmin',
 };
 
 class EventCollection extends BaseCollection {
@@ -106,8 +105,8 @@ class EventCollection extends BaseCollection {
       // get the EventCollection instance.
       const instance = this;
       /** This subscription publishes all events regardless of user. */
-      Meteor.publish(eventPublications.eventAll, function publish() {
-        if (this.userId && Roles.userIsInRole(this.userId, ROLE.ADMIN || ROLE.VOLUNTEER || ROLE.ORGANIZATION)) {
+      Meteor.publish(eventPublications.event, function publish() {
+        if (this.userId) {
           return instance._collection.find();
         }
         return this.ready();
@@ -120,18 +119,7 @@ class EventCollection extends BaseCollection {
    */
   subscribeEvents() {
     if (Meteor.isClient) {
-      return Meteor.subscribe(eventPublications.eventAll);
-    }
-    return null;
-  }
-
-  /**
-   * Subscription method for admin users.
-   * It subscribes to the entire collection.
-   */
-  subscribeEventsAdmin() {
-    if (Meteor.isClient) {
-      return Meteor.subscribe(eventPublications.eventAll);
+      return Meteor.subscribe(eventPublications.event);
     }
     return null;
   }
@@ -143,7 +131,7 @@ class EventCollection extends BaseCollection {
    * @throws { Meteor.Error } If there is no logged in user, or the user is not an Admin or User.
    */
   assertValidRoleForMethod(userId) {
-    this.assertRole(userId, [ROLE.ADMIN, ROLE.USER, ROLE.ORGANIZATION]);
+    this.assertRole(userId, [ROLE.ADMIN, ROLE.USER, ROLE.ORGANIZATION, ROLE.USER]);
   }
 
   /**
