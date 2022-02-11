@@ -2,9 +2,8 @@ import React from 'react';
 import { Container, Button, Header, Loader, Grid, Icon, Segment, Image } from 'semantic-ui-react';
 import { withTracker } from 'meteor/react-meteor-data';
 import PropTypes from 'prop-types';
-import { Stuffs } from '../../api/stuff/StuffCollection';
+import { Events } from '../../api/event/EventCollection';
 import EventProfileHeader from '../components/EventProfileHeader';
-import { Organizations } from '../../api/organization/OrganizationCollection';
 
 /** Renders a table containing all of the Stuff documents. Use <StuffItem> to render each row. */
 const EventProfile = ({ ready }) => ((ready) ? (
@@ -113,11 +112,11 @@ EventProfile.propTypes = {
 // withTracker connects Meteor data to React components. https://guide.meteor.com/react.html#using-withTracker
 export default withTracker(() => {
   // Get access to Stuff documents.
-  const subscription = Stuffs.subscribeStuff();
+  const subscription = Events.subscribeEvents();
   // Determine if the subscription is ready
   const ready = subscription.ready();
   // Get the Stuff documents and sort them by name.
-  const stuffs = Stuffs.find({}, { sort: { name: 1 } }).fetch();
+  const stuffs = Events.find({}, { sort: { name: 1 } }).fetch();
   return {
     stuffs,
     ready,
