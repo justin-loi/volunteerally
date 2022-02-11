@@ -24,19 +24,18 @@ const availabilityAllowValues = ['Once a week', '1-3 times a week', 'More than 3
 // address, city, state, zipCode_postalCode, phoneNumber,
 // interests, specialSkills, environmentalPreference, availability
 const formSchema = new SimpleSchema({
-  username: String,
   email: String,
   password: String,
-  timeTracker: { type: String, required: false },
-  dob: { type: String },
   firstName: String,
   lastName: String,
-  gender: { type: String, required: false, allowedValues: genderAllowValues },
-  address: String,
-  city: String,
-  state: String,
-  zipCode_postalCode: String,
-  phoneNumber: String,
+  username: { type: String, optional: true },
+  gender: { type: String, optional: true },
+  dob: { type: String, optional: true },
+  address: { type: String, optional: true },
+  city: { type: String, optional: true },
+  state: { type: String, optional: true },
+  code: { type: String, optional: true },
+  phoneNumber: { type: String, optional: true },
   interests: { type: Array, required: false },
   'interests.$': { type: String, required: false },
   specialSkills: { type: Array, required: false },
@@ -51,7 +50,7 @@ const bridge = new SimpleSchema2Bridge(formSchema);
 /**
  * Signup component is similar to signin component, but we create a new user instead.
  */
-const Signup = ({ location }) => {
+const VolunteerSignUp = ({ location }) => {
   const [redirectToReferer, setRedirectToReferer] = useState(false);
   const [confirmPassword, setConfirmPassword] = useState('');
   const [dateOfBirth, setDateOfBirth] = useState('');
@@ -254,7 +253,6 @@ const Signup = ({ location }) => {
                 required
                 onChange={handleChange}
               />
-              <HiddenField name='timeTracker' value='0'/>
               <HiddenField name='dob' label='Date of Birth (You must be at least 16 years old to join Volunteer Ally)' value={dateOfBirth} />
               <Form.Input
                 label="Date Of Birth (You must be at least 16 years old to join Volunteer Ally)"
@@ -300,7 +298,7 @@ const Signup = ({ location }) => {
               </div>
               <div className="two fields">
                 <div className="field">
-                  <TextField name='zipCode_postalCode' label='Zip/Postal Code'
+                  <TextField name='code' label='Zip/Postal Code'
                     id={COMPONENT_IDS.VOLUNTEER_SIGNUP_FORM_ZIPCODE}/>
                 </div>
                 <div className="field">
@@ -451,8 +449,8 @@ const Signup = ({ location }) => {
 };
 
 /* Ensure that the React Router location object is available in case we need to redirect. */
-Signup.propTypes = {
+VolunteerSignUp.propTypes = {
   location: PropTypes.object,
 };
 
-export default Signup;
+export default VolunteerSignUp;

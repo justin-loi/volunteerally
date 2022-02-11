@@ -17,6 +17,16 @@ class BaseProfileCollection extends BaseCollection {
       lastName: String,
       role: String,
       userID: SimpleSchema.RegEx.Id,
+      // use in VolunteerProfileCollection.
+      username: { type: String, optional: true },
+      gender: { type: String, optional: true },
+      dob: { type: String, optional: true },
+      address: { type: String, optional: true },
+      city: { type: String, optional: true },
+      state: { type: String, optional: true },
+      code: { type: String, optional: true },
+      phoneNumber: { type: String, optional: true },
+      // ^ use in VolunteerProfileCollection.
     })));
   }
 
