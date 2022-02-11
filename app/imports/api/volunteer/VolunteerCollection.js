@@ -43,13 +43,13 @@ class VolunteerCollection {
    * Define a new user, which means creating an entry in Meteor.Accounts.
    * This is called in the various Profile define() methods.
    * @param username The username to be defined.
-   * @param email The email to be defined.
+   * @param email The email for the user.
    * @param password The password for the user.
    * @param role The role.
    * @returns { String } The docID of the newly created user.
    * @throws { Meteor.Error } If the user exists.
    */
-  define({ username, email, password, role }) {
+  define({ username, role, password, email }) {
     if (Meteor.isServer) {
       Roles.createRole(role, { unlessExists: true });
       // In test Meteor.settings is not set from settings.development.json so we use _.get to see if it is set.
@@ -62,7 +62,7 @@ class VolunteerCollection {
       }
       // Otherwise define this user with a Meteor login and randomly generated password.
       console.log(`Defining ${role} ${username} with password ${credential}`);
-      const userID = Accounts.createUser({ username: username, email: email, password: credential });
+      const userID = Accounts.createUser({ username, email: username, password: credential });
       Roles.addUsersToRoles(userID, [role]);
       return userID;
     }
@@ -88,14 +88,15 @@ class VolunteerCollection {
     }
   }
 
-  /**
-   * Returns true if user is referenced by other "public" entities. Specifically user owns SomeCollection.
-   * Used to determine if user can be deleted.
-   * @param user
-   * @return {boolean}
-   */
+  // did not use for now.
+  // /**
+  //  * Returns true if user is referenced by other "public" entities. Specifically user owns Stuff.
+  //  * Used to determine if user can be deleted.
+  //  * @param user
+  // * @return {boolean}
+  // */
   // isReferenced(user) {
-  //   return SomeCollection.find({ owner: user }).fetch().length > 0;
+  // return CollectionName.find({ owner: user }).fetch().length > 0;
   // }
 
   /**

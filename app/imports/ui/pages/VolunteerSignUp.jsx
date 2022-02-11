@@ -24,19 +24,18 @@ const availabilityAllowValues = ['Once a week', '1-3 times a week', 'More than 3
 // address, city, state, zipCode_postalCode, phoneNumber,
 // interests, specialSkills, environmentalPreference, availability
 const formSchema = new SimpleSchema({
-  username: String,
   email: String,
   password: String,
-  timeTracker: { type: String, required: false },
-  dob: { type: String },
   firstName: String,
   lastName: String,
-  gender: { type: String, required: false, allowedValues: genderAllowValues },
-  address: String,
-  city: String,
-  state: String,
-  zipCode_postalCode: String,
-  phoneNumber: String,
+  username: { type: String, optional: true },
+  gender: { type: String, optional: true },
+  dob: { type: String, optional: true },
+  address: { type: String, optional: true },
+  city: { type: String, optional: true },
+  state: { type: String, optional: true },
+  code: { type: String, optional: true },
+  phoneNumber: { type: String, optional: true },
   interests: { type: Array, required: false },
   'interests.$': { type: String, required: false },
   specialSkills: { type: Array, required: false },
@@ -254,7 +253,6 @@ const VolunteerSignUp = ({ location }) => {
                 required
                 onChange={handleChange}
               />
-              <HiddenField name='timeTracker' value='0'/>
               <HiddenField name='dob' label='Date of Birth (You must be at least 16 years old to join Volunteer Ally)' value={dateOfBirth} />
               <Form.Input
                 label="Date Of Birth (You must be at least 16 years old to join Volunteer Ally)"
@@ -301,7 +299,7 @@ const VolunteerSignUp = ({ location }) => {
               </div>
               <div className="two fields">
                 <div className="field">
-                  <TextField name='zipCode_postalCode' placeholder='96822' label='Zip/Postal Code'
+                  <TextField name='code' label='Zip/Postal Code'
                     id={COMPONENT_IDS.VOLUNTEER_SIGNUP_FORM_ZIPCODE}/>
                 </div>
                 <div className="field">

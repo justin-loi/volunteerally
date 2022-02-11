@@ -6,20 +6,14 @@
   ],
 
   "defaultVolunteers": [
-    { "username": "tom","email": "tom@foo.com", "password": "changeme", "role": "VOLUNTEER", "timeTracker": "20",
-      "firstName": "Tom", "lastName": "Tom", "dob": "1/1/1999", "gender": "Male",
-      "address": "2444 Dole St", "city": "Honolulu", "state": "Hawaii", "zipCode_postalCode": "96822", "phoneNumber": "123456789",
-      "interests": [],
-      "specialSkill": [],
-      "environmentalPreference": "",
-      "availability": []},
-    { "username": "jerry","email": "jerry@foo.com", "password": "changeme", "role": "VOLUNTEER", "timeTracker": "0",
-      "firstName": "Jerry", "lastName": "Jerry", "dob": "1/1/1998", "gender": "Male",
-      "address": "2444 Dole St", "city": "Honolulu", "state": "Hawaii", "zipCode_postalCode": "96822", "phoneNumber": "123456789",
-      "interests": [],
-      "specialSkill": [],
-      "environmentalPreference": "",
-      "availability": []}
+    { "email": "tom@foo.com", "password": "changeme", "role": "VOLUNTEER", "firstName": "tom", "lastName": "tom",
+      "username": "tom", "gender": "Male", "dob": "12/31/2000",
+      "address": "2500 Campus Rd", "city": "Honolulu", "state": "Hawaii", "code": "96822"
+    },
+    { "email": "jerry@foo.com", "password": "changeme", "role": "VOLUNTEER" , "firstName": "jerry", "lastName": "jerry",
+      "username": "jerry", "gender": "Male", "dob": "12/31/2000",
+      "address": "2500 Campus Rd", "city": "Honolulu", "state": "Hawaii", "code": "96822"
+    }
   ],
 
   "defaultOrganizations": [
