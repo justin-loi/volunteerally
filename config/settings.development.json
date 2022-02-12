@@ -2,7 +2,7 @@
   "defaultAccounts": [
     { "email": "admin@foo.com", "password": "changeme", "role": "ADMIN", "firstName": "Admin", "lastName": "MATRP"
     },
-    { "email": "john@foo.com", "password": "changeme", "role": "USER" , "firstName": "John", "lastName": "Doe" }
+    { "email": "john@foo.com", "password": "changeme", "role": "VOLUNTEER" , "firstName": "John", "lastName": "Doe" }
   ],
 
   "defaultVolunteers": [
@@ -26,6 +26,14 @@
       "firstName": "Nah", "lastName": "Foo", "eventBackgroundImage": "images/young-people.jpg",
       "logoImage": "images/helping-hands-logo.png", "organizationName": "Helping Hands", "missionStatement": "You know what the say about idle hands, we are helping hands!", "phoneNumber": "808-999-8888"
     }
+  ],
+
+  "defaultEvents": [
+    { "eventName": "Mowing Peoples Lawns", "time":  "8:00am-8:00pm", "location": "Manoa", "date": "April 20th, 1989", "orgName": "Helping Hands", "categories":
+      "crisis relief"
+     },
+    { "eventName": "Back 2 Skewl", "time":  "8:00am-8:00pm", "location": "UH Manoa", "date": "Jan. 10th, 2022", "orgName": "UHM", "categories": "other" },
+    { "eventName": "Dr. Moore Buys Pizza", "time":  "8:00am-8:00pm", "location": "POST 319", "date": "Feb. 18 2022", "orgName": "Helping Hands", "categories": "education" }
   ],
 
   "defaultData": [
