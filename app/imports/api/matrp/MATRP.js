@@ -4,6 +4,7 @@ import { AdminProfiles } from '../user/AdminProfileCollection';
 import { UserProfiles } from '../user/UserProfileCollection';
 // new collection
 import { VolunteerProfiles } from '../volunteer/VolunteerProfileCollection';
+import { Events } from '../event/EventCollection';
 
 class MATRPClass {
   collections;
@@ -19,6 +20,7 @@ class MATRPClass {
       UserProfiles,
       Stuffs,
       VolunteerProfiles,
+      Events,
     ];
     /*
      * A list of collection class instances in the order required for them to be sequentially loaded from a file.
@@ -28,6 +30,7 @@ class MATRPClass {
       UserProfiles,
       Stuffs,
       VolunteerProfiles,
+      Events,
     ];
 
     /*
