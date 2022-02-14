@@ -24,7 +24,7 @@ const EventProfile = ({ event, ready }) => ((ready) ? (
           </Grid.Column>
           <Grid.Column>
             <Header as='h3' inverted block>
-              Contact Email: {event.orgName}
+              Contact Email: xxx.gmail.com
             </Header>
           </Grid.Column>
         </Grid.Row>
@@ -75,7 +75,7 @@ const EventProfile = ({ event, ready }) => ((ready) ? (
             <Header as="">
               <Icon name="calendar"/> Upcoming Dates
             </Header>
-            November 9, 2021 8:00 am - 2:09 pm
+            {event.date} {event.time}
           </Segment>
         </Grid.Column>
         <Grid.Column>
@@ -83,12 +83,13 @@ const EventProfile = ({ event, ready }) => ((ready) ? (
             <Header as="h3">
               <Icon name="building"/> Organization
             </Header>
-            Curren Gaspar
+            {event.orgName}
           </Segment>
           <Segment>
             <Header as="h3">
               <Icon name="address card"/> Contact Details
             </Header>
+            Curren Gaspar
           </Segment>
           <Segment>
             <Header as="h3">
