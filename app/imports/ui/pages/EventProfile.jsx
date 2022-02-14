@@ -5,7 +5,7 @@ import PropTypes from 'prop-types';
 import { useParams } from 'react-router';
 import { Events } from '../../api/event/EventCollection';
 
-/** Renders a table containing all of the Stuff documents. Use <StuffItem> to render each row. */
+// Renders a Event Info page that connects with the current Event collection.
 const gridStyle = { height: '500px', fontSize: '75px' };
 const EventProfile = ({ event, ready }) => ((ready) ? (
   <div>
@@ -123,7 +123,7 @@ const EventProfile = ({ event, ready }) => ((ready) ? (
   </div>
 ) : <Loader active>Getting data</Loader>);
 
-// Require an array of Stuff documents in the props.
+// Require an Event object in the props.
 EventProfile.propTypes = {
   event: PropTypes.object,
   ready: PropTypes.bool.isRequired,
@@ -131,13 +131,14 @@ EventProfile.propTypes = {
 
 // withTracker connects Meteor data to React components. https://guide.meteor.com/react.html#using-withTracker
 export default withTracker(() => {
+  // Get the eventID from the URL field. See imports/ui/layouts/App.jsx for the route containing :_id.
   const { _id } = useParams();
   const eventId = _id;
-  // Get access to Stuff documents.
+  // Get access to Events documents.
   const subscription = Events.subscribeEvents();
   // Determine if the subscription is ready
   const ready = subscription.ready();
-  // Get the Stuff documents and sort them by name.
+  // Get the Event document that matches the :_id
   const event = Events.findDoc(eventId);
   return {
     event,
