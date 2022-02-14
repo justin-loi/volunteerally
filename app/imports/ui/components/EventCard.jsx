@@ -5,10 +5,10 @@ import { NavLink, withRouter } from 'react-router-dom';
 
 /** Renders a single event card. */
 const EventCard = ({ event }) => (
-  <Card>
+  <Card as={NavLink} exact to={`/details/${event._id}`}>
     <Image src='images/event_card_image_volunteer.jpg' wrapped ui={false}/>
     <Card.Content>
-      <Card.Header as={NavLink} exact to={'/eprofile'}> {event.eventName}</Card.Header>
+      <Card.Header> {event.eventName}</Card.Header>
       <Card.Meta>
         <span>Date: {event.date}</span>
         <br/>
