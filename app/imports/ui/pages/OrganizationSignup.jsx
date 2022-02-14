@@ -2,6 +2,26 @@ import React from 'react';
 import { Container, Grid, Form, Segment, Checkbox, Radio } from 'semantic-ui-react';
 import OrganizationSignupBackground from '../components/OrganizationSignupBackground';
 
+const formScheme = new ({
+  email: String,
+  ein: String,
+  primaryAddress: String,
+  city: String,
+  state: String,
+  zipcode: String,
+  // industry
+  primaryContactFirstName: String,
+  primaryContactLastName: String,
+  secondContactFirstName: String,
+  secondContactLastName: String,
+  primaryContactEmail: String,
+  primaryContactPhone: String,
+  secondContactEmaiL: String,
+  secondContactPhone: String,
+  username: String,
+  password: String,
+});
+
 const OrganizationSignup = () => (
   <div>
     <OrganizationSignupBackground />
