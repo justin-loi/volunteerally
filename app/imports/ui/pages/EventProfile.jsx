@@ -10,7 +10,7 @@ const gridStyle = { height: '500px', fontSize: '75px' };
 const EventProfile = ({ event, ready }) => ((ready) ? (
   <div>
     <div className="event-profile-top-background">
-      <Grid container verticalAlign="bottom" textAlign='center' style={gridStyle} columns={3}>
+      <Grid stackable container verticalAlign="bottom" textAlign='center' style={gridStyle} columns={3}>
         <Grid.Row>
           <Grid.Column>
             <Header as='h2' inverted block>
@@ -139,9 +139,8 @@ export default withTracker(() => {
   // Determine if the subscription is ready
   const ready = subscription.ready();
   // Get the Event document that matches the :_id
-  const event = Events.findDoc(eventId);
   return {
-    event,
+    event: Events.find({ _id: eventId }).fetch()[0],
     ready,
   };
 })(EventProfile);
