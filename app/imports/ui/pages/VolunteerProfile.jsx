@@ -3,7 +3,7 @@ import { Grid, Header, Loader } from 'semantic-ui-react';
 import PropTypes from 'prop-types';
 import { withTracker } from 'meteor/react-meteor-data';
 import { PAGE_IDS } from '../utilities/PageIDs';
-import volunteerProfile from '../components/volunteerProfile/volunteerProfile';
+import VolunteerCard from '../components/volunteerProfile/VolunteerCard';
 import { VolunteerProfiles } from '../../api/volunteer/VolunteerProfileCollection';
 
 /** Renders the Page for adding a document. */
@@ -11,9 +11,8 @@ const VolunteerProfile = ({ ready, volunteers }) => ((ready) ? (
   <Grid id={PAGE_IDS.VOLUNTEER_PROFILE} container centered>
     <Grid.Column>
       <div className="about-us-header">
-        <Header as="h1" textAlign="center">{volunteers.map((volunteer) => <volunteerProfile key={volunteer._id} volunteer={volunteer} />)}
+        <Header as="h1" textAlign="center">{volunteers.map((volunteer) => <VolunteerCard key={volunteer._id} volunteer={volunteer} />)}
         </Header>
-        <Header as="h2" textAlign="center"> Welcome {volunteers.map((volunteer) => <volunteerProfile key={volunteer._id} volunteer={volunteer}/>)} </Header>
       </div>
     </Grid.Column>
   </Grid>

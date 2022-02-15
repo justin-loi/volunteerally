@@ -2,18 +2,20 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Header } from 'semantic-ui-react';
 
-const volunteerProfile = ({ volunteer }) => (
+console.log('you have reached here');
+
+const volunteerCard = ({ volunteer }) => (
   <div>
-    <Header as="h1" Hello test></Header>
-    <Header as="h1">{volunteer.firstName}</Header>
+    <Header as="h1">Hello {volunteer.firstName}</Header>
   </div>
 );
 
-volunteerProfile.propTypes = {
+volunteerCard.propTypes = {
   volunteer: PropTypes.shape({
     firstName: PropTypes.string,
+    lastName: PropTypes.string,
     _id: PropTypes.string,
   }).isRequired,
 };
 
-export default volunteerProfile;
+export default volunteerCard;
