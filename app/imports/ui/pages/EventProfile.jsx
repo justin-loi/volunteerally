@@ -125,7 +125,7 @@ const EventProfile = ({ event, ready }) => ((ready) ? (
 
 // Require an Event object in the props.
 EventProfile.propTypes = {
-  event: PropTypes.object,
+  event: PropTypes.object.isRequired,
   ready: PropTypes.bool.isRequired,
 };
 
