@@ -125,7 +125,7 @@ const EventProfile = ({ event, ready }) => ((ready) ? (
 
 // Require an Event object in the props.
 EventProfile.propTypes = {
-  event: PropTypes.object,
+  event: PropTypes.object.isRequired,
   ready: PropTypes.bool.isRequired,
 };
 
@@ -139,9 +139,8 @@ export default withTracker(() => {
   // Determine if the subscription is ready
   const ready = subscription.ready();
   // Get the Event document that matches the :_id
-  const event = Events.findDoc(eventId);
   return {
-    event,
+    event: Events.find({ _id: eventId }).fetch()[0],
     ready,
   };
 })(EventProfile);
