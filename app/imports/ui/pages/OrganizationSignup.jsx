@@ -1,67 +1,156 @@
-import React from 'react';
+import React, { useState } from 'react';
+import PropTypes from 'prop-types';
 import { Container, Grid, Form, Segment, Checkbox, Radio } from 'semantic-ui-react';
+import { AutoForm, TextField, HiddenField } from 'uniforms-semantic';
+import SimpleSchema from 'simpl-schema';
+import SimpleSchema2Bridge from 'uniforms-bridge-simple-schema-2';
+import swal from 'sweetalert';
+import { PAGE_IDS } from '../utilities/PageIDs';
+import { COMPONENT_IDS } from '../utilities/ComponentIDs';
 import OrganizationSignupBackground from '../components/OrganizationSignupBackground';
 
-const formScheme = new ({
+const industryAllowedValues = ['Animal Welfare/Rescue', 'Child/Family Support', 'COVID-19 Recovery', 'Crisis/Disaster Relief',
+'Education', 'Environment', 'Elderly/Senior Care', 'Food Banks', 'Housing', 'Homelessness/Poverty', 'Special Needs', 'Other'];
+
+const formSchema = new SimpleSchema({
   email: String,
   ein: String,
   primaryAddress: String,
   city: String,
   state: String,
   zipcode: String,
-  // industry
+  industry: { type: String, required: true, allowedValues: industryAllowedValues },
   primaryContactFirstName: String,
   primaryContactLastName: String,
   secondContactFirstName: String,
   secondContactLastName: String,
   primaryContactEmail: String,
   primaryContactPhone: String,
-  secondContactEmaiL: String,
+  secondContactEmail: String,
   secondContactPhone: String,
   username: String,
   password: String,
 });
 
-const OrganizationSignup = () => (
-  <div>
-    <OrganizationSignupBackground />
+const bridge = new SimpleSchema2Bridge(formSchema);
+
+const OrganizationSignup = ({ location }) => {
+  const [industry, acceptIndustry] = useState('');
+  const [checkPassword, acceptPassword] = useState('');
+  const [checkPrivacyPolicy, acceptPrivacyPolicy] = useState('');
+
+  const isNotEmpty = (value) => (!value);
+
+  const checkIsValueEmpty = (index, value) => {
+    isValueEmpty[index] = value;
+    checkIsValueEmpty(isValueEmpty);
+  }
+
+  // referenced VolunteerSignUp matcher
+  const checkEmail = (email) => String(email).toLowerCase()
+    .match(/^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,);
+
+  const confirmEmail = (email) => {
+    if(checkEmail(email)) {
+      return true;
+    } else {
+      swal('Error!', 'Please enter a valid email', 'error');
+      return false;
+    }
+  }
+
+  const confirmPassword = (inputOne, inputTwo) => {
+    if (inputOne === inputTwo) {
+      return true;
+    } else {
+      swal('Error!', 'Your passwords do not match', 'error');
+      return false;
+    }
+  };
+
+  const verifyPrivacyPolicyAndTermsConditions = (value) => {
+    if (!value) {
+      swal('Error!', 'Please confirm that you agree to our Privacy Policy and Terms & Conditions','error');
+      return false;
+    } else {
+      return true;
+    }
+  };
+
+  const handleChange = (e, { name, value }) => {
+    switch(name) {
+      case 'confirmPassword':
+        acceptPassword(value);
+        break;
+      case 'industry':
+        acceptIndustry(value);
+      case 'checkPrivacyPolicy':
+        if (checkPrivacyPolicy === '') {
+          acceptPrivacyPolicy(value);
+          checkIsValueEmpty(1, false);
+        } else {
+          checkIsValueEmpty(1, true);
+        }
+        break;
+      default:
+        // do nothing
+    }
+  };
+
+  const submit = (data, formRef) => {
+    if (confirmPassword(data.password, checkPassword)
+      && verifyPrivacyPolicyAndTermsConditions(checkPrivacyPolicy)
+      && confirmEmail(data.email)) {
+      // insert Organization Profile Collection method here
+      .registerNewOrganizationMethod.callPromise(data).catch(error => {
+        swal('Error', error.message, 'error');
+      })
+        .then(() => {
+        formRef.reset();
+        swal({
+          title: 'Organization pending',
+          text: 'Please wait for approval by admin',
+          icon: 'success',
+          timer: 1500,
+        });
+      });
+    }
+  };
+
+  let fRef = null;
+
+  return (
+    <div>
+    <OrganizationSignupBackground/>
     <br/>
-    <Container>
+    <Container id={PAGE_IDS.ORGANIZATION_SIGNUP}>
       <br/>
       <Grid>
         <Grid.Column>
-          <Form>
+          <AutoForm ref={ref => { fRef = ref; }} schema={bridge} onSubmit={data => submit(data, fRef)}>
             <Segment stacked>
-              <Form.Input
-                label="E-mail Address"
-                name="email"
-                type="email"
-              />
-              <Form.Input
-                label="EIN"
-                name="EIN"
-                type="EIN"
-              />
-              <Form.Input
-                label="Primary Address"
-                name="address"
-                type="address"
-              />
-              <Form.Input
-                label="City"
-                name="city"
-                type="city"
-              />
-              <Form.Input
-                label="State"
-                name="state"
-                type="state"
-              />
-              <Form.Input
-                label="Zip/Postal Code"
-                name="zip_postalCode"
-                type="zipcode"
-              />
+              <TextField name='organizationName' type='name' label='Organization Name' id={COMPONENT_IDS.ORGANIZATION_SIGNUP_FORM_ORGANIZATION_NAME}/>
+              <TextField name='email' type='email' label='E-mail Address' id={COMPONENT_IDS.ORGANIZATION_SIGNUP_FORM_EMAIL}/>
+              <TextField name='ein' label='EIN' id={COMPONENT_IDS.ORGANIZATION_SIGNUP_FORM_EIN}/>
+              <TextField name='primaryAddress' label='Primary Address' id={COMPONENT_IDS.ORGANIZATION_SIGNUP_FORM_PRIMARY_ADDRESS}/>
+              <TextField name='city' label='City' id={COMPONENT_IDS.ORGANIZATION_SIGNUP_FORM_CITY}/>
+              <TextField name='state' label='State' id={COMPONENT_IDS.ORGANIZATION_SIGNUP_FORM_STATE}/>
+              <TextField name='zipcodePostalcode' label='Zip/Postal Code' id={COMPONENT_IDS.ORGANIZATION_SIGNUP_FORM_ZIPCODE_POSTALCODE}/>
+              <HiddenField name='industry' value={industry}/>
+              <label>Industry</label>
+              <Form.Group>
+                <Grid columns{2}>
+                  <Grid.Row style={{ paddingLeft: '8px' }}>
+                    <Grid.Column>
+                      <Form.Radio name='industry'
+                                  label='Animal Welfare/Rescue'
+                                  id={COMPONENT_IDS.ORGANIZATION_SIGNUP_FORM_ANIMAL_WELFARE_RESCUE}
+                      />
+
+                    </Grid.Column>
+                  </Grid.Row>
+                </Grid>
+              </Form.Group>
               <Form.Field>
                 <label>Industry</label>
                 <Grid columns={2}>
@@ -216,11 +305,16 @@ const OrganizationSignup = () => (
               </Grid>
               <br/>
             </Segment>
-          </Form>
+          </AutoForm>
         </Grid.Column>
       </Grid>
     </Container>
   </div>
 );
+};
+
+OrganizationSignup.propTypes = {
+  location: PropTypes.object,
+};
 
 export default OrganizationSignup;

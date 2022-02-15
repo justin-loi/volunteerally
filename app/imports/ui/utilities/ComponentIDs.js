@@ -44,4 +44,13 @@ export const COMPONENT_IDS = {
   VOLUNTEER_SIGNUP_FORM_INDOOR: 'volunteer-signup-indoor',
   VOLUNTEER_SIGNUP_FORM_MONTHLY: 'volunteer-signup-monthly',
   VOLUNTEER_SIGNUP_FORM_POLICY: 'volunteer-signup-policy',
+  ORGANIZATION_SIGNUP_FORM_ORGANIZATION_NAME: 'organization-signup-form-organization-name',
+  ORGANIZATION_SIGNUP_FORM_EMAIL: 'organization-signup-form-username',
+  ORGANIZATION_SIGNUP_FORM_EIN: 'organization-signup-form-ein',
+  ORGANIZATION_SIGNUP_FORM_PRIMARY_ADDRESS: 'organization-signup-form-primary-address',
+  ORGANIZATION_SIGNUP_FORM_CITY: 'organization-signup-form-city',
+  ORGANIZATION_SIGNUP_FORM_STATE: 'organization-signup-form-state',
+  ORGANIZATION_SIGNUP_FORM_ZIPCODE_POSTALCODE: 'organization-signup-form-zipcode-postalcode',
+  ORGANIZATION_SIGNUP_FORM_ANIMAL_WELFARE_RESCUE: 'organization-signup-form-animal-welfare-rescue',
+
 };
