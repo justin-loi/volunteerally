@@ -4,7 +4,6 @@ import { withTracker } from 'meteor/react-meteor-data';
 import PropTypes from 'prop-types';
 import { useParams } from 'react-router';
 import { Events } from '../../api/event/EventCollection';
-import { OrganizationProfiles } from '../../api/organization/OrganizationProfileCollection';
 
 // Renders a Event Info page that connects with the current Event collection.
 const gridStyle = { height: '500px', fontSize: '75px' };
@@ -137,16 +136,13 @@ export default withTracker(() => {
   const { _id } = useParams();
   const eventId = _id;
   // Get access to Events documents.
-  const subscription1 = Events.subscribe();
-  const subscription2 = OrganizationProfiles.subscribe();
+  const subscription = Events.subscribe();
   // Determine if the subscription is ready
-  const ready = subscription1.ready() && subscription2.ready();
+  const ready = subscription.ready();
   // Get the Event document that matches the :_id
   const event = Events.findDoc(eventId);
-  const orgProfile = OrganizationProfiles.findByEmail(event.owner);
   return {
     event,
-    orgProfile,
     ready,
   };
 
