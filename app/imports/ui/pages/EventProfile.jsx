@@ -143,7 +143,7 @@ export default withTracker(() => {
   const ready = subscription1.ready() && subscription2.ready();
   // Get the Event document that matches the :_id
   const event = Events.findDoc(eventId);
-  const orgProfile = OrganizationProfiles.getProfile(event.owner);
+  const orgProfile = OrganizationProfiles.findByEmail(event.owner);
   return {
     event,
     orgProfile,
