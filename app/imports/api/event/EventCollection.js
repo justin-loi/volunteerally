@@ -1,4 +1,3 @@
-import { Meteor } from 'meteor/meteor';
 import SimpleSchema from 'simpl-schema';
 import { check } from 'meteor/check';
 import BaseCollection from '../base/BaseCollection';
@@ -12,6 +11,9 @@ class EventCollection extends BaseCollection {
       location: String,
       orgName: String,
       categories: String,
+      environmentType: String,
+      owner: String,
+      skillsNeeded: String,
     }));
   }
 
@@ -24,9 +26,12 @@ class EventCollection extends BaseCollection {
    * @param orgName the event holder name.
    * @param location the event location.
    * @param categories the condition of the item.
+   * @param environmentType the condition of the item.
+   * @param owner the condition of the item.
+   * @param skillsNeeded the condition of the item.
    * @return {String} the docID of the new document.
    */
-  define({ eventName, date, time, location, orgName, categories }) {
+  define({ eventName, date, time, location, orgName, categories, environmentType, owner, skillsNeeded }) {
     const docID = this._collection.insert({
       eventName,
       date,
@@ -34,6 +39,9 @@ class EventCollection extends BaseCollection {
       location,
       orgName,
       categories,
+      environmentType,
+      owner,
+      skillsNeeded,
     });
     return docID;
   }
@@ -49,7 +57,7 @@ class EventCollection extends BaseCollection {
    * @param location the event location.
    * @param categories the condition of the item.
    */
-  update(docID, { eventName, date, time, location, orgName, categories }) {
+  update(docID, { eventName, date, time, location, orgName, categories, environmentType, owner, skillsNeeded }) {
     const updateData = {};
     if (eventName) {
       updateData.eventName = eventName;
@@ -70,6 +78,15 @@ class EventCollection extends BaseCollection {
     if (categories) {
       updateData.categories = categories;
     }
+    if (environmentType) {
+      updateData.environmentType = environmentType;
+    }
+    if (skillsNeeded) {
+      updateData.skillsNeeded = skillsNeeded;
+    }
+    if (owner) {
+      updateData.owner = owner;
+    }
     this._collection.update(docID, { $set: updateData });
   }
 
@@ -86,27 +103,6 @@ class EventCollection extends BaseCollection {
   }
 
   /**
-   * Default publication method for entities.
-   * It publishes the entire collection. This should be overridden in subclasses.
-   */
-  publishEvents() {
-    if (Meteor.isServer) {
-      Meteor.publish(this._collectionName, () => this._collection.find());
-    }
-  }
-
-  /**
-   * Default subscription method for entities.
-   * It subscribes to the entire collection. Should be overridden in subclass
-   */
-  subscribeEvents() {
-    if (Meteor.isClient) {
-      return Meteor.subscribe(this._collectionName);
-    }
-    return undefined;
-  }
-
-  /**
    * Returns an object representing the definition of docID in a format appropriate to the restoreOne or define function.
    * @param docID
    * @return {{owner: (*|number), condition: *, quantity: *, name}}
@@ -119,7 +115,10 @@ class EventCollection extends BaseCollection {
     const orgName = doc.orgName;
     const location = doc.location;
     const categories = doc.categories;
-    return { eventName, date, time, orgName, location, categories };
+    const owner = doc.owner;
+    const environmentType = doc.owner;
+    const skillsNeeded = doc.skillsNeeded;
+    return { eventName, date, time, orgName, location, categories, environmentType, skillsNeeded, owner };
   }
 }
 

@@ -4,10 +4,11 @@ import { withTracker } from 'meteor/react-meteor-data';
 import PropTypes from 'prop-types';
 import { useParams } from 'react-router';
 import { Events } from '../../api/event/EventCollection';
+import { OrganizationProfiles } from '../../api/organization/OrganizationProfileCollection';
 
 // Renders a Event Info page that connects with the current Event collection.
 const gridStyle = { height: '500px', fontSize: '75px' };
-const EventProfile = ({ event, ready }) => ((ready) ? (
+const EventProfile = ({ event, orgProfile, ready }) => ((ready) ? (
   <div>
     <div className="event-profile-top-background">
       <Grid container verticalAlign="bottom" textAlign='center' style={gridStyle} columns={3}>
@@ -24,7 +25,7 @@ const EventProfile = ({ event, ready }) => ((ready) ? (
           </Grid.Column>
           <Grid.Column>
             <Header as='h3' inverted block>
-              Contact Email: xxx.gmail.com
+              {orgProfile.email}
             </Header>
           </Grid.Column>
         </Grid.Row>
@@ -126,6 +127,7 @@ const EventProfile = ({ event, ready }) => ((ready) ? (
 // Require an Event object in the props.
 EventProfile.propTypes = {
   event: PropTypes.object,
+  orgProfile: PropTypes.object,
   ready: PropTypes.bool.isRequired,
 };
 
@@ -135,13 +137,17 @@ export default withTracker(() => {
   const { _id } = useParams();
   const eventId = _id;
   // Get access to Events documents.
-  const subscription = Events.subscribeEvents();
+  const subscription1 = Events.subscribe();
+  const subscription2 = OrganizationProfiles.subscribe();
   // Determine if the subscription is ready
-  const ready = subscription.ready();
+  const ready = subscription1.ready() && subscription2.ready();
   // Get the Event document that matches the :_id
   const event = Events.findDoc(eventId);
+  const orgProfile = OrganizationProfiles.getProfile(event.owner);
   return {
     event,
+    orgProfile,
     ready,
   };
+
 })(EventProfile);

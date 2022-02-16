@@ -1,8 +1,8 @@
 import { Meteor } from 'meteor/meteor';
 import SimpleSchema from 'simpl-schema';
-import BaseProfileCollection from './BaseProfileCollection';
+import BaseProfileCollection from '../user/BaseProfileCollection';
 import { ROLE } from '../role/Role';
-import { Users } from './UserCollection';
+import { Users } from '../user/UserCollection';
 
 class OrganizationProfileCollection extends BaseProfileCollection {
   constructor() {
@@ -26,7 +26,7 @@ class OrganizationProfileCollection extends BaseProfileCollection {
       const username = email;
       const user = this.findOne({ email, firstName, lastName });
       if (!user) {
-        const role = ROLE.USER;
+        const role = ROLE.ORGANIZATION;
         const profileID = this._collection.insert({ email, firstName, lastName, logoImage, eventBackgroundImage, organizationName, phoneNumber, missionStatement, userID: this.getFakeUserId(), role });
         const userID = Users.define({ username, role, password });
         this._collection.update(profileID, { $set: { userID } });
@@ -39,7 +39,7 @@ class OrganizationProfileCollection extends BaseProfileCollection {
 
   /**
    * Updates the OrganizationProfile. You cannot change the email or role.
-   * @param docID the id of the UserProfile
+   * @param docID the id of the OrganizationProfile
    * @param firstName new first name.
    * @param lastName new last name.
    * @param firstName update the organization representative first name.
