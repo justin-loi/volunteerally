@@ -19,3 +19,16 @@
   const editLinks = await Selector(`.${COMPONENT_IDS.LIST_STUFF_EDIT}`);
   await t.click(editLinks.nth(0));
   await editStuffPage.isDisplayed(); */
+
+/**
+ // use in VolunteerProfileCollection.
+ username: { type: String, optional: true },
+ gender: { type: String, optional: true },
+ dob: { type: String, optional: true },
+ address: { type: String, optional: true },
+ city: { type: String, optional: true },
+ state: { type: String, optional: true },
+ code: { type: String, optional: true },
+ phoneNumber: { type: String, optional: true },
+ // ^ use in VolunteerProfileCollection.
+ */

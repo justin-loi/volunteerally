@@ -1,6 +1,7 @@
 import { Meteor } from 'meteor/meteor';
 import { Stuffs } from '../../api/stuff/StuffCollection';
 import { Events } from '../../api/event/EventCollection';
+import { OrganizationProfiles } from '../../api/organization/OrganizationProfileCollection';
 /* eslint-disable no-console */
 
 // Initialize the database with a default data document.
@@ -26,5 +27,17 @@ if (Events.count() === 0) {
   if (Meteor.settings.defaultEvents) {
     console.log('Creating default events.');
     Meteor.settings.defaultEvents.map(data => addEvent(data));
+  }
+}
+
+function addOrganization(data) {
+  console.log(`  Adding: ${data.email} (${data.organizationName})`);
+  OrganizationProfiles.define(data);
+}
+
+if (OrganizationProfiles.count() === 0) {
+  if (Meteor.settings.defaultOrganizations) {
+    console.log('Creating default organizations.');
+    Meteor.settings.defaultOrganizations.map(data => addOrganization(data));
   }
 }
