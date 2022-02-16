@@ -1,8 +1,10 @@
 import React from 'react';
 import { Container, Button, Header, Loader, Grid, Icon, Segment, Image } from 'semantic-ui-react';
 import { withTracker } from 'meteor/react-meteor-data';
+import { useParams } from 'react-router';
 import PropTypes from 'prop-types';
 import { Events } from '../../api/event/EventCollection';
+import { OrganizationProfiles } from '../../api/organization/OrganizationProfileCollection';
 
 // Renders a Event Info page that connects with the current Event collection.
 const gridStyle = { height: '500px', fontSize: '75px' };
@@ -130,19 +132,20 @@ EventProfile.propTypes = {
 };
 
 // withTracker connects Meteor data to React components. https://guide.meteor.com/react.html#using-withTracker
-export default withTracker(({ match }) => {
+export default withTracker(() => {
   // Get the eventID from the URL field. See imports/ui/layouts/App.jsx for the route containing :_id.
-  // const { _id } = useParams();
-  const { _id } = match.params;
+  const { _id } = useParams();
   const eventId = _id;
   // Get access to Events documents.
-  const subscription = Events.subscribe();
+  const subscription1 = Events.subscribe();
+  const subscription2 = OrganizationProfiles.subscribe();
   // Determine if the subscription is ready
-  const ready = subscription.ready();
-  // Get the Event document that matches the :_id
-  // console.log(match, ready);
+  const ready = subscription1.ready() && subscription2.ready();
+  const event = Events.findDoc(eventId);
+  const orgProfile = OrganizationProfiles.findByEmail(event.owner);
   return {
-    event: Events.find({ _id: eventId }).fetch()[0],
+    event,
+    orgProfile,
     ready,
   };
 
