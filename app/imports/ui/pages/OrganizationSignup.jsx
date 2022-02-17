@@ -192,13 +192,14 @@ const OrganizationSignup = () => (
                 />
               </Form.Field>
               <Grid centered>
-                <Form.Button color='orange' size='large'>Submit</Form.Button>
+                <Form.Button color='orange' size='massive'>Submit</Form.Button>
               </Grid>
               <br/>
             </Segment>
           </Form>
         </Grid.Column>
       </Grid>
+      <br/>
     </Container>
   </div>
 );
