@@ -1,12 +1,19 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Header } from 'semantic-ui-react';
+import { Header, Grid, Image } from 'semantic-ui-react';
 
 console.log('you have reached here');
 
-const volunteerCard = ({ volunteer }) => (
+const volunteerCard = () => (
   <div>
-    <Header as="h1">Hello {volunteer.address}</Header>
+      <Grid.Row columns={2}>
+        <Grid.Column>
+          <Image src='images/profile.png' size='medium' circular />
+        </Grid.Column>
+        <Grid.Column>
+          <Image src='https://react.semantic-ui.com/images/wireframe/paragraph.png' />
+        </Grid.Column>
+      </Grid.Row>
   </div>
 );
 
@@ -17,7 +24,7 @@ volunteerCard.propTypes = {
     dob: PropTypes.string,
     address: PropTypes.string,
     _id: PropTypes.string,
-  }).isRequired,
+  }),
 };
 
 export default volunteerCard;
