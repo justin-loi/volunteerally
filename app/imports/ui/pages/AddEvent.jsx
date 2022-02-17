@@ -1,6 +1,6 @@
 import React from 'react';
 import { Grid, Segment, Header, Button } from 'semantic-ui-react';
-import { AutoForm, ErrorsField, SubmitField, TextField, LongTextField, RadioField, HiddenField } from 'uniforms-semantic';
+import { AutoForm, ErrorsField, SubmitField, TextField, LongTextField, RadioField } from 'uniforms-semantic';
 import swal from 'sweetalert';
 import { Meteor } from 'meteor/meteor';
 import SimpleSchema2Bridge from 'uniforms-bridge-simple-schema-2';
@@ -51,11 +51,11 @@ class AddEvent extends React.Component {
               <TextField name='date'/>
               <TextField name='time'/>
               <RadioField name='categories'/>
-              <a className="ui label">Online<i className="delete icon"></i></a>
-              <a className="ui label">In-Person<i className="delete icon"></i></a>
+              <a className="ui label">Online<i className="delete icon"/></a>
+              <a className="ui label">In-Person<i className="delete icon"/></a>
               <LongTextField name='description'/>
               <RadioField name='eventImage'/>
-              <Button class='ui labeled icon button'><i className="upload icon"></i>Upload Image</Button>
+              <Button class='ui labeled icon button'><i className="upload icon"/>Upload Image</Button>
               <SubmitField value='Submit'/>
               <ErrorsField/>
             </Segment>
