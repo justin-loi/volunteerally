@@ -124,7 +124,7 @@ const OrganizationInfo = ({ orgProfile, ready }) => ((ready) ? (
 ) : <Loader active>Getting data</Loader>);
 
 // Require an Event object in the props.
-OrganizationInfo .propTypes = {
+OrganizationInfo.propTypes = {
   event: PropTypes.object,
   orgProfile: PropTypes.object,
   ready: PropTypes.bool.isRequired,

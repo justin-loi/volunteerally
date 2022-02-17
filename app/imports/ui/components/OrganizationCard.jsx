@@ -6,7 +6,6 @@ import { NavLink, withRouter } from 'react-router-dom';
 // `/details/${organization._id}`
 // {organization.organizationName}
 
-
 /** Renders a single organization card. */
 const OrganizationCard = ({ organization }) => (
   <Card as={NavLink} exact to={'/'}>

@@ -16,7 +16,7 @@ const formSchema = new SimpleSchema({
   description: String,
   eventImage: String,
   date: String,
-  time: String
+  time: String,
 });
 
 const bridge = new SimpleSchema2Bridge(formSchema);
