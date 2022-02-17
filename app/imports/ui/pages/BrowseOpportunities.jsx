@@ -25,13 +25,12 @@ BrowseOpportunities.propTypes = {
 // withTracker connects Meteor data to React components. https://guide.meteor.com/react.html#using-withTracker
 export default withTracker(() => {
   // Get access to events documents.
-  const subscription = Events.subscribeEvents();
+  const subscription = Events.subscribe();
   // Determine if the subscription is ready
   const ready = subscription.ready();
   // Get the Stuff documents and sort them by name.
   const events = Events.find({}, { sort: { name: 1 } }).fetch();
   // random data
-
   return {
     events,
     ready,

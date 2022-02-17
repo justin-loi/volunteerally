@@ -2,15 +2,15 @@ import React from 'react';
 import { Container, Button, Header, Loader, Grid, Icon, Segment, Image } from 'semantic-ui-react';
 import { withTracker } from 'meteor/react-meteor-data';
 import PropTypes from 'prop-types';
-import { useParams } from 'react-router';
 import { Events } from '../../api/event/EventCollection';
+import { OrganizationProfiles } from '../../api/organization/OrganizationProfileCollection';
 
 // Renders a Event Info page that connects with the current Event collection.
 const gridStyle = { height: '500px', fontSize: '75px' };
-const EventProfile = ({ event, ready }) => ((ready) ? (
+const EventProfile = ({ event, orgProfile, ready }) => ((ready) ? (
   <div>
     <div className="event-profile-top-background">
-      <Grid container verticalAlign="bottom" textAlign='center' style={gridStyle} columns={3}>
+      <Grid stackable container verticalAlign="bottom" textAlign='center' style={gridStyle} columns={3}>
         <Grid.Row>
           <Grid.Column>
             <Header as='h2' inverted block>
@@ -24,7 +24,7 @@ const EventProfile = ({ event, ready }) => ((ready) ? (
           </Grid.Column>
           <Grid.Column>
             <Header as='h3' inverted block>
-              Contact Email: xxx.gmail.com
+              {orgProfile.email}
             </Header>
           </Grid.Column>
         </Grid.Row>
@@ -126,22 +126,26 @@ const EventProfile = ({ event, ready }) => ((ready) ? (
 // Require an Event object in the props.
 EventProfile.propTypes = {
   event: PropTypes.object,
+  orgProfile: PropTypes.object,
   ready: PropTypes.bool.isRequired,
 };
 
 // withTracker connects Meteor data to React components. https://guide.meteor.com/react.html#using-withTracker
-export default withTracker(() => {
+export default withTracker(({ match }) => {
   // Get the eventID from the URL field. See imports/ui/layouts/App.jsx for the route containing :_id.
-  const { _id } = useParams();
+  const { _id } = match.params;
   const eventId = _id;
   // Get access to Events documents.
-  const subscription = Events.subscribeEvents();
+  const subscription1 = Events.subscribe();
+  const subscription2 = OrganizationProfiles.subscribe();
   // Determine if the subscription is ready
-  const ready = subscription.ready();
-  // Get the Event document that matches the :_id
+  const ready = subscription1.ready() && subscription2.ready();
   const event = Events.findDoc(eventId);
+  const orgProfile = OrganizationProfiles.findByEmail(event.owner);
   return {
     event,
+    orgProfile,
     ready,
   };
+
 })(EventProfile);

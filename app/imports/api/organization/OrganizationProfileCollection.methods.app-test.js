@@ -7,7 +7,7 @@ import {
   withSubscriptions,
 } from '../../test-utilities/test-utilities';
 import { defineMethod, updateMethod, removeItMethod } from '../base/BaseCollection.methods';
-import { OrganizationProfiles } from './OrganizationCollectionProfileCollection';
+import { OrganizationProfiles } from './OrganizationProfileCollection';
 
 /* eslint prefer-arrow-callback: "off",  no-unused-expressions: "off" */
 /* eslint-env mocha */
