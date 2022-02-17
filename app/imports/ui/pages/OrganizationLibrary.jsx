@@ -1,5 +1,6 @@
 import React from 'react';
 import { Grid, Image, Button, Icon, Header } from 'semantic-ui-react';
+import { NavLink } from 'react-router-dom';
 import { PAGE_IDS } from '../utilities/PageIDs';
 
 /** The Footer appears at the bottom of every page. Rendered by the App Layout component. */
@@ -96,7 +97,12 @@ const OrganizationLibrary = () => (
 
       <Grid.Row>
         {/** what is the purpose of this button? */}
-        <Button size='massive' color='green'>Sign Up Today</Button>
+        <Button
+          content={'Sign up Today'}
+          size={'massive'}
+          color={'green'}
+          as={NavLink}
+          exact to={'/organization_signup'}/>
       </Grid.Row>
     </Grid>
   </Grid>
