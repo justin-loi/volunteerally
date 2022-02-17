@@ -6,7 +6,16 @@ import { Volunteers } from './VolunteerCollection';
 
 class VolunteerProfileCollection extends BaseProfileCollection {
   constructor() {
-    super('VolunteerProfile', new SimpleSchema({}));
+    super('VolunteerProfile', new SimpleSchema({
+      username: String,
+      gender: String,
+      dob: String,
+      address: String,
+      city: String,
+      state: String,
+      code: String,
+      phoneNumber: String,
+    }));
   }
 
   /**
