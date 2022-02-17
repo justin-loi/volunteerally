@@ -1,14 +1,13 @@
 import React from 'react';
-import {Grid, Header, Image, Loader, Label, Segment, Divider, Icon, Card, Button, Statistic} from 'semantic-ui-react';
+import { Grid, Header, Image, Loader, Label, Segment, Divider, Icon, Card, Button, Statistic } from 'semantic-ui-react';
 import PropTypes from 'prop-types';
 import { withTracker } from 'meteor/react-meteor-data';
-import { NavLink, withRouter } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 import { PAGE_IDS } from '../utilities/PageIDs';
-import VolunteerCard from '../components/volunteerProfile/VolunteerCard';
 import { VolunteerProfiles } from '../../api/volunteer/VolunteerProfileCollection';
 
 /** Renders the Page for adding a document. */
-const VolunteerProfile = ({ ready, event }) => ((ready) ? (
+const VolunteerProfile = ({ ready }) => ((ready) ? (
   <Grid id={PAGE_IDS.VOLUNTEER_PROFILE} container centered>
     <Grid.Row>
       <Image src='/images/volunteer_profile_banner.png' size='big' />
@@ -25,6 +24,21 @@ const VolunteerProfile = ({ ready, event }) => ((ready) ? (
           Tom Jerry
         </Label>
         <Image src='images/profile.png' size='medium' circular centered />
+        <Divider/>
+        <Segment>
+          <Header as="h3">
+            <Icon name="tag"/> Interests
+          </Header>
+          <Label>
+            <Icon name='leaf' size='big' /> Environment
+          </Label>
+          <Label>
+            <Icon name='paw' size='big'/> Animal Welfare/Rescue
+          </Label>
+          <Label>
+            <Icon name='graduation cap' size='big'/> Education
+          </Label>
+        </Segment>
       </Grid.Column>
       <Grid.Column>
         <Segment>
@@ -64,12 +78,6 @@ const VolunteerProfile = ({ ready, event }) => ((ready) ? (
     </Grid.Row>
     <Divider/>
     <Grid.Row>
-    <Segment>
-      <Header as="h3">
-        <Icon name="clock"/> Total Hours Volunteered
-      </Header>
-      <p>35</p>
-    </Segment>
     </Grid.Row>
   </Grid>
 ) : <Loader active>Getting data</Loader>);
