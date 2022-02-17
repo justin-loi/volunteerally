@@ -20,9 +20,6 @@ const specialSkillsAllowValues = ['Construction', 'Education', 'Engineering', 'E
 const environmentalPreferenceAllowValues = ['Outdoor', 'Both', 'No Preference'];
 const availabilityAllowValues = ['Once a week', '1-3 times a week', 'More than 3 times a week', 'Weekends only', 'Weekdays onlymetoer'];
 
-// username, email, password, timeTracker, dob, firstName, lastName, gender,
-// address, city, state, zipCode_postalCode, phoneNumber,
-// interests, specialSkills, environmentalPreference, availability
 const formSchema = new SimpleSchema({
   email: String,
   password: String,
@@ -36,13 +33,6 @@ const formSchema = new SimpleSchema({
   state: { type: String, optional: true },
   code: { type: String, optional: true },
   phoneNumber: { type: String, optional: true },
-  interests: { type: Array, required: false },
-  'interests.$': { type: String, required: false },
-  specialSkills: { type: Array, required: false },
-  'specialSkills.$': { type: String, required: false },
-  environmentalPreference: { type: String, required: false },
-  availability: { type: Array, required: false },
-  'availability.$': { type: String, required: false },
 });
 
 const bridge = new SimpleSchema2Bridge(formSchema);
@@ -61,7 +51,7 @@ const VolunteerSignUp = ({ location }) => {
   const [availability, setAvailability] = useState([]);
   const [privacyPolicy, setPrivacyPolicy] = useState('');
   // Array(arraySize).fill(value)
-  const [isValueEmpty, setIsValueEmpty] = useState(Array(2).fill(true));
+  const [isValueEmpty, setIsValueEmpty] = useState(Array(2).fill(false));
 
   const checkPassword = (p1, p2) => {
     if (p1 === p2) {
@@ -83,6 +73,14 @@ const VolunteerSignUp = ({ location }) => {
       return true;
     }
     swal('Error!', 'Please enter a valid email ', 'error');
+    return false;
+  };
+
+  const numberOnly = (value) => {
+    if (/^[0-9]+$/.test(value)) {
+      return true;
+    }
+    swal('Error!', 'Zip/Postal Code and Phone Numbers should be number only ', 'error');
     return false;
   };
 
@@ -198,7 +196,9 @@ const VolunteerSignUp = ({ location }) => {
 
   /* Handle SignUp submission. Create user account and a profile entry, then redirect to the home page. */
   const submit = (data, formRef) => {
-    if (isValidDate(data.dob) && checkPassword(data.password, confirmPassword) && agreePolicyAndTerm(privacyPolicy) && checkEmail(data.email)) {
+    if (isValidDate(data.dob) && checkPassword(data.password, confirmPassword)
+        && agreePolicyAndTerm(privacyPolicy) && checkEmail(data.email) &&
+        numberOnly(data.code) && numberOnly(data.phoneNumber)) {
       signUpNewVolunteerMethod.callPromise(data)
         .catch(error => {
           swal('Error', error.message, 'error');
@@ -241,15 +241,19 @@ const VolunteerSignUp = ({ location }) => {
             fRef = ref;
           }} schema={bridge} onSubmit={data => submit(data, fRef)}>
             <Segment>
-              <TextField name='username' placeholder='Username' id={COMPONENT_IDS.VOLUNTEER_SIGNUP_FORM_USERNAME}/>
-              <TextField name='email' type='email' label='E-mail Address' placeholder='E-mail Address' id={COMPONENT_IDS.VOLUNTEER_SIGNUP_FORM_EMAIL}/>
-              <TextField name='password' type='password' placeholder='Password' id={COMPONENT_IDS.VOLUNTEER_SIGNUP_FORM_PASSWORD}/>
+              <TextField name='username' placeholder='Username' iconLeft='user'
+                id={COMPONENT_IDS.VOLUNTEER_SIGNUP_FORM_USERNAME}/>
+              <TextField name='email' type='email' label='E-mail Address' placeholder='E-mail Address' iconLeft='mail'
+                id={COMPONENT_IDS.VOLUNTEER_SIGNUP_FORM_EMAIL}/>
+              <TextField name='password' type='password' placeholder='Password' iconLeft='lock' id={COMPONENT_IDS.VOLUNTEER_SIGNUP_FORM_PASSWORD}/>
               <Form.Input
                 label="Confirm Password"
                 id={COMPONENT_IDS.VOLUNTEER_SIGNUP_FORM_CONFIRM_PASSWORD}
                 name="confirmPassword"
                 type="password"
                 placeholder="Confirm Your Password"
+                icon='lock'
+                iconPosition='left'
                 required
                 onChange={handleChange}
               />
@@ -288,26 +292,28 @@ const VolunteerSignUp = ({ location }) => {
                   />
                 ))}
               </Form.Group>
-              <TextField name='address' placeholder='1234 Example Street' id={COMPONENT_IDS.VOLUNTEER_SIGNUP_FORM_ADDRESS}/>
+              <TextField name='address' placeholder='1234 Example Street' iconLeft='map marker alternate'
+                id={COMPONENT_IDS.VOLUNTEER_SIGNUP_FORM_ADDRESS}/>
               <div className="two fields">
                 <div className="field">
-                  <TextField name='city' placeholder='Honolulu' id={COMPONENT_IDS.VOLUNTEER_SIGNUP_FORM_CITY}/>
+                  <TextField name='city' placeholder='Honolulu' iconLeft='map marker alternate'
+                    id={COMPONENT_IDS.VOLUNTEER_SIGNUP_FORM_CITY}/>
                 </div>
                 <div className="field">
-                  <TextField name='state' placeholder='Hawaii' id={COMPONENT_IDS.VOLUNTEER_SIGNUP_FORM_STATE}/>
+                  <TextField name='state' placeholder='Hawaii' iconLeft='map marker alternate'
+                    id={COMPONENT_IDS.VOLUNTEER_SIGNUP_FORM_STATE}/>
                 </div>
               </div>
               <div className="two fields">
                 <div className="field">
-                  <TextField name='code' label='Zip/Postal Code'
+                  <TextField name='code' placeholder='96822' label='Zip/Postal Code' iconLeft='map marker alternate'
                     id={COMPONENT_IDS.VOLUNTEER_SIGNUP_FORM_ZIPCODE}/>
                 </div>
                 <div className="field">
-                  <TextField name='phoneNumber' placeholder='18081234567' label='Phone Number'
+                  <TextField name='phoneNumber' placeholder='18081234567' label='Phone Number' iconLeft='phone'
                     id={COMPONENT_IDS.VOLUNTEER_SIGNUP_FORM_PHONE}/>
                 </div>
               </div>
-              <HiddenField name='interests' value={interests}/>
               <label style={{ paddingTop: '20px' }}>Interests </label>
               <Form.Group>
                 <Grid columns={2}>
@@ -336,7 +342,6 @@ const VolunteerSignUp = ({ location }) => {
                   </Grid.Row>
                 </Grid>
               </Form.Group>
-              <HiddenField name='specialSkills' label='Special Skills (optional)' value={specialSkills}/>
               <label style={{ paddingTop: '20px' }}>Special Skills (optional) </label>
               <Form.Group>
                 <Grid columns={2}>
@@ -365,7 +370,6 @@ const VolunteerSignUp = ({ location }) => {
                   </Grid.Row>
                 </Grid>
               </Form.Group>
-              <HiddenField name='environmentalPreference' label='Environmental Preference' value={environmentalPreference}/>
               <label>Environmental Preference </label>
               <Form.Group inline>
                 <Form.Radio
@@ -388,7 +392,6 @@ const VolunteerSignUp = ({ location }) => {
                   />
                 ))}
               </Form.Group>
-              <HiddenField name='availability' value={availability}/>
               <label style={{ paddingTop: '20px' }}>Availability </label>
               <Form.Group>
                 <Grid columns={2}>
