@@ -148,7 +148,6 @@ export default withTracker(({ match }) => {
     console.log(event);
   }
 
->>>>>>> Stashed changes
   return {
     event,
     orgProfile,
