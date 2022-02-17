@@ -5,9 +5,10 @@ import { withTracker } from 'meteor/react-meteor-data';
 import { NavLink } from 'react-router-dom';
 import { PAGE_IDS } from '../utilities/PageIDs';
 import { VolunteerProfiles } from '../../api/volunteer/VolunteerProfileCollection';
+import { Events } from '../../api/event/EventCollection';
 
 /** Renders the Page for adding a document. */
-const VolunteerProfile = ({ ready }) => ((ready) ? (
+const VolunteerProfile = ({ event, ready }) => ((ready) ? (
   <Grid id={PAGE_IDS.VOLUNTEER_PROFILE} container centered>
     <Grid.Row>
       <Image src='/images/volunteer_profile_banner.png' size='big' />
@@ -64,7 +65,7 @@ const VolunteerProfile = ({ ready }) => ((ready) ? (
           <Header as="h3">
             <Icon name="calendar outline"/> Upcoming Events
           </Header>
-          <Card as={NavLink} exact to={'/details/Z5k9TdQeJPpgJXbp4'}>
+          <Card as={NavLink} exact to={`/details/${event._id}`}>
             <Image src='images/event_card_image_volunteer.jpg' size='medium'/>
             <Card.Content>
               <Card.Header> Mowing Peoples Lawns</Card.Header>
@@ -84,6 +85,7 @@ const VolunteerProfile = ({ ready }) => ((ready) ? (
 
 VolunteerProfile.propTypes = {
   volunteers: PropTypes.array.isRequired,
+  event: PropTypes.object,
   ready: PropTypes.bool.isRequired,
 };
 
@@ -91,12 +93,15 @@ export default withTracker(() => {
   // volunteers.map((volunteer) => <VolunteerCard key={volunteer._id} volunteer={volunteer}
   // Get access to volunteer documents.
   const subscription = VolunteerProfiles.subscribe();
+  const subscription2 = Events.subscribe();
   // Determine if the subscription is ready
-  const ready = subscription.ready();
+  const ready = subscription.ready() && subscription2.ready();
   // Get the volunteer documents and sort them by name.
+  const event = Events.find({}, { sort: { name: 1 } }).fetch()[0];
   const volunteers = VolunteerProfiles.find({}, { sort: { name: 1 } }).fetch();
   return {
     volunteers,
+    event,
     ready,
   };
 })(VolunteerProfile);
