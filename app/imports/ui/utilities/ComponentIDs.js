@@ -15,6 +15,7 @@ export const COMPONENT_IDS = {
   NAVBAR_ABOUT_US: 'navbar-about-us',
   NAVBAR_ORGANIZATION_LIBRARY: 'navbar-organization-library',
   NAVBAR_BROWSE_OPPORTUNITY: 'navbar-browse-opportunity',
+  NAVBAR_ORGANIZATION_SIGNUP: 'navbar-organization-library',
   NAVBAR_ADD_EVENT: 'navbar-add-event',
   SIGN_IN_FORM_EMAIL: 'sign-in-form-email',
   SIGN_IN_FORM_PASSWORD: 'sign-in-form-password',
