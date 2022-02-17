@@ -1,6 +1,7 @@
 import React from 'react';
 import { Grid, Header, Loader } from 'semantic-ui-react';
 import PropTypes from 'prop-types';
+import { Meteor } from 'meteor/meteor';
 import { withTracker } from 'meteor/react-meteor-data';
 import { PAGE_IDS } from '../utilities/PageIDs';
 import VolunteerCard from '../components/volunteerProfile/VolunteerCard';
@@ -24,6 +25,10 @@ VolunteerProfile.propTypes = {
 };
 
 export default withTracker(() => {
+  const username = Meteor.user().username;
+  console.log(username);
+  const profile = VolunteerProfiles.find({}, { firstName: username }).fetch();
+  console.log(profile);
   // Get access to volunteer documents.
   const subscription = VolunteerProfiles.subscribe();
   // Determine if the subscription is ready
