@@ -49,10 +49,9 @@ class AddEvent extends React.Component {
               <RadioField name='category'/>
               <a className="ui label">Online<i className="delete icon"></i></a>
               <a className="ui label">In-Person<i className="delete icon"></i></a>
-              <a className="ui label">etc.<i className="delete icon"></i></a>
               <LongTextField name='description'/>
               <RadioField name='eventImage'/>
-              <Button class='ui labeled icon button'><i className="mail icon"></i>Choose Image</Button>
+              <Button class='ui labeled icon button'><i className="upload icon"></i>Upload Image</Button>
               <SubmitField value='Submit'/>
               <ErrorsField/>
             </Segment>
