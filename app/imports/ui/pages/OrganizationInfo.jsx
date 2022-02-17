@@ -7,7 +7,7 @@ import { OrganizationProfiles } from '../../api/organization/OrganizationProfile
 
 // Renders a Event Info page that connects with the current Event collection.
 const gridStyle = { height: '500px', fontSize: '75px' };
-const EventProfile = ({ event, orgProfile, ready }) => ((ready) ? (
+const OrganizationInfo = ({ orgProfile, ready }) => ((ready) ? (
   <div>
     <div className="event-profile-top-background">
       <Grid stackable container verticalAlign="bottom" textAlign='center' style={gridStyle} columns={3}>
@@ -124,7 +124,7 @@ const EventProfile = ({ event, orgProfile, ready }) => ((ready) ? (
 ) : <Loader active>Getting data</Loader>);
 
 // Require an Event object in the props.
-EventProfile.propTypes = {
+OrganizationInfo .propTypes = {
   event: PropTypes.object,
   orgProfile: PropTypes.object,
   ready: PropTypes.bool.isRequired,
@@ -154,4 +154,4 @@ export default withTracker(({ match }) => {
     ready,
   };
 
-})(EventProfile);
+})(OrganizationInfo);
