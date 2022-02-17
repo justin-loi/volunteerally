@@ -27,6 +27,7 @@ import BrowseOpportunities from '../pages/BrowseOpportunities';
 import OrganizationSignup from '../pages/OrganizationSignup';
 import OrganizationLibrary from '../pages/OrganizationLibrary';
 import VolunteerProfile from '../pages/VolunteerProfile';
+import OrganizationInfo from '../pages/OrganizationInfo';
 
 /** Top-level layout component for this application. Called in imports/startup/client/startup.jsx. */
 class App extends React.Component {
@@ -47,6 +48,7 @@ class App extends React.Component {
             <Route path="/details/:_id" component={EventProfile}/>
             <Route path="/terms" component={TermsAndConditions}/>
             <Route path="/find_volunteers" component={OrganizationLibrary}/>
+            <Route path="/organization/:_id" component={OrganizationInfo}/>
             <Route path="/signup" component={Signup}/>
             <Route path="/signout" component={Signout}/>
             <Route path="/volunteer-profile" component={VolunteerProfile}/>
