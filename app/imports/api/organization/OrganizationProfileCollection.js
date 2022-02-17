@@ -6,7 +6,14 @@ import { Organizations } from './OrganizationCollection';
 
 class OrganizationProfileCollection extends BaseProfileCollection {
   constructor() {
-    super('OrganizationProfile', new SimpleSchema({}));
+    super('OrganizationProfile', new SimpleSchema({
+      username: { type: String, optional: true },
+      eventBackgroundImage: { type: String, optional: true },
+      logoImage: { type: String, optional: true },
+      organizationName: { type: String, optional: true },
+      missionStatement: { type: String, optional: true },
+      phoneNumber: { type: String, optional: true },
+    }));
   }
 
   /**
