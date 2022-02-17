@@ -3,20 +3,19 @@ import { Card, Image } from 'semantic-ui-react';
 import PropTypes from 'prop-types';
 import { NavLink, withRouter } from 'react-router-dom';
 
-/** Renders a single event card. */
+// `/details/${organization._id}`
+// {organization.organizationName}
+
+
+/** Renders a single organization card. */
 const OrganizationCard = ({ organization }) => (
-  <Card as={NavLink} exact to={`/details/${organization._id}`}>
+  <Card as={NavLink} exact to={'/'}>
     <Image src='images/event_card_image_volunteer.jpg' wrapped ui={false}/>
     <Card.Content>
-      <Card.Header> {organization.organizationName}</Card.Header>
+      <Card.Header>Organization 1</Card.Header>
       <Card.Meta>
         {organization.logoImage}
       </Card.Meta>
-      <Card.Description>
-        <p>Placeholder for special skill</p>
-      </Card.Description>
-    </Card.Content>
-    <Card.Content extra>
     </Card.Content>
   </Card>
 );

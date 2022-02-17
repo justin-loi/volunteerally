@@ -1,4 +1,5 @@
 import React from 'react';
+import { Meteor } from 'meteor/meteor';
 import { Container, Button, Header, Loader, Grid, Icon, Segment, Image } from 'semantic-ui-react';
 import { withTracker } from 'meteor/react-meteor-data';
 import PropTypes from 'prop-types';
@@ -7,7 +8,7 @@ import { OrganizationProfiles } from '../../api/organization/OrganizationProfile
 
 // Renders a Event Info page that connects with the current Event collection.
 const gridStyle = { height: '500px', fontSize: '75px' };
-const EventProfile = ({ event, orgProfile, ready }) => ((ready) ? (
+const EventProfile = ({ event, orgProfile, currentUser, ready }) => ((ready) ? (
   <div>
     <div className="event-profile-top-background">
       <Grid stackable container verticalAlign="bottom" textAlign='center' style={gridStyle} columns={3}>
@@ -89,14 +90,8 @@ const EventProfile = ({ event, orgProfile, ready }) => ((ready) ? (
             <Header as="h3">
               <Icon name="address card"/> Contact Details
             </Header>
-            Curren Gaspar
-          </Segment>
-          <Segment>
-            <Header as="h3">
-              <Icon name="globe"/> Other Details
-            </Header>
-            Mary Finley <br/>
-            volunteerpacific@redcross.org <br/>
+            {orgProfile.firstName} {orgProfile.lastName}<br/>
+            {orgProfile.email} <br/>
             808 - 734 - 2101 <br/>
           </Segment>
           <Segment>
@@ -115,7 +110,8 @@ const EventProfile = ({ event, orgProfile, ready }) => ((ready) ? (
             <Header as="h3">
               <Icon name="group"/> RSVP
             </Header>
-            Please log in or register to RSVP.
+            {currentUser ?
+              'Form is currently under construction' : ('Please log in or register to RSVP.')}
           </Segment>
         </Grid.Column>
       </Grid>
@@ -128,10 +124,12 @@ EventProfile.propTypes = {
   event: PropTypes.object,
   orgProfile: PropTypes.object,
   ready: PropTypes.bool.isRequired,
+  currentUser: PropTypes.bool.isRequired,
 };
 
 // withTracker connects Meteor data to React components. https://guide.meteor.com/react.html#using-withTracker
 export default withTracker(({ match }) => {
+  const currentUser = Meteor.user() ? Meteor.user().username : '';
   // Get the eventID from the URL field. See imports/ui/layouts/App.jsx for the route containing :_id.
   const { _id } = match.params;
   const eventId = _id;
@@ -150,6 +148,7 @@ export default withTracker(({ match }) => {
 
   return {
     event,
+    currentUser,
     orgProfile,
     ready,
   };
