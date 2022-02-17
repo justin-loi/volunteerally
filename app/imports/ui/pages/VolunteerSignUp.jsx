@@ -38,7 +38,7 @@ const formSchema = new SimpleSchema({
 const bridge = new SimpleSchema2Bridge(formSchema);
 
 /**
- * VolunteerSignUp component is similar to signin component, but we create a new user instead.
+ * VolunteerSignUp component is similar to signin component, but we create a new volunteer instead.
  */
 const VolunteerSignUp = ({ location }) => {
   const [redirectToReferer, setRedirectToReferer] = useState(false);
