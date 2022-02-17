@@ -3,7 +3,7 @@ import { Card, Image } from 'semantic-ui-react';
 import PropTypes from 'prop-types';
 import { NavLink, withRouter } from 'react-router-dom';
 
-/** Renders a single event card. */
+/* Renders a single event card. */
 const EventCard = ({ event }) => (
   <Card as={NavLink} exact to={`/details/${event._id}`}>
     <Image src='images/event_card_image_volunteer.jpg' wrapped ui={false}/>
@@ -14,11 +14,11 @@ const EventCard = ({ event }) => (
         <br/>
         <span>Time: {event.time}</span>
         <br/>
-        <span> Location: {event.location}</span>
+        <span>Location: {event.location}</span>
         <br/>
       </Card.Meta>
       <Card.Description>
-        <p>Placeholder for special skill</p>
+        <p>Placeholder for special skill.</p>
       </Card.Description>
     </Card.Content>
     <Card.Content extra>
@@ -42,5 +42,4 @@ EventCard.propTypes = {
   }).isRequired,
 };
 
-// Wrap this component in withRouter since we use the <Link> React Router element.
 export default withRouter(EventCard);
