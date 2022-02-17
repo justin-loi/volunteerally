@@ -140,12 +140,6 @@ export default withTracker(({ match }) => {
   const subscription2 = OrganizationProfiles.subscribe();
   // Determine if the subscription is ready
   const ready = subscription1.ready() && subscription2.ready();
-<<<<<<< Updated upstream
-  const event = Events.findDoc(eventId);
-  console.log(event);
-  const orgProfile = OrganizationProfiles.findByEmail(event.owner);
-  console.log(orgProfile);
-=======
   const event = Events.find({ _id: eventId }).fetch()[0];
   let orgProfile;
   if (event !== undefined) {
