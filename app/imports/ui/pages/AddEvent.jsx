@@ -12,9 +12,11 @@ import { PAGE_IDS } from '../utilities/PageIDs';
 const formSchema = new SimpleSchema({
   eventName: String,
   location: String,
-  category: String,
+  categories: String,
   description: String,
-  eventImage: String
+  eventImage: String,
+  date: String,
+  time: String
 });
 
 const bridge = new SimpleSchema2Bridge(formSchema);
@@ -23,9 +25,9 @@ const bridge = new SimpleSchema2Bridge(formSchema);
 class AddEvent extends React.Component {
 
   submit(data, formRef) {
-    const { eventName, address, category, description, image } = data;
+    const { eventName, location, categories, description, eventImage, date, time } = data;
     const owner = Meteor.user().username;
-    Events.collection.insert({ eventName, location, category, description, eventImage, owner },
+    Events.collection.insert({ eventName, location, categories, description, eventImage, date, time, owner },
       (error) => {
         if (error) {
           swal('Error', error.message, 'error');
@@ -46,7 +48,9 @@ class AddEvent extends React.Component {
             <Segment>
               <TextField name='eventName'/>
               <TextField name='location'/>
-              <RadioField name='category'/>
+              <TextField name='date'/>
+              <TextField name='time'/>
+              <RadioField name='categories'/>
               <a className="ui label">Online<i className="delete icon"></i></a>
               <a className="ui label">In-Person<i className="delete icon"></i></a>
               <LongTextField name='description'/>
