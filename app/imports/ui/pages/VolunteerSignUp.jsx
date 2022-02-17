@@ -15,7 +15,7 @@ const genderComponentID = [COMPONENT_IDS.VOLUNTEER_SIGNUP_FORM_GENDER_MALE, COMP
   COMPONENT_IDS.VOLUNTEER_SIGNUP_FORM_GENDER_OTHER, COMPONENT_IDS.VOLUNTEER_SIGNUP_FORM_GENDER_NO_SAY];
 const interestsAllowValues = ['Child/Family Support', 'COVID-19 Recovery', 'Crisis/Disaster Relief', 'Education', 'Environment',
   'Elderly/Senior Care', 'Food Banks', 'Housing', 'Homelessness/Poverty', 'Special Needs'];
-const specialSkillsAllowValues = ['Construction', 'Education', 'Engineering', 'Event Planning', 'Sales/Marketing', 'Technology',
+const specialSkillsAllowValues = ["Agriculture", 'Construction', 'Education', 'Engineering', 'Event Planning', 'Sales/Marketing', 'Technology',
   'Graphic/Web Design', 'CPR (Certification Required)', 'First Aid (Certification Required)', 'Nursing (CNA/RNA Certified)', 'Other'];
 const environmentalPreferenceAllowValues = ['Outdoor', 'Both', 'No Preference'];
 const availabilityAllowValues = ['Once a week', '1-3 times a week', 'More than 3 times a week', 'Weekends only', 'Weekdays onlymetoer'];

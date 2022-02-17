@@ -5,7 +5,11 @@ import { UserProfiles } from '../user/UserProfileCollection';
 // new collection
 import { VolunteerProfiles } from '../volunteer/VolunteerProfileCollection';
 import { Events } from '../event/EventCollection';
-import { OrganizationProfiles } from '../organization/OrganizationProfileCollection'
+import { OrganizationProfiles } from '../organization/OrganizationProfileCollection';
+import { Interests } from '../interest/InterestCollection';
+import { SpecialSkills } from '../special_skills/SpecialSkillCollection';
+import { Environmental } from '../environmental_preference/EnvironmentalPreferenceCollection';
+import { Availabilities } from '../availability/AvailabilityCollection';
 
 class MATRPClass {
   collections;
@@ -23,6 +27,10 @@ class MATRPClass {
       VolunteerProfiles,
       Events,
       OrganizationProfiles,
+      Interests,
+      SpecialSkills,
+      Environmental,
+      Availabilities,
     ];
     /*
      * A list of collection class instances in the order required for them to be sequentially loaded from a file.
@@ -34,6 +42,10 @@ class MATRPClass {
       VolunteerProfiles,
       Events,
       OrganizationProfiles,
+      Interests,
+      SpecialSkills,
+      Environmental,
+      Availabilities,
     ];
 
     /*
