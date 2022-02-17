@@ -6,7 +6,7 @@ import { PAGE_IDS } from '../utilities/PageIDs';
 import EventCard from '../components/EventCard';
 import { Events } from '../../api/event/EventCollection';
 
-/** Renders a list of events. Use <EventCard> to render each event card. */
+/* Renders a list of events. Use <EventCard> to render each event card. */
 const BrowseOpportunities = ({ ready, events }) => ((ready) ? (
   <Container id={PAGE_IDS.LIST_EVENTS}>
     <Header as="h2" textAlign="center">Browse Opportunities</Header>
@@ -24,13 +24,9 @@ BrowseOpportunities.propTypes = {
 
 // withTracker connects Meteor data to React components. https://guide.meteor.com/react.html#using-withTracker
 export default withTracker(() => {
-  // Get access to events documents.
   const subscription = Events.subscribe();
-  // Determine if the subscription is ready
   const ready = subscription.ready();
-  // Get the Stuff documents and sort them by name.
   const events = Events.find({}, { sort: { name: 1 } }).fetch();
-  // random data
   return {
     events,
     ready,

@@ -19,7 +19,7 @@ const formSchema = new SimpleSchema({
 
 const bridge = new SimpleSchema2Bridge(formSchema);
 
-/** Renders the Page for adding a document. */
+/* Renders the Page for adding a document. */
 class AddEvent extends React.Component {
 
   submit(data, formRef) {
