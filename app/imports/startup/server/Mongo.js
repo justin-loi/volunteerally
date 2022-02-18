@@ -47,7 +47,7 @@ if (OrganizationProfiles.count() === 0) {
 }
 
 function addInterest(data) {
-  console.log(`  Adding interest: ${data.name} with description: ${data.description}`);
+  console.log(`  Adding interest: ${data.name}`);
   Interests.define(data);
 }
 
@@ -59,7 +59,7 @@ if (Interests.count() === 0) {
 }
 
 function addSpecialSkills(data) {
-  console.log(`  Adding special skills: ${data.name} with description: ${data.description}`);
+  console.log(`  Adding special skills: ${data.name}`);
   SpecialSkills.define(data);
 }
 
@@ -71,25 +71,25 @@ if (SpecialSkills.count() === 0) {
 }
 
 function addEnvironmentalPreferences(data) {
-  console.log(`  Adding Environmental Preferences: ${data.name} with description: ${data.description}`);
+  console.log(`  Adding environmental preferences: ${data.name}`);
   Environmental.define(data);
 }
 
 if (Environmental.count() === 0) {
   if (Meteor.settings.defaultEnvironmentalPreferences) {
-    console.log('Creating default Special Skills.');
+    console.log('Creating default Environmental Preferences.');
     Meteor.settings.defaultEnvironmentalPreferences.map(data => addEnvironmentalPreferences(data));
   }
 }
 
 function addAvailabilities(data) {
-  console.log(`  Adding availabilities: ${data.name} with description: ${data.description}`);
+  console.log(`  Adding availabilities: ${data.name}`);
   Availabilities.define(data);
 }
 
 if (Availabilities.count() === 0) {
   if (Meteor.settings.defaultAvailabilities) {
-    console.log('Creating default Special Skills.');
+    console.log('Creating default Availabilities.');
     Meteor.settings.defaultAvailabilities.map(data => addAvailabilities(data));
   }
 }
