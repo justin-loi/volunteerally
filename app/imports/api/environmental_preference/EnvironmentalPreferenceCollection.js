@@ -13,8 +13,8 @@ class EnvironmentalPreferenceCollection extends BaseCollection {
 
   /**
    * Defines a new Environmental Preferences.
-   * @param name the name of the item.
-   * @param description how many.
+   * @param name the environmental preference name.
+   * @param description environment description (optional).
    * @return {String} the docID of the new document.
    */
   define({ name, description }) {
@@ -29,7 +29,7 @@ class EnvironmentalPreferenceCollection extends BaseCollection {
    * Updates the given document.
    * @param docID the id of the document to update.
    * @param name the new name (optional).
-   * @param description the new quantity (optional).
+   * @param description the new description (optional).
    */
   update(docID, { name, description }) {
     const updateData = {};

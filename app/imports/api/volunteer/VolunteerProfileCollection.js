@@ -59,6 +59,7 @@ class VolunteerProfileCollection extends BaseProfileCollection {
    * @param city new city (optional)
    * @param state new state (optional)
    * @param code new code (optional)
+   * @param phoneNumber new phone nubmer (optional)
    */
   update(docID, { firstName, lastName, gender, dob, address, city, state, code, phoneNumber }) {
     this.assertDefined(docID);
@@ -141,7 +142,14 @@ class VolunteerProfileCollection extends BaseProfileCollection {
     const email = doc.email;
     const firstName = doc.firstName;
     const lastName = doc.lastName;
-    return { email, firstName, lastName };
+    const gender = doc.gender;
+    const dob = doc.dob;
+    const address = doc.address;
+    const city = doc.city;
+    const state = doc.state;
+    const code = doc.code;
+    const phoneNumber = doc.phoneNumber;
+    return { email, firstName, lastName, gender, dob, address, city, state, code, phoneNumber };
   }
 }
 

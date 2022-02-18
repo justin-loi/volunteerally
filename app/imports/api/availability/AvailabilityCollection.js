@@ -12,9 +12,9 @@ class AvailabilityCollection extends BaseCollection {
   }
 
   /**
-   * Defines a new Interests.
-   * @param name the name of the item.
-   * @param description how many.
+   * Defines a new Availability.
+   * @param name the name of the Availability.
+   * @param description availability description (optional).
    * @return {String} the docID of the new document.
    */
   define({ name, description }) {
@@ -29,7 +29,7 @@ class AvailabilityCollection extends BaseCollection {
    * Updates the given document.
    * @param docID the id of the document to update.
    * @param name the new name (optional).
-   * @param description the new quantity (optional).
+   * @param description the new description (optional).
    */
   update(docID, { name, description }) {
     const updateData = {};

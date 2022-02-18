@@ -13,8 +13,8 @@ class SpecialSkillCollection extends BaseCollection {
 
   /**
    * Defines a new Special Skills.
-   * @param name the name of the item.
-   * @param description how many.
+   * @param name the name of the skills.
+   * @param description the skill description (optional)
    * @return {String} the docID of the new document.
    */
   define({ name, description }) {
@@ -28,8 +28,8 @@ class SpecialSkillCollection extends BaseCollection {
   /**
    * Updates the given document.
    * @param docID the id of the document to update.
-   * @param name the new name (optional).
-   * @param description the new quantity (optional).
+   * @param name the new skill name (optional).
+   * @param description the new description (optional).
    */
   update(docID, { name, description }) {
     const updateData = {};
