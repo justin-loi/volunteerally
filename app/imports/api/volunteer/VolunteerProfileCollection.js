@@ -1,47 +1,45 @@
 import { Meteor } from 'meteor/meteor';
 import SimpleSchema from 'simpl-schema';
-import BaseProfileCollection from './BaseProfileCollection';
+import BaseProfileCollection from '../user/BaseProfileCollection';
 import { ROLE } from '../role/Role';
 import { Volunteers } from './VolunteerCollection';
 
 class VolunteerProfileCollection extends BaseProfileCollection {
   constructor() {
-    super('VolunteerProfile', new SimpleSchema({}));
+    super('VolunteerProfile', new SimpleSchema({
+      username: { type: String, optional: true },
+      gender: { type: String, optional: true },
+      dob: { type: String, optional: true },
+      address: { type: String, optional: true },
+      city: { type: String, optional: true },
+      state: { type: String, optional: true },
+      code: { type: String, optional: true },
+      phoneNumber: { type: String, optional: true },
+    }));
   }
 
   /**
-   * Defines the profile associated with an Volunteer and the associated Meteor account.
-   * @param username volunteer account's username.
-   * @param email The email associated with this profile. Can also be username
+   * Defines the profile associated with an User and the associated Meteor account.
+   * @param username The username for this user
+   * @param email The email associated with this profile.
    * @param password The password for this user.
-   * @param timeTracker volunteer's trackTime
-   * @param dob volunteer's date of birth
    * @param firstName The first name.
    * @param lastName The last name.
-   * @param gender volunteer's gender.
-   * @param address volunteer's address.
-   * @param city volunteer's city.
-   * @param state volunteer's state.
-   * @param zipCode_postalCode volunteer's zip/postal code.
-   * @param phoneNumber volunteer's phone number.
-   * @param interests volunteer's interests.
-   * @param specialSkills volunteer's special skill
-   * @param environmentalPreference volunteer's environmental preference
-   * @param availability volunteer's availability
+   * @param gender Volunteer's gender
+   * @param dob Volunteer's dob
+   * @param address Volunteer's address
+   * @param city Volunteer's address city
+   * @param state Volunteer's address state
+   * @param code Volunteer's address code
+   * @param phoneNumber Volunteer's phoneNumber
    */
-  // timeTracker, dob, firstName, lastName, gender, address, city, state, zipCode_postalCode, phoneNumber, interests, specialSkills, environmentalPreference, availability
-  define({ username, email, password, timeTracker, dob, firstName, lastName, gender,
-    address, city, state, zipCode_postalCode, phoneNumber,
-    interests, specialSkills, environmentalPreference, availability }) {
+  define({ email, firstName, lastName, password, username, gender, dob, address, city, state, code, phoneNumber }) {
     if (Meteor.isServer) {
       const user = this.findOne({ email, firstName, lastName });
       if (!user) {
         const role = ROLE.VOLUNTEER;
-        const profileID = this._collection.insert({ email, timeTracker, dob, firstName, lastName, gender,
-          address, city, state, zipCode_postalCode, phoneNumber,
-          interests, specialSkills, environmentalPreference, availability,
-          userID: this.getFakeUserId(), role });
-        const userID = Volunteers.define({ username, email, password, role });
+        const profileID = this._collection.insert({ email, firstName, lastName, userID: this.getFakeUserId(), role, gender, dob, address, city, state, code, phoneNumber });
+        const userID = Volunteers.define({ username, role, password, email });
         this._collection.update(profileID, { $set: { userID } });
         return profileID;
       }
@@ -51,34 +49,21 @@ class VolunteerProfileCollection extends BaseProfileCollection {
   }
 
   /**
-   * Updates the VolunteerProfile. You cannot change the email or role.
+   * Updates the UserProfile. You cannot change the email or role.
    * @param docID the id of the UserProfile
-   * @param timeTracker volunteer's trackTime
-   * @param dob volunteer's date of birth
-   * @param firstName The first name.
-   * @param lastName The last name.
-   * @param gender volunteer's gender.
-   * @param address volunteer's address.
-   * @param city volunteer's city.
-   * @param state volunteer's state.
-   * @param zipCode_postalCode volunteer's zip/postal code.
-   * @param phoneNumber volunteer's phone number.
-   * @param interests volunteer's interests.
-   * @param specialSkills volunteer's special skill
-   * @param environmentalPreference volunteer's environmental preference
-   * @param availability volunteer's availability
+   * @param firstName new first name (optional).
+   * @param lastName new last name (optional).
+   * @param gender new gender to change (optional).
+   * @param dob new dob (optional).
+   * @param address new address (optional)
+   * @param city new city (optional)
+   * @param state new state (optional)
+   * @param code new code (optional)
+   * @param phoneNumber new phone nubmer (optional)
    */
-  update(docID, { timeTracker, dob, firstName, lastName, gender,
-    address, city, state, zipCode_postalCode, phoneNumber,
-    interests, specialSkills, environmentalPreference, availability }) {
+  update(docID, { firstName, lastName, gender, dob, address, city, state, code, phoneNumber }) {
     this.assertDefined(docID);
     const updateData = {};
-    if (timeTracker) {
-      updateData.timeTracker = timeTracker;
-    }
-    if (dob) {
-      updateData.dob = dob;
-    }
     if (firstName) {
       updateData.firstName = firstName;
     }
@@ -87,6 +72,9 @@ class VolunteerProfileCollection extends BaseProfileCollection {
     }
     if (gender) {
       updateData.gender = gender;
+    }
+    if (dob) {
+      updateData.dob = dob;
     }
     if (address) {
       updateData.address = address;
@@ -97,23 +85,11 @@ class VolunteerProfileCollection extends BaseProfileCollection {
     if (state) {
       updateData.state = state;
     }
-    if (zipCode_postalCode) {
-      updateData.zipCode_postalCode = zipCode_postalCode;
+    if (code) {
+      updateData.code = code;
     }
     if (phoneNumber) {
       updateData.phoneNumber = phoneNumber;
-    }
-    if (interests) {
-      updateData.interests = interests;
-    }
-    if (specialSkills) {
-      updateData.specialSkills = specialSkills;
-    }
-    if (environmentalPreference) {
-      updateData.environmentalPreference = environmentalPreference;
-    }
-    if (availability) {
-      updateData.availability = availability;
     }
     this._collection.update(docID, { $set: updateData });
   }
@@ -137,7 +113,7 @@ class VolunteerProfileCollection extends BaseProfileCollection {
    * @throws { Meteor.Error } If there is no logged in user, or the user is not an Admin or User.
    */
   assertValidRoleForMethod(userId) {
-    this.assertRole(userId, [ROLE.ADMIN, ROLE.VOLUNTEER]);
+    this.assertRole(userId, [ROLE.ADMIN, ROLE.USER, ROLE.VOLUNTEER]);
   }
 
   /**
@@ -157,17 +133,23 @@ class VolunteerProfileCollection extends BaseProfileCollection {
   }
 
   /**
-   * Returns an object representing the VolunteerProfile docID in a format acceptable to define().
-   * @param docID The docID of a VolunteerProfile
+   * Returns an object representing the UserProfile docID in a format acceptable to define().
+   * @param docID The docID of a UserProfile
    * @returns { Object } An object representing the definition of docID.
    */
   dumpOne(docID) {
     const doc = this.findDoc(docID);
-    const username = doc.username;
     const email = doc.email;
     const firstName = doc.firstName;
     const lastName = doc.lastName;
-    return { username, email, firstName, lastName };
+    const gender = doc.gender;
+    const dob = doc.dob;
+    const address = doc.address;
+    const city = doc.city;
+    const state = doc.state;
+    const code = doc.code;
+    const phoneNumber = doc.phoneNumber;
+    return { email, firstName, lastName, gender, dob, address, city, state, code, phoneNumber };
   }
 }
 

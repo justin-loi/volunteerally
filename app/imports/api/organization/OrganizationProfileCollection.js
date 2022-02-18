@@ -1,8 +1,8 @@
 import { Meteor } from 'meteor/meteor';
 import SimpleSchema from 'simpl-schema';
-import BaseProfileCollection from './BaseProfileCollection';
+import BaseProfileCollection from '../user/BaseProfileCollection';
 import { ROLE } from '../role/Role';
-import { Users } from './UserCollection';
+import { Organizations } from './OrganizationCollection';
 
 class OrganizationProfileCollection extends BaseProfileCollection {
   constructor() {
@@ -26,9 +26,9 @@ class OrganizationProfileCollection extends BaseProfileCollection {
       const username = email;
       const user = this.findOne({ email, firstName, lastName });
       if (!user) {
-        const role = ROLE.USER;
+        const role = ROLE.ORGANIZATION;
         const profileID = this._collection.insert({ email, firstName, lastName, logoImage, eventBackgroundImage, organizationName, phoneNumber, missionStatement, userID: this.getFakeUserId(), role });
-        const userID = Users.define({ username, role, password });
+        const userID = Organizations.define({ username, role, password });
         this._collection.update(profileID, { $set: { userID } });
         return profileID;
       }
@@ -39,7 +39,7 @@ class OrganizationProfileCollection extends BaseProfileCollection {
 
   /**
    * Updates the OrganizationProfile. You cannot change the email or role.
-   * @param docID the id of the UserProfile
+   * @param docID the id of the OrganizationProfile
    * @param firstName new first name.
    * @param lastName new last name.
    * @param firstName update the organization representative first name.
@@ -60,19 +60,19 @@ class OrganizationProfileCollection extends BaseProfileCollection {
       updateData.lastName = lastName;
     }
     if (logoImage) {
-      updateData.lastName = lastName;
+      updateData.logoImage = logoImage;
     }
     if (eventBackgroundImage) {
-      updateData.lastName = lastName;
+      updateData.eventBackgroundImage = eventBackgroundImage;
     }
     if (organizationName) {
-      updateData.lastName = lastName;
+      updateData.organizationName = organizationName;
     }
     if (phoneNumber) {
-      updateData.lastName = lastName;
+      updateData.phoneNumber = phoneNumber;
     }
     if (missionStatement) {
-      updateData.lastName = lastName;
+      updateData.missionStatement = missionStatement;
     }
     this._collection.update(docID, { $set: updateData });
   }
@@ -109,7 +109,7 @@ class OrganizationProfileCollection extends BaseProfileCollection {
     const problems = [];
     this.find().forEach((doc) => {
       if (doc.role !== ROLE.ORGANIZATION) {
-        problems.push(`UserProfile instance does not have ROLE.USER: ${doc}`);
+        problems.push(`OrganizationProfile instance does not have ROLE.ORGANIZATION: ${doc}`);
       }
     });
     return problems;
