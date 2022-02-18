@@ -3,24 +3,24 @@ import { check } from 'meteor/check';
 import BaseCollection from '../base/BaseCollection';
 import { ROLE } from '../role/Role';
 
-class InterestCollection extends BaseCollection {
+class VolunteerInterestCollection extends BaseCollection {
   constructor() {
-    super('Interests', new SimpleSchema({
-      name: String,
-      description: { type: String, optional: true },
+    super('VolunteerInterest', new SimpleSchema({
+      volunteerID: SimpleSchema.RegEx.Id,
+      interestID: SimpleSchema.RegEx.Id,
     }));
   }
 
   /**
-   * Defines a new Interests.
-   * @param name the name of the interest.
-   * @param description interest's description (optional).
+   * Define a link between a volunteer and an interest based on their ID.
+   * @param volunteerID the volunteer ID
+   * @param interestID the interest ID
    * @return {String} the docID of the new document.
    */
-  define({ name, description }) {
+  define({ volunteerID, interestID }) {
     const docID = this._collection.insert({
-      name,
-      description,
+      volunteerID,
+      interestID,
     });
     return docID;
   }
@@ -28,16 +28,16 @@ class InterestCollection extends BaseCollection {
   /**
    * Updates the given document.
    * @param docID the id of the document to update.
-   * @param name the new name (optional).
-   * @param description the new description (optional).
+   * @param volunteerID the volunteer ID (optional)
+   * @param interestID the interest ID (optional)
    */
-  update(docID, { name, description }) {
+  update(docID, { volunteerID, interestID }) {
     const updateData = {};
-    if (name) {
-      updateData.name = name;
+    if (volunteerID) {
+      updateData.volunteerID = volunteerID;
     }
-    if (description) {
-      updateData.description = description;
+    if (interestID) {
+      updateData.interestID = interestID;
     }
     this._collection.update(docID, { $set: updateData });
   }
@@ -71,13 +71,13 @@ class InterestCollection extends BaseCollection {
    */
   dumpOne(docID) {
     const doc = this.findDoc(docID);
-    const name = doc.name;
-    const description = doc.description;
-    return { name, description };
+    const volunteerID = doc.volunteerID;
+    const interestID = doc.interestID;
+    return { volunteerID, interestID };
   }
 }
 
 /**
  * Provides the singleton instance of this class to all other entities.
  */
-export const Interests = new InterestCollection();
+export const VolunteerInterest = new VolunteerInterestCollection();

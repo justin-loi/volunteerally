@@ -10,6 +10,10 @@ import { Interests } from '../interest/InterestCollection';
 import { SpecialSkills } from '../special_skills/SpecialSkillCollection';
 import { Environmental } from '../environmental_preference/EnvironmentalPreferenceCollection';
 import { Availabilities } from '../availability/AvailabilityCollection';
+import { VolunteerInterest } from '../interest/VolunteerInterestCollection';
+import { VolunteerSkill } from '../special_skills/VolunteerSkillCollection';
+import { VolunteerEnvironmental } from '../environmental_preference/VolunteerEnvironmentalCollection';
+import { VolunteerAvailability } from '../availability/VolunteerAvailabilityCollection';
 
 class MATRPClass {
   collections;
@@ -31,6 +35,10 @@ class MATRPClass {
       SpecialSkills,
       Environmental,
       Availabilities,
+      VolunteerInterest,
+      VolunteerSkill,
+      VolunteerEnvironmental,
+      VolunteerAvailability,
     ];
     /*
      * A list of collection class instances in the order required for them to be sequentially loaded from a file.
@@ -46,6 +54,10 @@ class MATRPClass {
       SpecialSkills,
       Environmental,
       Availabilities,
+      VolunteerInterest,
+      VolunteerSkill,
+      VolunteerEnvironmental,
+      VolunteerAvailability,
     ];
 
     /*

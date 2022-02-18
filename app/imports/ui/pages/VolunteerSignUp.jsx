@@ -198,6 +198,14 @@ const VolunteerSignUp = ({ location, ready, interestsArray, skillsArray, environ
     if (isValidDate(data.dob) && checkPassword(data.password, confirmPassword)
         && agreePolicyAndTerm(privacyPolicy) && checkEmail(data.email) &&
         numberOnly(data.code) && numberOnly(data.phoneNumber)) {
+      // eslint-disable-next-line no-param-reassign
+      data.interests = interests;
+      // eslint-disable-next-line no-param-reassign
+      data.skills = specialSkills;
+      // eslint-disable-next-line no-param-reassign
+      data.environmental = environmentalPreference;
+      // eslint-disable-next-line no-param-reassign
+      data.availabilities = availability;
       signUpNewVolunteerMethod.callPromise(data)
         .catch(error => {
           swal('Error', error.message, 'error');
@@ -327,7 +335,7 @@ const VolunteerSignUp = ({ location, ready, interestsArray, skillsArray, environ
                           id={`volunteer-signup-interests-${index}`}
                           label={interest.name}
                           name='interests'
-                          value={interest.name}
+                          value={interest._id}
                           onChange={handleChange}
                         />
                       </Grid.Column>
@@ -346,7 +354,7 @@ const VolunteerSignUp = ({ location, ready, interestsArray, skillsArray, environ
                           id={`volunteer-signup-skill-${index}`}
                           label={skill.name}
                           name='specialSkills'
-                          value={skill.name}
+                          value={skill._id}
                           onChange={handleChange}
                         />
                       </Grid.Column>
@@ -362,8 +370,8 @@ const VolunteerSignUp = ({ location, ready, interestsArray, skillsArray, environ
                     id={`volunteer-signup-environmental-preference-${index}`}
                     label={environmental.name}
                     name='environmentalPreference'
-                    value={environmental.name}
-                    checked={environmentalPreference === environmental.name}
+                    value={environmental._id}
+                    checked={environmentalPreference === environmental._id}
                     onChange={handleChange}
                   />
                 ))}
@@ -379,7 +387,7 @@ const VolunteerSignUp = ({ location, ready, interestsArray, skillsArray, environ
                           id={`volunteer-signup-availability-${index}`}
                           label={ava.name}
                           name='availability'
-                          value={ava.name}
+                          value={ava._id}
                           onChange={handleChange}
                         />
                       </Grid.Column>

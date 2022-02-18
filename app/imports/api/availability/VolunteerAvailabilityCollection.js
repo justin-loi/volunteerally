@@ -3,24 +3,24 @@ import { check } from 'meteor/check';
 import BaseCollection from '../base/BaseCollection';
 import { ROLE } from '../role/Role';
 
-class InterestCollection extends BaseCollection {
+class VolunteerAvailabilityCollection extends BaseCollection {
   constructor() {
-    super('Interests', new SimpleSchema({
-      name: String,
-      description: { type: String, optional: true },
+    super('VolunteerAvailability', new SimpleSchema({
+      volunteerID: SimpleSchema.RegEx.Id,
+      availabilityID: SimpleSchema.RegEx.Id,
     }));
   }
 
   /**
-   * Defines a new Interests.
-   * @param name the name of the interest.
-   * @param description interest's description (optional).
+   * Define a link between a volunteer and an availability based on their ID.
+   * @param volunteerID the volunteer ID
+   * @param availabilityID the availability ID
    * @return {String} the docID of the new document.
    */
-  define({ name, description }) {
+  define({ volunteerID, availabilityID }) {
     const docID = this._collection.insert({
-      name,
-      description,
+      volunteerID,
+      availabilityID,
     });
     return docID;
   }
@@ -28,16 +28,16 @@ class InterestCollection extends BaseCollection {
   /**
    * Updates the given document.
    * @param docID the id of the document to update.
-   * @param name the new name (optional).
-   * @param description the new description (optional).
+   * @param volunteerID the volunteer ID (optional)
+   * @param availabilityID the availability ID (optional)
    */
-  update(docID, { name, description }) {
+  update(docID, { volunteerID, availabilityID }) {
     const updateData = {};
-    if (name) {
-      updateData.name = name;
+    if (volunteerID) {
+      updateData.volunteerID = volunteerID;
     }
-    if (description) {
-      updateData.description = description;
+    if (availabilityID) {
+      updateData.availabilityID = availabilityID;
     }
     this._collection.update(docID, { $set: updateData });
   }
@@ -71,13 +71,13 @@ class InterestCollection extends BaseCollection {
    */
   dumpOne(docID) {
     const doc = this.findDoc(docID);
-    const name = doc.name;
-    const description = doc.description;
-    return { name, description };
+    const volunteerID = doc.volunteerID;
+    const availabilityID = doc.availabilityID;
+    return { volunteerID, availabilityID };
   }
 }
 
 /**
  * Provides the singleton instance of this class to all other entities.
  */
-export const Interests = new InterestCollection();
+export const VolunteerAvailability = new VolunteerAvailabilityCollection();

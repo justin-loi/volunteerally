@@ -36,7 +36,6 @@ class EnvironmentalPreferenceCollection extends BaseCollection {
     if (name) {
       updateData.name = name;
     }
-    // if (quantity) { NOTE: 0 is falsy so we need to check if the quantity is a number.
     if (description) {
       updateData.description = description;
     }
