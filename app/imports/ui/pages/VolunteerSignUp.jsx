@@ -1,24 +1,23 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { Link, Redirect } from 'react-router-dom';
-import { Container, Grid, Header, Message, Segment, Form } from 'semantic-ui-react';
+import { Container, Grid, Header, Message, Segment, Form, Loader } from 'semantic-ui-react';
 import SimpleSchema from 'simpl-schema';
 import SimpleSchema2Bridge from 'uniforms-bridge-simple-schema-2';
 import swal from 'sweetalert';
 import { AutoForm, ErrorsField, SubmitField, TextField, HiddenField } from 'uniforms-semantic';
+import { withTracker } from 'meteor/react-meteor-data';
 import { PAGE_IDS } from '../utilities/PageIDs';
 import { COMPONENT_IDS } from '../utilities/ComponentIDs';
 import { signUpNewVolunteerMethod } from '../../api/volunteer/VolunteerProfileCollection.methods';
+import { Interests } from '../../api/interest/InterestCollection';
+import { SpecialSkills } from '../../api/special_skills/SpecialSkillCollection';
+import { Environmental } from '../../api/environmental_preference/EnvironmentalPreferenceCollection';
+import { Availabilities } from '../../api/availability/AvailabilityCollection';
 
 const genderAllowValues = ['Male', 'Female', 'Other', 'Prefer Not to Say'];
 const genderComponentID = [COMPONENT_IDS.VOLUNTEER_SIGNUP_FORM_GENDER_MALE, COMPONENT_IDS.VOLUNTEER_SIGNUP_FORM_GENDER_FEMALE,
   COMPONENT_IDS.VOLUNTEER_SIGNUP_FORM_GENDER_OTHER, COMPONENT_IDS.VOLUNTEER_SIGNUP_FORM_GENDER_NO_SAY];
-const interestsAllowValues = ['Child/Family Support', 'COVID-19 Recovery', 'Crisis/Disaster Relief', 'Education', 'Environment',
-  'Elderly/Senior Care', 'Food Banks', 'Housing', 'Homelessness/Poverty', 'Special Needs'];
-const specialSkillsAllowValues = ['Agriculture', 'Construction', 'Education', 'Engineering', 'Event Planning', 'Sales/Marketing', 'Technology',
-  'Graphic/Web Design', 'CPR (Certification Required)', 'First Aid (Certification Required)', 'Nursing (CNA/RNA Certified)', 'Other'];
-const environmentalPreferenceAllowValues = ['Outdoor', 'Both', 'No Preference'];
-const availabilityAllowValues = ['Once a week', '1-3 times a week', 'More than 3 times a week', 'Weekends only', 'Weekdays onlymetoer'];
 
 const formSchema = new SimpleSchema({
   email: String,
@@ -40,7 +39,7 @@ const bridge = new SimpleSchema2Bridge(formSchema);
 /**
  * VolunteerSignUp component is similar to signin component, but we create a new volunteer instead.
  */
-const VolunteerSignUp = ({ location }) => {
+const VolunteerSignUp = ({ location, ready, interestsArray, skillsArray, environmentalArray, availabilitiesArray }) => {
   const [redirectToReferer, setRedirectToReferer] = useState(false);
   const [confirmPassword, setConfirmPassword] = useState('');
   const [dateOfBirth, setDateOfBirth] = useState('');
@@ -228,6 +227,9 @@ const VolunteerSignUp = ({ location }) => {
   if (redirectToReferer) {
     return <Redirect to={from}/>;
   }
+  if (!ready) {
+    return <Loader active>Getting data</Loader>;
+  }
   let fRef = null;
   return (
     <Container id={PAGE_IDS.VOLUNTEER_SIGNUP}>
@@ -318,23 +320,14 @@ const VolunteerSignUp = ({ location }) => {
               <Form.Group>
                 <Grid columns={2}>
                   <Grid.Row style={{ paddingLeft: '8px' }}>
-                    <Grid.Column>
-                      <Form.Checkbox
-                        id={COMPONENT_IDS.VOLUNTEER_SIGNUP_FORM_ANIMALS}
-                        label='Animal Welfare/Rescue'
-                        name='interests'
-                        value='Animal Welfare/Rescue'
-                        onChange={handleChange}
-                      />
-                    </Grid.Column>
-                    {interestsAllowValues.map((value, index) => (
-                      <Grid.Column key={`volunteer-signup-grid-interests-${value}`}>
+                    {interestsArray.map((interest, index) => (
+                      <Grid.Column key={`volunteer-signup-grid-interests-${index}`}>
                         <Form.Checkbox
-                          key={`volunteer-signup-interests-${index}`}
-                          id={`volunteer-signup-interests-${value}`}
-                          label={value}
+                          key={`volunteer-signup-interests-${interest._id}`}
+                          id={`volunteer-signup-interests-${index}`}
+                          label={interest.name}
                           name='interests'
-                          value={value}
+                          value={interest.name}
                           onChange={handleChange}
                         />
                       </Grid.Column>
@@ -346,23 +339,14 @@ const VolunteerSignUp = ({ location }) => {
               <Form.Group>
                 <Grid columns={2}>
                   <Grid.Row style={{ paddingLeft: '8px' }}>
-                    <Grid.Column>
-                      <Form.Checkbox
-                        id={COMPONENT_IDS.VOLUNTEER_SIGNUP_FORM_AGRICULTURE}
-                        label='Agriculture'
-                        name='specialSkills'
-                        value='Agriculture'
-                        onChange={handleChange}
-                      />
-                    </Grid.Column>
-                    {specialSkillsAllowValues.map((value, index) => (
-                      <Grid.Column key={`volunteer-signup-grid-skills-${value}`}>
+                    {skillsArray.map((skill, index) => (
+                      <Grid.Column key={`volunteer-signup-grid-skills-${index}`}>
                         <Form.Checkbox
-                          key={`volunteer-signup-skill-${index}`}
-                          id={`volunteer-signup-skill-${value}`}
-                          label={value}
+                          key={`volunteer-signup-skill-${skill._id}`}
+                          id={`volunteer-signup-skill-${index}`}
+                          label={skill.name}
                           name='specialSkills'
-                          value={value}
+                          value={skill.name}
                           onChange={handleChange}
                         />
                       </Grid.Column>
@@ -372,22 +356,14 @@ const VolunteerSignUp = ({ location }) => {
               </Form.Group>
               <label>Environmental Preference </label>
               <Form.Group inline>
-                <Form.Radio
-                  id={COMPONENT_IDS.VOLUNTEER_SIGNUP_FORM_INDOOR}
-                  label='Indoor'
-                  name='environmentalPreference'
-                  value='Indoor'
-                  checked={environmentalPreference === 'Indoor'}
-                  onChange={handleChange}
-                />
-                {environmentalPreferenceAllowValues.map((value, index) => (
+                {environmentalArray.map((environmental, index) => (
                   <Form.Radio
-                    key={`volunteer-signup-environmental-preference-${index}`}
+                    key={`volunteer-signup-environmental-preference-${environmental._id}`}
                     id={`volunteer-signup-environmental-preference-${index}`}
-                    label={value}
+                    label={environmental.name}
                     name='environmentalPreference'
-                    value={value}
-                    checked={environmentalPreference === value}
+                    value={environmental.name}
+                    checked={environmentalPreference === environmental.name}
                     onChange={handleChange}
                   />
                 ))}
@@ -396,31 +372,14 @@ const VolunteerSignUp = ({ location }) => {
               <Form.Group>
                 <Grid columns={2}>
                   <Grid.Row style={{ paddingLeft: '8px' }}>
-                    <Grid.Column>
-                      <Form.Checkbox
-                        label='One-Time'
-                        name='availability'
-                        value='One-Time'
-                        onChange={handleChange}
-                      />
-                    </Grid.Column>
-                    <Grid.Column>
-                      <Form.Checkbox
-                        id={COMPONENT_IDS.VOLUNTEER_SIGNUP_FORM_MONTHLY}
-                        label='Once a month'
-                        name='availability'
-                        value='Once a month'
-                        onChange={handleChange}
-                      />
-                    </Grid.Column>
-                    {availabilityAllowValues.map((value, index) => (
-                      <Grid.Column key={`volunteer-signup-grid-availability-${value}`}>
+                    {availabilitiesArray.map((ava, index) => (
+                      <Grid.Column key={`volunteer-signup-grid-availability-${index}`}>
                         <Form.Checkbox
-                          key={`volunteer-signup-availability-${index}`}
-                          id={`volunteer-signup-availability-${value}`}
-                          label={value}
+                          key={`volunteer-signup-availability-${ava._id}`}
+                          id={`volunteer-signup-availability-${index}`}
+                          label={ava.name}
                           name='availability'
-                          value={value}
+                          value={ava.name}
                           onChange={handleChange}
                         />
                       </Grid.Column>
@@ -455,6 +414,31 @@ const VolunteerSignUp = ({ location }) => {
 /* Ensure that the React Router location object is available in case we need to redirect. */
 VolunteerSignUp.propTypes = {
   location: PropTypes.object,
+  interestsArray: PropTypes.array.isRequired,
+  skillsArray: PropTypes.array.isRequired,
+  environmentalArray: PropTypes.array.isRequired,
+  availabilitiesArray: PropTypes.array.isRequired,
+  ready: PropTypes.bool.isRequired,
 };
 
-export default VolunteerSignUp;
+export default withTracker(() => {
+  // Get access to Stuff documents.
+  const subscription1 = Interests.subscribe();
+  const subscription2 = SpecialSkills.subscribe();
+  const subscription3 = Environmental.subscribe();
+  const subscription4 = Availabilities.subscribe();
+  // Determine if the subscription is ready
+  const ready = subscription1.ready() && subscription2.ready() && subscription3.ready() && subscription4.ready();
+  // Get the document
+  const interestsArray = Interests.find({}, {}).fetch();
+  const skillsArray = SpecialSkills.find({}, {}).fetch();
+  const environmentalArray = Environmental.find({}, {}).fetch();
+  const availabilitiesArray = Availabilities.find({}, {}).fetch();
+  return {
+    interestsArray,
+    skillsArray,
+    environmentalArray,
+    availabilitiesArray,
+    ready,
+  };
+})(VolunteerSignUp);

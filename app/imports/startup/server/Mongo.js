@@ -71,7 +71,7 @@ if (SpecialSkills.count() === 0) {
 }
 
 function addEnvironmentalPreferences(data) {
-  console.log(`  Adding Environmental Preferences: ${data.preference} with description: ${data.description}`);
+  console.log(`  Adding Environmental Preferences: ${data.name} with description: ${data.description}`);
   Environmental.define(data);
 }
 

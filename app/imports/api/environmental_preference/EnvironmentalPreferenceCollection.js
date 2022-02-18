@@ -6,20 +6,20 @@ import { ROLE } from '../role/Role';
 class EnvironmentalPreferenceCollection extends BaseCollection {
   constructor() {
     super('Environmental', new SimpleSchema({
-      preference: String,
+      name: String,
       description: { type: String, optional: true },
     }));
   }
 
   /**
    * Defines a new Environmental Preferences.
-   * @param preference the name of the item.
+   * @param name the name of the item.
    * @param description how many.
    * @return {String} the docID of the new document.
    */
-  define({ preference, description }) {
+  define({ name, description }) {
     const docID = this._collection.insert({
-      preference,
+      name,
       description,
     });
     return docID;
@@ -31,10 +31,10 @@ class EnvironmentalPreferenceCollection extends BaseCollection {
    * @param name the new name (optional).
    * @param description the new quantity (optional).
    */
-  update(docID, { preference, description }) {
+  update(docID, { name, description }) {
     const updateData = {};
-    if (preference) {
-      updateData.preference = preference;
+    if (name) {
+      updateData.name = name;
     }
     // if (quantity) { NOTE: 0 is falsy so we need to check if the quantity is a number.
     if (description) {
@@ -72,9 +72,9 @@ class EnvironmentalPreferenceCollection extends BaseCollection {
    */
   dumpOne(docID) {
     const doc = this.findDoc(docID);
-    const preference = doc.preference;
+    const name = doc.name;
     const description = doc.description;
-    return { preference, description };
+    return { name, description };
   }
 }
 

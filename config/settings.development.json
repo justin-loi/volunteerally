@@ -50,8 +50,8 @@
   ],
 
   "defaultEnvironmentalPreferences": [
-    {"preference": "Indoor"}, {"preference": "Outdoor"}, {"preference": "Both"},
-    {"preference": "No Preference"}
+    {"name": "Indoor"}, {"name": "Outdoor"}, {"name": "Both"},
+    {"name": "No Preference"}
   ],
 
  "defaultAvailabilities": [
