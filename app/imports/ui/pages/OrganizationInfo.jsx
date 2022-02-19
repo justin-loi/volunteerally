@@ -7,7 +7,7 @@ import { OrganizationProfiles } from '../../api/organization/OrganizationProfile
 
 // Renders a Event Info page that connects with the current Event collection.
 const gridStyle = { height: '500px', fontSize: '75px' };
-const OrganizationInfo = ({ orgProfile, ready }) => ((ready) ? (
+const OrganizationInfo = ({ orgProfile, ready, event }) => ((ready) ? (
   <div>
     <div className="event-profile-top-background">
       <Grid stackable container verticalAlign="bottom" textAlign='center' style={gridStyle} columns={3}>

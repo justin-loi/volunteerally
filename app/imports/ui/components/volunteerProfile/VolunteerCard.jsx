@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Header, Grid, Image } from 'semantic-ui-react';
+import { Grid, Image } from 'semantic-ui-react';
 
 console.log('you have reached here');
 
