@@ -22,8 +22,6 @@ if (Meteor.isClient) {
       expect(Interests.isDefined(docID)).to.be.true;
       let doc = Interests.findDoc(docID);
       expect(doc.name).to.equal(definitionData.name);
-      expect(doc.quantity).to.equal(definitionData.quantity);
-      expect(doc.condition).to.equal(definitionData.condition);
       const updateData = {};
       updateData.id = docID;
       updateData.name = faker.lorem.words();
