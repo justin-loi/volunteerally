@@ -1,7 +1,11 @@
 import { Meteor } from 'meteor/meteor';
 import { expect } from 'chai';
 import faker from 'faker';
-import { defineTestUser, withLoggedInUser, withSubscriptions } from '../../test-utilities/test-utilities';
+import {
+  defineTestVolunteer,
+  withLoggedInUser,
+  withSubscriptions,
+} from '../../test-utilities/test-utilities';
 import { defineMethod, updateMethod, removeItMethod } from '../base/BaseCollection.methods';
 import { VolunteerProfiles } from './VolunteerProfileCollection';
 
@@ -11,7 +15,7 @@ import { VolunteerProfiles } from './VolunteerProfileCollection';
 if (Meteor.isClient) {
   describe('VolunteerProfileCollection Meteor Methods', function testSuite() {
     it('Can define, update, and removeIt', async function test1() {
-      const { username, password } = await defineTestUser.callPromise();
+      const { username, password } = await defineTestVolunteer.callPromise();
       await withLoggedInUser({ username, password });
       await withSubscriptions();
       const collectionName = VolunteerProfiles.getCollectionName();
@@ -38,6 +42,7 @@ if (Meteor.isClient) {
       expect(doc.lastName).to.equal(updateData.lastName);
       await removeItMethod.callPromise({ collectionName, instance: docID });
       expect(VolunteerProfiles.isDefined(docID)).to.be.false;
+      Meteor.logout();
     });
   });
 }
