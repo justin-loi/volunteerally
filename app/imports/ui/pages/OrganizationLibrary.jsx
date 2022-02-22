@@ -5,7 +5,6 @@ import { withRouter } from 'react-router-dom';
 import { withTracker } from 'meteor/react-meteor-data';
 import PropTypes from 'prop-types';
 import { PAGE_IDS } from '../utilities/PageIDs';
-// import { COMPONENT_IDS } from '../utilities/ComponentIDs';
 import OrganizationCard from '../components/OrganizationCard';
 import { OrganizationProfiles } from '../../api/organization/OrganizationProfileCollection';
 

@@ -13,7 +13,7 @@ const OrganizationCard = ({ organization }) => (
     <Card.Content>
       <Card.Header>Organization 1</Card.Header>
       <Card.Meta>
-        {organization.logoImage}
+        <Image src={organization.logoImage} size='tiny' circular/>
       </Card.Meta>
     </Card.Content>
   </Card>
