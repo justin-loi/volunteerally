@@ -12,9 +12,9 @@ import { OrganizationProfiles } from '../../api/organization/OrganizationProfile
 const Landing = ({ ready, organizations }) => ((ready) ? (
   <div>
     <LandingTopSection/>
-    <Container>
+    <Container centered>
       <Image.Group>
-        {organizations.map((organization) => <Image key={organization._id} organization={organization} src={organization.logoImage} />)}
+        {organizations.map((organization) => <Image key={organization._id} organization={organization} src={organization.logoImage} size='small' circular/>)}
       </Image.Group>
     </Container>
     <LandingEventCalendarSection/>
