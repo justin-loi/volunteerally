@@ -1,6 +1,16 @@
 import { Meteor } from 'meteor/meteor';
 import { Stuffs } from '../../api/stuff/StuffCollection';
-import { Volunteers } from '../../api/volunteer/VolunteerCollection';
+import { Events } from '../../api/event/EventCollection';
+import { OrganizationProfiles } from '../../api/organization/OrganizationProfileCollection';
+import { Interests } from '../../api/interest/InterestCollection';
+import { SpecialSkills } from '../../api/special_skills/SpecialSkillCollection';
+import { Environmental } from '../../api/environmental_preference/EnvironmentalPreferenceCollection';
+import { Availabilities } from '../../api/availability/AvailabilityCollection';
+import { VolunteerProfiles } from '../../api/volunteer/VolunteerProfileCollection';
+import { VolunteerInterest } from '../../api/interest/VolunteerInterestCollection';
+import { VolunteerSkill } from '../../api/special_skills/VolunteerSkillCollection';
+import { VolunteerEnvironmental } from '../../api/environmental_preference/VolunteerEnvironmentalCollection';
+import { VolunteerAvailability } from '../../api/availability/VolunteerAvailabilityCollection';
 /* eslint-disable no-console */
 
 // Initialize the database with a default data document.
@@ -17,16 +27,122 @@ if (Stuffs.count() === 0) {
   }
 }
 
-// Initialize the database with a default volunteer data document.
-function addVolunteer(data) {
-  console.log(`  Adding: ${data.firstName} ${data.lastName} (${data.owner})`);
-  Volunteers.define(data);
+function addEvent(data) {
+  console.log(`  Adding: ${data.eventName} (${data.orgName})`);
+  Events.define(data);
 }
 
-// Initialize the VolunteerCollection if empty.
-if (Volunteers.count() === 0) {
-  if (Meteor.settings.defaultVolunteer) {
-    console.log('Creating default Volunteer data.');
-    Meteor.settings.defaultVolunteer.map(data => addVolunteer(data));
+if (Events.count() === 0) {
+  if (Meteor.settings.defaultEvents) {
+    console.log('Creating default events.');
+    Meteor.settings.defaultEvents.map(data => addEvent(data));
   }
+}
+
+function addOrganization(data) {
+  console.log(`  Adding: ${data.email} (${data.organizationName})`);
+  OrganizationProfiles.define(data);
+}
+
+if (OrganizationProfiles.count() === 0) {
+  if (Meteor.settings.defaultOrganizations) {
+    console.log('Creating default organizations.');
+    Meteor.settings.defaultOrganizations.map(data => addOrganization(data));
+  }
+}
+
+function addInterest(data) {
+  console.log(`  Adding interest: ${data.name}`);
+  Interests.define(data);
+}
+
+if (Interests.count() === 0) {
+  if (Meteor.settings.defaultInterests) {
+    console.log('Creating default Interests.');
+    Meteor.settings.defaultInterests.map(data => addInterest(data));
+  }
+}
+
+function addSpecialSkills(data) {
+  console.log(`  Adding special skills: ${data.name}`);
+  SpecialSkills.define(data);
+}
+
+if (SpecialSkills.count() === 0) {
+  if (Meteor.settings.defaultSpecialSkills) {
+    console.log('Creating default Special Skills.');
+    Meteor.settings.defaultSpecialSkills.map(data => addSpecialSkills(data));
+  }
+}
+
+function addEnvironmentalPreferences(data) {
+  console.log(`  Adding environmental preferences: ${data.name}`);
+  Environmental.define(data);
+}
+
+if (Environmental.count() === 0) {
+  if (Meteor.settings.defaultEnvironmentalPreferences) {
+    console.log('Creating default Environmental Preferences.');
+    Meteor.settings.defaultEnvironmentalPreferences.map(data => addEnvironmentalPreferences(data));
+  }
+}
+
+function addAvailabilities(data) {
+  console.log(`  Adding availabilities: ${data.name}`);
+  Availabilities.define(data);
+}
+
+if (Availabilities.count() === 0) {
+  if (Meteor.settings.defaultAvailabilities) {
+    console.log('Creating default Availabilities.');
+    Meteor.settings.defaultAvailabilities.map(data => addAvailabilities(data));
+  }
+}
+
+if (VolunteerInterest.count() === 0) {
+  console.log('Creating default VolunteerInterest collection.');
+  const volunteerArray = VolunteerProfiles.find({}, {}).fetch();
+  const interestsArray = Interests.find({}, {}).fetch();
+  let length = volunteerArray.length;
+  if (length > interestsArray.length) {
+    length = interestsArray.length;
+  }
+  interestsArray.map((interest, index) => (VolunteerInterest.define({
+    volunteerID: volunteerArray[(index % length)]._id, interestID: interest._id })));
+}
+
+if (VolunteerSkill.count() === 0) {
+  console.log('Creating default VolunteerSkill collection.');
+  const volunteerArray = VolunteerProfiles.find({}, {}).fetch();
+  const skillsArray = SpecialSkills.find({}, {}).fetch();
+  let length = volunteerArray.length;
+  if (length > skillsArray.length) {
+    length = skillsArray.length;
+  }
+  skillsArray.map((skill, index) => (VolunteerSkill.define({
+    volunteerID: volunteerArray[(index % length)]._id, skillID: skill._id })));
+}
+
+if (VolunteerEnvironmental.count() === 0) {
+  console.log('Creating default VolunteerEnvironmental collection.');
+  const volunteerArray = VolunteerProfiles.find({}, {}).fetch();
+  const environmentalArray = Environmental.find({}, {}).fetch();
+  let length = volunteerArray.length;
+  if (length > environmentalArray.length) {
+    length = environmentalArray.length;
+  }
+  volunteerArray.map((volunteer, index) => (VolunteerEnvironmental.define({
+    volunteerID: volunteer._id, environmentalID: environmentalArray[(index % length)]._id })));
+}
+
+if (VolunteerAvailability.count() === 0) {
+  console.log('Creating default VolunteerAvailability collection.');
+  const volunteerArray = VolunteerProfiles.find({}, {}).fetch();
+  const availabilitiesArray = Availabilities.find({}, {}).fetch();
+  let length = volunteerArray.length;
+  if (length > availabilitiesArray.length) {
+    length = availabilitiesArray.length;
+  }
+  availabilitiesArray.map((availability, index) => (VolunteerAvailability.define({
+    volunteerID: volunteerArray[(index % length)]._id, availabilityID: availability._id })));
 }

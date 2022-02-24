@@ -2,31 +2,135 @@
   "defaultAccounts": [
     { "email": "admin@foo.com", "password": "changeme", "role": "ADMIN", "firstName": "Admin", "lastName": "MATRP"
     },
-    { "email": "john@foo.com", "password": "changeme", "role": "USER" , "firstName": "John", "lastName": "Doe" },
-    { "email": "test@foo.com", "password": "changeme", "role": "USER" , "firstName": "test", "lastName": "test" }
+    { "email": "john@foo.com", "password": "changeme", "role": "VOLUNTEER" , "firstName": "John", "lastName": "Doe" }
   ],
+
+  "defaultVolunteers": [
+    { "email": "tom@foo.com", "password": "changeme", "role": "VOLUNTEER", "firstName": "tom", "lastName": "tom",
+      "username": "tom", "gender": "Male", "dob": "12/31/2000",
+      "address": "2500 Campus Rd", "city": "Honolulu", "state": "Hawaii", "code": "96822"
+    },
+    { "email": "jerry@foo.com", "password": "changeme", "role": "VOLUNTEER" , "firstName": "jerry", "lastName": "jerry",
+      "username": "jerry", "gender": "Male", "dob": "12/31/2000",
+      "address": "2500 Campus Rd", "city": "Honolulu", "state": "Hawaii", "code": "96822"
+    }
+  ],
+
+  "defaultOrganizations": [
+    { "email": "sup@foo.com", "password": "changeme", "role": "ORGANIZATION",
+      "firstName": "Sup", "lastName": "Foo", "eventBackgroundImage": "images/red-cross-map.jpeg",
+      "logoImage": "images/red-cross-logo.png", "organizationName": "The Red Cross", "missionStatement": "To help everyone and cure everything!", "phoneNumber": "808-123-0420"
+    },
+    {
+      "email": "nah@foo.com", "password": "changeme", "role": "ORGANIZATION",
+      "firstName": "Nah", "lastName": "Foo", "eventBackgroundImage": "images/young-people.jpg",
+      "logoImage": "images/helping-hands-logo.png", "organizationName": "Helping Hands", "missionStatement": "You know what the say about idle hands, we are helping hands!", "phoneNumber": "808-999-8888"
+    },
+    {
+      "email": "ya@foo.com", "password": "changeme", "role": "ORGANIZATION",
+      "firstName": "Sha", "lastName": "Moo", "eventBackgroundImage": "images/volunteer.jpg",
+      "logoImage": "images/food-bank-logo.png", "organizationName": "Food Bank", "missionStatement": "Interest free food!", "phoneNumber": "808-420-1234"
+    },
+    {
+      "email": "aye@foo.com", "password": "changeme", "role": "ORGANIZATION",
+      "firstName": "Aye", "lastName": "Yu", "eventBackgroundImage": "images/volunteer.jpg",
+      "logoImage": "images/habitat-humanity-logo.png", "organizationName": "Habitat for Humanity", "missionStatement": "The habitat for humanity!", "phoneNumber": "808-333-8998"
+    },
+    {
+      "email": "que@foo.com", "password": "changeme", "role": "ORGANIZATION",
+      "firstName": "Jim", "lastName": "Dean", "eventBackgroundImage": "images/volunteer.jpg",
+      "logoImage": "images/humane-society-logo.png", "organizationName": "Humane Society", "missionStatement": "Against inhumane societies!", "phoneNumber": "808-111-2233"
+    },
+    {
+      "email": "malama@foo.com", "password": "changeme", "role": "ORGANIZATION",
+      "firstName": "Malama", "lastName": "Aina", "eventBackgroundImage": "images/young-people.jpg",
+      "logoImage": "images/malama-maunalua-logo.png", "organizationName": "Malama Maunalua", "missionStatement": "Protect and serve!", "phoneNumber": "808-454-4444"
+    },
+    {
+      "email": "fish@foo.com", "password": "changeme", "role": "ORGANIZATION",
+      "firstName": "Jeff", "lastName": "Googlestein", "eventBackgroundImage": "images/young-people.jpg",
+      "logoImage": "images/maunalua-fishpond-logo.png", "organizationName": "Maunalua Fishpond", "missionStatement": "Fish for one, fish for all!", "phoneNumber": "808-933-3888"
+    },
+    {
+      "email": "meals@foo.com", "password": "changeme", "role": "ORGANIZATION",
+      "firstName": "Martha", "lastName": "Abernathy", "eventBackgroundImage": "images/young-people.jpg",
+      "logoImage": "images/meals-on-wheels-logo.png", "organizationName": "Meals On Wheels", "missionStatement": "The original!", "phoneNumber": "808-111-1111"
+    },
+    {
+      "email": "aloha@foo.com", "password": "changeme", "role": "ORGANIZATION",
+      "firstName": "Tim", "lastName": "Dowdy", "eventBackgroundImage": "images/young-people.jpg",
+      "logoImage": "images/aloha-sanctuary-logo.png", "organizationName": "Aloha Sanctuary", "missionStatement": "Kapu ALoha!", "phoneNumber": "808-888-9999"
+    },
+    {
+      "email": "brotherh@foo.com", "password": "changeme", "role": "ORGANIZATION",
+      "firstName": "Bro", "lastName": "Sis", "eventBackgroundImage": "images/young-people.jpg",
+      "logoImage": "images/big-bros-big-sis-logo.png", "organizationName": "Big Brothers, Big Sisters", "missionStatement": "We got the biggest siblings around!", "phoneNumber": "808-909-9999"
+    },
+    {
+      "email": "protect@foo.com", "password": "changeme", "role": "ORGANIZATION",
+      "firstName": "Coppy", "lastName": "Copperson", "eventBackgroundImage": "images/volunteer.jpg",
+      "logoImage": "images/protect-preserve-logo.png", "organizationName": "Helping Hands", "missionStatement": "Protect and Preserve!!", "phoneNumber": "808-655-7777"
+    },
+    {
+      "email": "read@foo.com", "password": "changeme", "role": "ORGANIZATION",
+      "firstName": "Ready", "lastName": "McReaderson", "eventBackgroundImage": "images/volunteer.jpg",
+      "logoImage": "images/read-to-me-logo.png", "organizationName": "Read to Me", "missionStatement": "Ready! Set! Read!", "phoneNumber": "808-221-1212"
+    },
+    {
+      "email": "salvy@foo.com", "password": "changeme", "role": "ORGANIZATION",
+      "firstName": "Ben", "lastName": "Sonyy", "eventBackgroundImage": "images/volunteer.jpg",
+      "logoImage": "images/salvation-army-logo.png", "organizationName": "Salvation Army", "missionStatement": "Upcycling everything!!", "phoneNumber": "808-667-7766"
+    },
+    {
+      "email": "pantry@foo.com", "password": "changeme", "role": "ORGANIZATION",
+      "firstName": "Howie", "lastName": "Mandel", "eventBackgroundImage": "images/young-people.jpg",
+      "logoImage": "images/the-pantry-logo.png", "organizationName": "The Pantry", "missionStatement": "We got your pantry!", "phoneNumber": "808-888-1008"
+    },
+    {
+      "email": "surf@foo.com", "password": "changeme", "role": "ORGANIZATION",
+      "firstName": "Colton", "lastName": "Breckinridge", "eventBackgroundImage": "images/young-people.jpg",
+      "logoImage": "images/surf-rider-logo.png", "organizationName": "Surf Rider", "missionStatement": "Surf first!", "phoneNumber": "808-099-0000"
+    }
+
+  ],
+
+  "defaultEvents": [
+    { "eventName": "Mowing Peoples Lawns", "time":  "8:00am-8:00pm", "location": "Manoa", "date": "April 20th, 1989", "orgName": "Helping Hands", "categories": "crisis relief", "environmentType": "Outside", "owner": "nah@foo.com", "skillsNeeded": "Computerist"
+     },
+    { "eventName": "Back 2 Skewl", "time":  "8:00am-8:00pm", "location": "UH Manoa", "date": "Jan. 10th, 2022", "orgName": "UHM", "categories": "other", "environmentType": "Inside", "owner": "nah@foo.com", "skillsNeeded": "Writer" },
+    { "eventName": "Dr. Moore Buys Pizza", "time":  "8:00am-8:00pm", "location": "POST 319", "date": "Feb. 18 2022", "orgName": "Helping Hands", "categories": "education", "environmentType": "Virtual", "owner": "sup@foo.com", "skillsNeeded": "Hunger" }
+  ],
+
+  "defaultInterests": [
+    {"name": "Animal Welfare/Rescue"}, {"name": "Child/Family Support"}, {"name": "COVID-19 Recovery"},
+    {"name": "Crisis/Disaster Relief"}, {"name": "Education"}, {"name": "Environment"},
+    {"name": "Elderly/Senior Care"}, {"name": "Food Banks"}, {"name": "Housing"},
+    {"name": "Homelessness/Poverty"}, {"name": "Special Needs"}
+  ],
+
+  "defaultSpecialSkills": [
+    {"name": "Agriculture"}, {"name": "Construction"}, {"name": "Education"},
+    {"name": "Engineering"}, {"name": "Event Planning"}, {"name": "Sales/Marketing"},
+    {"name": "Technology"}, {"name": "Graphic/Web Design"}, {"name": "CPR (Certification Required)"},
+    {"name": "First Aid (Certification Required)"}, {"name": "Nursing (CNA/RNA Certified)"}, {"name": "Other"}
+  ],
+
+  "defaultEnvironmentalPreferences": [
+    {"name": "Indoor"}, {"name": "Outdoor"}, {"name": "Both"},
+    {"name": "No Preference"}
+  ],
+
+ "defaultAvailabilities": [
+   {"name": "One-Time"}, {"name": "Once a month"}, {"name": "Once a week"},
+   {"name": "1-3 times a week"}, {"name": "More than 3 times a week"}, {"name": "Weekends only"},
+   {"name": "Weekdays only"}
+ ],
 
   "defaultData": [
     { "name": "Basket", "quantity": 3, "owner": "john@foo.com", "condition": "excellent" },
     { "name": "Bicycle", "quantity": 2, "owner": "john@foo.com", "condition": "poor" },
     { "name": "Banana", "quantity": 2, "owner": "admin@foo.com", "condition": "good" },
     { "name": "Boogie Board", "quantity": 2, "owner": "admin@foo.com", "condition": "excellent" }
-  ],
-
-  "defaultVolunteer": [
-    { "owner": "john@foo.com",
-      "firstName": "john",
-      "lastName": "foo",
-      "gender": "Male",
-      "address": "2444 Dole St",
-      "city": "Honolulu",
-      "state": "Hawaii",
-      "zipCode_postalCode": "96822",
-      "phoneNumber": "123456789",
-      "interests": [],
-      "specialSkill": [],
-      "environmentalPreference": "",
-      "availability": []}
   ],
   "public": {
     "development": true,
