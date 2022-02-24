@@ -22,7 +22,7 @@ const formSchema = new SimpleSchema({
 const bridge = new SimpleSchema2Bridge(formSchema);
 
 /* Renders the Page for adding a document. */
-class AddEvent extends React.Component {
+class AddOpportunity extends React.Component {
 
   submit(data, formRef) {
     const { eventName, location, categories, description, eventImage, date, time } = data;
@@ -41,9 +41,9 @@ class AddEvent extends React.Component {
   render() {
     let fRef = null;
     return (
-      <Grid id={PAGE_IDS.ADD_EVENT} container centered>
+      <Grid id={PAGE_IDS.ADD_OPPORTUNITY} container centered>
         <Grid.Column>
-          <Header as="h2" textAlign="center" inverted>Add Event</Header>
+          <Header as="h2" textAlign="center" inverted>Add Opportunity</Header>
           <AutoForm ref={ref => { fRef = ref; }} schema={bridge} onSubmit={data => this.submit(data, fRef)} >
             <Segment>
               <TextField name='eventName'/>
@@ -66,4 +66,4 @@ class AddEvent extends React.Component {
   }
 }
 
-export default AddEvent;
+export default AddOpportunity;

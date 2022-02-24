@@ -9,7 +9,7 @@ import Footer from '../components/Footer';
 import Landing from '../pages/Landing';
 import ListStuff from '../pages/ListStuff';
 import ListStuffAdmin from '../pages/ListStuffAdmin';
-import AddEvent from '../pages/AddEvent';
+import AddOpportunity from '../pages/AddOpportunity';
 import EditStuff from '../pages/EditStuff';
 import NotFound from '../pages/NotFound';
 import Signin from '../pages/Signin';
@@ -58,7 +58,7 @@ class App extends React.Component {
             <Route path="/terms" component={TermsAndConditions}/>
             <Route path="/signup" component={Signup}/>
             <Route path="/signout" component={Signout}/>
-            <OrgProtectedRoute path="/add" component={AddEvent}/>
+            <OrgProtectedRoute path="/add" component={AddOpportunity}/>
             <ProtectedRoute path="/list" component={ListStuff}/>
             <ProtectedRoute path="/edit/:_id" component={EditStuff}/>
             <AdminProtectedRoute path="/admin" component={ListStuffAdmin}/>
