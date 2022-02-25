@@ -86,7 +86,7 @@ const VolunteerSignUp = ({ location, ready, interestsArray, skillsArray, environ
   const isNotEmpty = (value) => (!value);
 
   const agreePolicyAndTerm = (value) => {
-    if (!value) {
+    if (!value || value === '') {
       swal('Error!', 'Please confirm that you agree to our Privacy Policy and Term & Conditions', 'error');
       return false;
     }
