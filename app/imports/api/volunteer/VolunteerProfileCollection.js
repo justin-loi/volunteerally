@@ -1,6 +1,5 @@
 import { Meteor } from 'meteor/meteor';
 import SimpleSchema from 'simpl-schema';
-import { Roles } from 'meteor/alanning:roles';
 import BaseProfileCollection from '../user/BaseProfileCollection';
 import { ROLE } from '../role/Role';
 import { Volunteers } from './VolunteerCollection';
