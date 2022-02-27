@@ -44,7 +44,7 @@ class BaseProfileCollection extends BaseCollection {
    * If instance is the value for the username field in this collection, then return that document's ID.
    * If instance is the userID for the profile, then return the Profile's ID.
    * If instance is an object with an _id field, then that value is checked to see if it's in the collection.
-   * @param { String } instance Either a valid docID, valid userID or a valid slug string.
+   * @param {String} instance Either a valid docID, valid userID or a valid slug string.
    * @returns { String } The docID associated with instance.
    * @throws { Meteor.Error } If instance is not a docID or a slug.
    */
@@ -64,6 +64,28 @@ class BaseProfileCollection extends BaseCollection {
     const userIDBasedDoc = this._collection.findOne({ userID: instance });
     if (userIDBasedDoc) {
       return userIDBasedDoc._id;
+    }
+    // Otherwise see if we can find instance as a docID.
+    try {
+      id = (this._collection.findOne({ _id: instance }));
+    } catch (err) {
+      throw new Meteor.Error(`Error in ${this._collectionName} getID(): Failed to convert ${instance} to an ID.`);
+    }
+    return id;
+  }
+
+  /**
+   * Returns the Profile's docID associated with instance, or throws an error if it cannot be found.
+   * @param {Mongo.Cursor} instance Either a valid docID, valid userID or a valid slug string.
+   * @returns { String } The docID associated with instance.
+   * @throws { Meteor.Error } If instance is not a docID or a slug.
+   */
+  getIDVerTwo(instance) {
+    let id;
+    // If we've been passed a document, check to see if it has an _id field and use that if available.
+    if (_.isObject(instance) && _.has(instance, '_id')) {
+      // @ts-ignore
+      return instance._id; // eslint-disable-line no-param-reassign, dot-notation
     }
     // Otherwise see if we can find instance as a docID.
     try {

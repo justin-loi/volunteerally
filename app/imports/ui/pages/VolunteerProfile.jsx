@@ -6,9 +6,11 @@ import { NavLink } from 'react-router-dom';
 import { PAGE_IDS } from '../utilities/PageIDs';
 import { VolunteerProfiles } from '../../api/volunteer/VolunteerProfileCollection';
 import { Events } from '../../api/event/EventCollection';
+import { VolunteerInterest } from '../../api/interest/VolunteerInterestCollection';
+import { Interests } from '../../api/interest/InterestCollection';
 
 /** Renders the Page for adding a document. */
-const VolunteerProfile = ({ event, ready }) => ((ready) ? (
+const VolunteerProfile = ({ ready, event, volunteer, interests }) => ((ready) ? (
   <Grid id={PAGE_IDS.VOLUNTEER_PROFILE} container centered>
     <Grid.Row>
       <Image src='/images/volunteer_profile_banner.png' size='big' />
@@ -22,7 +24,7 @@ const VolunteerProfile = ({ event, ready }) => ((ready) ? (
     <Grid.Row columns={2}>
       <Grid.Column>
         <Label color='teal' size='massive' ribbon>
-          Tom Jerry
+          {`${volunteer.firstName} ${volunteer.lastName}`}
         </Label>
         <Image src='images/profile.png' size='medium' circular centered />
         <Divider/>
@@ -39,6 +41,11 @@ const VolunteerProfile = ({ event, ready }) => ((ready) ? (
           <Label>
             <Icon name='graduation cap' size='big'/> Education
           </Label>
+          {interests.map((interest, index) => (
+            <Label size='big' key={`volunteer-profile-interest-${index}`}>
+              {interest.name}
+            </Label>
+          ))}
         </Segment>
       </Grid.Column>
       <Grid.Column>
@@ -84,7 +91,8 @@ const VolunteerProfile = ({ event, ready }) => ((ready) ? (
 ) : <Loader active>Getting data</Loader>);
 
 VolunteerProfile.propTypes = {
-  volunteers: PropTypes.array.isRequired,
+  volunteer: PropTypes.object,
+  interests: PropTypes.array,
   event: PropTypes.object,
   ready: PropTypes.bool.isRequired,
 };
@@ -92,15 +100,28 @@ VolunteerProfile.propTypes = {
 export default withTracker(() => {
   // volunteers.map((volunteer) => <VolunteerCard key={volunteer._id} volunteer={volunteer}
   // Get access to volunteer documents.
-  const subscription = VolunteerProfiles.subscribe();
+  const subscription = VolunteerProfiles.subscribeVolProfile();
   const subscription2 = Events.subscribe();
+  const subscription3 = VolunteerInterest.subscribe();
+  const subscription4 = Interests.subscribe();
   // Determine if the subscription is ready
-  const ready = subscription.ready() && subscription2.ready();
+  const ready = subscription.ready() && subscription2.ready() && subscription3.ready() && subscription4.ready();
   // Get the volunteer documents and sort them by name.
   const event = Events.find({}, { sort: { name: 1 } }).fetch()[0];
-  const volunteers = VolunteerProfiles.find({}, { sort: { name: 1 } }).fetch();
+  // get profile
+  const volunteer = VolunteerProfiles.findOne({}, {});
+  // The following is to get volunteer linked interests
+  // get profile ID, getID() don't work
+  const volId = VolunteerProfiles.getIDVerTwo(volunteer);
+  const volInterests = VolunteerInterest.find({ volunteerID: volId }, { name: 1 }).fetch();
+  const interests = [];
+  // eslint-disable-next-line no-unused-expressions
+  (typeof volInterests !== 'undefined') ? (
+    volInterests.map((volInterest) => interests.push(Interests.findDoc({ _id: volInterest.interestID })))) : '';
+  // console.log(interests); At this point, the interests array should have all the interests linked by the volunteers.
   return {
-    volunteers,
+    volunteer,
+    interests,
     event,
     ready,
   };
