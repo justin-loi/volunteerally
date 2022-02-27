@@ -4,6 +4,11 @@ import BaseProfileCollection from '../user/BaseProfileCollection';
 import { ROLE } from '../role/Role';
 import { Volunteers } from './VolunteerCollection';
 
+export const volunteerPublications = {
+  volunteer: 'Volunteer',
+  volunteerAll: 'VolunteerAll',
+};
+
 class VolunteerProfileCollection extends BaseProfileCollection {
   constructor() {
     super('VolunteerProfile', new SimpleSchema({
@@ -130,6 +135,53 @@ class VolunteerProfileCollection extends BaseProfileCollection {
       }
     });
     return problems;
+  }
+
+  /**
+   * Default publication method for entities.
+   * It publishes the entire collection for admin and just the volunteerProfile associated to an owner.
+   */
+  publish() {
+    if (Meteor.isServer) {
+      const instance = this;
+      /** This subscription publishes only the documents associated with the logged in user */
+      Meteor.publish(volunteerPublications.volunteer, function publish() {
+        if (this.userId) {
+          return instance._collection.find({ userID: this.userId });
+        }
+        return this.ready();
+      });
+
+      /** This subscription publishes all documents regardless of user, but only if the logged in user is the Admin. */
+      Meteor.publish(volunteerPublications.volunteerAll, function publish() {
+        // add role use if (this.userId && Roles.userIsInRole(this.userId, ROLE.ADMIN)) {
+        if (this.userId) {
+          return instance._collection.find();
+        }
+        return this.ready();
+      });
+    }
+  }
+
+  /**
+   * Subscription method for volunteer profile by the current user.
+   */
+  subscribeCurrVolProfile() {
+    if (Meteor.isClient) {
+      return Meteor.subscribe(volunteerPublications.volunteer);
+    }
+    return null;
+  }
+
+  /**
+   * Subscription method for subscribing all profile
+   * It subscribes to the entire collection.
+   */
+  subscribe() {
+    if (Meteor.isClient) {
+      return Meteor.subscribe(volunteerPublications.volunteerAll);
+    }
+    return null;
   }
 
   /**
