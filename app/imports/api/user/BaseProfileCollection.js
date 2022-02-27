@@ -44,7 +44,7 @@ class BaseProfileCollection extends BaseCollection {
    * If instance is the value for the username field in this collection, then return that document's ID.
    * If instance is the userID for the profile, then return the Profile's ID.
    * If instance is an object with an _id field, then that value is checked to see if it's in the collection.
-   * @param {String} instance Either a valid docID, valid userID or a valid slug string.
+   * @param { String } instance Either a valid docID, valid userID or a valid slug string.
    * @returns { String } The docID associated with instance.
    * @throws { Meteor.Error } If instance is not a docID or a slug.
    */

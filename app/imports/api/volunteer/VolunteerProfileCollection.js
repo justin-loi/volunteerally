@@ -166,7 +166,7 @@ class VolunteerProfileCollection extends BaseProfileCollection {
   /**
    * Subscription method for volunteer profile by the current user.
    */
-  subscribeVolProfile() {
+  subscribeCurrVolProfile() {
     if (Meteor.isClient) {
       return Meteor.subscribe(volunteerPublications.volunteer);
     }

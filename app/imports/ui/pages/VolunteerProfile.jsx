@@ -100,7 +100,7 @@ VolunteerProfile.propTypes = {
 export default withTracker(() => {
   // volunteers.map((volunteer) => <VolunteerCard key={volunteer._id} volunteer={volunteer}
   // Get access to volunteer documents.
-  const subscription = VolunteerProfiles.subscribeVolProfile();
+  const subscription = VolunteerProfiles.subscribeCurrVolProfile();
   const subscription2 = Events.subscribe();
   const subscription3 = VolunteerInterest.subscribe();
   const subscription4 = Interests.subscribe();
@@ -116,7 +116,7 @@ export default withTracker(() => {
   const volInterests = VolunteerInterest.find({ volunteerID: volId }, { name: 1 }).fetch();
   const interests = [];
   // eslint-disable-next-line no-unused-expressions
-  (typeof volInterests !== 'undefined') ? (
+  (typeof volInterests !== 'undefined' && ready) ? ( // ready or subscription4.ready() must be ready, otherwise the first page load will fail
     volInterests.map((volInterest) => interests.push(Interests.findDoc({ _id: volInterest.interestID })))) : '';
   // console.log(interests); At this point, the interests array should have all the interests linked by the volunteers.
   return {
