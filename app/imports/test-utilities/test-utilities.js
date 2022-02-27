@@ -9,6 +9,12 @@ import { Stuffs } from '../api/stuff/StuffCollection';
 import { ROLE } from '../api/role/Role';
 import { AdminProfiles } from '../api/user/AdminProfileCollection';
 import { UserProfiles } from '../api/user/UserProfileCollection';
+import { VolunteerProfiles } from '../api/volunteer/VolunteerProfileCollection';
+import { Interests } from '../api/interest/InterestCollection';
+import { SpecialSkills } from '../api/special_skills/SpecialSkillCollection';
+import { Environmental } from '../api/environmental_preference/EnvironmentalPreferenceCollection';
+import { Availabilities } from '../api/availability/AvailabilityCollection';
+import { OrganizationProfiles } from '../api/organization/OrganizationProfileCollection';
 
 export function withSubscriptions() {
   return new Promise((resolve => {
@@ -16,6 +22,12 @@ export function withSubscriptions() {
     AdminProfiles.subscribe();
     Stuffs.subscribeStuff();
     UserProfiles.subscribe();
+    VolunteerProfiles.subscribe();
+    Interests.subscribe();
+    SpecialSkills.subscribe();
+    Environmental.subscribe();
+    Availabilities.subscribe();
+    OrganizationProfiles.subscribe();
     const poll = Meteor.setInterval(() => {
       if (DDP._allSubscriptionsReady()) {
         Meteor.clearInterval(poll);
@@ -63,6 +75,9 @@ export const defineTestUser = new ValidatedMethod({
   run() {
     // Only do this if in test or test-app.
     if (Meteor.isTest || Meteor.isAppTest) {
+      if (Meteor.isServer) {
+        Accounts.removeDefaultRateLimit();
+      }
       const username = faker.internet.userName();
       const email = faker.internet.email();
       const password = faker.internet.password();
@@ -79,6 +94,69 @@ export const defineTestUser = new ValidatedMethod({
     throw new Meteor.Error('Need to be in test mode to call this method.');
   },
 });
+
+/**
+ * Defines a test organization.
+ * @type {ValidatedMethod}
+ */
+export const defineTestOrg = new ValidatedMethod({
+  name: 'Test.defineOrganization',
+  mixins: [CallPromiseMixin],
+  validate: null,
+  run() {
+    // Only do this if in test or test-app.
+    if (Meteor.isTest || Meteor.isAppTest) {
+      if (Meteor.isServer) {
+        Accounts.removeDefaultRateLimit();
+      }
+      const username = faker.internet.userName();
+      const email = faker.internet.email();
+      const password = faker.internet.password();
+      // console.log('defineTestUser', username, password);
+      const users = Accounts.createUser({
+        username,
+        email,
+        password,
+      });
+      Roles.createRole(ROLE.ORGANIZATION, { unlessExists: true });
+      Roles.addUsersToRoles([users], [ROLE.ORGANIZATION]);
+      return { username, email, password };
+    }
+    throw new Meteor.Error('Need to be in test mode to call this method.');
+  },
+});
+
+/**
+ * Defines a test volunteer.
+ * @type {ValidatedMethod}
+ */
+export const defineTestVolunteer = new ValidatedMethod({
+  name: 'Test.defineVolunteer',
+  mixins: [CallPromiseMixin],
+  validate: null,
+  run() {
+    // Only do this if in test or test-app.
+    if (Meteor.isTest || Meteor.isAppTest) {
+      if (Meteor.isServer) {
+        Accounts.removeDefaultRateLimit();
+      }
+      const username = faker.internet.userName();
+      const email = faker.internet.email();
+      const password = faker.internet.password();
+      // console.log('defineTestUser', username, password);
+      const users = Accounts.createUser({
+        username,
+        email,
+        password,
+      });
+      Roles.createRole(ROLE.VOLUNTEER, { unlessExists: true });
+      Roles.addUsersToRoles([users], [ROLE.VOLUNTEER]);
+      return { username, email, password };
+    }
+    throw new Meteor.Error('Need to be in test mode to call this method.');
+  },
+});
+
 /**
  * Returns a Promise that resolves if one can successfully login with the passed credentials.
  * Credentials default to the standard admin username and password.

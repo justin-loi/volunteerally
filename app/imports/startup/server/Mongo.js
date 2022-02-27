@@ -6,6 +6,11 @@ import { Interests } from '../../api/interest/InterestCollection';
 import { SpecialSkills } from '../../api/special_skills/SpecialSkillCollection';
 import { Environmental } from '../../api/environmental_preference/EnvironmentalPreferenceCollection';
 import { Availabilities } from '../../api/availability/AvailabilityCollection';
+import { VolunteerProfiles } from '../../api/volunteer/VolunteerProfileCollection';
+import { VolunteerInterest } from '../../api/interest/VolunteerInterestCollection';
+import { VolunteerSkill } from '../../api/special_skills/VolunteerSkillCollection';
+import { VolunteerEnvironmental } from '../../api/environmental_preference/VolunteerEnvironmentalCollection';
+import { VolunteerAvailability } from '../../api/availability/VolunteerAvailabilityCollection';
 /* eslint-disable no-console */
 
 // Initialize the database with a default data document.
@@ -92,4 +97,52 @@ if (Availabilities.count() === 0) {
     console.log('Creating default Availabilities.');
     Meteor.settings.defaultAvailabilities.map(data => addAvailabilities(data));
   }
+}
+
+if (VolunteerInterest.count() === 0) {
+  console.log('Creating default VolunteerInterest collection.');
+  const volunteerArray = VolunteerProfiles.find({}, {}).fetch();
+  const interestsArray = Interests.find({}, {}).fetch();
+  let length = volunteerArray.length;
+  if (length > interestsArray.length) {
+    length = interestsArray.length;
+  }
+  interestsArray.map((interest, index) => (VolunteerInterest.define({
+    volunteerID: volunteerArray[(index % length)]._id, interestID: interest._id })));
+}
+
+if (VolunteerSkill.count() === 0) {
+  console.log('Creating default VolunteerSkill collection.');
+  const volunteerArray = VolunteerProfiles.find({}, {}).fetch();
+  const skillsArray = SpecialSkills.find({}, {}).fetch();
+  let length = volunteerArray.length;
+  if (length > skillsArray.length) {
+    length = skillsArray.length;
+  }
+  skillsArray.map((skill, index) => (VolunteerSkill.define({
+    volunteerID: volunteerArray[(index % length)]._id, skillID: skill._id })));
+}
+
+if (VolunteerEnvironmental.count() === 0) {
+  console.log('Creating default VolunteerEnvironmental collection.');
+  const volunteerArray = VolunteerProfiles.find({}, {}).fetch();
+  const environmentalArray = Environmental.find({}, {}).fetch();
+  let length = volunteerArray.length;
+  if (length > environmentalArray.length) {
+    length = environmentalArray.length;
+  }
+  volunteerArray.map((volunteer, index) => (VolunteerEnvironmental.define({
+    volunteerID: volunteer._id, environmentalID: environmentalArray[(index % length)]._id })));
+}
+
+if (VolunteerAvailability.count() === 0) {
+  console.log('Creating default VolunteerAvailability collection.');
+  const volunteerArray = VolunteerProfiles.find({}, {}).fetch();
+  const availabilitiesArray = Availabilities.find({}, {}).fetch();
+  let length = volunteerArray.length;
+  if (length > availabilitiesArray.length) {
+    length = availabilitiesArray.length;
+  }
+  availabilitiesArray.map((availability, index) => (VolunteerAvailability.define({
+    volunteerID: volunteerArray[(index % length)]._id, availabilityID: availability._id })));
 }

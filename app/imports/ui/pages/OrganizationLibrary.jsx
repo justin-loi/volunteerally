@@ -5,9 +5,7 @@ import { withRouter } from 'react-router-dom';
 import { withTracker } from 'meteor/react-meteor-data';
 import PropTypes from 'prop-types';
 import { PAGE_IDS } from '../utilities/PageIDs';
-// import { COMPONENT_IDS } from '../utilities/ComponentIDs';
 import OrganizationCard from '../components/OrganizationCard';
-import { Events } from '../../api/event/EventCollection';
 import { OrganizationProfiles } from '../../api/organization/OrganizationProfileCollection';
 
 /** The Footer appears at the bottom of every page. Rendered by the App Layout component. */
