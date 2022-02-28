@@ -8,11 +8,11 @@
   "defaultVolunteers": [
     { "email": "tom@foo.com", "password": "changeme", "role": "VOLUNTEER", "firstName": "tom", "lastName": "tom",
       "username": "tom", "gender": "Male", "dob": "12/31/2000",
-      "address": "2500 Campus Rd", "city": "Honolulu", "state": "Hawaii", "code": "96822"
+      "address": "2500 Campus Rd", "city": "Honolulu", "state": "Hawaii", "code": "96822", "phoneNumber": "808-123-1234"
     },
     { "email": "jerry@foo.com", "password": "changeme", "role": "VOLUNTEER" , "firstName": "jerry", "lastName": "jerry",
       "username": "jerry", "gender": "Male", "dob": "12/31/2000",
-      "address": "2500 Campus Rd", "city": "Honolulu", "state": "Hawaii", "code": "96822"
+      "address": "2500 Campus Rd", "city": "Honolulu", "state": "Hawaii", "code": "96822", "phoneNumber": "808-123-1234"
     }
   ],
 
