@@ -9,7 +9,7 @@ import { NavLink, withRouter } from 'react-router-dom';
 /** Renders a single organization card. */
 const OrganizationCard = ({ organization }) => (
   <Card as={NavLink} exact to={'/'}>
-    <Image src='images/event_card_default_picture.png' wrapped ui={false}/>
+    <Image src='images/event_card_default_image.png' wrapped ui={false}/>
     <Card.Content>
       <Card.Header>Organization 1</Card.Header>
       <Card.Meta>
