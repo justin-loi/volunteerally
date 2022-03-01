@@ -75,6 +75,28 @@ class BaseProfileCollection extends BaseCollection {
   }
 
   /**
+   * Returns the Profile's docID associated with instance, or throws an error if it cannot be found.
+   * @param {Mongo.Cursor} instance Either a valid docID, valid userID or a valid slug string.
+   * @returns { String } The docID associated with instance.
+   * @throws { Meteor.Error } If instance is not a docID or a slug.
+   */
+  getIDVerTwo(instance) {
+    let id;
+    // If we've been passed a document, check to see if it has an _id field and use that if available.
+    if (_.isObject(instance) && _.has(instance, '_id')) {
+      // @ts-ignore
+      return instance._id; // eslint-disable-line no-param-reassign, dot-notation
+    }
+    // Otherwise see if we can find instance as a docID.
+    try {
+      id = (this._collection.findOne({ _id: instance }));
+    } catch (err) {
+      throw new Meteor.Error(`Error in ${this._collectionName} getID(): Failed to convert ${instance} to an ID.`);
+    }
+    return id;
+  }
+
+  /**
    * Returns the profile associated with the specified user.
    * @param user The user (either their username (email) or their userID).
    * @return The profile document.
