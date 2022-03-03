@@ -25,7 +25,7 @@ export const COMPONENT_IDS = {
   SIGN_UP_FORM_SUBMIT: 'sign-up-form-submit',
   VOLUNTEER_SIGNUP_FORM_FIRST: 'volunteer-signup-form-first',
   VOLUNTEER_SIGNUP_FORM_LAST: 'volunteer-signup-form-last',
-  VOLUNTEER_SIGNUP_FORM_BIRTH: 'volunteer-signup-form-brith',
+  VOLUNTEER_SIGNUP_FORM_BIRTH: 'volunteer-signup-form-birth',
   VOLUNTEER_SIGNUP_FORM_ADDRESS: 'volunteer-signup-form-address',
   VOLUNTEER_SIGNUP_FORM_CITY: 'volunteer-signup-form-city',
   VOLUNTEER_SIGNUP_FORM_STATE: 'volunteer-signup-form-state',
