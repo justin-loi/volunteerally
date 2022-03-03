@@ -3,23 +3,23 @@ import { check } from 'meteor/check';
 import BaseCollection from '../base/BaseCollection';
 import { ROLE } from '../role/Role';
 
-class VolunteerEventCollection extends BaseCollection {
+class OrganizationEventCollection extends BaseCollection {
   constructor() {
-    super('VolunteerEvent', new SimpleSchema({
-      volunteerID: SimpleSchema.RegEx.Id,
+    super('OrganizationEvent', new SimpleSchema({
+      organizationID: SimpleSchema.RegEx.Id,
       eventID: SimpleSchema.RegEx.Id,
     }));
   }
 
   /**
    * Define a link between a volunteer and an event based on their ID.
-   * @param volunteerID the volunteer ID
+   * @param organizationID the organization ID
    * @param eventID the event ID
    * @return {String} the docID of the new document.
    */
-  define({ volunteerID, eventID }) {
+  define({ organizationID, eventID }) {
     const docID = this._collection.insert({
-      volunteerID,
+      organizationID,
       eventID,
     });
     return docID;
@@ -28,13 +28,13 @@ class VolunteerEventCollection extends BaseCollection {
   /**
    * Updates the given document.
    * @param docID the id of the document to update.
-   * @param volunteerID the volunteer ID (optional)
+   * @param organizationID the organization ID (optional)
    * @param eventID the event ID (optional)
    */
-  update(docID, { volunteerID, eventID }) {
+  update(docID, { organizationID, eventID }) {
     const updateData = {};
-    if (volunteerID) {
-      updateData.volunteerID = volunteerID;
+    if (organizationID) {
+      updateData.volunteerID = organizationID;
     }
     if (eventID) {
       updateData.eventID = eventID;
@@ -67,7 +67,7 @@ class VolunteerEventCollection extends BaseCollection {
   /**
    * Returns an object representing the definition of docID in a format appropriate to the restoreOne or define function.
    * @param docID
-   * @return {{ eventID, volunteerIDInterestCollection.js }}
+   * @return {{ eventID, organizationIDInterestCollection.js }}
    */
   dumpOne(docID) {
     const doc = this.findDoc(docID);
@@ -80,4 +80,4 @@ class VolunteerEventCollection extends BaseCollection {
 /**
  * Provides the singleton instance of this class to all other entities.
  */
-export const VolunteerEvent = new VolunteerEventCollection();
+export const OrganizationEvent = new OrganizationEventCollection();
