@@ -126,6 +126,13 @@
    {"name": "Weekdays only"}
  ],
 
+  "defaultIndustries": [
+    {"name": "Animal Welfare/Rescue"}, {"name": "Child/Family Support"}, {"name": "COVID-19 Recovery"},
+    {"name": "Crisis/Disaster Relief"}, {"name": "Education"}, {"name": "Environment"},
+    {"name": "Elderly/Senior Care"}, {"name": "Food Banks"}, {"name": "Housing"},
+    {"name": "Homelessness/Poverty"}, {"name": "Special Needs"}
+  ],
+
   "defaultData": [
     { "name": "Basket", "quantity": 3, "owner": "john@foo.com", "condition": "excellent" },
     { "name": "Bicycle", "quantity": 2, "owner": "john@foo.com", "condition": "poor" },
