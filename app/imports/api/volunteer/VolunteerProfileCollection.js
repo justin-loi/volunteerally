@@ -184,6 +184,11 @@ class VolunteerProfileCollection extends BaseProfileCollection {
     return null;
   }
 
+  dumpUserId(docID) {
+    const doc = this.findDoc(docID);
+    return doc.userID;
+  }
+
   /**
    * Returns an object representing the UserProfile docID in a format acceptable to define().
    * @param docID The docID of a UserProfile
