@@ -11,6 +11,10 @@ import { VolunteerInterest } from '../../api/interest/VolunteerInterestCollectio
 import { VolunteerSkill } from '../../api/special_skills/VolunteerSkillCollection';
 import { VolunteerEnvironmental } from '../../api/environmental_preference/VolunteerEnvironmentalCollection';
 import { VolunteerAvailability } from '../../api/availability/VolunteerAvailabilityCollection';
+import { VolunteerEvent } from '../../api/event/VolunteerEventCollection';
+import { OrganizationEvent } from '../../api/event/OrganizationEventCollection';
+import { Hours } from '../../api/hours/HoursCollection';
+import { VolunteerEventHours } from '../../api/hours/VolunteerEventHours';
 /* eslint-disable no-console */
 
 // Initialize the database with a default data document.
@@ -145,4 +149,39 @@ if (VolunteerAvailability.count() === 0) {
   }
   availabilitiesArray.map((availability, index) => (VolunteerAvailability.define({
     volunteerID: volunteerArray[(index % length)].userID, availabilityID: availability._id })));
+}
+
+if (VolunteerEvent.count() === 0) {
+  console.log('Creating default VolunteerEvent collection.');
+  const volunteerArray = VolunteerProfiles.find({}, {}).fetch();
+  const eventsArray = Events.find({}, {}).fetch();
+  let length = volunteerArray.length;
+  if (length > eventsArray.length) {
+    length = eventsArray.length;
+  }
+  eventsArray.map((event, index) => (VolunteerEvent.define({
+    volunteerID: volunteerArray[(index % length)].userID, eventID: event._id })));
+}
+
+if (VolunteerEventHours.count() === 0) {
+  console.log('Creating default VolunteerEventHours and Hours collection.');
+  const volunteerArray = VolunteerProfiles.find({}, {}).fetch();
+  volunteerArray.map((volunteer) => (VolunteerEventHours.define({
+    volunteerID: volunteer.userID, hoursID: Hours.define({ total: Math.floor(Math.random() * 10) + 1 }) })));
+}
+
+if (OrganizationEvent.count() === 0) {
+  console.log('Creating default OrgEvent collection.');
+  const organizationArray = OrganizationProfiles.find({}, {}).fetch();
+  const eventsArray = Events.find({}, {}).fetch();
+  let length = organizationArray.length;
+  if (length > eventsArray.length) {
+    length = eventsArray.length;
+  }
+  // console.log(organizationArray.findIndex((organization) => organization.organizationName === eventsArray[0].orgName));
+  // console.log(organizationArray[(organizationArray.findIndex((organization) => organization.organizationName === eventsArray[0].orgName))].userID);
+  const orgIndex = [];
+  eventsArray.map((event) => orgIndex.push(organizationArray.findIndex((organization) => organization.email === event.owner)));
+  eventsArray.map((event, index) => (OrganizationEvent.define({
+    organizationID: organizationArray[orgIndex[index]].userID, eventID: event._id })));
 }
