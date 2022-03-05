@@ -5,10 +5,11 @@ import { withTracker } from 'meteor/react-meteor-data';
 import { NavLink } from 'react-router-dom';
 import { PAGE_IDS } from '../utilities/PageIDs';
 import { VolunteerProfiles } from '../../api/volunteer/VolunteerProfileCollection';
+import VolunteerCard from '../../ui/components/volunteerProfile/VolunteerCard';
 import { Events } from '../../api/event/EventCollection';
 
 /** Renders the Page for adding a document. */
-const VolunteerProfile = ({ event, ready }) => ((ready) ? (
+const VolunteerProfile = ({ volunteers, event, ready }) => ((ready) ? (
   <Grid id={PAGE_IDS.VOLUNTEER_PROFILE} container centered>
     <Grid.Row>
       <Image src='/images/volunteer_profile_banner.png' size='big' />
@@ -22,7 +23,7 @@ const VolunteerProfile = ({ event, ready }) => ((ready) ? (
     <Grid.Row columns={2}>
       <Grid.Column>
         <Label color='teal' size='massive' ribbon>
-          Tom Jerry
+          <div> {volunteers.map((prof) => <VolunteerCard key={prof._id} volunteer={prof}/>)} </div>
         </Label>
         <Image src='images/profile.png' size='medium' circular centered />
         <Divider/>
@@ -92,7 +93,7 @@ VolunteerProfile.propTypes = {
 export default withTracker(() => {
   // volunteers.map((volunteer) => <VolunteerCard key={volunteer._id} volunteer={volunteer}
   // Get access to volunteer documents.
-  const subscription = VolunteerProfiles.subscribe();
+  const subscription = VolunteerProfiles.subscribeCurrVolProfile();
   const subscription2 = Events.subscribe();
   // Determine if the subscription is ready
   const ready = subscription.ready() && subscription2.ready();

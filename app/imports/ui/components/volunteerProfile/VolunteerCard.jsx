@@ -1,23 +1,20 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Grid, Image } from 'semantic-ui-react';
+import { Grid, Header } from 'semantic-ui-react';
 
 console.log('you have reached here');
 
-const volunteerCard = () => (
+const VolunteerCard = (volunteer) => (
   <div>
     <Grid.Row columns={2}>
       <Grid.Column>
-        <Image src='images/profile.png' size='medium' circular />
-      </Grid.Column>
-      <Grid.Column>
-        <Image src='https://react.semantic-ui.com/images/wireframe/paragraph.png' />
+        <Header as='h1'>{volunteer.firstName}</Header>
       </Grid.Column>
     </Grid.Row>
   </div>
 );
 
-volunteerCard.propTypes = {
+VolunteerCard.propTypes = {
   volunteer: PropTypes.shape({
     firstName: PropTypes.string,
     lastName: PropTypes.string,
@@ -27,4 +24,4 @@ volunteerCard.propTypes = {
   }),
 };
 
-export default volunteerCard;
+export default VolunteerCard;
