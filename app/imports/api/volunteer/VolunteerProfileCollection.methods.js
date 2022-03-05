@@ -13,8 +13,9 @@ export const signUpNewVolunteerMethod = new ValidatedMethod({
   validate: null,
   run({ email, firstName, lastName, password, username, gender, dob, address, city, state, code, phoneNumber, interests, skills, environmental, availabilities }) {
     if (Meteor.isServer) {
-      const volunteerID = VolunteerProfiles.define({
+      const profileId = VolunteerProfiles.define({
         email, firstName, lastName, password, username, gender, dob, address, city, state, code, phoneNumber });
+      const volunteerID = VolunteerProfiles.dumpUserId(profileId);
       // eslint-disable-next-line no-unused-expressions
       interests.map((interestID) => (VolunteerInterest.define({ volunteerID, interestID })));
       skills.map((skillID) => (VolunteerSkill.define({ volunteerID, skillID })));

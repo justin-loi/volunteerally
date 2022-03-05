@@ -7,9 +7,22 @@ import { PAGE_IDS } from '../utilities/PageIDs';
 import { VolunteerProfiles } from '../../api/volunteer/VolunteerProfileCollection';
 import VolunteerCard from '../../ui/components/volunteerProfile/VolunteerCard';
 import { Events } from '../../api/event/EventCollection';
+import { Interests } from '../../api/interest/InterestCollection';
+import { VolunteerInterest } from '../../api/interest/VolunteerInterestCollection';
+import { Availabilities } from '../../api/availability/AvailabilityCollection';
+import { VolunteerAvailability } from '../../api/availability/VolunteerAvailabilityCollection';
+import { SpecialSkills } from '../../api/special_skills/SpecialSkillCollection';
+import { VolunteerSkill } from '../../api/special_skills/VolunteerSkillCollection';
+import { Environmental } from '../../api/environmental_preference/EnvironmentalPreferenceCollection';
+import { VolunteerEnvironmental } from '../../api/environmental_preference/VolunteerEnvironmentalCollection';
+
+const capitalizeFirstLetter = (string) => string.charAt(0).toUpperCase() + string.slice(1);
+const interestsStyle = {
+  marginTop: '8px',
+};
 
 /** Renders the Page for adding a document. */
-const VolunteerProfile = ({ volunteers, event, ready }) => ((ready) ? (
+const VolunteerProfile = ({ volunteer, event, interests, ready }) => ((ready) ? (
   <Grid id={PAGE_IDS.VOLUNTEER_PROFILE} container centered>
     <Grid.Row>
       <Image src='/images/volunteer_profile_banner.png' size='big' />
@@ -23,7 +36,7 @@ const VolunteerProfile = ({ volunteers, event, ready }) => ((ready) ? (
     <Grid.Row columns={2}>
       <Grid.Column>
         <Label color='teal' size='massive' ribbon>
-          <div> {volunteers.map((prof) => <VolunteerCard key={prof._id} volunteer={prof}/>)} </div>
+          {`${(capitalizeFirstLetter(volunteer.firstName))} ${(capitalizeFirstLetter(volunteer.lastName))}`}
         </Label>
         <Image src='images/profile.png' size='medium' circular centered />
         <Divider/>
@@ -40,6 +53,10 @@ const VolunteerProfile = ({ volunteers, event, ready }) => ((ready) ? (
           <Label>
             <Icon name='graduation cap' size='big'/> Education
           </Label>
+          {interests.map((interest, index) => (
+            <Label style={interestsStyle} key={`vol-profile-interest-${index}`}>
+              {interest.name}
+            </Label>))}
         </Segment>
       </Grid.Column>
       <Grid.Column>
@@ -85,8 +102,12 @@ const VolunteerProfile = ({ volunteers, event, ready }) => ((ready) ? (
 ) : <Loader active>Getting data</Loader>);
 
 VolunteerProfile.propTypes = {
-  volunteers: PropTypes.array.isRequired,
+  volunteer: PropTypes.object,
   event: PropTypes.object,
+  interests: PropTypes.array,
+  skills: PropTypes.array,
+  envPerfer: PropTypes.object,
+  availabilities: PropTypes.array,
   ready: PropTypes.bool.isRequired,
 };
 
@@ -95,14 +116,45 @@ export default withTracker(() => {
   // Get access to volunteer documents.
   const subscription = VolunteerProfiles.subscribeCurrVolProfile();
   const subscription2 = Events.subscribe();
+  const subscription3 = Interests.subscribe();
+  const subscription4 = VolunteerInterest.subscribeCurr();
+  const subscription5 = SpecialSkills.subscribe();
+  const subscription6 = VolunteerSkill.subscribeCurr();
+  const subscription7 = Environmental.subscribe();
+  const subscription8 = VolunteerEnvironmental.subscribeCurr();
+  const subscription9 = Availabilities.subscribe();
+  const subscription10 = VolunteerAvailability.subscribeCurr();
   // Determine if the subscription is ready
-  const ready = subscription.ready() && subscription2.ready();
+  const ready = subscription.ready() && subscription2.ready() && subscription3.ready() && subscription4.ready()
+      && subscription5.ready() && subscription6.ready() && subscription7.ready() && subscription8.ready() && subscription9.ready()
+      && subscription10.ready();
   // Get the volunteer documents and sort them by name.
   const event = Events.find({}, { sort: { name: 1 } }).fetch()[0];
-  const volunteers = VolunteerProfiles.find({}, { sort: { name: 1 } }).fetch();
+  const volunteer = VolunteerProfiles.findOne({}, {});
+  const volInterests = VolunteerInterest.find({}, {}).fetch();
+  const interests = [];
+  // eslint-disable-next-line no-unused-expressions
+  (typeof volInterests !== 'undefined' && ready) ? (
+    volInterests.map((volInterest) => interests.push(Interests.findDoc({ _id: volInterest.interestID })))) : '';
+  const volSkills = VolunteerSkill.find({}, {}).fetch();
+  const skills = [];
+  // eslint-disable-next-line no-unused-expressions
+  (typeof volSkills !== 'undefined' && ready) ? (
+    volSkills.map((volSkill) => skills.push(SpecialSkills.findDoc({ _id: volSkill.skillID })))) : '';
+  const volEnvPrefers = VolunteerEnvironmental.find({}, {}).fetch()[0];
+  const envPerfer = (typeof volEnvPrefers !== 'undefined' && ready) ? (Environmental.findDoc({ _id: volEnvPrefers.environmentalID })) : {};
+  const volAvailabilities = VolunteerAvailability.find({}, {}).fetch();
+  const availabilities = [];
+  // eslint-disable-next-line no-unused-expressions
+  (typeof volAvailabilities !== 'undefined' && ready) ? (
+    volAvailabilities.map((volAvailability) => availabilities.push(Availabilities.findDoc({ _id: volAvailability.availabilityID })))) : '';
   return {
-    volunteers,
+    volunteer,
     event,
     ready,
+    interests,
+    skills,
+    envPerfer,
+    availabilities,
   };
 })(VolunteerProfile);

@@ -108,7 +108,7 @@ if (VolunteerInterest.count() === 0) {
     length = interestsArray.length;
   }
   interestsArray.map((interest, index) => (VolunteerInterest.define({
-    volunteerID: volunteerArray[(index % length)]._id, interestID: interest._id })));
+    volunteerID: volunteerArray[(index % length)].userID, interestID: interest._id })));
 }
 
 if (VolunteerSkill.count() === 0) {
@@ -120,7 +120,7 @@ if (VolunteerSkill.count() === 0) {
     length = skillsArray.length;
   }
   skillsArray.map((skill, index) => (VolunteerSkill.define({
-    volunteerID: volunteerArray[(index % length)]._id, skillID: skill._id })));
+    volunteerID: volunteerArray[(index % length)].userID, skillID: skill._id })));
 }
 
 if (VolunteerEnvironmental.count() === 0) {
@@ -132,7 +132,7 @@ if (VolunteerEnvironmental.count() === 0) {
     length = environmentalArray.length;
   }
   volunteerArray.map((volunteer, index) => (VolunteerEnvironmental.define({
-    volunteerID: volunteer._id, environmentalID: environmentalArray[(index % length)]._id })));
+    volunteerID: volunteer.userID, environmentalID: environmentalArray[(index % length)]._id })));
 }
 
 if (VolunteerAvailability.count() === 0) {
@@ -144,5 +144,5 @@ if (VolunteerAvailability.count() === 0) {
     length = availabilitiesArray.length;
   }
   availabilitiesArray.map((availability, index) => (VolunteerAvailability.define({
-    volunteerID: volunteerArray[(index % length)]._id, availabilityID: availability._id })));
+    volunteerID: volunteerArray[(index % length)].userID, availabilityID: availability._id })));
 }
