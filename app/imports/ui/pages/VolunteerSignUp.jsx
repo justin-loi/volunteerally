@@ -87,6 +87,15 @@ const VolunteerSignUp = ({ location, ready, interestsArray, skillsArray, environ
     setIsValueEmpty(isValueEmpty);
   };
 
+  // phone number error check, not working yet
+  // const phoneNumberLimit = (phoneNumber) => {
+  //   if(phoneNumber.length() > 10) {
+  //     swal('Error!', 'Phone number should only be 10 digit long', 'error');
+  //     return false;
+  //   }
+  //   return true;
+  // }
+
   // reference: https://stackoverflow.com/questions/6177975/how-to-validate-date-with-format-mm-dd-yyyy-in-javascript
   // Validates that the input string is a valid date formatted as "mm/dd/yyyy"
   const isValidDate = (dateString) => {

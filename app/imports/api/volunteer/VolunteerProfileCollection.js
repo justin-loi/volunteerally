@@ -64,7 +64,7 @@ class VolunteerProfileCollection extends BaseProfileCollection {
    * @param city new city (optional)
    * @param state new state (optional)
    * @param code new code (optional)
-   * @param phoneNumber new phone nubmer (optional)
+   * @param phoneNumber new phone number (optional)
    */
   update(docID, { firstName, lastName, gender, dob, address, city, state, code, phoneNumber }) {
     this.assertDefined(docID);
