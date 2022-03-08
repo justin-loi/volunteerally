@@ -1,7 +1,8 @@
 import React from 'react';
-import { Card, Image } from 'semantic-ui-react';
+import { Card, Image, Button} from 'semantic-ui-react';
 import PropTypes from 'prop-types';
-import { NavLink, withRouter } from 'react-router-dom';
+import { Link, NavLink, withRouter } from 'react-router-dom';
+import { COMPONENT_IDS } from '../utilities/ComponentIDs';
 
 /* Renders a single event card. */
 const EventCard = ({ event }) => (
@@ -26,6 +27,18 @@ const EventCard = ({ event }) => (
         {event.categories}
       </p>
     </Card.Content>
+    <Card.Meta>
+      <Button content='Like' icon={{ color: 'red', name: 'like' }} />
+      {/* 💡 you can also add handlers and any DOM props to shorthands */}
+      <Input
+        action={{
+          icon: 'search',
+          onClick: () => console.log('An action was clicked!'),
+        }}
+        actionPosition='left'
+        placeholder='Search...'
+      />
+    </Card.Meta>
   </Card>
 );
 
