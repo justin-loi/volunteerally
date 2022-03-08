@@ -32,6 +32,7 @@ const VolunteerProfile = ({ volunteer, event, interests, totalHours, volEventsCo
       <Image src='/images/volunteer_profile_banner.png' size='big' />
     </Grid.Row>
     <Grid.Row >
+      <Button as={NavLink} exact to={`/edit-volunteer-profile/${volunteer._id}`}>Edit Profile</Button>
       <Button>Settings</Button>
       <Button>Preferences</Button>
       <Button>Log Volunteer Hours</Button>

@@ -37,7 +37,7 @@ const NavBar = ({ currentUser }) => {
         {Roles.userIsInRole(Meteor.userId(), [ROLE.ORGANIZATION]) ? (
           <Menu.Item id={COMPONENT_IDS.NAVBAR_ADD_EVENT} as={NavLink} activeClassName="active" exact to="/add" key='add_event'>Add Event</Menu.Item>
         ) : ''}
-        <Menu.Item id={COMPONENT_IDS.NAVBAR_BROWSE_OPPORTUNITY} as={NavLink} activeClassName="active" exact to="/browse_opportunities" key='browse_opportunity'>Browse Opportunity</Menu.Item>
+        <Menu.Item id={COMPONENT_IDS.NAVBAR_BROWSE_OPPORTUNITY} as={NavLink} activeClassName="active" exact to="/browse_opportunities" key='browse_opportunity'>Browse Opportunities</Menu.Item>
         <Menu.Item id={COMPONENT_IDS.NAVBAR_ORGANIZATION_LIBRARY} as={NavLink} activeClassName="active" exact to="/find_volunteers" key='organization_library'>Organization Library</Menu.Item>
         <Menu.Item id={COMPONENT_IDS.NAVBAR_ABOUT_US} as={NavLink} activeClassName="active" exact to="/about_us" key='about_us'>About Us</Menu.Item>
         {currentUser === '' ? ([
