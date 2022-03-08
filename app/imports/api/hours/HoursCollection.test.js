@@ -20,8 +20,8 @@ if (Meteor.isServer) {
 
     it('Can define and removeIt', function test1(done) {
       fc.assert(
-        fc.property(fc.integer(8), (newQuantity) => {
-          const docID = Hours.define({ newQuantity });
+        fc.property(fc.integer(0, 8), (hours) => {
+          const docID = Hours.define({ total: hours });
           expect(Hours.isDefined(docID)).to.be.true;
           Hours.removeIt(docID);
           expect(Hours.isDefined(docID)).to.be.false;
@@ -39,14 +39,15 @@ if (Meteor.isServer) {
 
     it('Can update', function test3(done) {
       const total = faker.datatype.number({ min: 1, max: 5 });
-      const docID = Hours.define({ total });
-      // console.log(Stuffs.findDoc(docID));
+      const docID = Hours.define({ total: total });
+      // console.log(Hours.findDoc(docID));
       fc.assert(
-        fc.property(fc.integer(8), (newQuantity) => {
-          Hours.update(docID, { name: newQuantity });
-          const hours = Hours.findDoc(docID);
-          expect(hours.total).to.equal(newQuantity);
-        }),
+        fc.property(fc.integer(10),
+          (newTotal) => {
+            Hours.update(docID, { total: newTotal });
+            const hoursDoc = Hours.findDoc(docID);
+            expect(hoursDoc.total).to.equal(newTotal);
+          }),
       );
       done();
     });

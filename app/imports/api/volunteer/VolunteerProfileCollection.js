@@ -197,6 +197,7 @@ class VolunteerProfileCollection extends BaseProfileCollection {
   dumpOne(docID) {
     const doc = this.findDoc(docID);
     const email = doc.email;
+    const userID = doc.userID;
     const firstName = doc.firstName;
     const lastName = doc.lastName;
     const gender = doc.gender;
@@ -206,7 +207,7 @@ class VolunteerProfileCollection extends BaseProfileCollection {
     const state = doc.state;
     const code = doc.code;
     const phoneNumber = doc.phoneNumber;
-    return { email, firstName, lastName, gender, dob, address, city, state, code, phoneNumber };
+    return { email, userID, firstName, lastName, gender, dob, address, city, state, code, phoneNumber };
   }
 }
 
