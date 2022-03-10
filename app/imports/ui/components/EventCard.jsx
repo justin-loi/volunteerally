@@ -2,48 +2,51 @@ import React from 'react';
 import { Button, Card, Image } from 'semantic-ui-react';
 import PropTypes from 'prop-types';
 import { NavLink, withRouter } from 'react-router-dom';
+import { Meteor } from 'meteor/meteor';
 import { defineMethod } from '../../api/base/BaseCollection.methods';
 import { VolunteerEvent } from '../../api/event/VolunteerEventCollection';
 
 /* Renders a single event card. */
 const EventCard = ({ event }) => {
-const handleClick = (e) => {
-  e.preventDefault();
-  const vID = Meteor.user().getID();
-  if (vID) {
-    defineMethod.callPromise(VolunteerEvent, vID, event._id)
-  }
-}
-(
-  <Card as={NavLink} exact to={`/details/${event._id}`}>
-    <Image src='images/event_card_default_image.png' wrapped ui={false}/>
-    <Card.Content>
-      <Card.Header> {event.eventName}</Card.Header>
-      <Card.Meta>
-        <span>Date: {event.date}</span>
-        <br/>
-        <span>Time: {event.time}</span>
-        <br/>
-        <span>Location: {event.location}</span>
-        <br/>
-      </Card.Meta>
-      <Card.Description>
-        <p>Placeholder for special skill.</p>
-      </Card.Description>
-    </Card.Content>
-    <Card.Content extra>
-      <p>
-        {event.categories}
-      </p>
-    </Card.Content>
-    <Card.Content>
-      { currentUser ? (<Button onClick={handleClick}>
+  const handleClick = (e) => {
+    e.preventDefault();
+    const vID = Meteor.userId();
+    const defineData = { volunteerID: vID, eventID: event._id};
+    if (vID) {
+      defineMethod.callPromise({ collectionName: VolunteerEvent, defineData });
+    }
+  };
+  return (
+    <Card as={NavLink} exact to={`/details/${event._id}`}>
+      <Image src='images/event_card_default_image.png' wrapped ui={false}/>
+      <Card.Content>
+        <Card.Header> {event.eventName}</Card.Header>
+        <Card.Meta>
+          <span>Date: {event.date}</span>
+          <br/>
+          <span>Time: {event.time}</span>
+          <br/>
+          <span>Location: {event.location}</span>
+          <br/>
+        </Card.Meta>
+        <Card.Description>
+          <p>Placeholder for special skill.</p>
+        </Card.Description>
+      </Card.Content>
+      <Card.Content extra>
+        <p>
+          {event.categories}
+        </p>
+      </Card.Content>
+      <Card.Content>
+        <Button onClick={handleClick}>
         Add Event!
-      </Button>): ' ' }
-    </Card.Content>
+        </Button>
+      </Card.Content>
 
-  </Card>
-);
+    </Card>
+  );
+};
 
 // Require a document to be passed to this component.
 EventCard.propTypes = {
@@ -58,7 +61,7 @@ EventCard.propTypes = {
   }).isRequired,
   volunteer: PropTypes.shape({
     _id: PropTypes.string,
-  }).isRequired,
+  })
 };
 
 export default withRouter(EventCard);
