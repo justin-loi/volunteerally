@@ -1,11 +1,20 @@
 import React from 'react';
-import { Card, Image, Button} from 'semantic-ui-react';
+import { Button, Card, Image } from 'semantic-ui-react';
 import PropTypes from 'prop-types';
-import { Link, NavLink, withRouter } from 'react-router-dom';
-import { COMPONENT_IDS } from '../utilities/ComponentIDs';
+import { NavLink, withRouter } from 'react-router-dom';
+import { defineMethod } from '../../api/base/BaseCollection.methods';
+import { VolunteerEvent } from '../../api/event/VolunteerEventCollection';
 
 /* Renders a single event card. */
-const EventCard = ({ event }) => (
+const EventCard = ({ event }) => {
+const handleClick = (e) => {
+  e.preventDefault();
+  const vID = Meteor.user().getID();
+  if (vID) {
+    defineMethod.callPromise(VolunteerEvent, vID, event._id)
+  }
+}
+(
   <Card as={NavLink} exact to={`/details/${event._id}`}>
     <Image src='images/event_card_default_image.png' wrapped ui={false}/>
     <Card.Content>
@@ -27,18 +36,12 @@ const EventCard = ({ event }) => (
         {event.categories}
       </p>
     </Card.Content>
-    <Card.Meta>
-      <Button content='Like' icon={{ color: 'red', name: 'like' }} />
-      {/* 💡 you can also add handlers and any DOM props to shorthands */}
-      <Input
-        action={{
-          icon: 'search',
-          onClick: () => console.log('An action was clicked!'),
-        }}
-        actionPosition='left'
-        placeholder='Search...'
-      />
-    </Card.Meta>
+    <Card.Content>
+      { currentUser ? (<Button onClick={handleClick}>
+        Add Event!
+      </Button>): ' ' }
+    </Card.Content>
+
   </Card>
 );
 
@@ -51,6 +54,9 @@ EventCard.propTypes = {
     location: PropTypes.string,
     categories: PropTypes.string,
     orgName: PropTypes.string,
+    _id: PropTypes.string,
+  }).isRequired,
+  volunteer: PropTypes.shape({
     _id: PropTypes.string,
   }).isRequired,
 };
