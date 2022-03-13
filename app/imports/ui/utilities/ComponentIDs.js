@@ -64,4 +64,5 @@ export const COMPONENT_IDS = {
   ORGANIZATION_SIGNUP_FORM_HOMELESSNESS_POVERTY: 'organization-signup-form-homelessness-poverty',
   ORGANIZATION_SIGNUP_FORM_SPECIAL_NEEDS: 'organization-signup-form-special-needs',
   VOLUNTEER_PROFILE: 'volunteer-profile',
+  ORGANIZATION_PROFILE: 'organization-profile',
 };
