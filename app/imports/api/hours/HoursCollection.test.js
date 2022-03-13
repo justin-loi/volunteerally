@@ -42,7 +42,7 @@ if (Meteor.isServer) {
       const docID = Hours.define({ total: total });
       // console.log(Hours.findDoc(docID));
       fc.assert(
-        fc.property(fc.integer(10),
+        fc.property(fc.integer(1, 10),
           (newTotal) => {
             Hours.update(docID, { total: newTotal });
             const hoursDoc = Hours.findDoc(docID);

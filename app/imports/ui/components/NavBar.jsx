@@ -12,8 +12,9 @@ import { ROLE } from '../../api/role/Role';
 /** The NavBar appears at the top of every page. Rendered by the App Layout component. */
 const NavBar = ({ currentUser }) => {
   const menuStyle = { marginBottom: '10px', backgroundColor: '#024731', flexShrink: 0 };
+
   return (
-    <Menu style={menuStyle} attached="top" borderless inverted>
+    <Menu id={COMPONENT_IDS.NAVBAR_NAVBAR} style={menuStyle} attached="top" borderless inverted stackable>
       <Menu.Item id={COMPONENT_IDS.NAVBAR_LANDING_PAGE} as={NavLink} activeClassName="" exact to="/">
         <Image size='small' circular src="/images/volunteer-ally-temp-logo.png" centered/>
       </Menu.Item>
@@ -33,35 +34,41 @@ const NavBar = ({ currentUser }) => {
             </Dropdown.Menu>
           </Dropdown>]
       ) : ''}
-      <Menu.Item position="right">
+      {
+        // https://github.com/Semantic-Org/Semantic-UI/issues/3604
+        // <Menu.Item position="right"> has bug.
+      }
+      <div className="right menu">
         {Roles.userIsInRole(Meteor.userId(), [ROLE.ORGANIZATION]) ? (
           <Menu.Item id={COMPONENT_IDS.NAVBAR_ADD_EVENT} as={NavLink} activeClassName="active" exact to="/add" key='add_event'>Add Event</Menu.Item>
         ) : ''}
         <Menu.Item id={COMPONENT_IDS.NAVBAR_BROWSE_OPPORTUNITY} as={NavLink} activeClassName="active" exact to="/browse_opportunities" key='browse_opportunity'>Browse Opportunities</Menu.Item>
         <Menu.Item id={COMPONENT_IDS.NAVBAR_ORGANIZATION_LIBRARY} as={NavLink} activeClassName="active" exact to="/find_volunteers" key='organization_library'>Organization Library</Menu.Item>
         <Menu.Item id={COMPONENT_IDS.NAVBAR_ABOUT_US} as={NavLink} activeClassName="active" exact to="/about_us" key='about_us'>About Us</Menu.Item>
-        {currentUser === '' ? ([
-          <Dropdown id={COMPONENT_IDS.NAVBAR_LOGIN_DROPDOWN} text="Login/SignUp" pointing="top right" icon={'user'} key='SignIn_SignOut'>
-            <Dropdown.Menu>
-              <Dropdown.Item id={COMPONENT_IDS.NAVBAR_LOGIN_DROPDOWN_SIGN_IN} icon="user" text="Sign In" as={NavLink} exact to="/signin" />
-              <Dropdown.Item id={COMPONENT_IDS.NAVBAR_VOLUNTEER_SIGNUP} icon="add user" text="Volunteer Sign Up" as={NavLink} exact to="/volunteer_signup" key='volunteer_signup' />
-              <Dropdown.Item id={COMPONENT_IDS.NAVBAR_ORGANIZATION_SIGNUP} icon="building" text="Organization Sign up" as={NavLink} exact to="/organization_signup" key="organization_signup"/>
-            </Dropdown.Menu>
-          </Dropdown>,
-        ]) : (
-          <Dropdown id={COMPONENT_IDS.NAVBAR_CURRENT_USER} text={currentUser} pointing="top right" icon={'user'}>
-            <Dropdown.Menu>
-              {Roles.userIsInRole(Meteor.userId(), [ROLE.VOLUNTEER]) ? (
-                <Dropdown.Item id={COMPONENT_IDS.VOLUNTEER_PROFILE} icon="user" text="My Profile" as={NavLink} exact to="/volunteer-profile" />
-              ) : ''}
-              {Roles.userIsInRole(Meteor.userId(), [ROLE.ORGANIZATION]) ? (
-                <Dropdown.Item id={COMPONENT_IDS.ORGANIZATION_PROFILE} icon="user" text="My Profile" as={NavLink} exact to="/organization-profile" />
-              ) : ''}
-              <Dropdown.Item id={COMPONENT_IDS.NAVBAR_SIGN_OUT} icon="sign out" text="Sign Out" as={NavLink} exact to="/signout" />
-            </Dropdown.Menu>
-          </Dropdown>
-        )}
-      </Menu.Item>
+        <Menu.Item>
+          {currentUser === '' ? ([
+            <Dropdown id={COMPONENT_IDS.NAVBAR_LOGIN_DROPDOWN} text="Login/SignUp" pointing="top right" icon={'user'} key='SignIn_SignOut'>
+              <Dropdown.Menu>
+                <Dropdown.Item id={COMPONENT_IDS.NAVBAR_LOGIN_DROPDOWN_SIGN_IN} icon="user" text="Sign In" as={NavLink} exact to="/signin" />
+                <Dropdown.Item id={COMPONENT_IDS.NAVBAR_VOLUNTEER_SIGNUP} icon="add user" text="Volunteer Sign Up" as={NavLink} exact to="/volunteer_signup" key='volunteer_signup' />
+                <Dropdown.Item id={COMPONENT_IDS.NAVBAR_ORGANIZATION_SIGNUP} icon="building" text="Organization Sign up" as={NavLink} exact to="/organization_signup" key="organization_signup"/>
+              </Dropdown.Menu>
+            </Dropdown>,
+          ]) : (
+            <Dropdown id={COMPONENT_IDS.NAVBAR_CURRENT_USER} text={currentUser} pointing="top right" icon={'user'}>
+              <Dropdown.Menu>
+                {Roles.userIsInRole(Meteor.userId(), [ROLE.VOLUNTEER]) ? (
+                  <Dropdown.Item id={COMPONENT_IDS.VOLUNTEER_PROFILE} icon="user" text="My Profile" as={NavLink} exact to="/volunteer-profile" />
+                ) : ''}
+                {Roles.userIsInRole(Meteor.userId(), [ROLE.ORGANIZATION]) ? (
+                  <Dropdown.Item id={COMPONENT_IDS.ORGANIZATION_PROFILE} icon="user" text="My Profile" as={NavLink} exact to="/organization-profile" />
+                ) : ''}
+                <Dropdown.Item id={COMPONENT_IDS.NAVBAR_SIGN_OUT} icon="sign out" text="Sign Out" as={NavLink} exact to="/signout" />
+              </Dropdown.Menu>
+            </Dropdown>
+          )}
+        </Menu.Item>
+      </div>
     </Menu>
   );
 };

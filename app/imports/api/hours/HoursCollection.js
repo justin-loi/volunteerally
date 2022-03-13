@@ -30,7 +30,7 @@ class HoursCollection extends BaseCollection {
    */
   update(docID, { total }) {
     const updateData = {};
-    if (total) {
+    if (total || total === 0) {
       updateData.total = total;
     }
     this._collection.update(docID, { $set: updateData });
