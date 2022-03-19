@@ -18,7 +18,6 @@ const Landing = ({ ready, events }) => ((ready) ? (
         {events.map((event) => <EventCard key={event._id} event={event}/>)}
       </Card.Group>
     </Container>
-    <LandingOpportunitiesByCategorySection/>
     <LandingBottomSection/>
   </div>
 ) : <Loader active>Getting data</Loader>);

@@ -11,7 +11,7 @@ const OrganizationCard = ({ organization }) => (
   <Card as={NavLink} exact to={'/'}>
     <Image src='images/event_card_default_image.png' wrapped ui={false}/>
     <Card.Content>
-      <Card.Header>Organization 1</Card.Header>
+      <Card.Header>{organization.organizationName}</Card.Header>
       <Card.Meta>
         <Image src={organization.logoImage} size='tiny' circular/>
       </Card.Meta>
