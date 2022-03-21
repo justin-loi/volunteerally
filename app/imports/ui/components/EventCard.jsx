@@ -1,5 +1,5 @@
 import React from 'react';
-import { Button, Card, Image } from 'semantic-ui-react';
+import { Button, Card, Icon, Image } from 'semantic-ui-react';
 import PropTypes from 'prop-types';
 import { NavLink, withRouter } from 'react-router-dom';
 import { Meteor } from 'meteor/meteor';
@@ -55,9 +55,18 @@ const EventCard = ({ event }) => {
       </Card.Content>
       <Card.Content>
         {(Meteor.userId() && Roles.userIsInRole(Meteor.userId(), [ROLE.VOLUNTEER])) ? (
-          <Button onClick={handleClick} color='green' centered>
+          <Button onClick={handleClick} color='green'>
             Add Event!
           </Button>) : ''}
+        {(Meteor.userId() && Roles.userIsInRole(Meteor.userId(), [ROLE.VOLUNTEER])) ? (
+          <Icon circular inverted color='blue' name='twitter' />) : ''}
+        {(Meteor.userId() && Roles.userIsInRole(Meteor.userId(), [ROLE.VOLUNTEER])) ? (
+          <Icon circular inverted color='blue' name='facebook' />) : ''}
+        {(Meteor.userId() && Roles.userIsInRole(Meteor.userId(), [ROLE.VOLUNTEER])) ? (
+          <Icon circular inverted color='blue' name='mail' />) : ''}
+        {(Meteor.userId() && Roles.userIsInRole(Meteor.userId(), [ROLE.VOLUNTEER])) ? (
+          <Icon circular inverted color='blue' name='pinterest' />) : ''}
+
       </Card.Content>
     </Card>
   );
