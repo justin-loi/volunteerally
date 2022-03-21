@@ -3,6 +3,9 @@ import { Button, Card, Image } from 'semantic-ui-react';
 import PropTypes from 'prop-types';
 import { NavLink, withRouter } from 'react-router-dom';
 import { Meteor } from 'meteor/meteor';
+import swal from 'sweetalert';
+import { Roles } from 'meteor/alanning:roles';
+import { ROLE } from '../../api/role/Role';
 import { defineMethod } from '../../api/base/BaseCollection.methods';
 import { VolunteerEvent } from '../../api/event/VolunteerEventCollection';
 
@@ -11,9 +14,21 @@ const EventCard = ({ event }) => {
   const handleClick = (e) => {
     e.preventDefault();
     const vID = Meteor.userId();
-    const defineData = { volunteerID: vID, eventID: event._id};
+    const definitionData = { volunteerID: vID, eventID: event._id };
     if (vID) {
-      defineMethod.callPromise({ collectionName: VolunteerEvent, defineData });
+      defineMethod.callPromise({ collectionName: VolunteerEvent.getCollectionName(), definitionData })
+        .catch(error => {
+          swal('Error', error.message, 'error');
+        })
+        .then(() => {
+          swal({
+            title: 'Add Opportunity',
+            text: 'Opportunity added successfully',
+            icon: 'success',
+            timer: 1500,
+          });
+        });
+
     }
   };
   return (
@@ -39,11 +54,11 @@ const EventCard = ({ event }) => {
         </p>
       </Card.Content>
       <Card.Content>
-        <Button onClick={handleClick}>
-        Add Event!
-        </Button>
+        {(Meteor.userId() && Roles.userIsInRole(Meteor.userId(), [ROLE.VOLUNTEER])) ? (
+          <Button onClick={handleClick} color='green' centered>
+            Add Event!
+          </Button>) : ''}
       </Card.Content>
-
     </Card>
   );
 };
@@ -61,7 +76,7 @@ EventCard.propTypes = {
   }).isRequired,
   volunteer: PropTypes.shape({
     _id: PropTypes.string,
-  })
+  }),
 };
 
 export default withRouter(EventCard);
