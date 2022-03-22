@@ -55,7 +55,7 @@ const EventCard = ({ event }) => {
       </Card.Content>
       <Card.Content>
         {(Meteor.userId() && Roles.userIsInRole(Meteor.userId(), [ROLE.VOLUNTEER])) ? (
-          <Button onClick={handleClick} color='green'>
+          <Button onClick={handleClick} color='green' size='small'>
             Add Event!
           </Button>) : ''}
         {(Meteor.userId() && Roles.userIsInRole(Meteor.userId(), [ROLE.VOLUNTEER])) ? (
@@ -65,7 +65,7 @@ const EventCard = ({ event }) => {
         {(Meteor.userId() && Roles.userIsInRole(Meteor.userId(), [ROLE.VOLUNTEER])) ? (
           <Icon circular inverted color='blue' name='mail' />) : ''}
         {(Meteor.userId() && Roles.userIsInRole(Meteor.userId(), [ROLE.VOLUNTEER])) ? (
-          <Icon circular inverted color='blue' name='pinterest' />) : ''}
+          <Icon circular inverted color='blue' name='calendar' />) : ''}
 
       </Card.Content>
     </Card>
