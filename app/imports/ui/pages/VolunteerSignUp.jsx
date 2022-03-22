@@ -332,13 +332,13 @@ const VolunteerSignUp = ({ location, ready, interestsArray, skillsArray, environ
                 </div>
               </div>
               <div className="field">
-                <h4>Upload a Profile Picture</h4>
+                <h4 style={{ marginBottom: '-5px', marginTop: '5px', fontSize: '13px' }}>Upload a Profile Picture</h4>
                 <Form.Input
+                  id={COMPONENT_IDS.VOLUNTEER_SIGNUP_FORM_IMAGE}
                   style={{ marginTop: '10px' }}
-                  type='file' onChange={(event) => {
+                  type='file' required onChange={(event) => {
                     uploadImg(event.target.files);
-                  }}
-                />
+                  }}/>
               </div>
               <label style={{ paddingTop: '20px' }}>Interests </label>
               <Form.Group>

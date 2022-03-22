@@ -46,6 +46,7 @@ export const COMPONENT_IDS = {
   VOLUNTEER_SIGNUP_FORM_INDOOR: 'volunteer-signup-environmental-preference-0',
   VOLUNTEER_SIGNUP_FORM_MONTHLY: 'volunteer-signup-availability-0',
   VOLUNTEER_SIGNUP_FORM_POLICY: 'volunteer-signup-policy',
+  VOLUNTEER_SIGNUP_FORM_IMAGE: 'volunteer-signup-image',
   ORGANIZATION_SIGNUP_FORM_ORGANIZATION_NAME: 'organization-signup-form-organization-name',
   ORGANIZATION_SIGNUP_FORM_EMAIL: 'organization-signup-form-username',
   ORGANIZATION_SIGNUP_FORM_EIN: 'organization-signup-form-ein',
