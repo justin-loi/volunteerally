@@ -323,6 +323,7 @@ const VolunteerSignUp = ({ location, ready, interestsArray, skillsArray, environ
                 </div>
               </div>
               <div className="field">
+                <h4>Upload a Profile Picture</h4>
                 <Form.Input
                   style={{ marginTop: '10px' }}
                   type='file' onChange={(event) => {
