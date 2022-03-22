@@ -65,7 +65,7 @@ class App extends React.Component {
             <Route path="/terms" component={TermsAndConditions}/>
             <Route path="/signup" component={Signup}/>
             <Route path="/signout" component={Signout}/>
-              <Route path ="/map" component={GoogleMap}/>
+            <Route path ="/map" component={GoogleMap}/>
             <OrgProtectedRoute path="/add" component={AddEvent}/>
             <ProtectedRoute path="/list" component={ListStuff}/>
             <ProtectedRoute path="/edit/:_id" component={EditStuff}/>
