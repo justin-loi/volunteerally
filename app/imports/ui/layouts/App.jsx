@@ -29,6 +29,7 @@ import OrganizationLibrary from '../pages/OrganizationLibrary';
 import VolunteerProfile from '../pages/VolunteerProfile';
 import OrganizationInfo from '../pages/OrganizationInfo';
 import EditVolunteerProfile from '../pages/EditVolunteerProfile';
+import GoogleMap from '../pages/GoogleMap';
 import OrganizationProfile from '../pages/OrganizationProfile';
 import EditOrganizationProfile from '../pages/EditOrganizationProfile';
 
@@ -64,6 +65,7 @@ class App extends React.Component {
             <Route path="/terms" component={TermsAndConditions}/>
             <Route path="/signup" component={Signup}/>
             <Route path="/signout" component={Signout}/>
+            <Route path ="/map" component={GoogleMap}/>
             <OrgProtectedRoute path="/add" component={AddEvent}/>
             <ProtectedRoute path="/list" component={ListStuff}/>
             <ProtectedRoute path="/edit/:_id" component={EditStuff}/>
