@@ -11,10 +11,26 @@ const OrganizationCard = ({ organization }) => (
   <Card as={NavLink} exact to={'/'}>
     <Image src='images/event_card_default_image.png' wrapped ui={false}/>
     <Card.Content>
-      <Card.Header>{organization.organizationName}</Card.Header>
-      <Card.Meta>
-        <Image src={organization.logoImage} size='tiny' circular/>
-      </Card.Meta>
+      <Card.Header>
+        <span>{organization.organizationName}</span>
+        <Image src={organization.logoImage} size='mini' circular/>
+      </Card.Header>
+      <Card.Description>
+        <p>
+          {organization.missionStatement}
+        </p>
+        <p>
+          Representative:
+          {organization.firstName} {organization.lastName}
+        </p>
+      </Card.Description>
+      <Card.Content>
+        <span>Give Us A Call!!</span>
+        {organization.phoneNumber}
+      </Card.Content>
+      <Card.Content extra>
+
+      </Card.Content>
     </Card.Content>
   </Card>
 );
@@ -24,8 +40,12 @@ OrganizationCard.propTypes = {
   organization: PropTypes.shape({
     _id: PropTypes.string,
     logoImage: PropTypes.string,
+    missionStatement: PropTypes.string,
     eventBackgroundImage: PropTypes.string,
     organizationName: PropTypes.string,
+    phoneNumber: PropTypes.string,
+    firstName: PropTypes.string,
+    lastName: PropTypes.string,
   }).isRequired,
 };
 
