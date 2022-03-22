@@ -48,7 +48,7 @@ const VolunteerProfile = ({ volunteer, event, interests, skills, envPrefer, avai
         <Label color='teal' size='massive' ribbon>
           {`${(capitalizeFirstLetter(volunteer.firstName))} ${(capitalizeFirstLetter(volunteer.lastName))}`}
         </Label>
-        <Image src='images/profile.png' size='medium' circular centered />
+        <Image src={volunteer.image} size='medium' circular centered />
         <Divider/>
         <Segment>
           <Header as="h3" style={segmentHeaderStyle}>
