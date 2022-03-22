@@ -95,15 +95,16 @@ const VolunteerProfile = ({ volunteer, event, interests, skills, envPrefer, avai
           <Header as="h3">
             <Icon name="calendar outline"/> Upcoming Events
           </Header>
-          <Card as={NavLink} exact to={`/details/${event._id}`}>
-            <Image src='images/event_card_image_volunteer.jpg' size='medium'/>
-            <Card.Content>
-              <Card.Header>{event.eventName}</Card.Header>
-              <Card.Meta>
-                <span>{event.time}</span>
-              </Card.Meta>
-            </Card.Content>
-          </Card>
+          {(event.length !== 0) ?
+            <Card as={NavLink} exact to={`/details/${event._id}`}>
+              <Image src='images/event_card_image_volunteer.jpg' size='medium'/>
+              <Card.Content>
+                <Card.Header>{event.eventName}</Card.Header>
+                <Card.Meta>
+                  <span>{event.time}</span>
+                </Card.Meta>
+              </Card.Content>
+            </Card> : <p>No upcoming events</p>}
         </Segment>
         <Segment>
           <Header as="h3" style={segmentHeaderStyle}>
@@ -202,10 +203,11 @@ export default withTracker(() => {
   // get volunteer event
   const volEvents = VolunteerEvent.find({ volunteerID: Meteor.userId() }, {}).fetch();
 
-  const event = (typeof volEvents !== 'undefined' && ready) ? (
-    Events.find({ _id: volEvents[volEvents.length - 1].eventID }, { sort: { _id: -1 } }).fetch()[0]) : { };
-  // console.log(event);
-
+  console.log(volEvents);
+  const event = (volEvents.length !== 0 && ready) ? (
+    Events.find({ _id: volEvents[volEvents.length - 1].eventID }, { sort: { _id: -1 } }).fetch()[0]) : [];
+  console.log(event);
+  // { _id: volEvents[volEvents.length - 1].eventID }
   // get OrgEvents
   const orgEvents = [];
   // eslint-disable-next-line no-unused-expressions
