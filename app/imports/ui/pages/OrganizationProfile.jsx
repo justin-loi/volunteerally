@@ -3,16 +3,19 @@ import { Meteor } from 'meteor/meteor';
 import { Grid, Image, Loader, Button, Segment, Divider, Header, Icon } from 'semantic-ui-react';
 import PropTypes from 'prop-types';
 import { withTracker } from 'meteor/react-meteor-data';
+import { NavLink } from 'react-router-dom';
+import { Roles } from 'meteor/alanning:roles';
 import { PAGE_IDS } from '../utilities/PageIDs';
 import { OrganizationProfiles } from '../../api/organization/OrganizationProfileCollection';
+import { ROLE } from '../../api/role/Role';
 
 /** Renders the Page for adding a document. */
 const OrganizationProfile = ({ orgProfile, ready }) => ((ready) ? (
   <Grid id={PAGE_IDS.ORGANIZATION_PROFILE} container centered>
     <Grid.Row >
-      <Button>Settings</Button>
-      <Button>Preferences</Button>
-      <Button>Log Volunteer Hours</Button>
+      {(Meteor.userId() && Roles.userIsInRole(Meteor.userId(), [ROLE.ORGANIZATION])) ? (
+        <Button as={NavLink} exact to={`/edit-organization-profile/${orgProfile._id}`}>Edit Profile</Button>
+      ) : ''}
       <Button>Send an email</Button>
     </Grid.Row>
     <Grid.Row columns={2}>
@@ -47,13 +50,15 @@ OrganizationProfile.propTypes = {
   ready: PropTypes.bool.isRequired,
 };
 
-export default withTracker(() => {
+export default withTracker(({ match }) => {
   // Get access to organization documents.
+  const { _id } = match.params;
+  const orgProfileId = _id;
   const subscription = OrganizationProfiles.subscribe();
   // Determine if the subscription is ready
   const ready = subscription.ready();
 
-  const orgProfile = OrganizationProfiles.findOne({ userID: Meteor.userId() }, {});
+  const orgProfile = OrganizationProfiles.findOne({ _id: orgProfileId }, {});
 
   return {
     orgProfile,

@@ -3,10 +3,8 @@ import { Meteor } from 'meteor/meteor';
 import { Container, Button, Header, Loader, Grid, Icon, Segment, Image } from 'semantic-ui-react';
 import { withTracker } from 'meteor/react-meteor-data';
 import PropTypes from 'prop-types';
-import { Roles } from 'meteor/alanning:roles';
 import { Events } from '../../api/event/EventCollection';
 import { OrganizationProfiles } from '../../api/organization/OrganizationProfileCollection';
-import { ROLE } from '../../api/role/Role';
 
 // Renders a Event Info page that connects with the current Event collection.
 const gridStyle = { height: '500px', fontSize: '75px' };
@@ -145,8 +143,8 @@ export default withTracker(({ match }) => {
   let orgProfile;
   if (event !== undefined) {
     orgProfile = OrganizationProfiles.findByEmail(event.owner);
-    console.log(orgProfile);
-    console.log(event);
+    // console.log(orgProfile);
+    // console.log(event);
   }
 
   return {
