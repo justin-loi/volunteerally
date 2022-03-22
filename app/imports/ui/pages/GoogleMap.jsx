@@ -26,7 +26,7 @@ const GoogleMap = () => {
         const zoom = 4;
 
         return (
-            <Wrapper apiKey={AIzaSyD5i_tYlCxvgzgg8ivVgS6jpMJxarmAHCQ} render={render}>
+            <Wrapper apiKey={/* hide api for now*/} render={render}>
                 <MyMapComponent center={center} zoom={zoom}/>
             </Wrapper>
         );
