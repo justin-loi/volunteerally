@@ -19,4 +19,5 @@ export const PAGE_IDS = {
   EDIT_VOLUNTEER_PROFILE: 'edit-volunteer-profile',
   GOOGLE_MAP: 'google-map',
 
+  ORGANIZATION_PROFILE: 'organization-profile',
 };

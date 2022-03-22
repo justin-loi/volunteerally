@@ -24,17 +24,22 @@ const capitalizeFirstLetter = (string) => string.charAt(0).toUpperCase() + strin
 const interestsStyle = {
   marginTop: '8px',
 };
+const segmentHeaderStyle = {
+  paddingTop: '6px',
+};
 
 /** Renders the Page for adding a document. */
-const VolunteerProfile = ({ volunteer, event, interests, totalHours, volEventsCount, orgEventsCount, ready }) => ((ready) ? (
+const VolunteerProfile = ({ volunteer, event, interests, skills, envPrefer, availabilities, totalHours, volEventsCount, orgEventsCount, ready }) => ((ready) ? (
   <Grid id={PAGE_IDS.VOLUNTEER_PROFILE} container centered>
     <Grid.Row>
       <Image src='/images/volunteer_profile_banner.png' size='big' />
     </Grid.Row>
     <Grid.Row >
       <Button as={NavLink} exact to={`/edit-volunteer-profile/${volunteer._id}`}>Edit Profile</Button>
-      <Button>Settings</Button>
-      <Button>Preferences</Button>
+      {
+        // <Button>Settings</Button>
+        // <Button>Preferences</Button>
+      }
       <Button>Log Volunteer Hours</Button>
       <Button>Send an email</Button>
     </Grid.Row>
@@ -46,40 +51,42 @@ const VolunteerProfile = ({ volunteer, event, interests, totalHours, volEventsCo
         <Image src='images/profile.png' size='medium' circular centered />
         <Divider/>
         <Segment>
-          <Header as="h3">
-            <Icon name="tag"/> Interests
+          <Header as="h3" style={segmentHeaderStyle}>
+            <Icon name="tag"/>
+            <Header.Content>Interests</Header.Content>
           </Header>
-          <Label>
-            <Icon name='leaf' size='big' /> Environment
-          </Label>
-          <Label>
-            <Icon name='paw' size='big'/> Animal Welfare/Rescue
-          </Label>
-          <Label>
-            <Icon name='graduation cap' size='big'/> Education
-          </Label>
           {interests.map((interest, index) => (
             <Label style={interestsStyle} key={`vol-profile-interest-${index}`}>
               {interest.name}
             </Label>))}
         </Segment>
+        <Segment>
+          <Header as="h3" style={segmentHeaderStyle}>
+            <Icon name="star"/>
+            <Header.Content>Special Skills</Header.Content>
+          </Header>
+          {skills.map((skill, index) => (
+            <Label style={interestsStyle} key={`vol-profile-skill-${index}`}>
+              {skill.name}
+            </Label>))}
+        </Segment>
       </Grid.Column>
       <Grid.Column>
         <Segment>
-          <Statistic.Group horizontal>
+          <Statistic.Group horizontal size={ 'tiny' }>
             <Statistic>
-              <Statistic.Value>{totalHours.total}</Statistic.Value>
               <Icon name="clock" size='big'/>
+              <Statistic.Value>{totalHours.total}</Statistic.Value>
               <Statistic.Label>Total Hours Volunteered</Statistic.Label>
             </Statistic>
             <Statistic>
-              <Statistic.Value>{orgEventsCount}</Statistic.Value>
               <Icon name="building" size='big'/>
+              <Statistic.Value>{orgEventsCount}</Statistic.Value>
               <Statistic.Label>Organizations Helped</Statistic.Label>
             </Statistic>
             <Statistic>
-              <Statistic.Value>{volEventsCount}</Statistic.Value>
               <Icon name="globe" size='big'/>
+              <Statistic.Value size='tiny'>{volEventsCount}</Statistic.Value>
               <Statistic.Label>Events Participated</Statistic.Label>
             </Statistic>
           </Statistic.Group>
@@ -91,12 +98,27 @@ const VolunteerProfile = ({ volunteer, event, interests, totalHours, volEventsCo
           <Card as={NavLink} exact to={`/details/${event._id}`}>
             <Image src='images/event_card_image_volunteer.jpg' size='medium'/>
             <Card.Content>
-              <Card.Header> Mowing Peoples Lawns</Card.Header>
+              <Card.Header>{event.eventName}</Card.Header>
               <Card.Meta>
-                <span>Date: 8:00am - 8:00pm</span>
+                <span>{event.time}</span>
               </Card.Meta>
             </Card.Content>
           </Card>
+        </Segment>
+        <Segment>
+          <Header as="h3" style={segmentHeaderStyle}>
+            <Icon name="street view"/>
+            <Header.Content>Environmental Preference</Header.Content>
+          </Header>
+          <Label>{envPrefer.name}</Label>
+          <Header as="h3" style={segmentHeaderStyle}>
+            <Icon name="calendar alternate outline"/>
+            <Header.Content>Availabilities</Header.Content>
+          </Header>
+          {availabilities.map((availability, index) => (
+            <Label style={interestsStyle} key={`vol-profile-availability-${index}`}>
+              {availability.name}
+            </Label>))}
         </Segment>
       </Grid.Column>
     </Grid.Row>
@@ -141,7 +163,6 @@ export default withTracker(() => {
       && subscription5.ready() && subscription6.ready() && subscription7.ready() && subscription8.ready() && subscription9.ready()
       && subscription10.ready() && subscription11.ready() && subscription12.ready() && subscription13.ready() && subscription14.ready();
   // Get the volunteer documents and sort them by name.
-  const event = Events.find({}, { sort: { name: 1 } }).fetch()[0];
   // const volunteerProfile = VolunteerProfiles.findOne({ userID: Meteor.userId() }, {});
   // Get volunteer profile
   const volunteer = VolunteerProfiles.findOne({}, {});
@@ -178,8 +199,14 @@ export default withTracker(() => {
   // get volunteer helped event count
   const volEventsCount = VolunteerEvent.find({ volunteerID: Meteor.userId() }, {}).count();
 
-  // get OrgEvents
+  // get volunteer event
   const volEvents = VolunteerEvent.find({ volunteerID: Meteor.userId() }, {}).fetch();
+
+  const event = (typeof volEvents !== 'undefined' && ready) ? (
+    Events.find({ _id: volEvents[volEvents.length - 1].eventID }, { sort: { _id: -1 } }).fetch()[0]) : { };
+  // console.log(event);
+
+  // get OrgEvents
   const orgEvents = [];
   // eslint-disable-next-line no-unused-expressions
   (typeof volEvents !== 'undefined' && ready) ? (

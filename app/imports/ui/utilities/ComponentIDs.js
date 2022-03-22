@@ -1,5 +1,6 @@
 export const COMPONENT_IDS = {
   LIST_STUFF_EDIT: 'list-stuff-edit',
+  NAVBAR_NAVBAR: 'navbar-navbar',
   NAVBAR_ADD_STUFF: 'navbar-add-stuff',
   NAVBAR_LIST_STUFF: 'navbar-list-stuff',
   NAVBAR_LIST_STUFF_ADMIN: 'navbar-list-stuff-admin',
@@ -64,4 +65,5 @@ export const COMPONENT_IDS = {
   ORGANIZATION_SIGNUP_FORM_HOMELESSNESS_POVERTY: 'organization-signup-form-homelessness-poverty',
   ORGANIZATION_SIGNUP_FORM_SPECIAL_NEEDS: 'organization-signup-form-special-needs',
   VOLUNTEER_PROFILE: 'volunteer-profile',
+  ORGANIZATION_PROFILE: 'organization-profile',
 };
