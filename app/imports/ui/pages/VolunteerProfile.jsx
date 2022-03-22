@@ -29,7 +29,7 @@ const segmentHeaderStyle = {
 };
 
 /** Renders the Page for adding a document. */
-const VolunteerProfile = ({ volunteer, event, interests, skills, envPrefer, availabilities, totalHours, volEventsCount, orgEventsCount, ready }) => ((ready) ? (
+const VolunteerProfile = ({ volunteer, signedUpEvents, interests, skills, envPrefer, availabilities, totalHours, volEventsCount, orgEventsCount, ready }) => ((ready) ? (
   <Grid id={PAGE_IDS.VOLUNTEER_PROFILE} container centered>
     <Grid.Row>
       <Image src='/images/volunteer_profile_banner.png' size='big' />
@@ -95,16 +95,19 @@ const VolunteerProfile = ({ volunteer, event, interests, skills, envPrefer, avai
           <Header as="h3">
             <Icon name="calendar outline"/> Upcoming Events
           </Header>
-          {(event.length !== 0) ?
-            <Card as={NavLink} exact to={`/details/${event._id}`}>
-              <Image src='images/event_card_image_volunteer.jpg' size='medium'/>
-              <Card.Content>
-                <Card.Header>{event.eventName}</Card.Header>
-                <Card.Meta>
-                  <span>{event.time}</span>
-                </Card.Meta>
-              </Card.Content>
-            </Card> : <p>No upcoming events</p>}
+          {(signedUpEvents.length !== 0) ?
+            signedUpEvents.map((events, index) => (
+              <Card as={NavLink} exact to={`/details/${events._id}`} key={`vol-event-${index}`}>
+                <Image src='images/event_card_image_volunteer.jpg' size='medium'/>
+                <Card.Content>
+                  <Card.Header>{events.eventName}</Card.Header>
+                  <Card.Meta>
+                    <span>{events.time}</span>
+                  </Card.Meta>
+                </Card.Content>
+              </Card>
+            ))
+            : <p>No upcoming events</p>}
         </Segment>
         <Segment>
           <Header as="h3" style={segmentHeaderStyle}>
@@ -131,7 +134,7 @@ const VolunteerProfile = ({ volunteer, event, interests, skills, envPrefer, avai
 
 VolunteerProfile.propTypes = {
   volunteer: PropTypes.object,
-  event: PropTypes.object,
+  signedUpEvents: PropTypes.array,
   interests: PropTypes.array,
   skills: PropTypes.array,
   envPrefer: PropTypes.object,
@@ -204,9 +207,11 @@ export default withTracker(() => {
   const volEvents = VolunteerEvent.find({ volunteerID: Meteor.userId() }, {}).fetch();
 
   console.log(volEvents);
-  const event = (volEvents.length !== 0 && ready) ? (
-    Events.find({ _id: volEvents[volEvents.length - 1].eventID }, { sort: { _id: -1 } }).fetch()[0]) : [];
-  console.log(event);
+  const signedUpEvents = [];
+  // eslint-disable-next-line no-unused-expressions
+  (volEvents.length !== 0 && ready) ? (
+    volEvents.map((volEvent) => signedUpEvents.push(Events.findDoc({ _id: volEvent.eventID })))) : [];
+  console.log('signed up Events', signedUpEvents);
   // { _id: volEvents[volEvents.length - 1].eventID }
   // get OrgEvents
   const orgEvents = [];
@@ -217,7 +222,7 @@ export default withTracker(() => {
 
   return {
     volunteer,
-    event,
+    signedUpEvents,
     ready,
     interests,
     skills,
