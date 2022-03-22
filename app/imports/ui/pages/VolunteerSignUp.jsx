@@ -22,7 +22,7 @@ const formSchema = new SimpleSchema({
   password: String,
   firstName: String,
   lastName: String,
-  username: { type: String, optional: true },
+  // username: { type: String, optional: true },
   gender: { type: String, optional: true },
   dob: { type: String, optional: true },
   address: { type: String, optional: true },
@@ -203,6 +203,8 @@ const VolunteerSignUp = ({ location, ready, interestsArray, skillsArray, environ
         && agreePolicyAndTerm(privacyPolicy) && checkEmail(data.email) &&
         numberOnly(data.code)) {
       // eslint-disable-next-line no-param-reassign
+      data.username = data.email;
+      // eslint-disable-next-line no-param-reassign
       data.interests = interests;
       // eslint-disable-next-line no-param-reassign
       data.skills = specialSkills;
@@ -258,8 +260,10 @@ const VolunteerSignUp = ({ location, ready, interestsArray, skillsArray, environ
             fRef = ref;
           }} schema={bridge} onSubmit={data => submit(data, fRef)}>
             <Segment>
-              <TextField name='username' placeholder='Username' iconLeft='user'
-                id={COMPONENT_IDS.VOLUNTEER_SIGNUP_FORM_USERNAME} required />
+              {
+                // <TextField name='username' placeholder='Username' iconLeft='user'
+                //                 id={COMPONENT_IDS.VOLUNTEER_SIGNUP_FORM_USERNAME} required />
+              }
               <TextField name='email' type='email' label='E-mail Address' placeholder='E-mail Address' iconLeft='mail'
                 id={COMPONENT_IDS.VOLUNTEER_SIGNUP_FORM_EMAIL}/>
               <TextField name='password' type='password' placeholder='Password' iconLeft='lock' id={COMPONENT_IDS.VOLUNTEER_SIGNUP_FORM_PASSWORD}/>
