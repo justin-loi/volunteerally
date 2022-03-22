@@ -1,38 +1,36 @@
-import React, { useEffect, useRef, ReactElement} from 'react';
-import { Header } from 'semantic-ui-react';
-import { PAGE_IDS } from '../utilities/PageIDs';
-import { Wrapper, Status} from "@googlemaps/react-wrapper";
-import reactDom from "react-dom";
+import React, { useEffect, useRef, ReactElement, Component} from 'react';
+import GoogleMapReact from 'google-map-react';
 
-const GoogleMap = () => {
-    const render = (status: Status): ReactElement => {
-        if (status === Status.LOADING) return <h3>{status}</h3>;
-        if (status === Status.FAILURE) return <h3>{status}</h3>;
-        return null;
+
+const AnyReactComponent = ({ text}) => <div>{text}</div>;
+/* default values to initialize the map */
+    class GoogleMap extends Component {
+        static defaultProps = {
+            center : {
+                lat: 21.44,
+                lng: -157.86
+            },
+            zoom: 11
+        };
+        render() {
+            return (
+                /*The map itself in a container, adjustment to be made later */
+                <div style={{ height: '100vh', width: '100%'}}>
+                    <GoogleMapReact
+                        /*api key to be hidden for now */
+                        bootstrapURLKeys={{ key: 'hidden' }}
+                        defaultCenter={this.props.center}
+                        defaultZoom={this.props.zoom}
+                        >
+                        <AnyReactComponent
+                            lat={21.44}
+                            lng={-157.86}
+                            text = "Success"
+                            />
+                    </GoogleMapReact>
+                </div>
+            )
+        }
     }
-    function MyMapComponent({center,zoom,}:{ center : google.maps.LatLngLiteral; zoom : number}) {
-        const ref = useRef();
-
-        useEffect(() => {
-            new window.google.maps.Map(ref.current, {
-                center,
-                zoom,
-            });
-        });
-        return <div ref={ref} id={"map"} />;
-    }
-    function App() {
-        const center = {lat: -34.397, lng: 150.644};
-        const zoom = 4;
-
-        return (
-            <Wrapper apiKey={/* hide api for now*/} render={render}>
-                <MyMapComponent center={center} zoom={zoom}/>
-            </Wrapper>
-        );
-    }
-
-reactDom.render(<App/>, document.querySelector("#root"));
-}
 
 export default GoogleMap;
