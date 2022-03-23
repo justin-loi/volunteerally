@@ -9,13 +9,13 @@ import { Events } from '../../api/event/EventCollection';
 
 /* Renders a list of events. Use <EventCard> to render each event card. */
 const BrowseOpportunities = ({ /* ready, */ events }) => {
-  const [results, setResult] = useState([]);
+  const [results, setResult] = useState(events);
   const [value, setValue] = useState('');
 
-  const resultRenderer = ({ event }) => <EventCard event={event}/>;
+  const resultRenderer = (event) => <EventCard event={event}/>;
 
   const handleSearchChange = (e, data) => {
-    setValue(data);
+    setValue(data.value);
     if (data.value.length === 0) {
       setResult([]);
       setValue('');
@@ -23,12 +23,7 @@ const BrowseOpportunities = ({ /* ready, */ events }) => {
 
     const re = new RegExp(_.escapeRegExp(data.value), 'i');
     const isMatch = (result) => re.test(result.eventName) || re.test(result.orgName);
-
-    console.log(re);
-    console.log(isMatch);
-    console.log(_.filter(events, isMatch));
-    setResult('bob');
-    setValue('as');
+    setResult(_.filter(events, isMatch));
   };
 
   const onResultSelect = (e, data) => {
