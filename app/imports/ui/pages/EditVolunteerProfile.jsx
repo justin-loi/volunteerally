@@ -17,6 +17,10 @@ import { SpecialSkills } from '../../api/special_skills/SpecialSkillCollection';
 import { Environmental } from '../../api/environmental_preference/EnvironmentalPreferenceCollection';
 import { Availabilities } from '../../api/availability/AvailabilityCollection';
 import { editVolunteerLinkedCollectionMethod } from '../../api/volunteer/VolunteerProfileCollection.methods';
+import { VolunteerInterest } from '../../api/interest/VolunteerInterestCollection';
+import { VolunteerSkill } from '../../api/special_skills/VolunteerSkillCollection';
+import { VolunteerEnvironmental } from '../../api/environmental_preference/VolunteerEnvironmentalCollection';
+import { VolunteerAvailability } from '../../api/availability/VolunteerAvailabilityCollection';
 
 const formSchema = new SimpleSchema({
   firstName: { type: String, optional: true },
@@ -32,13 +36,15 @@ const formSchema = new SimpleSchema({
 const bridge = new SimpleSchema2Bridge(formSchema);
 
 /** Renders the Page for editing a single volunteer. */
-const EditVolunteerProfile = ({ location, volunteer, interestsArray, skillsArray, environmentalArray, availabilitiesArray, ready }) => {
+const EditVolunteerProfile = ({ location, volunteer, volInterests, volSkills, volEnv, volAvas,
+  interestsArray, skillsArray, environmentalArray, availabilitiesArray, ready }) => {
   const [redirectToReferer, setRedirectToReferer] = useState(false);
   const [genderValue, setGender] = useState(volunteer.gender);
-  const [interests, setInterests] = useState([]);
-  const [specialSkills, setSpecialSkills] = useState([]);
-  const [environmentalPreference, setEnvironmentalPreference] = useState('');
-  const [availability, setAvailability] = useState([]);
+  const [interests, setInterests] = useState(volInterests.map(volInterest => volInterest.interestID));
+  const [specialSkills, setSpecialSkills] = useState(volSkills.map(volSkill => volSkill.skillID));
+  const [environmentalPreference, setEnvironmentalPreference] = useState(volEnv.environmentalID);
+  const [availability, setAvailability] = useState(volAvas.map(volAva => volAva.availabilityID));
+  const [temp, setTemp] = useState(1);
   const [image, setImage] = useState('');
 
   const uploadImg = (files) => {
@@ -63,15 +69,18 @@ const EditVolunteerProfile = ({ location, volunteer, interestsArray, skillsArray
       break;
     case 'interests':
       setInterests(checkboxHelper(interests, value));
+      setTemp((temp % 100) + 1);
       break;
     case 'specialSkills':
       setSpecialSkills(checkboxHelper(specialSkills, value));
+      setTemp((temp % 100) + 1);
       break;
     case 'environmentalPreference':
       setEnvironmentalPreference(value);
       break;
     case 'availability':
       setAvailability(checkboxHelper(availability, value));
+      setTemp((temp % 100) + 1);
       break;
     default:
         // do nothing.
@@ -130,6 +139,7 @@ const EditVolunteerProfile = ({ location, volunteer, interestsArray, skillsArray
                   label={value}
                   name='gender'
                   value={value}
+                  update={temp}
                   checked={genderValue === value}
                   onChange={handleChange}
                 />
@@ -173,6 +183,7 @@ const EditVolunteerProfile = ({ location, volunteer, interestsArray, skillsArray
                         label={interest.name}
                         name='interests'
                         value={interest._id}
+                        checked = {interests.includes(interest._id)}
                         onChange={handleChange}
                       />
                     </Grid.Column>
@@ -192,6 +203,7 @@ const EditVolunteerProfile = ({ location, volunteer, interestsArray, skillsArray
                         label={skill.name}
                         name='specialSkills'
                         value={skill._id}
+                        checked = {specialSkills.includes(skill._id)}
                         onChange={handleChange}
                       />
                     </Grid.Column>
@@ -225,6 +237,7 @@ const EditVolunteerProfile = ({ location, volunteer, interestsArray, skillsArray
                         label={ava.name}
                         name='availability'
                         value={ava._id}
+                        checked = {availability.includes(ava._id)}
                         onChange={handleChange}
                       />
                     </Grid.Column>
@@ -245,6 +258,10 @@ const EditVolunteerProfile = ({ location, volunteer, interestsArray, skillsArray
 EditVolunteerProfile.propTypes = {
   location: PropTypes.object,
   volunteer: PropTypes.object,
+  volInterests: PropTypes.array.isRequired,
+  volSkills: PropTypes.array.isRequired,
+  volEnv: PropTypes.object.isRequired,
+  volAvas: PropTypes.array.isRequired,
   interestsArray: PropTypes.array.isRequired,
   skillsArray: PropTypes.array.isRequired,
   environmentalArray: PropTypes.array.isRequired,
@@ -259,16 +276,30 @@ export default withTracker(({ match }) => {
   const volunteerId = _id;
   // Get access to volunteer profile documents.
   const subscription = VolunteerProfiles.subscribeCurrVolProfile();
+  // Get VolInterests and other collections.
+  const subscription2 = VolunteerInterest.subscribe();
+  const subscription3 = VolunteerSkill.subscribe();
+  const subscription4 = VolunteerEnvironmental.subscribe();
+  const subscription5 = VolunteerAvailability.subscribe();
   // Get access to Interests and other collections.
-  const subscription2 = Interests.subscribe();
-  const subscription3 = SpecialSkills.subscribe();
-  const subscription4 = Environmental.subscribe();
-  const subscription5 = Availabilities.subscribe();
+  const subscription6 = Interests.subscribe();
+  const subscription7 = SpecialSkills.subscribe();
+  const subscription8 = Environmental.subscribe();
+  const subscription9 = Availabilities.subscribe();
   // Determine if the subscription is ready
-  const ready = subscription.ready() && subscription2.ready() && subscription3.ready() && subscription4.ready() &&
-      subscription5.ready();
+  const ready = subscription.ready() && subscription2.ready() && subscription3 && subscription4 && subscription5 &&
+    subscription6.ready() && subscription7.ready() && subscription8.ready() && subscription9.ready();
   // Get the document
   const volunteer = VolunteerProfiles.findDoc(volunteerId);
+
+  // get volunteer interests and other volunteer linked collection
+  // can use fields: { interestID: 1 } ?
+  const volInterests = VolunteerInterest.find({ volunteerID: volunteer.userID }, { }).fetch();
+  const volSkills = VolunteerSkill.find({ volunteerID: volunteer.userID }, { }).fetch();
+  const volEnv = VolunteerEnvironmental.findOne({ volunteerID: volunteer.userID }, {});
+  console.log(volEnv);
+  const volAvas = VolunteerAvailability.find({ volunteerID: volunteer.userID }, { }).fetch();
+
   const interestsArray = Interests.find({}, {}).fetch();
   const skillsArray = SpecialSkills.find({}, {}).fetch();
   const environmentalArray = Environmental.find({}, {}).fetch();
@@ -276,6 +307,10 @@ export default withTracker(({ match }) => {
   return {
     volunteer,
     ready,
+    volInterests,
+    volSkills,
+    volEnv,
+    volAvas,
     interestsArray,
     skillsArray,
     environmentalArray,
