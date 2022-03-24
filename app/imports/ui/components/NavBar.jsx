@@ -18,11 +18,6 @@ const NavBar = ({ currentUser }) => {
       <Menu.Item id={COMPONENT_IDS.NAVBAR_LANDING_PAGE} as={NavLink} activeClassName="" exact to="/">
         <Image size='small' circular src="/images/volunteer-ally-temp-logo.png" centered/>
       </Menu.Item>
-      <Menu.Item>
-        <Search
-          placeholder='Search for an Opportunity'
-        />
-      </Menu.Item>
       {currentUser ? (
         [<Menu.Item id={COMPONENT_IDS.NAVBAR_LIST_STUFF} as={NavLink} activeClassName="active" exact to="/list" key='list'> </Menu.Item>]
       ) : ''}

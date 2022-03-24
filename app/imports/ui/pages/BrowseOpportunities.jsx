@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import _ from 'lodash';
-import { Search } from 'semantic-ui-react';
+import { Container, Search, Divider, Header, Card } from 'semantic-ui-react';
 import PropTypes from 'prop-types';
 import { withTracker } from 'meteor/react-meteor-data';
 // import { PAGE_IDS } from '../utilities/PageIDs';
@@ -8,7 +8,8 @@ import EventCard from '../components/EventCard';
 import { Events } from '../../api/event/EventCollection';
 
 /* Renders a list of events. Use <EventCard> to render each event card. */
-const BrowseOpportunities = ({ /* ready, */ events }) => {
+const BrowseOpportunities = ({ events }) => {
+
   const [results, setResult] = useState(events);
   const [value, setValue] = useState('');
 
@@ -35,13 +36,22 @@ const BrowseOpportunities = ({ /* ready, */ events }) => {
   };
 
   return (
-    <Search id='searchbar' placeholder='Search for any position, location, or skill!'
-      onResultSelect={onResultSelect}
-      onSearchChange={handleSearchChange}
-      resultRenderer={resultRenderer}
-      results={results}
-      value={value}
-    />
+    <Container>
+      <Header as="h2" textAlign="center">Browse Opportunities</Header>
+      <Divider/>
+      <Search style={{ marginBottom: 50 }} id='searchbar' placeholder='Search for any position, location, or skill!'
+        onResultSelect={onResultSelect}
+        onSearchChange={handleSearchChange}
+        resultRenderer={resultRenderer}
+        results={results}
+        value={value}
+      />
+
+      <Card.Group centered>
+        {events.map((event) => <EventCard key={event._id} event={event}/>)}
+      </Card.Group>
+    </Container>
+
   );
 };
 
@@ -49,6 +59,7 @@ const BrowseOpportunities = ({ /* ready, */ events }) => {
 BrowseOpportunities.propTypes = {
   events: PropTypes.array.isRequired,
   ready: PropTypes.bool.isRequired,
+  volunteerInterests: PropTypes.array.isRequired,
 };
 
 // withTracker connects Meteor data to React components. https://guide.meteor.com/react.html#using-withTracker
@@ -56,6 +67,7 @@ export default withTracker(() => {
   const subscription = Events.subscribe();
   const ready = subscription.ready();
   const events = Events.find({}, { sort: { name: 1 } }).fetch();
+
   return {
     events,
     ready,
