@@ -9,7 +9,7 @@ import Footer from '../components/Footer';
 import Landing from '../pages/Landing';
 import ListStuff from '../pages/ListStuff';
 import ListStuffAdmin from '../pages/ListStuffAdmin';
-import AddEvent from '../pages/AddEvent';
+import AddEvent from '../pages/AddOpportunity';
 import EditStuff from '../pages/EditStuff';
 import NotFound from '../pages/NotFound';
 import Signin from '../pages/Signin';
@@ -32,6 +32,7 @@ import EditVolunteerProfile from '../pages/EditVolunteerProfile';
 import GoogleMap from '../pages/GoogleMap';
 import OrganizationProfile from '../pages/OrganizationProfile';
 import EditOrganizationProfile from '../pages/EditOrganizationProfile';
+import AddOpportunity from '../pages/AddOpportunity';
 
 /** Top-level layout component for this application. Called in imports/startup/client/startup.jsx. */
 class App extends React.Component {
@@ -66,7 +67,7 @@ class App extends React.Component {
             <Route path="/signup" component={Signup}/>
             <Route path="/signout" component={Signout}/>
             <Route path ="/map" component={GoogleMap}/>
-            <OrgProtectedRoute path="/add" component={AddEvent}/>
+            <OrgProtectedRoute path="/add" component={AddOpportunity}/>
             <ProtectedRoute path="/list" component={ListStuff}/>
             <ProtectedRoute path="/edit/:_id" component={EditStuff}/>
             <AdminProtectedRoute path="/admin" component={ListStuffAdmin}/>
