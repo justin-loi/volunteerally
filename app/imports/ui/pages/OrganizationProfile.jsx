@@ -58,7 +58,8 @@ export default withTracker(({ match }) => {
   // Determine if the subscription is ready
   const ready = subscription.ready();
 
-  const orgProfile = OrganizationProfiles.findOne({ _id: orgProfileId }, {});
+  const orgProfile = (orgProfileId === 'user') ? OrganizationProfiles.findOne({ userID: Meteor.userId() }, {}) :
+    (OrganizationProfiles.findOne({ _id: orgProfileId }, {}));
 
   return {
     orgProfile,
