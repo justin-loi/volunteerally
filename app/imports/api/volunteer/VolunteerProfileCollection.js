@@ -20,6 +20,7 @@ class VolunteerProfileCollection extends BaseProfileCollection {
       state: { type: String, optional: true },
       code: { type: String, optional: true },
       phoneNumber: { type: String, optional: true },
+      image: { type: String, optional: true },
     }));
   }
 
@@ -37,15 +38,20 @@ class VolunteerProfileCollection extends BaseProfileCollection {
    * @param state Volunteer's address state
    * @param code Volunteer's address code
    * @param phoneNumber Volunteer's phoneNumber
+   * @param image Volunteer's image
    */
-  define({ email, firstName, lastName, password, username, gender, dob, address, city, state, code, phoneNumber }) {
+  define({ email, firstName, lastName, password, username, gender, dob, address, city, state, code, phoneNumber, image }) {
     if (Meteor.isServer) {
       const user = this.findOne({ email, firstName, lastName });
       if (!user) {
         const role = ROLE.VOLUNTEER;
-        const profileID = this._collection.insert({ email, firstName, lastName, userID: this.getFakeUserId(), role, gender, dob, address, city, state, code, phoneNumber });
+        const profileID = this._collection.insert({ email, firstName, lastName, userID: this.getFakeUserId(), role, gender, dob, address, city, state, code, phoneNumber,
+          image: 'images/profile.png' });
         const userID = Volunteers.define({ username, role, password, email });
         this._collection.update(profileID, { $set: { userID } });
+        if (image) {
+          this._collection.update(profileID, { $set: { image } });
+        }
         return profileID;
       }
       return user._id;
@@ -64,9 +70,10 @@ class VolunteerProfileCollection extends BaseProfileCollection {
    * @param city new city (optional)
    * @param state new state (optional)
    * @param code new code (optional)
-   * @param phoneNumber new phone nubmer (optional)
+   * @param phoneNumber new phone number (optional)
+   * @param image new profile image (optional)
    */
-  update(docID, { firstName, lastName, gender, dob, address, city, state, code, phoneNumber }) {
+  update(docID, { firstName, lastName, gender, dob, address, city, state, code, phoneNumber, image }) {
     this.assertDefined(docID);
     const updateData = {};
     if (firstName) {
@@ -95,6 +102,9 @@ class VolunteerProfileCollection extends BaseProfileCollection {
     }
     if (phoneNumber) {
       updateData.phoneNumber = phoneNumber;
+    }
+    if (image) {
+      updateData.image = image;
     }
     this._collection.update(docID, { $set: updateData });
   }
@@ -184,6 +194,11 @@ class VolunteerProfileCollection extends BaseProfileCollection {
     return null;
   }
 
+  dumpUserId(docID) {
+    const doc = this.findDoc(docID);
+    return doc.userID;
+  }
+
   /**
    * Returns an object representing the UserProfile docID in a format acceptable to define().
    * @param docID The docID of a UserProfile
@@ -192,6 +207,7 @@ class VolunteerProfileCollection extends BaseProfileCollection {
   dumpOne(docID) {
     const doc = this.findDoc(docID);
     const email = doc.email;
+    const userID = doc.userID;
     const firstName = doc.firstName;
     const lastName = doc.lastName;
     const gender = doc.gender;
@@ -201,7 +217,8 @@ class VolunteerProfileCollection extends BaseProfileCollection {
     const state = doc.state;
     const code = doc.code;
     const phoneNumber = doc.phoneNumber;
-    return { email, firstName, lastName, gender, dob, address, city, state, code, phoneNumber };
+    const image = doc.image;
+    return { email, userID, firstName, lastName, gender, dob, address, city, state, code, phoneNumber, image };
   }
 }
 

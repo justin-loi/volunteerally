@@ -1,3 +1,3 @@
-![ci-badge](https://github.com/ics-software-engineering/matrp/workflows/ci-matrp/badge.svg)
+[![nonprofit-project-template](https://github.com/uh-manoa-meteorites/nonprofit-project-template/actions/workflows/ci.yml/badge.svg)](https://github.com/uh-manoa-meteorites/nonprofit-project-template/actions/workflows/ci.yml)
 
-For details, please see http://ics-software-engineering.github.io/matrp/
+For details, please see http://uh-manoa-meteorites.github.io

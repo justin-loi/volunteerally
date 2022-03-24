@@ -1,5 +1,6 @@
 export const COMPONENT_IDS = {
   LIST_STUFF_EDIT: 'list-stuff-edit',
+  NAVBAR_NAVBAR: 'navbar-navbar',
   NAVBAR_ADD_STUFF: 'navbar-add-stuff',
   NAVBAR_LIST_STUFF: 'navbar-list-stuff',
   NAVBAR_LIST_STUFF_ADMIN: 'navbar-list-stuff-admin',
@@ -16,7 +17,7 @@ export const COMPONENT_IDS = {
   NAVBAR_ORGANIZATION_LIBRARY: 'navbar-organization-library',
   NAVBAR_BROWSE_OPPORTUNITY: 'navbar-browse-opportunity',
   NAVBAR_ORGANIZATION_SIGNUP: 'navbar-organization-library',
-  NAVBAR_ADD_OPPORTUNITY: 'navbar-add-opportunity',
+  NAVBAR_ADD_EVENT: 'navbar-add-event',
   SIGN_IN_FORM_EMAIL: 'sign-in-form-email',
   SIGN_IN_FORM_PASSWORD: 'sign-in-form-password',
   SIGN_IN_FORM_SUBMIT: 'sign-in-form-submit',
@@ -25,7 +26,7 @@ export const COMPONENT_IDS = {
   SIGN_UP_FORM_SUBMIT: 'sign-up-form-submit',
   VOLUNTEER_SIGNUP_FORM_FIRST: 'volunteer-signup-form-first',
   VOLUNTEER_SIGNUP_FORM_LAST: 'volunteer-signup-form-last',
-  VOLUNTEER_SIGNUP_FORM_BIRTH: 'volunteer-signup-form-birth',
+  VOLUNTEER_SIGNUP_FORM_BIRTH: 'volunteer-signup-form-brith',
   VOLUNTEER_SIGNUP_FORM_ADDRESS: 'volunteer-signup-form-address',
   VOLUNTEER_SIGNUP_FORM_CITY: 'volunteer-signup-form-city',
   VOLUNTEER_SIGNUP_FORM_STATE: 'volunteer-signup-form-state',
@@ -64,4 +65,5 @@ export const COMPONENT_IDS = {
   ORGANIZATION_SIGNUP_FORM_HOMELESSNESS_POVERTY: 'organization-signup-form-homelessness-poverty',
   ORGANIZATION_SIGNUP_FORM_SPECIAL_NEEDS: 'organization-signup-form-special-needs',
   VOLUNTEER_PROFILE: 'volunteer-profile',
+  ORGANIZATION_PROFILE: 'organization-profile',
 };

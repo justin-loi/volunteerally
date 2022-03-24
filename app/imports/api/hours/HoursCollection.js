@@ -26,12 +26,12 @@ class HoursCollection extends BaseCollection {
   /**
    * Updates the given document.
    * @param docID the id of the document to update.
-   * @param total, the new total (optional).
+   * @param total the new total (optional).
    */
   update(docID, { total }) {
     const updateData = {};
-    if (total) {
-      updateData.name = total;
+    if (total || total === 0) {
+      updateData.total = total;
     }
     this._collection.update(docID, { $set: updateData });
   }
