@@ -79,3 +79,5 @@ class AddOpportunity extends React.Component {
     );
   }
 }
+
+export default AddOpportunity;
