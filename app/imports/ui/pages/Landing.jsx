@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import { Card, Container, Loader, Header } from 'semantic-ui-react';
 import { withTracker } from 'meteor/react-meteor-data';
 import LandingTopSection from '../components/landing/LandingTopSection';
+import LandingOpportunitiesByCategorySection from '../components/landing/LandingOpportunitiesByCategorySection';
 import LandingBottomSection from '../components/landing/LandingBottomSection';
 import { Events } from '../../api/event/EventCollection';
 import EventCard from '../components/EventCard';
@@ -17,6 +18,7 @@ const Landing = ({ ready, events }) => ((ready) ? (
         {events.map((event) => <EventCard key={event._id} event={event}/>)}
       </Card.Group>
     </Container>
+    <LandingOpportunitiesByCategorySection/>
     <LandingBottomSection/>
   </div>
 ) : <Loader active>Getting data</Loader>);

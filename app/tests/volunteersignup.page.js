@@ -17,7 +17,7 @@ class VolunteerSignup {
   async signupVolunteer(username, password) {
     await this.isDisplayed();
     await t.typeText(`#${COMPONENT_IDS.VOLUNTEER_SIGNUP_FORM_EMAIL}`, username);
-    // await t.typeText(`#${COMPONENT_IDS.VOLUNTEER_SIGNUP_FORM_USERNAME}`, username);
+    await t.typeText(`#${COMPONENT_IDS.VOLUNTEER_SIGNUP_FORM_USERNAME}`, username);
     await t.typeText(`#${COMPONENT_IDS.VOLUNTEER_SIGNUP_FORM_PASSWORD}`, password);
     await t.typeText(`#${COMPONENT_IDS.VOLUNTEER_SIGNUP_FORM_CONFIRM_PASSWORD}`, password);
     await t.typeText(`#${COMPONENT_IDS.VOLUNTEER_SIGNUP_FORM_BIRTH}`, '04/20/1989');

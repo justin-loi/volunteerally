@@ -6,17 +6,14 @@ import { withTracker } from 'meteor/react-meteor-data';
 import PropTypes from 'prop-types';
 import SimpleSchema2Bridge from 'uniforms-bridge-simple-schema-2';
 import SimpleSchema from 'simpl-schema';
-import Axios from 'axios';
-import { Redirect } from 'react-router-dom';
 import { VolunteerProfiles } from '../../api/volunteer/VolunteerProfileCollection';
 import { updateMethod } from '../../api/base/BaseCollection.methods';
 import { PAGE_IDS } from '../utilities/PageIDs';
-import { genderAllowValues, genderComponentID, numberOnly, checkboxHelper } from '../components/VolunteerUsefulFunction';
-import { Interests } from '../../api/interest/InterestCollection';
-import { SpecialSkills } from '../../api/special_skills/SpecialSkillCollection';
-import { Environmental } from '../../api/environmental_preference/EnvironmentalPreferenceCollection';
-import { Availabilities } from '../../api/availability/AvailabilityCollection';
-import { editVolunteerLinkedCollectionMethod } from '../../api/volunteer/VolunteerProfileCollection.methods';
+import { COMPONENT_IDS } from '../utilities/ComponentIDs';
+
+const genderAllowValues = ['Male', 'Female', 'Other', 'Prefer Not to Say'];
+const genderComponentID = [COMPONENT_IDS.VOLUNTEER_SIGNUP_FORM_GENDER_MALE, COMPONENT_IDS.VOLUNTEER_SIGNUP_FORM_GENDER_FEMALE,
+  COMPONENT_IDS.VOLUNTEER_SIGNUP_FORM_GENDER_OTHER, COMPONENT_IDS.VOLUNTEER_SIGNUP_FORM_GENDER_NO_SAY];
 
 const formSchema = new SimpleSchema({
   firstName: { type: String, optional: true },
@@ -31,47 +28,14 @@ const formSchema = new SimpleSchema({
 
 const bridge = new SimpleSchema2Bridge(formSchema);
 
-/** Renders the Page for editing a single volunteer. */
-const EditVolunteerProfile = ({ location, volunteer, interestsArray, skillsArray, environmentalArray, availabilitiesArray, ready }) => {
-  const [redirectToReferer, setRedirectToReferer] = useState(false);
-  const [genderValue, setGender] = useState(volunteer.gender);
-  const [interests, setInterests] = useState([]);
-  const [specialSkills, setSpecialSkills] = useState([]);
-  const [environmentalPreference, setEnvironmentalPreference] = useState('');
-  const [availability, setAvailability] = useState([]);
-  const [image, setImage] = useState('');
-
-  const uploadImg = (files) => {
-    // eslint-disable-next-line no-undef
-    const data = new FormData();
-    data.append('file', files[0]);
-    data.append('cloud_name', 'irene-ma');
-    data.append('upload_preset', 'nkv8kepo');
-    Axios.post('https://api.cloudinary.com/v1_1/irene-ma/image/upload', data).then((r) => {
-      console.log(r.data.url);
-      setImage(r.data.url);
-    });
-  };
+/** Renders the Page for editing a single document. */
+const EditVolunteerProfile = ({ doc, ready }) => {
+  const [genderValue, setGender] = useState(doc.gender);
 
   const handleChange = (e, { name, value }) => {
     switch (name) {
     case 'gender':
       setGender(value);
-      break;
-    case 'image':
-      setImage(value);
-      break;
-    case 'interests':
-      setInterests(checkboxHelper(interests, value));
-      break;
-    case 'specialSkills':
-      setSpecialSkills(checkboxHelper(specialSkills, value));
-      break;
-    case 'environmentalPreference':
-      setEnvironmentalPreference(value);
-      break;
-    case 'availability':
-      setAvailability(checkboxHelper(availability, value));
       break;
     default:
         // do nothing.
@@ -80,38 +44,20 @@ const EditVolunteerProfile = ({ location, volunteer, interestsArray, skillsArray
 
   // On successful submit, insert the data.
   const submit = (data) => {
-    if (numberOnly(data.code)) {
-      const { firstName, lastName, address, gender, city, state, code, phoneNumber, _id } = data;
-      const collectionName = VolunteerProfiles.getCollectionName();
-      const updateData = { id: _id, firstName, lastName, gender, address, city, state, code, phoneNumber };
-      // eslint-disable-next-line no-param-reassign
-      updateData.image = image;
-      updateMethod.callPromise({ collectionName, updateData })
-        .catch(error => swal('Error', error.message, 'error'))
-        .then(() => swal('Success', 'updated updated successfully', 'success'));
-      editVolunteerLinkedCollectionMethod.callPromise({ profileID: _id, interests: interests, skills: specialSkills, environmental: environmentalPreference, availabilities: availability })
-        .catch(error => swal('Error', error.message, 'error'))
-        .then(() => {
-          swal('Success', 'updated updated successfully', 'success');
-          setRedirectToReferer(true);
-        });
-    }
+    const { firstName, lastName, address, gender, city, state, code, phoneNumber, _id } = data;
+    const collectionName = VolunteerProfiles.getCollectionName();
+    const updateData = { id: _id, firstName, lastName, gender, address, city, state, code, phoneNumber };
+    updateMethod.callPromise({ collectionName, updateData })
+      .catch(error => swal('Error', error.message, 'error'))
+      .then(() => swal('Success', 'updated updated successfully', 'success'));
   };
-
-  /* Display the signup form. Redirect to add page after successful registration and login. */
-  const { from } = location.state || { from: { pathname: '/volunteer-profile' } };
-  // if correct authentication, redirect to from: page instead of signup screen
-  if (redirectToReferer) {
-    return <Redirect to={from}/>;
-  }
 
   return (ready) ? (
     <Grid id={PAGE_IDS.EDIT_VOLUNTEER_PROFILE} container centered>
       <Grid.Column>
         <Header as="h2" textAlign="center">Update Your Information</Header>
-        <AutoForm schema={bridge} onSubmit={data => submit(data)} model={volunteer}>
+        <AutoForm schema={bridge} onSubmit={data => submit(data)} model={doc}>
           <Segment>
-            <div style={{ paddingBottom: '6px' }}>Date Of Birth: {volunteer.dob} (contact administrator to make change)</div>
             <div className="two fields">
               <div className="field">
                 <TextField name='firstName' label='First Name' placeholder='First Name'/>
@@ -152,86 +98,6 @@ const EditVolunteerProfile = ({ location, volunteer, interestsArray, skillsArray
                 <TextField name='phoneNumber' placeholder='18081234567' label='Phone Number' iconLeft='phone'/>
               </div>
             </div>
-            <div className="field">
-              <h4>Upload a Profile Picture</h4>
-              <Form.Input
-                style={{ marginTop: '10px' }}
-                type='file' onChange={(event) => {
-                  uploadImg(event.target.files);
-                }}
-              />
-            </div>
-            <label style={{ paddingTop: '20px' }}>Interests </label>
-            <Form.Group>
-              <Grid columns={2} container>
-                <Grid.Row>
-                  {interestsArray.map((interest, index) => (
-                    <Grid.Column key={`volunteer-signup-grid-interests-${index}`}>
-                      <Form.Checkbox
-                        key={`volunteer-signup-interests-${interest._id}`}
-                        id={`volunteer-signup-interests-${index}`}
-                        label={interest.name}
-                        name='interests'
-                        value={interest._id}
-                        onChange={handleChange}
-                      />
-                    </Grid.Column>
-                  ))}
-                </Grid.Row>
-              </Grid>
-            </Form.Group>
-            <label style={{ paddingTop: '20px' }}>Special Skills (optional) </label>
-            <Form.Group>
-              <Grid columns={2} container>
-                <Grid.Row>
-                  {skillsArray.map((skill, index) => (
-                    <Grid.Column key={`volunteer-signup-grid-skills-${index}`}>
-                      <Form.Checkbox
-                        key={`volunteer-signup-skill-${skill._id}`}
-                        id={`volunteer-signup-skill-${index}`}
-                        label={skill.name}
-                        name='specialSkills'
-                        value={skill._id}
-                        onChange={handleChange}
-                      />
-                    </Grid.Column>
-                  ))}
-                </Grid.Row>
-              </Grid>
-            </Form.Group>
-            <div style={{ paddingTop: '6px' }}>Environmental Preference</div>
-            <Form.Group inline>
-              {environmentalArray.map((environmental, index) => (
-                <Form.Radio
-                  key={`volunteer-signup-environmental-preference-${environmental._id}`}
-                  id={`volunteer-signup-environmental-preference-${index}`}
-                  label={environmental.name}
-                  name='environmentalPreference'
-                  value={environmental._id}
-                  checked={environmentalPreference === environmental._id}
-                  onChange={handleChange}
-                />
-              ))}
-            </Form.Group>
-            <label style={{ paddingTop: '20px' }}>Availability </label>
-            <Form.Group>
-              <Grid columns={2} container>
-                <Grid.Row>
-                  {availabilitiesArray.map((ava, index) => (
-                    <Grid.Column key={`volunteer-signup-grid-availability-${index}`}>
-                      <Form.Checkbox
-                        key={`volunteer-signup-availability-${ava._id}`}
-                        id={`volunteer-signup-availability-${index}`}
-                        label={ava.name}
-                        name='availability'
-                        value={ava._id}
-                        onChange={handleChange}
-                      />
-                    </Grid.Column>
-                  ))}
-                </Grid.Row>
-              </Grid>
-            </Form.Group>
             <SubmitField value='Submit' />
             <ErrorsField />
           </Segment>
@@ -243,12 +109,7 @@ const EditVolunteerProfile = ({ location, volunteer, interestsArray, skillsArray
 
 // Require the presence of a volunteer profile document in the props object. Uniforms adds 'model' to the props, which we use.
 EditVolunteerProfile.propTypes = {
-  location: PropTypes.object,
-  volunteer: PropTypes.object,
-  interestsArray: PropTypes.array.isRequired,
-  skillsArray: PropTypes.array.isRequired,
-  environmentalArray: PropTypes.array.isRequired,
-  availabilitiesArray: PropTypes.array.isRequired,
+  doc: PropTypes.object,
   ready: PropTypes.bool.isRequired,
 };
 
@@ -256,29 +117,15 @@ EditVolunteerProfile.propTypes = {
 export default withTracker(({ match }) => {
   // Get the documentID from the URL field. See imports/ui/layouts/App.jsx for the route containing :_id.
   const { _id } = match.params;
-  const volunteerId = _id;
+  const documentId = _id;
   // Get access to volunteer profile documents.
   const subscription = VolunteerProfiles.subscribeCurrVolProfile();
-  // Get access to Interests and other collections.
-  const subscription2 = Interests.subscribe();
-  const subscription3 = SpecialSkills.subscribe();
-  const subscription4 = Environmental.subscribe();
-  const subscription5 = Availabilities.subscribe();
   // Determine if the subscription is ready
-  const ready = subscription.ready() && subscription2.ready() && subscription3.ready() && subscription4.ready() &&
-      subscription5.ready();
+  const ready = subscription.ready();
   // Get the document
-  const volunteer = VolunteerProfiles.findDoc(volunteerId);
-  const interestsArray = Interests.find({}, {}).fetch();
-  const skillsArray = SpecialSkills.find({}, {}).fetch();
-  const environmentalArray = Environmental.find({}, {}).fetch();
-  const availabilitiesArray = Availabilities.find({}, {}).fetch();
+  const doc = VolunteerProfiles.findDoc(documentId);
   return {
-    volunteer,
+    doc,
     ready,
-    interestsArray,
-    skillsArray,
-    environmentalArray,
-    availabilitiesArray,
   };
 })(EditVolunteerProfile);

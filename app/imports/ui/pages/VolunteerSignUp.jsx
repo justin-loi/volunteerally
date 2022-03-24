@@ -7,7 +7,6 @@ import SimpleSchema2Bridge from 'uniforms-bridge-simple-schema-2';
 import swal from 'sweetalert';
 import { AutoForm, ErrorsField, SubmitField, TextField, HiddenField } from 'uniforms-semantic';
 import { withTracker } from 'meteor/react-meteor-data';
-import Axios from 'axios';
 import { PAGE_IDS } from '../utilities/PageIDs';
 import { COMPONENT_IDS } from '../utilities/ComponentIDs';
 import { signUpNewVolunteerMethod } from '../../api/volunteer/VolunteerProfileCollection.methods';
@@ -15,14 +14,17 @@ import { Interests } from '../../api/interest/InterestCollection';
 import { SpecialSkills } from '../../api/special_skills/SpecialSkillCollection';
 import { Environmental } from '../../api/environmental_preference/EnvironmentalPreferenceCollection';
 import { Availabilities } from '../../api/availability/AvailabilityCollection';
-import { genderAllowValues, genderComponentID, numberOnly, checkboxHelper } from '../components/VolunteerUsefulFunction';
+
+const genderAllowValues = ['Male', 'Female', 'Other', 'Prefer Not to Say'];
+const genderComponentID = [COMPONENT_IDS.VOLUNTEER_SIGNUP_FORM_GENDER_MALE, COMPONENT_IDS.VOLUNTEER_SIGNUP_FORM_GENDER_FEMALE,
+  COMPONENT_IDS.VOLUNTEER_SIGNUP_FORM_GENDER_OTHER, COMPONENT_IDS.VOLUNTEER_SIGNUP_FORM_GENDER_NO_SAY];
 
 const formSchema = new SimpleSchema({
   email: String,
   password: String,
   firstName: String,
   lastName: String,
-  // username: { type: String, optional: true },
+  username: { type: String, optional: true },
   gender: { type: String, optional: true },
   dob: { type: String, optional: true },
   address: { type: String, optional: true },
@@ -30,7 +32,6 @@ const formSchema = new SimpleSchema({
   state: { type: String, optional: true },
   code: { type: String, optional: true },
   phoneNumber: { type: String, optional: true },
-  image: { type: String, optional: true },
 });
 
 const bridge = new SimpleSchema2Bridge(formSchema);
@@ -48,7 +49,6 @@ const VolunteerSignUp = ({ location, ready, interestsArray, skillsArray, environ
   const [environmentalPreference, setEnvironmentalPreference] = useState('');
   const [availability, setAvailability] = useState([]);
   const [privacyPolicy, setPrivacyPolicy] = useState('');
-  const [image, setImage] = useState('');
   // Array(arraySize).fill(value)
   const [isValueEmpty, setIsValueEmpty] = useState(Array(2).fill(false));
 
@@ -75,6 +75,14 @@ const VolunteerSignUp = ({ location, ready, interestsArray, skillsArray, environ
     return false;
   };
 
+  const numberOnly = (value) => {
+    if (/^[0-9]+$/.test(value)) {
+      return true;
+    }
+    swal('Error!', 'Zip/Postal Code and Phone Numbers should be number only ', 'error');
+    return false;
+  };
+
   const isNotEmpty = (value) => (!value);
 
   const agreePolicyAndTerm = (value) => {
@@ -90,14 +98,16 @@ const VolunteerSignUp = ({ location, ready, interestsArray, skillsArray, environ
     setIsValueEmpty(isValueEmpty);
   };
 
-  // phone number error check, not working yet
-  // const phoneNumberLimit = (phoneNumber) => {
-  //   if(phoneNumber.length() > 10) {
-  //     swal('Error!', 'Phone number should only be 10 digit long', 'error');
-  //     return false;
-  //   }
-  //   return true;
-  // }
+  const checkboxHelper = (array, value) => {
+    // Reference: https://stackoverflow.com/questions/5767325/how-can-i-remove-a-specific-item-from-an-array
+    const index = array.indexOf(value);
+    if (index > -1) {
+      array.splice(index, 1);
+    } else {
+      array.push(value);
+    }
+    return array;
+  };
 
   // reference: https://stackoverflow.com/questions/6177975/how-to-validate-date-with-format-mm-dd-yyyy-in-javascript
   // Validates that the input string is a valid date formatted as "mm/dd/yyyy"
@@ -145,18 +155,6 @@ const VolunteerSignUp = ({ location, ready, interestsArray, skillsArray, environ
     return true;
   };
 
-  const uploadImg = (files) => {
-    // eslint-disable-next-line no-undef
-    const data = new FormData();
-    data.append('file', files[0]);
-    data.append('cloud_name', 'irene-ma');
-    data.append('upload_preset', 'nkv8kepo');
-    Axios.post('https://api.cloudinary.com/v1_1/irene-ma/image/upload', data).then((r) => {
-      console.log(r.data.url);
-      setImage(r.data.url);
-    });
-  };
-
   const handleChange = (e, { name, value }) => {
     switch (name) {
     case 'dateOfBirth':
@@ -181,9 +179,6 @@ const VolunteerSignUp = ({ location, ready, interestsArray, skillsArray, environ
     case 'availability':
       setAvailability(checkboxHelper(availability, value));
       break;
-    case 'image':
-      setImage(value);
-      break;
     case 'privacyPolicy':
       if (privacyPolicy === '') {
         setPrivacyPolicy(value);
@@ -197,13 +192,12 @@ const VolunteerSignUp = ({ location, ready, interestsArray, skillsArray, environ
         // do nothing.
     }
   };
+
   /* Handle SignUp submission. Create user account and a profile entry, then redirect to the home page. */
   const submit = (data, formRef) => {
     if (isValidDate(data.dob) && checkPassword(data.password, confirmPassword)
         && agreePolicyAndTerm(privacyPolicy) && checkEmail(data.email) &&
-        numberOnly(data.code)) {
-      // eslint-disable-next-line no-param-reassign
-      data.username = data.email;
+        numberOnly(data.code) && numberOnly(data.phoneNumber)) {
       // eslint-disable-next-line no-param-reassign
       data.interests = interests;
       // eslint-disable-next-line no-param-reassign
@@ -212,8 +206,6 @@ const VolunteerSignUp = ({ location, ready, interestsArray, skillsArray, environ
       data.environmental = environmentalPreference;
       // eslint-disable-next-line no-param-reassign
       data.availabilities = availability;
-      // eslint-disable-next-line no-param-reassign
-      data.image = image;
       signUpNewVolunteerMethod.callPromise(data)
         .catch(error => {
           swal('Error', error.message, 'error');
@@ -226,7 +218,6 @@ const VolunteerSignUp = ({ location, ready, interestsArray, skillsArray, environ
           setSpecialSkills([]);
           setEnvironmentalPreference('');
           setAvailability([]);
-          setImage('');
           swal({
             title: 'Signed Up',
             text: 'You now have an account. Next you need to login.',
@@ -239,7 +230,7 @@ const VolunteerSignUp = ({ location, ready, interestsArray, skillsArray, environ
   };
 
   /* Display the signup form. Redirect to add page after successful registration and login. */
-  const { from } = location.state || { from: { pathname: '/volunteer-profile' } };
+  const { from } = location.state || { from: { pathname: '/add' } };
   // if correct authentication, redirect to from: page instead of signup screen
   if (redirectToReferer) {
     return <Redirect to={from}/>;
@@ -250,7 +241,7 @@ const VolunteerSignUp = ({ location, ready, interestsArray, skillsArray, environ
   let fRef = null;
   return (
     <Container id={PAGE_IDS.VOLUNTEER_SIGNUP}>
-      <Grid textAlign="center" verticalAlign="middle" centered>
+      <Grid textAlign="center" verticalAlign="middle" centered columns={2}>
         <Grid.Column>
           <Header as="h2" textAlign="center">
             Volunteer Sign Up Form
@@ -260,10 +251,8 @@ const VolunteerSignUp = ({ location, ready, interestsArray, skillsArray, environ
             fRef = ref;
           }} schema={bridge} onSubmit={data => submit(data, fRef)}>
             <Segment>
-              {
-                // <TextField name='username' placeholder='Username' iconLeft='user'
-                //                 id={COMPONENT_IDS.VOLUNTEER_SIGNUP_FORM_USERNAME} required />
-              }
+              <TextField name='username' placeholder='Username' iconLeft='user'
+                id={COMPONENT_IDS.VOLUNTEER_SIGNUP_FORM_USERNAME}/>
               <TextField name='email' type='email' label='E-mail Address' placeholder='E-mail Address' iconLeft='mail'
                 id={COMPONENT_IDS.VOLUNTEER_SIGNUP_FORM_EMAIL}/>
               <TextField name='password' type='password' placeholder='Password' iconLeft='lock' id={COMPONENT_IDS.VOLUNTEER_SIGNUP_FORM_PASSWORD}/>
@@ -314,40 +303,31 @@ const VolunteerSignUp = ({ location, ready, interestsArray, skillsArray, environ
                 ))}
               </Form.Group>
               <TextField name='address' placeholder='1234 Example Street' iconLeft='map marker alternate'
-                id={COMPONENT_IDS.VOLUNTEER_SIGNUP_FORM_ADDRESS} required/>
+                id={COMPONENT_IDS.VOLUNTEER_SIGNUP_FORM_ADDRESS}/>
               <div className="two fields">
                 <div className="field">
                   <TextField name='city' placeholder='Honolulu' iconLeft='map marker alternate'
-                    id={COMPONENT_IDS.VOLUNTEER_SIGNUP_FORM_CITY} required/>
+                    id={COMPONENT_IDS.VOLUNTEER_SIGNUP_FORM_CITY}/>
                 </div>
                 <div className="field">
                   <TextField name='state' placeholder='Hawaii' iconLeft='map marker alternate'
-                    id={COMPONENT_IDS.VOLUNTEER_SIGNUP_FORM_STATE} required/>
+                    id={COMPONENT_IDS.VOLUNTEER_SIGNUP_FORM_STATE}/>
                 </div>
               </div>
               <div className="two fields">
                 <div className="field">
                   <TextField name='code' placeholder='96822' label='Zip/Postal Code' iconLeft='map marker alternate'
-                    id={COMPONENT_IDS.VOLUNTEER_SIGNUP_FORM_ZIPCODE} required/>
+                    id={COMPONENT_IDS.VOLUNTEER_SIGNUP_FORM_ZIPCODE}/>
                 </div>
                 <div className="field">
                   <TextField name='phoneNumber' placeholder='18081234567' label='Phone Number' iconLeft='phone'
-                    id={COMPONENT_IDS.VOLUNTEER_SIGNUP_FORM_PHONE} required/>
+                    id={COMPONENT_IDS.VOLUNTEER_SIGNUP_FORM_PHONE}/>
                 </div>
-              </div>
-              <div className="field">
-                <h4>Upload a Profile Picture</h4>
-                <Form.Input
-                  style={{ marginTop: '10px' }}
-                  type='file' onChange={(event) => {
-                    uploadImg(event.target.files);
-                  }}
-                />
               </div>
               <label style={{ paddingTop: '20px' }}>Interests </label>
               <Form.Group>
-                <Grid columns={2} container>
-                  <Grid.Row>
+                <Grid columns={2}>
+                  <Grid.Row style={{ paddingLeft: '8px' }}>
                     {interestsArray.map((interest, index) => (
                       <Grid.Column key={`volunteer-signup-grid-interests-${index}`}>
                         <Form.Checkbox
@@ -365,8 +345,8 @@ const VolunteerSignUp = ({ location, ready, interestsArray, skillsArray, environ
               </Form.Group>
               <label style={{ paddingTop: '20px' }}>Special Skills (optional) </label>
               <Form.Group>
-                <Grid columns={2} container>
-                  <Grid.Row>
+                <Grid columns={2}>
+                  <Grid.Row style={{ paddingLeft: '8px' }}>
                     {skillsArray.map((skill, index) => (
                       <Grid.Column key={`volunteer-signup-grid-skills-${index}`}>
                         <Form.Checkbox
@@ -382,7 +362,7 @@ const VolunteerSignUp = ({ location, ready, interestsArray, skillsArray, environ
                   </Grid.Row>
                 </Grid>
               </Form.Group>
-              <div style={{ paddingTop: '6px' }}>Environmental Preference</div>
+              <label>Environmental Preference </label>
               <Form.Group inline>
                 {environmentalArray.map((environmental, index) => (
                   <Form.Radio
@@ -398,8 +378,8 @@ const VolunteerSignUp = ({ location, ready, interestsArray, skillsArray, environ
               </Form.Group>
               <label style={{ paddingTop: '20px' }}>Availability </label>
               <Form.Group>
-                <Grid columns={2} container>
-                  <Grid.Row>
+                <Grid columns={2}>
+                  <Grid.Row style={{ paddingLeft: '8px' }}>
                     {availabilitiesArray.map((ava, index) => (
                       <Grid.Column key={`volunteer-signup-grid-availability-${index}`}>
                         <Form.Checkbox
@@ -418,7 +398,7 @@ const VolunteerSignUp = ({ location, ready, interestsArray, skillsArray, environ
               <Link to="/privacy" target="_blank" >Privacy Policy</Link>
               <br/>
               <Link to="/terms" target="_blank" >Term & Conditions</Link>
-              <Form.Checkbox style={{ paddingLeft: '8px' }}
+              <Form.Checkbox
                 id={COMPONENT_IDS.VOLUNTEER_SIGNUP_FORM_POLICY}
                 label='Please confirm that you agree to our Privacy Policy and Term & Conditions'
                 name = 'privacyPolicy'
@@ -450,7 +430,7 @@ VolunteerSignUp.propTypes = {
 };
 
 export default withTracker(() => {
-  // Get access to Interests and other collections.
+  // Get access to Stuff documents.
   const subscription1 = Interests.subscribe();
   const subscription2 = SpecialSkills.subscribe();
   const subscription3 = Environmental.subscribe();

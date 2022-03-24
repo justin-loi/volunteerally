@@ -1,13 +1,7 @@
 import SimpleSchema from 'simpl-schema';
 import { check } from 'meteor/check';
-import { Meteor } from 'meteor/meteor';
 import BaseCollection from '../base/BaseCollection';
 import { ROLE } from '../role/Role';
-
-export const volEnvPublications = {
-  current: 'currUserEnvironmentalPreference',
-  all: 'allUserEnvironmentalPreference',
-};
 
 class VolunteerEnvironmentalCollection extends BaseCollection {
   constructor() {
@@ -68,53 +62,6 @@ class VolunteerEnvironmentalCollection extends BaseCollection {
    */
   assertValidRoleForMethod(userId) {
     this.assertRole(userId, [ROLE.ADMIN, ROLE.USER, ROLE.VOLUNTEER, ROLE.ORGANIZATION]);
-  }
-
-  /**
-   * Default publication method for entities.
-   * It publishes the entire collection for admin and just the volunteerProfile associated to an owner.
-   */
-  publish() {
-    if (Meteor.isServer) {
-      const instance = this;
-      /** This subscription publishes only the documents associated with the logged in user */
-      Meteor.publish(volEnvPublications.current, function publish() {
-        if (this.userId) {
-          return instance._collection.find({ volunteerID: this.userId });
-        }
-        return this.ready();
-      });
-
-      /** This subscription publishes all documents regardless of user, but only if the logged in user is the Admin. */
-      Meteor.publish(volEnvPublications.all, function publish() {
-        // add role use if (this.userId && Roles.userIsInRole(this.userId, ROLE.ADMIN)) {
-        if (this.userId) {
-          return instance._collection.find();
-        }
-        return this.ready();
-      });
-    }
-  }
-
-  /**
-   * Subscription method for volunteer profile by the current user.
-   */
-  subscribeCurr() {
-    if (Meteor.isClient) {
-      return Meteor.subscribe(volEnvPublications.current);
-    }
-    return null;
-  }
-
-  /**
-   * Subscription method for subscribing all profile
-   * It subscribes to the entire collection.
-   */
-  subscribe() {
-    if (Meteor.isClient) {
-      return Meteor.subscribe(volEnvPublications.all);
-    }
-    return null;
   }
 
   /**

@@ -1,4 +1,4 @@
-name: nonprofit-project-template
+name: ci-matrp
 
 on:
   push:

@@ -8,7 +8,6 @@ import { OrganizationProfiles } from '../../api/organization/OrganizationProfile
 
 // Renders a Event Info page that connects with the current Event collection.
 const gridStyle = { height: '500px', fontSize: '75px' };
-
 const EventProfile = ({ event, orgProfile, currentUser, ready }) => ((ready) ? (
   <div>
     <div className="event-profile-top-background">
@@ -143,8 +142,8 @@ export default withTracker(({ match }) => {
   let orgProfile;
   if (event !== undefined) {
     orgProfile = OrganizationProfiles.findByEmail(event.owner);
-    // console.log(orgProfile);
-    // console.log(event);
+    console.log(orgProfile);
+    console.log(event);
   }
 
   return {

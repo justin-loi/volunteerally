@@ -32,10 +32,3 @@
  phoneNumber: { type: String, optional: true },
  // ^ use in VolunteerProfileCollection.
  */
-
-/**
- NavBar:
-
- <Dropdown.Item id={COMPONENT_IDS.NAVBAR_ORGANIZATION_SIGNUP} icon="building" text="Organization Sign up" as={NavLink} exact to="/organization_signup" key="organization_signup"/>
-
- */
