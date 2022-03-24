@@ -21,7 +21,10 @@ export const signUpNewVolunteerMethod = new ValidatedMethod({
       // eslint-disable-next-line no-unused-expressions
       interests.map((interestID) => (VolunteerInterest.define({ volunteerID, interestID })));
       skills.map((skillID) => (VolunteerSkill.define({ volunteerID, skillID })));
-      VolunteerEnvironmental.define({ volunteerID, environmentalID: environmental });
+      if (environmental !== '') {
+        // console.log(environmental);
+        VolunteerEnvironmental.define({ volunteerID, environmentalID: environmental });
+      }
       availabilities.map((availabilityID) => (VolunteerAvailability.define({ volunteerID, availabilityID })));
       VolunteerEventHours.define({ volunteerID: volunteerID, hoursID: Hours.define({ total: hours }) });
     }

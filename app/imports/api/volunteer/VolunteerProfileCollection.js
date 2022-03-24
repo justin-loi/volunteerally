@@ -45,9 +45,13 @@ class VolunteerProfileCollection extends BaseProfileCollection {
       const user = this.findOne({ email, firstName, lastName });
       if (!user) {
         const role = ROLE.VOLUNTEER;
-        const profileID = this._collection.insert({ email, firstName, lastName, userID: this.getFakeUserId(), role, gender, dob, address, city, state, code, phoneNumber, image });
+        const profileID = this._collection.insert({ email, firstName, lastName, userID: this.getFakeUserId(), role, gender, dob, address, city, state, code, phoneNumber,
+          image: 'images/profile.png' });
         const userID = Volunteers.define({ username, role, password, email });
         this._collection.update(profileID, { $set: { userID } });
+        if (image) {
+          this._collection.update(profileID, { $set: { image } });
+        }
         return profileID;
       }
       return user._id;

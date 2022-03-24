@@ -206,12 +206,12 @@ export default withTracker(() => {
   // get volunteer event
   const volEvents = VolunteerEvent.find({ volunteerID: Meteor.userId() }, {}).fetch();
 
-  console.log(volEvents);
+  // console.log(volEvents);
   const signedUpEvents = [];
   // eslint-disable-next-line no-unused-expressions
   (volEvents.length !== 0 && ready) ? (
     volEvents.map((volEvent) => signedUpEvents.push(Events.findDoc({ _id: volEvent.eventID })))) : [];
-  console.log('signed up Events', signedUpEvents);
+  // console.log('signed up Events', signedUpEvents);
   // { _id: volEvents[volEvents.length - 1].eventID }
   // get OrgEvents
   const orgEvents = [];

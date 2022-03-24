@@ -6,6 +6,8 @@ import { withTracker } from 'meteor/react-meteor-data';
 import PropTypes from 'prop-types';
 import SimpleSchema2Bridge from 'uniforms-bridge-simple-schema-2';
 import SimpleSchema from 'simpl-schema';
+import Axios from 'axios';
+import { Redirect } from 'react-router-dom';
 import { VolunteerProfiles } from '../../api/volunteer/VolunteerProfileCollection';
 import { updateMethod } from '../../api/base/BaseCollection.methods';
 import { PAGE_IDS } from '../utilities/PageIDs';
@@ -30,17 +32,34 @@ const formSchema = new SimpleSchema({
 const bridge = new SimpleSchema2Bridge(formSchema);
 
 /** Renders the Page for editing a single volunteer. */
-const EditVolunteerProfile = ({ volunteer, interestsArray, skillsArray, environmentalArray, availabilitiesArray, ready }) => {
+const EditVolunteerProfile = ({ location, volunteer, interestsArray, skillsArray, environmentalArray, availabilitiesArray, ready }) => {
+  const [redirectToReferer, setRedirectToReferer] = useState(false);
   const [genderValue, setGender] = useState(volunteer.gender);
   const [interests, setInterests] = useState([]);
   const [specialSkills, setSpecialSkills] = useState([]);
   const [environmentalPreference, setEnvironmentalPreference] = useState('');
   const [availability, setAvailability] = useState([]);
+  const [image, setImage] = useState('');
+
+  const uploadImg = (files) => {
+    // eslint-disable-next-line no-undef
+    const data = new FormData();
+    data.append('file', files[0]);
+    data.append('cloud_name', 'irene-ma');
+    data.append('upload_preset', 'nkv8kepo');
+    Axios.post('https://api.cloudinary.com/v1_1/irene-ma/image/upload', data).then((r) => {
+      console.log(r.data.url);
+      setImage(r.data.url);
+    });
+  };
 
   const handleChange = (e, { name, value }) => {
     switch (name) {
     case 'gender':
       setGender(value);
+      break;
+    case 'image':
+      setImage(value);
       break;
     case 'interests':
       setInterests(checkboxHelper(interests, value));
@@ -65,14 +84,26 @@ const EditVolunteerProfile = ({ volunteer, interestsArray, skillsArray, environm
       const { firstName, lastName, address, gender, city, state, code, phoneNumber, _id } = data;
       const collectionName = VolunteerProfiles.getCollectionName();
       const updateData = { id: _id, firstName, lastName, gender, address, city, state, code, phoneNumber };
+      // eslint-disable-next-line no-param-reassign
+      updateData.image = image;
       updateMethod.callPromise({ collectionName, updateData })
         .catch(error => swal('Error', error.message, 'error'))
         .then(() => swal('Success', 'updated updated successfully', 'success'));
       editVolunteerLinkedCollectionMethod.callPromise({ profileID: _id, interests: interests, skills: specialSkills, environmental: environmentalPreference, availabilities: availability })
         .catch(error => swal('Error', error.message, 'error'))
-        .then(() => swal('Success', 'updated updated successfully', 'success'));
+        .then(() => {
+          swal('Success', 'updated updated successfully', 'success');
+          setRedirectToReferer(true);
+        });
     }
   };
+
+  /* Display the signup form. Redirect to add page after successful registration and login. */
+  const { from } = location.state || { from: { pathname: '/volunteer-profile' } };
+  // if correct authentication, redirect to from: page instead of signup screen
+  if (redirectToReferer) {
+    return <Redirect to={from}/>;
+  }
 
   return (ready) ? (
     <Grid id={PAGE_IDS.EDIT_VOLUNTEER_PROFILE} container centered>
@@ -120,6 +151,15 @@ const EditVolunteerProfile = ({ volunteer, interestsArray, skillsArray, environm
               <div className="field">
                 <TextField name='phoneNumber' placeholder='18081234567' label='Phone Number' iconLeft='phone'/>
               </div>
+            </div>
+            <div className="field">
+              <h4>Upload a Profile Picture</h4>
+              <Form.Input
+                style={{ marginTop: '10px' }}
+                type='file' onChange={(event) => {
+                  uploadImg(event.target.files);
+                }}
+              />
             </div>
             <label style={{ paddingTop: '20px' }}>Interests </label>
             <Form.Group>
@@ -203,6 +243,7 @@ const EditVolunteerProfile = ({ volunteer, interestsArray, skillsArray, environm
 
 // Require the presence of a volunteer profile document in the props object. Uniforms adds 'model' to the props, which we use.
 EditVolunteerProfile.propTypes = {
+  location: PropTypes.object,
   volunteer: PropTypes.object,
   interestsArray: PropTypes.array.isRequired,
   skillsArray: PropTypes.array.isRequired,

@@ -1,11 +1,10 @@
 {
   "defaultAccounts": [
-    { "email": "admin@foo.com", "password": "changeme", "role": "ADMIN", "firstName": "Admin", "lastName": "MATRP"
-    }
+    { "email": "admin@foo.com", "password": "changeme", "role": "ADMIN", "firstName": "Admin", "lastName": "MATRP"},
+    { "email": "john@foo.com", "password": "changeme", "role": "VOLUNTEER" , "firstName": "John", "lastName": "Doe" }
   ],
 
   "defaultVolunteers": [
-    { "email": "john@foo.com", "password": "changeme", "role": "VOLUNTEER" , "firstName": "John", "lastName": "Doe" },
     { "email": "tom@foo.com", "password": "changeme", "role": "VOLUNTEER", "firstName": "tom", "lastName": "tom",
       "username": "tom", "gender": "Male", "dob": "12/31/2000",
       "address": "2500 Campus Rd", "city": "Honolulu", "state": "Hawaii", "code": "96822", "phoneNumber": "808-123-1234",
