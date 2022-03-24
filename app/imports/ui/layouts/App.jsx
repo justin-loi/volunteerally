@@ -29,7 +29,9 @@ import OrganizationLibrary from '../pages/OrganizationLibrary';
 import VolunteerProfile from '../pages/VolunteerProfile';
 import OrganizationInfo from '../pages/OrganizationInfo';
 import EditVolunteerProfile from '../pages/EditVolunteerProfile';
+import GoogleMap from '../pages/GoogleMap';
 import OrganizationProfile from '../pages/OrganizationProfile';
+import EditOrganizationProfile from '../pages/EditOrganizationProfile';
 
 /** Top-level layout component for this application. Called in imports/startup/client/startup.jsx. */
 class App extends React.Component {
@@ -55,13 +57,15 @@ class App extends React.Component {
             <Route path="/signup" component={Signup}/>
             <Route path="/signout" component={Signout}/>
             <VolProtectedRoute path="/volunteer-profile" component={VolunteerProfile}/>
-            <OrgProtectedRoute path="/organization-profile" component={OrganizationProfile}/>
+            <Route path="/organization-profile/:_id" component={OrganizationProfile}/>
+            <OrgProtectedRoute path="/edit-organization-profile/:_id" component={EditOrganizationProfile}/>
             <Route path="/eprofile" component={EventProfile}/>
             <Route path="/about_us" component={AboutUs}/>
             <Route path="/privacy" component={Privacy}/>
             <Route path="/terms" component={TermsAndConditions}/>
             <Route path="/signup" component={Signup}/>
             <Route path="/signout" component={Signout}/>
+            <Route path ="/map" component={GoogleMap}/>
             <OrgProtectedRoute path="/add" component={AddEvent}/>
             <ProtectedRoute path="/list" component={ListStuff}/>
             <ProtectedRoute path="/edit/:_id" component={EditStuff}/>

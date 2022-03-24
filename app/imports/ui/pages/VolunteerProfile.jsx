@@ -29,15 +29,17 @@ const segmentHeaderStyle = {
 };
 
 /** Renders the Page for adding a document. */
-const VolunteerProfile = ({ volunteer, event, interests, skills, envPrefer, availabilities, totalHours, volEventsCount, orgEventsCount, ready }) => ((ready) ? (
+const VolunteerProfile = ({ volunteer, signedUpEvents, interests, skills, envPrefer, availabilities, totalHours, volEventsCount, orgEventsCount, ready }) => ((ready) ? (
   <Grid id={PAGE_IDS.VOLUNTEER_PROFILE} container centered>
     <Grid.Row>
       <Image src='/images/volunteer_profile_banner.png' size='big' />
     </Grid.Row>
     <Grid.Row >
       <Button as={NavLink} exact to={`/edit-volunteer-profile/${volunteer._id}`}>Edit Profile</Button>
-      <Button>Settings</Button>
-      <Button>Preferences</Button>
+      {
+        // <Button>Settings</Button>
+        // <Button>Preferences</Button>
+      }
       <Button>Log Volunteer Hours</Button>
       <Button>Send an email</Button>
     </Grid.Row>
@@ -46,7 +48,7 @@ const VolunteerProfile = ({ volunteer, event, interests, skills, envPrefer, avai
         <Label color='teal' size='massive' ribbon>
           {`${(capitalizeFirstLetter(volunteer.firstName))} ${(capitalizeFirstLetter(volunteer.lastName))}`}
         </Label>
-        <Image src='images/profile.png' size='medium' circular centered />
+        <Image src={volunteer.image} size='medium' circular centered />
         <Divider/>
         <Segment>
           <Header as="h3" style={segmentHeaderStyle}>
@@ -93,15 +95,19 @@ const VolunteerProfile = ({ volunteer, event, interests, skills, envPrefer, avai
           <Header as="h3">
             <Icon name="calendar outline"/> Upcoming Events
           </Header>
-          <Card as={NavLink} exact to={`/details/${event._id}`}>
-            <Image src='images/event_card_image_volunteer.jpg' size='medium'/>
-            <Card.Content>
-              <Card.Header> Mowing Peoples Lawns</Card.Header>
-              <Card.Meta>
-                <span>Date: 8:00am - 8:00pm</span>
-              </Card.Meta>
-            </Card.Content>
-          </Card>
+          {(signedUpEvents.length !== 0) ?
+            signedUpEvents.map((events, index) => (
+              <Card as={NavLink} exact to={`/details/${events._id}`} key={`vol-event-${index}`}>
+                <Image src='images/event_card_image_volunteer.jpg' size='medium'/>
+                <Card.Content>
+                  <Card.Header>{events.eventName}</Card.Header>
+                  <Card.Meta>
+                    <span>{events.time}</span>
+                  </Card.Meta>
+                </Card.Content>
+              </Card>
+            ))
+            : <p>No upcoming events</p>}
         </Segment>
         <Segment>
           <Header as="h3" style={segmentHeaderStyle}>
@@ -128,7 +134,7 @@ const VolunteerProfile = ({ volunteer, event, interests, skills, envPrefer, avai
 
 VolunteerProfile.propTypes = {
   volunteer: PropTypes.object,
-  event: PropTypes.object,
+  signedUpEvents: PropTypes.array,
   interests: PropTypes.array,
   skills: PropTypes.array,
   envPrefer: PropTypes.object,
@@ -161,7 +167,6 @@ export default withTracker(() => {
       && subscription5.ready() && subscription6.ready() && subscription7.ready() && subscription8.ready() && subscription9.ready()
       && subscription10.ready() && subscription11.ready() && subscription12.ready() && subscription13.ready() && subscription14.ready();
   // Get the volunteer documents and sort them by name.
-  const event = Events.find({}, { sort: { name: 1 } }).fetch()[0];
   // const volunteerProfile = VolunteerProfiles.findOne({ userID: Meteor.userId() }, {});
   // Get volunteer profile
   const volunteer = VolunteerProfiles.findOne({}, {});
@@ -198,8 +203,17 @@ export default withTracker(() => {
   // get volunteer helped event count
   const volEventsCount = VolunteerEvent.find({ volunteerID: Meteor.userId() }, {}).count();
 
-  // get OrgEvents
+  // get volunteer event
   const volEvents = VolunteerEvent.find({ volunteerID: Meteor.userId() }, {}).fetch();
+
+  console.log(volEvents);
+  const signedUpEvents = [];
+  // eslint-disable-next-line no-unused-expressions
+  (volEvents.length !== 0 && ready) ? (
+    volEvents.map((volEvent) => signedUpEvents.push(Events.findDoc({ _id: volEvent.eventID })))) : [];
+  console.log('signed up Events', signedUpEvents);
+  // { _id: volEvents[volEvents.length - 1].eventID }
+  // get OrgEvents
   const orgEvents = [];
   // eslint-disable-next-line no-unused-expressions
   (typeof volEvents !== 'undefined' && ready) ? (
@@ -208,7 +222,7 @@ export default withTracker(() => {
 
   return {
     volunteer,
-    event,
+    signedUpEvents,
     ready,
     interests,
     skills,

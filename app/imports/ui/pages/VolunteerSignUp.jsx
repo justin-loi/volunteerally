@@ -7,6 +7,7 @@ import SimpleSchema2Bridge from 'uniforms-bridge-simple-schema-2';
 import swal from 'sweetalert';
 import { AutoForm, ErrorsField, SubmitField, TextField, HiddenField } from 'uniforms-semantic';
 import { withTracker } from 'meteor/react-meteor-data';
+import Axios from 'axios';
 import { PAGE_IDS } from '../utilities/PageIDs';
 import { COMPONENT_IDS } from '../utilities/ComponentIDs';
 import { signUpNewVolunteerMethod } from '../../api/volunteer/VolunteerProfileCollection.methods';
@@ -21,7 +22,7 @@ const formSchema = new SimpleSchema({
   password: String,
   firstName: String,
   lastName: String,
-  username: { type: String, optional: true },
+  // username: { type: String, optional: true },
   gender: { type: String, optional: true },
   dob: { type: String, optional: true },
   address: { type: String, optional: true },
@@ -29,6 +30,7 @@ const formSchema = new SimpleSchema({
   state: { type: String, optional: true },
   code: { type: String, optional: true },
   phoneNumber: { type: String, optional: true },
+  image: { type: String, optional: true },
 });
 
 const bridge = new SimpleSchema2Bridge(formSchema);
@@ -46,6 +48,7 @@ const VolunteerSignUp = ({ location, ready, interestsArray, skillsArray, environ
   const [environmentalPreference, setEnvironmentalPreference] = useState('');
   const [availability, setAvailability] = useState([]);
   const [privacyPolicy, setPrivacyPolicy] = useState('');
+  const [image, setImage] = useState('');
   // Array(arraySize).fill(value)
   const [isValueEmpty, setIsValueEmpty] = useState(Array(2).fill(false));
 
@@ -86,6 +89,15 @@ const VolunteerSignUp = ({ location, ready, interestsArray, skillsArray, environ
     isValueEmpty[index] = value;
     setIsValueEmpty(isValueEmpty);
   };
+
+  // phone number error check, not working yet
+  // const phoneNumberLimit = (phoneNumber) => {
+  //   if(phoneNumber.length() > 10) {
+  //     swal('Error!', 'Phone number should only be 10 digit long', 'error');
+  //     return false;
+  //   }
+  //   return true;
+  // }
 
   // reference: https://stackoverflow.com/questions/6177975/how-to-validate-date-with-format-mm-dd-yyyy-in-javascript
   // Validates that the input string is a valid date formatted as "mm/dd/yyyy"
@@ -133,6 +145,18 @@ const VolunteerSignUp = ({ location, ready, interestsArray, skillsArray, environ
     return true;
   };
 
+  const uploadImg = (files) => {
+    // eslint-disable-next-line no-undef
+    const data = new FormData();
+    data.append('file', files[0]);
+    data.append('cloud_name', 'irene-ma');
+    data.append('upload_preset', 'nkv8kepo');
+    Axios.post('https://api.cloudinary.com/v1_1/irene-ma/image/upload', data).then((r) => {
+      console.log(r.data.url);
+      setImage(r.data.url);
+    });
+  };
+
   const handleChange = (e, { name, value }) => {
     switch (name) {
     case 'dateOfBirth':
@@ -157,6 +181,9 @@ const VolunteerSignUp = ({ location, ready, interestsArray, skillsArray, environ
     case 'availability':
       setAvailability(checkboxHelper(availability, value));
       break;
+    case 'image':
+      setImage(value);
+      break;
     case 'privacyPolicy':
       if (privacyPolicy === '') {
         setPrivacyPolicy(value);
@@ -170,12 +197,13 @@ const VolunteerSignUp = ({ location, ready, interestsArray, skillsArray, environ
         // do nothing.
     }
   };
-
   /* Handle SignUp submission. Create user account and a profile entry, then redirect to the home page. */
   const submit = (data, formRef) => {
     if (isValidDate(data.dob) && checkPassword(data.password, confirmPassword)
         && agreePolicyAndTerm(privacyPolicy) && checkEmail(data.email) &&
         numberOnly(data.code)) {
+      // eslint-disable-next-line no-param-reassign
+      data.username = data.email;
       // eslint-disable-next-line no-param-reassign
       data.interests = interests;
       // eslint-disable-next-line no-param-reassign
@@ -184,6 +212,8 @@ const VolunteerSignUp = ({ location, ready, interestsArray, skillsArray, environ
       data.environmental = environmentalPreference;
       // eslint-disable-next-line no-param-reassign
       data.availabilities = availability;
+      // eslint-disable-next-line no-param-reassign
+      data.image = image;
       signUpNewVolunteerMethod.callPromise(data)
         .catch(error => {
           swal('Error', error.message, 'error');
@@ -196,6 +226,7 @@ const VolunteerSignUp = ({ location, ready, interestsArray, skillsArray, environ
           setSpecialSkills([]);
           setEnvironmentalPreference('');
           setAvailability([]);
+          setImage('');
           swal({
             title: 'Signed Up',
             text: 'You now have an account. Next you need to login.',
@@ -229,8 +260,10 @@ const VolunteerSignUp = ({ location, ready, interestsArray, skillsArray, environ
             fRef = ref;
           }} schema={bridge} onSubmit={data => submit(data, fRef)}>
             <Segment>
-              <TextField name='username' placeholder='Username' iconLeft='user'
-                id={COMPONENT_IDS.VOLUNTEER_SIGNUP_FORM_USERNAME} required />
+              {
+                // <TextField name='username' placeholder='Username' iconLeft='user'
+                //                 id={COMPONENT_IDS.VOLUNTEER_SIGNUP_FORM_USERNAME} required />
+              }
               <TextField name='email' type='email' label='E-mail Address' placeholder='E-mail Address' iconLeft='mail'
                 id={COMPONENT_IDS.VOLUNTEER_SIGNUP_FORM_EMAIL}/>
               <TextField name='password' type='password' placeholder='Password' iconLeft='lock' id={COMPONENT_IDS.VOLUNTEER_SIGNUP_FORM_PASSWORD}/>
@@ -301,6 +334,15 @@ const VolunteerSignUp = ({ location, ready, interestsArray, skillsArray, environ
                   <TextField name='phoneNumber' placeholder='18081234567' label='Phone Number' iconLeft='phone'
                     id={COMPONENT_IDS.VOLUNTEER_SIGNUP_FORM_PHONE} required/>
                 </div>
+              </div>
+              <div className="field">
+                <h4>Upload a Profile Picture</h4>
+                <Form.Input
+                  style={{ marginTop: '10px' }}
+                  type='file' onChange={(event) => {
+                    uploadImg(event.target.files);
+                  }}
+                />
               </div>
               <label style={{ paddingTop: '20px' }}>Interests </label>
               <Form.Group>

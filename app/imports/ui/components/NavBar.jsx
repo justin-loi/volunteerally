@@ -56,7 +56,7 @@ const NavBar = ({ currentUser }) => {
                   <Dropdown.Item id={COMPONENT_IDS.VOLUNTEER_PROFILE} icon="user" text="My Profile" as={NavLink} exact to="/volunteer-profile" />
                 ) : ''}
                 {Roles.userIsInRole(Meteor.userId(), [ROLE.ORGANIZATION]) ? (
-                  <Dropdown.Item id={COMPONENT_IDS.ORGANIZATION_PROFILE} icon="user" text="My Profile" as={NavLink} exact to="/organization-profile" />
+                  <Dropdown.Item id={COMPONENT_IDS.ORGANIZATION_PROFILE} icon="user" text="My Profile" as={NavLink} exact to="/organization-profile/user" />
                 ) : ''}
                 <Dropdown.Item id={COMPONENT_IDS.NAVBAR_SIGN_OUT} icon="sign out" text="Sign Out" as={NavLink} exact to="/signout" />
               </Dropdown.Menu>

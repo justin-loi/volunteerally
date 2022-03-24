@@ -13,10 +13,10 @@ export const signUpNewVolunteerMethod = new ValidatedMethod({
   name: 'VolunteerProfiles.SignUpNewUser',
   mixins: [CallPromiseMixin],
   validate: null,
-  run({ email, firstName, lastName, password, username, gender, dob, address, city, state, code, phoneNumber, interests, skills, environmental, availabilities, hours = 0 }) {
+  run({ email, firstName, lastName, password, username, gender, dob, address, city, state, code, phoneNumber, interests, skills, environmental, availabilities, hours = 0, image }) {
     if (Meteor.isServer) {
       const profileId = VolunteerProfiles.define({
-        email, firstName, lastName, password, username, gender, dob, address, city, state, code, phoneNumber });
+        email, firstName, lastName, password, username, gender, dob, address, city, state, code, phoneNumber, image });
       const volunteerID = VolunteerProfiles.dumpUserId(profileId);
       // eslint-disable-next-line no-unused-expressions
       interests.map((interestID) => (VolunteerInterest.define({ volunteerID, interestID })));
