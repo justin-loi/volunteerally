@@ -1,5 +1,5 @@
 import React from 'react';
-import { Grid, Segment, Header, Button } from 'semantic-ui-react';
+import { Grid, Segment, Header } from 'semantic-ui-react';
 import { AutoForm, ErrorsField, SubmitField, TextField, LongTextField, RadioField } from 'uniforms-semantic';
 import swal from 'sweetalert';
 import { Meteor } from 'meteor/meteor';
@@ -22,7 +22,7 @@ const formSchema = new SimpleSchema({
 const bridge = new SimpleSchema2Bridge(formSchema);
 
 /* Renders the Page for adding a document. */
-class AddEvent extends React.Component {
+class AddOpportunity extends React.Component {
 
   submit(data, formRef) {
     const { eventName, location, categories, description, eventImage, date, time } = data;
@@ -41,9 +41,9 @@ class AddEvent extends React.Component {
   render() {
     let fRef = null;
     return (
-      <Grid id={PAGE_IDS.ADD_EVENT} container centered>
+      <Grid id={PAGE_IDS.ADD_OPPORTUNITY} container centered>
         <Grid.Column>
-          <Header as="h2" textAlign="center" inverted>Add Event</Header>
+          <Header as="h2" textAlign="center" inverted>Add Opportunity</Header>
           <AutoForm ref={ref => { fRef = ref; }} schema={bridge} onSubmit={data => this.submit(data, fRef)} >
             <Segment>
               <TextField name='eventName'/>
@@ -51,11 +51,25 @@ class AddEvent extends React.Component {
               <TextField name='date'/>
               <TextField name='time'/>
               <RadioField name='categories'/>
-              <a className="ui label">Online<i className="delete icon"/></a>
-              <a className="ui label">In-Person<i className="delete icon"/></a>
+              <div className="ui form">
+                <div className="field">
+                  <select multiple="" className="ui dropdown">
+                    <option value="">Select Option</option>
+                    <option value="Online">Online</option>
+                    <option value="In-Person">In-Person</option>
+                    <option value="Hybrid">Hybrid</option>
+                  </select>
+                </div>
+              </div>
               <LongTextField name='description'/>
               <RadioField name='eventImage'/>
-              <Button className='ui labeled icon button'><i className="upload icon"/>Upload Image</Button>
+              <div className="ui placeholder segment">
+                <div className="ui icon header">
+                  <i className="pdf file outline icon"> </i>
+                  No image uploaded.
+                </div>
+                <div className="ui primary button">Add Image</div>
+              </div>
               <SubmitField value='Submit'/>
               <ErrorsField/>
             </Segment>
@@ -66,4 +80,4 @@ class AddEvent extends React.Component {
   }
 }
 
-export default AddEvent;
+export default AddOpportunity;
