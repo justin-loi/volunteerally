@@ -71,53 +71,6 @@ class EventInterestCollection extends BaseCollection {
   }
 
   /**
-   * Default publication method for entities.
-   * It publishes the entire collection for admin and just the eventProfile associated to an event.
-   */
-  publish() {
-    if (Meteor.isServer) {
-      const instance = this;
-      /** This subscription publishes only the documents associated with the logged in user */
-      Meteor.publish(eventInterestPublications.current, function publish() {
-        if (this.eventId) {
-          return instance._collection.find({ eventID: this.eventId });
-        }
-        return this.ready();
-      });
-
-      /** This subscription publishes all documents regardless of user, but only if the logged in user is the Admin. */
-      Meteor.publish(eventInterestPublications.all, function publish() {
-        // add role use if (this.userId && Roles.userIsInRole(this.userId, ROLE.ADMIN)) {
-        if (this.eventId) {
-          return instance._collection.find();
-        }
-        return this.ready();
-      });
-    }
-  }
-
-  /**
-   * Subscription method for volunteer profile by the current user.
-   */
-  subscribeCurr() {
-    if (Meteor.isClient) {
-      return Meteor.subscribe(eventInterestPublications.current);
-    }
-    return null;
-  }
-
-  /**
-   * Subscription method for subscribing all profile
-   * It subscribes to the entire collection.
-   */
-  subscribe() {
-    if (Meteor.isClient) {
-      return Meteor.subscribe(eventInterestPublications.all);
-    }
-    return null;
-  }
-
-  /**
    * Returns an object representing the definition of docID in a format appropriate to the restoreOne or define function.
    * @param docID
    * @return {{ name, description }}
