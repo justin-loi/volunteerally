@@ -139,6 +139,11 @@ class OrganizationProfileCollection extends BaseProfileCollection {
     const organizationName = doc.organizationName;
     return { email, firstName, lastName, logoImage, eventBackgroundImage, phoneNumber, missionStatement, organizationName };
   }
+
+  dumpUserId(docID) {
+    const doc = this.findDoc(docID);
+    return doc.userID;
+  }
 }
 
 /**
