@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { Link, Redirect } from 'react-router-dom';
 import { Container, Grid, Form, Segment, Loader, Message } from 'semantic-ui-react';
-import { AutoForm, TextField, HiddenField, SubmitField } from 'uniforms-semantic';
+import { AutoForm, TextField, SubmitField } from 'uniforms-semantic';
 import { withTracker } from 'meteor/react-meteor-data';
 import SimpleSchema from 'simpl-schema';
 import SimpleSchema2Bridge from 'uniforms-bridge-simple-schema-2';
@@ -12,6 +12,7 @@ import { COMPONENT_IDS } from '../utilities/ComponentIDs';
 import { signUpNewOrganizationMethod } from '../../api/organization/OrganizationProfileCollection.methods';
 import { Industries } from '../../api/industry/IndustryCollection';
 import OrganizationSignupBackground from '../components/OrganizationSignupBackground';
+import { checkboxHelper } from '../components/VolunteerUsefulFunction';
 
 const formSchema = new SimpleSchema({
   email: String,
@@ -28,9 +29,11 @@ const formSchema = new SimpleSchema({
   primaryContactPhone: String,
   secondContactEmail: { type: String, optional: true },
   secondContactPhone: { type: String, optional: true },
-  username: String,
+  // username: String,
   password: String,
+  // confirmPassword: String,
   image: { type: String, optional: true },
+  organizationName: String,
 });
 
 const bridge = new SimpleSchema2Bridge(formSchema);
@@ -38,10 +41,11 @@ const bridge = new SimpleSchema2Bridge(formSchema);
 const OrganizationSignup = ({ location, ready, industriesArray }) => {
   const [redirectToReferer, setRedirectToReferer] = useState(false);
   const [confirmPassword, setConfirmPassword] = useState('');
-  const [industries, setIndustries] = useState('');
+  const [industries, setIndustries] = useState([]);
   const [privacyPolicy, setPrivacyPolicy] = useState('');
   const [termsConditions, setTermsConditions] = useState('');
   const [isValueEmpty, setIsValueEmpty] = useState(Array(2).fill(false));
+  const [disableSecondContact, setDisableSecondContact] = useState(true);
 
   // const [image, setImage] = useState('');
 
@@ -88,7 +92,11 @@ const OrganizationSignup = ({ location, ready, industriesArray }) => {
       setConfirmPassword(value);
       break;
     case 'industries':
-      setIndustries(value);
+      setIndustries(checkboxHelper(industries, value));
+      break;
+    case 'addSecondContact':
+      // eslint-disable-next-line no-unused-expressions
+      (disableSecondContact) ? setDisableSecondContact(false) : setDisableSecondContact(true);
       break;
     case 'privacyPolicy':
       if (privacyPolicy === '') {
@@ -122,6 +130,7 @@ const OrganizationSignup = ({ location, ready, industriesArray }) => {
       // eslint-disable-next-line no-param-reassign
       data.industries = industries;
       // insert Organization Profile Collection method here
+      console.log(data);
       signUpNewOrganizationMethod.callPromise(data).catch(error => {
         swal('Error', error.message, 'error');
       })
@@ -193,17 +202,16 @@ const OrganizationSignup = ({ location, ready, industriesArray }) => {
                   label='State'
                   id={COMPONENT_IDS.ORGANIZATION_SIGNUP_FORM_STATE}/>
                 <TextField
-                  name='zipcodePostalcode'
+                  name='zipcode'
                   label='Zip/Postal Code'
                   id={COMPONENT_IDS.ORGANIZATION_SIGNUP_FORM_ZIPCODE_POSTALCODE}/>
-                <HiddenField name='industries' value={industries}/>
                 <label>Industry</label>
                 <Form.Group>
                   <Grid columns={2} container>
                     <Grid.Row style={{ paddingLeft: '8px' }}>
                       {industriesArray.map((industry, index) => (
                         <Grid.Column key={`organization-signup-grid-industries-${index}`}>
-                          <Form.Radio
+                          <Form.Checkbox
                             key={`organization-signup-industries-${industry._id}`}
                             id={`organization-signup-industries-${index}`}
                             label={industry.name}
@@ -229,52 +237,54 @@ const OrganizationSignup = ({ location, ready, industriesArray }) => {
                   label='Primary Contact Email'
                   id={COMPONENT_IDS.ORGANIZATION_SIGNUP_FORM_PRIMARY_CONTACT_EMAIL}/>
                 <TextField
-                  name='primaryPhoneNumber'
+                  name='primaryContactPhone'
                   label='Primary Phone Number'
                   id={COMPONENT_IDS.ORGANIZATION_SIGNUP_FORM_PRIMARY_CONTACT_PHONE_NUMBER}/>
                 <Form.Field>
                   <Form.Checkbox
                     label='Add a Secondary Contact'
-                    onChange={e => this.setState({ value: e.target.value })}
-                    value={this.state.value}
+                    name ='addSecondContact'
+                    value = {1}
+                    onChange={handleChange}
                   />
                   <TextField
-                    name='secondaryContactFirstName'
+                    name='secondContactFirstName'
                     label='Secondary Contact First Name'
                     id={COMPONENT_IDS.ORGANIZATION_SIGNUP_FORM_SECONDARY_CONTACT_FIRST_NAME}
-                    disabled={!this.state.value}
+                    disabled={disableSecondContact}
                   />
                   <TextField
-                    name='secondaryContactLastName'
+                    name='secondContactLastName'
                     label='Secondary Contact Last Name'
                     id={COMPONENT_IDS.ORGANIZATION_SIGNUP_FORM_SECONDARY_CONTACT_LAST_NAME}
-                    disabled={!this.state.value}
+                    disabled={disableSecondContact}
                   />
                   <TextField
-                    name='secondaryContactEmail'
+                    name='secondContactEmail'
                     label='Secondary Contact E-mail Address'
                     id={COMPONENT_IDS.ORGANIZATION_SIGNUP_FORM_SECONDARY_CONTACT_EMAIL}
-                    disabled={!this.state.value}
+                    disabled={disableSecondContact}
                   />
                   <TextField
-                    name='secondaryContactPhoneNumber'
+                    name='secondContactPhone'
                     label='Secondary Contact Phone Number'
                     id={COMPONENT_IDS.ORGANIZATION_SIGNUP_FORM_SECONDARY_CONTACT_PHONE_NUMBER}
-                    disabled={!this.state.value}
+                    disabled={disableSecondContact}
                   />
                 </Form.Field>
-                <TextField
-                  name='username'
-                  label='Username'
-                  id={COMPONENT_IDS.ORGANIZATION_SIGNUP_FORM_USERNAME}/>
                 <TextField
                   name='password'
                   label='Password'
                   id={COMPONENT_IDS.ORGANIZATION_SIGNUP_FORM_PASSWORD}/>
-                <TextField
-                  name='confirmPassword'
-                  label='Confirm Password'
-                  id={COMPONENT_IDS.ORGANIZATION_SIGNUP_FORM_CONFIRM_PASSWORD}/>
+                <Form.Input
+                  label="Confirm Password"
+                  id={COMPONENT_IDS.ORGANIZATION_SIGNUP_FORM_CONFIRM_PASSWORD}
+                  name="confirmPassword"
+                  type="password"
+                  placeholder="Confirm Your Password"
+                  required
+                  onChange={handleChange}
+                />
                 <Form.Field>
                   <br/>
                   <Message>Please confirm that you agree to our Privacy Policy and Terms & Conditions</Message>
@@ -318,7 +328,7 @@ export default withTracker(() => {
   const subscription1 = Industries.subscribe();
   const ready = subscription1.ready();
   const industriesArray = Industries.find({}, {}).fetch();
-
+  // console.log(industriesArray);
   return {
     industriesArray,
     ready,

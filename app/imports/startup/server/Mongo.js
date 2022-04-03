@@ -15,6 +15,7 @@ import { VolunteerEvent } from '../../api/event/VolunteerEventCollection';
 import { OrganizationEvent } from '../../api/event/OrganizationEventCollection';
 import { Hours } from '../../api/hours/HoursCollection';
 import { VolunteerEventHours } from '../../api/hours/VolunteerEventHours';
+import { Industries } from '../../api/industry/IndustryCollection';
 /* eslint-disable no-console */
 
 // Initialize the database with a default data document.
@@ -184,4 +185,16 @@ if (OrganizationEvent.count() === 0) {
   eventsArray.map((event) => orgIndex.push(organizationArray.findIndex((organization) => organization.email === event.owner)));
   eventsArray.map((event, index) => (OrganizationEvent.define({
     organizationID: organizationArray[orgIndex[index]].userID, eventID: event._id })));
+}
+
+function addIndustries(data) {
+  console.log(`  Adding industries: ${data.name}`);
+  Industries.define(data);
+}
+
+if (Industries.count() === 0) {
+  if (Meteor.settings.defaultIndustries) {
+    console.log('Creating default industries.');
+    Meteor.settings.defaultIndustries.map(data => addIndustries(data));
+  }
 }

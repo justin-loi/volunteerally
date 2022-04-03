@@ -18,6 +18,7 @@ import { Hours } from '../hours/HoursCollection';
 import { VolunteerEventHours } from '../hours/VolunteerEventHours';
 import { VolunteerEvent } from '../event/VolunteerEventCollection';
 import { OrganizationEvent } from '../event/OrganizationEventCollection';
+import { Industries } from '../industry/IndustryCollection';
 
 class MATRPClass {
   collections;
@@ -47,6 +48,7 @@ class MATRPClass {
       VolunteerEventHours,
       VolunteerEvent,
       OrganizationEvent,
+      Industries,
     ];
     /*
      * A list of collection class instances in the order required for them to be sequentially loaded from a file.
@@ -70,6 +72,7 @@ class MATRPClass {
       VolunteerEventHours,
       VolunteerEvent,
       OrganizationEvent,
+      Industries,
     ];
 
     /*
