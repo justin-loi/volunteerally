@@ -32,6 +32,7 @@ import GoogleMap from '../pages/GoogleMap';
 import OrganizationProfile from '../pages/OrganizationProfile';
 import EditOrganizationProfile from '../pages/EditOrganizationProfile';
 import AddOpportunity from '../pages/AddOpportunity';
+import ForgotPassword from '../pages/ForgotPassword';
 
 /** Top-level layout component for this application. Called in imports/startup/client/startup.jsx. */
 class App extends React.Component {
@@ -65,6 +66,7 @@ class App extends React.Component {
             <Route path="/terms" component={TermsAndConditions}/>
             <Route path="/signup" component={Signup}/>
             <Route path="/signout" component={Signout}/>
+            <Route path="/forgot_password" component={ForgotPassword}/>
             <Route path ="/map" component={GoogleMap}/>
             <OrgProtectedRoute path="/add" component={AddOpportunity}/>
             <ProtectedRoute path="/list" component={ListStuff}/>
