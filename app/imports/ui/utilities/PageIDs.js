@@ -10,6 +10,7 @@ export const PAGE_IDS = {
   SIGN_IN: 'sigin-in',
   SIGN_OUT: 'sign-out',
   SIGN_UP: 'sign-up',
+  FORGOT_PASSWORD: 'forgot-password',
   VOLUNTEER_SIGNUP: 'volunteer-signup',
   ABOUT_US: 'about-us',
   ORGANIZATION_LIB: 'organization_library',

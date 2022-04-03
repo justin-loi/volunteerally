@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { Link, Redirect } from 'react-router-dom';
 import { Meteor } from 'meteor/meteor';
-import { Container, Form, Grid, Header, Message, Segment } from 'semantic-ui-react';
+import { Container, Form, Grid, Header, Item, Message, Segment } from 'semantic-ui-react';
 import { PAGE_IDS } from '../utilities/PageIDs';
 import { COMPONENT_IDS } from '../utilities/ComponentIDs';
 
@@ -51,22 +51,27 @@ const Signin = ({ location }) => {
   }
   // Otherwise return the Login form.
   return (
-    <Container id={PAGE_IDS.SIGN_IN} style={{ paddingLeft: '130px', paddingRight: '130px', marginTop: '50px', marginBottom: '95px' }}>
+    <Container id={PAGE_IDS.SIGN_IN}
+      style={{ paddingLeft: '130px',
+        paddingRight: '130px',
+        marginTop: '50px',
+        marginBottom: '95px' }}>
       <Grid textAlign="center" verticalAlign="middle" centered columns={2}>
         <Grid.Column>
+          <br/>
           <Header as="h2" textAlign="center">
-            Login to your account
+            Sign In
           </Header>
           <Form onSubmit={submit}>
-            <Segment stacked>
+            <Segment style={{ boxShadow: 'none', border: 'none' }}>
               <Form.Input
-                label="Email"
+                label="Username"
                 id={COMPONENT_IDS.SIGN_IN_FORM_EMAIL}
                 icon="user"
                 iconPosition="left"
                 name="email"
                 type="email"
-                placeholder="E-mail address"
+                focus
                 onChange={handleChange}
               />
               <Form.Input
@@ -75,16 +80,29 @@ const Signin = ({ location }) => {
                 icon="lock"
                 iconPosition="left"
                 name="password"
-                placeholder="Password"
                 type="password"
+                focus
                 onChange={handleChange}
               />
-              <Form.Button id={COMPONENT_IDS.SIGN_IN_FORM_SUBMIT} content="Submit" />
+              <Item>
+                <Item.Content>
+                  <Link to="/forgot_password">Forgot your password?</Link>
+                </Item.Content>
+              </Item>
+              <br/>
+              <Form.Button id={COMPONENT_IDS.SIGN_IN_FORM_SUBMIT} content="Submit" fluid/>
+              <Form.Checkbox label="Remember me"/>
+              <br/>
+              <br/>
+              <Grid textAlign="center">
+                <Item>
+                  <Item.Content>
+                  Not registered? Click here to <Link to="/signup">Register</Link>
+                  </Item.Content>
+                </Item>
+              </Grid>
             </Segment>
           </Form>
-          <Message>
-            <Link to="/signup">Click here to Register</Link>
-          </Message>
           {error === '' ? (
             ''
           ) : (
