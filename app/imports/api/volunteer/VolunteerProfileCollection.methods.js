@@ -61,3 +61,16 @@ export const editVolunteerLinkedCollectionMethod = new ValidatedMethod({
     }
   },
 });
+
+/*
+export const volunteerSendEmailToOrg = new ValidatedMethod({
+  name: 'Volunteer.SendEmailToOrg',
+  mixins: [CallPromiseMixin],
+  validate: null,
+  run({ title, content, organizationEmail, volunteerEmail }) {
+    if (Meteor.isServer) {
+
+    }
+  },
+});
+*/

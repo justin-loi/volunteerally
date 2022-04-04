@@ -33,6 +33,7 @@ import OrganizationProfile from '../pages/OrganizationProfile';
 import EditOrganizationProfile from '../pages/EditOrganizationProfile';
 import AddOpportunity from '../pages/AddOpportunity';
 import ForgotPassword from '../pages/ForgotPassword';
+import SendEmailToOrg from '../pages/SendEmailToOrg';
 
 /** Top-level layout component for this application. Called in imports/startup/client/startup.jsx. */
 class App extends React.Component {
@@ -59,6 +60,7 @@ class App extends React.Component {
             <Route path="/signout" component={Signout}/>
             <VolProtectedRoute path="/volunteer-profile" component={VolunteerProfile}/>
             <Route path="/organization-profile/:_id" component={OrganizationProfile}/>
+            <Route path="/volunteer-send-email/:_id" component={SendEmailToOrg}/>
             <OrgProtectedRoute path="/edit-organization-profile/:_id" component={EditOrganizationProfile}/>
             <Route path="/eprofile" component={EventProfile}/>
             <Route path="/about_us" component={AboutUs}/>
