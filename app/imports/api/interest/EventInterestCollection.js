@@ -1,6 +1,5 @@
 import SimpleSchema from 'simpl-schema';
 import { check } from 'meteor/check';
-import { Meteor } from 'meteor/meteor';
 import BaseCollection from '../base/BaseCollection';
 import { ROLE } from '../role/Role';
 
