@@ -13,7 +13,7 @@ import { VolunteerProfiles } from './VolunteerProfileCollection';
 /* eslint-env mocha */
 
 if (Meteor.isClient) {
-  describe('VolunteerProfileCollection Meteor Methods', function testSuite() {
+  describe('EventCollection Meteor Methods', function testSuite() {
     it('Can define, update, and removeIt', async function test1() {
       const { username, password } = await defineTestVolunteer.callPromise();
       await withLoggedInUser({ username, password });

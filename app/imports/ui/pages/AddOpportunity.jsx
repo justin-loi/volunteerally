@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { Link, Redirect } from 'react-router-dom';
-import { Container, Grid, Header, Message, Segment, Form, Loader } from 'semantic-ui-react';
+import { Container, Grid, Header, Segment, Form, Loader } from 'semantic-ui-react';
 import SimpleSchema from 'simpl-schema';
 import SimpleSchema2Bridge from 'uniforms-bridge-simple-schema-2';
 import swal from 'sweetalert';
@@ -37,13 +37,13 @@ const bridge = new SimpleSchema2Bridge(formSchema);
 /**
  * Add Event, adds a new event.
  */
-const AddEvent = ({ location, ready, interestsArray, skillsArray, environmentalArray }) => {
+const AddEvent = ({ location, ready, interestsArray, skillsArray, environmentalArray, }) => {
   const [interests, setInterests] = useState([]);
   const [specialSkills, setSpecialSkills] = useState([]);
   const [environmentalPreference, setEnvironmentalPreference] = useState('');
   const [eventDate, setDate] = useState('');
   const [eventCardImage, setImage] = useState('');
-  const [eventProfileImage, setImage] = useState('');
+  const [eventProfileImage, setImage2] = useState('');
   const [isValueEmpty, setIsValueEmpty] = useState(Array(2).fill(false));
 
   const setIsValueEmptyHelper = (index, value) => {
@@ -68,7 +68,7 @@ const AddEvent = ({ location, ready, interestsArray, skillsArray, environmentalA
     const month = parseInt(parts[0], 10);
     const year = parseInt(parts[2], 10);
     // Check the ranges of month and year
-    if (year < (today.getFullYear) ||  month === 0 || month > 12) {
+    if (year < (today.getFullYear) || month === 0 || month > 12) {
       setIsValueEmptyHelper(0, true);
       swal('Error!', 'Invalid date', 'error');
       return false;
@@ -130,6 +130,8 @@ const AddEvent = ({ location, ready, interestsArray, skillsArray, environmentalA
       data.skills = specialSkills;
       // eslint-disable-next-line no-param-reassign
       data.environmental = environmentalPreference;
+      data.eventCardImage = eventCardImage;
+      data.eventProfileImage = eventProfileImage;
       // eslint-disable-next-line no-param-reassign
       addNewEventMethod.callPromise(data)
         .catch(error => {
@@ -143,6 +145,7 @@ const AddEvent = ({ location, ready, interestsArray, skillsArray, environmentalA
           setSpecialSkills([]);
           setEnvironmentalPreference('');
           setImage('');
+          setImage2('');
           swal({
             title: 'Opportunity Added Successfully!',
             text: 'This event now has an event card and event profile!',
@@ -191,7 +194,6 @@ const AddEvent = ({ location, ready, interestsArray, skillsArray, environmentalA
                 required
                 error={ isValueEmpty[0] }
               />
-              <HiddenField name='gender' value={gender}/>
               <TextField name='address' placeholder='1234 Example Street' iconLeft='map marker alternate'
                 id={COMPONENT_IDS.ADD_EVENT_ADDRESS} required/>
               <div className="two fields">
@@ -224,8 +226,8 @@ const AddEvent = ({ location, ready, interestsArray, skillsArray, environmentalA
                 <Form.Input
                   style={{ marginTop: '10px' }}
                   type='file' onChange={(event) => {
-                  uploadImg(event.target.files);
-                }}
+                    uploadImg(event.target.files);
+                  }}
                 />
               </div>
               <label style={{ paddingTop: '20px' }}>Special Interests for the Opportunity? </label>

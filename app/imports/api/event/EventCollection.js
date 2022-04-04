@@ -10,13 +10,13 @@ class EventCollection extends BaseCollection {
       eventDate: String,
       eventTime: String,
       eventAddress: String,
-      eventCity, String,
       eventState: String,
       eventZip: String,
       orgName: String,
       owner: String,
       eventCardImage: String,
       eventProfileImage: String,
+      eventCity, String,
     }));
   }
 
@@ -34,12 +34,11 @@ class EventCollection extends BaseCollection {
    * @param skillsNeeded the condition of the item.
    * @return {String} the docID of the new document.
    */
-  define({ eventName, eventDate, eventTime, eventLocation, eventDescription, orgName, eventCardImage, eventProfileImage, eventAddress, eventCity, eventState, eventZip, owner }) {
+  define({ eventName, eventDate, eventTime, eventDescription, orgName, eventCardImage, eventProfileImage, eventAddress, eventCity, eventState, eventZip, owner }) {
     const docID = this._collection.insert({
       eventName,
       eventDate,
       eventTime,
-      eventLocation,
       orgName,
       eventDescription,
       eventCardImage,
@@ -64,7 +63,7 @@ class EventCollection extends BaseCollection {
    * @param location the event location.
    * @param categories the condition of the item.
    */
-  update(docID, { eventName, eventDate, eventTime, eventLocation, eventDescription, orgName, eventCardImage, eventProfileImage, eventAddress, eventCity, eventState, eventZip, owner }) {
+  update(docID, { eventName, eventDate, eventTime, eventDescription, orgName, eventCardImage, eventProfileImage, eventAddress, eventCity, eventState, eventZip, owner }) {
     const updateData = {};
     if (eventName) {
       updateData.eventName = eventName;
@@ -75,9 +74,6 @@ class EventCollection extends BaseCollection {
     }
     if (eventTime) {
       updateData.eventTime = eventTime;
-    }
-    if (eventLocation) {
-      updateData.eventLocation = eventLocation;
     }
     if (eventDescription) {
       updateData.eventDescription = eventDescription;
@@ -132,7 +128,6 @@ class EventCollection extends BaseCollection {
     const eventDate = doc.eventDate;
     const eventTime = doc.eventTime;
     const orgName = doc.orgName;
-    const eventLocation = doc.location;
     const eventDescription = doc.eventDescription;
     const eventCardImage = doc.eventCardImage;
     const eventProfileImage = doc.eventProfileImage;
@@ -141,7 +136,7 @@ class EventCollection extends BaseCollection {
     const eventState = doc.eventState;
     const eventZip = doc.eventZip;
     const owner = doc.owner;
-    return { eventName, eventDate, eventTime, orgName, eventLocation, eventDescription, eventCardImage, eventProfileImage, eventAddress, eventCity, eventState, eventZip, owner };
+    return { eventName, eventDate, eventTime, orgName, eventDescription, eventCardImage, eventProfileImage, eventAddress, eventCity, eventState, eventZip, owner };
   }
 }
 
