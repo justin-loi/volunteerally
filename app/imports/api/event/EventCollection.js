@@ -9,7 +9,10 @@ class EventCollection extends BaseCollection {
       eventDescription: String,
       eventDate: String,
       eventTime: String,
-      eventLocation: String,
+      eventAddress: String,
+      eventCity, String,
+      eventState: String,
+      eventZip: String,
       orgName: String,
       owner: String,
       eventCardImage: String,
@@ -31,7 +34,7 @@ class EventCollection extends BaseCollection {
    * @param skillsNeeded the condition of the item.
    * @return {String} the docID of the new document.
    */
-  define({ eventName, eventDate, eventTime, eventLocation, eventDescription, orgName, eventCardImage, eventProfileImage, owner }) {
+  define({ eventName, eventDate, eventTime, eventLocation, eventDescription, orgName, eventCardImage, eventProfileImage, eventAddress, eventCity, eventState, eventZip, owner }) {
     const docID = this._collection.insert({
       eventName,
       eventDate,
@@ -41,6 +44,10 @@ class EventCollection extends BaseCollection {
       eventDescription,
       eventCardImage,
       eventProfileImage,
+      eventAddress,
+      eventCity,
+      eventState,
+      eventZip,
       owner,
     });
     return docID;
@@ -57,7 +64,7 @@ class EventCollection extends BaseCollection {
    * @param location the event location.
    * @param categories the condition of the item.
    */
-  update(docID, { eventName, eventDate, eventTime, eventLocation, eventDescription, orgName, eventCardImage, eventProfileImage, owner }) {
+  update(docID, { eventName, eventDate, eventTime, eventLocation, eventDescription, orgName, eventCardImage, eventProfileImage, eventAddress, eventCity, eventState, eventZip, owner }) {
     const updateData = {};
     if (eventName) {
       updateData.eventName = eventName;
@@ -86,6 +93,18 @@ class EventCollection extends BaseCollection {
     }
     if (eventProfileImage) {
       updateData.eventProfileImage = eventProfileImage;
+    }
+    if (eventAddress) {
+      updateData.eventAddress = eventAddress;
+    }
+    if (eventCity) {
+      updateData.eventCity = eventCity;
+    }
+    if (eventZip) {
+      updateData.eventZip = eventZip;
+    }
+    if (eventState) {
+      updateData.eventState = eventState;
     }
     this._collection.update(docID, { $set: updateData });
   }
@@ -117,8 +136,12 @@ class EventCollection extends BaseCollection {
     const eventDescription = doc.eventDescription;
     const eventCardImage = doc.eventCardImage;
     const eventProfileImage = doc.eventProfileImage;
+    const eventAddress = doc.eventAddress;
+    const eventCity = doc.eventCity;
+    const eventState = doc.eventState;
+    const eventZip = doc.eventZip;
     const owner = doc.owner;
-    return { eventName, eventDate, eventTime, orgName, eventLocation, eventDescription, eventCardImage, eventProfileImage, owner };
+    return { eventName, eventDate, eventTime, orgName, eventLocation, eventDescription, eventCardImage, eventProfileImage, eventAddress, eventCity, eventState, eventZip, owner };
   }
 }
 

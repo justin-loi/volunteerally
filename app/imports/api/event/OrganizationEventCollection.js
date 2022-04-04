@@ -12,7 +12,7 @@ class OrganizationEventCollection extends BaseCollection {
   }
 
   /**
-   * Define a link between a volunteer and an event based on their ID.
+   * Define a link between a organization and an event based on their ID.
    * @param organizationID the organization ID
    * @param eventID the event ID
    * @return {String} the docID of the new document.

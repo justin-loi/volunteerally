@@ -18,6 +18,7 @@ export const PAGE_IDS = {
   LIST_EVENTS: 'browse-opportunities',
   EDIT_VOLUNTEER_PROFILE: 'edit-volunteer-profile',
   GOOGLE_MAP: 'google-map',
-
   ORGANIZATION_PROFILE: 'organization-profile',
+  ADD_EVENT: 'add-event',
+
 };

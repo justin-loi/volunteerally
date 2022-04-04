@@ -66,8 +66,12 @@ export const COMPONENT_IDS = {
   ORGANIZATION_SIGNUP_FORM_SPECIAL_NEEDS: 'organization-signup-form-special-needs',
   VOLUNTEER_PROFILE: 'volunteer-profile',
   ORGANIZATION_PROFILE: 'organization-profile',
-  ADD_EVENT: 'add-event',
   ADD_EVENT_NAME: 'add-event-name',
   ADD_EVENT_DESCRIPTION: 'add-event-description',
-
+  ADD_EVENT_DATE: 'add-event-date',
+  ADD_EVENT_ADDRESS: 'add-event-address',
+  ADD_EVENT_CITY: 'add-event-city',
+  ADD_EVENT_STATE: 'add-event-state',
+  ADD_EVENT_ZIPCODE: 'add-event-zipcode',
+  ADD_EVENT_FORM_SUBMIT: 'add-event-form-submit',
 };

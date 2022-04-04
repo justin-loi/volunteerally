@@ -5,17 +5,15 @@ import { Container, Grid, Header, Message, Segment, Form, Loader } from 'semanti
 import SimpleSchema from 'simpl-schema';
 import SimpleSchema2Bridge from 'uniforms-bridge-simple-schema-2';
 import swal from 'sweetalert';
-import { AutoForm, ErrorsField, SubmitField, TextField, HiddenField } from 'uniforms-semantic';
+import { AutoForm, ErrorsField, SubmitField, TextField, HiddenField, LongTextField } from 'uniforms-semantic';
 import { withTracker } from 'meteor/react-meteor-data';
 import Axios from 'axios';
 import { PAGE_IDS } from '../utilities/PageIDs';
 import { COMPONENT_IDS } from '../utilities/ComponentIDs';
-import { signUpNewVolunteerMethod } from '../../api/volunteer/VolunteerProfileCollection.methods';
 import { Interests } from '../../api/interest/InterestCollection';
 import { SpecialSkills } from '../../api/special_skills/SpecialSkillCollection';
 import { Environmental } from '../../api/environmental_preference/EnvironmentalPreferenceCollection';
-import { Availabilities } from '../../api/availability/AvailabilityCollection';
-import { genderAllowValues, genderComponentID, numberOnly, checkboxHelper } from '../components/VolunteerUsefulFunction';
+import { checkboxHelper } from '../components/VolunteerUsefulFunction';
 import { addNewEventMethod } from '../../api/event/EventCollection.methods';
 
 // Create a schema to specify the structure of the data to appear in the form.
@@ -24,6 +22,10 @@ const formSchema = new SimpleSchema({
   eventDescription: String,
   eventCardImage: { type: String, optional: true },
   eventProfileImage: { type: String, optional: true },
+  eventAddress: String,
+  eventCity: String,
+  eventState: String,
+  eventZip: String,
   eventTime: String,
   orgName: String,
   eventLocation: String,
@@ -33,9 +35,9 @@ const formSchema = new SimpleSchema({
 const bridge = new SimpleSchema2Bridge(formSchema);
 
 /**
- * VolunteerSignUp component is similar to signin component, but we create a new volunteer instead.
+ * Add Event, adds a new event.
  */
-const addEvent = ({ location, ready, interestsArray, skillsArray, environmentalArray }) => {
+const AddEvent = ({ location, ready, interestsArray, skillsArray, environmentalArray }) => {
   const [interests, setInterests] = useState([]);
   const [specialSkills, setSpecialSkills] = useState([]);
   const [environmentalPreference, setEnvironmentalPreference] = useState('');
@@ -119,7 +121,7 @@ const addEvent = ({ location, ready, interestsArray, skillsArray, environmentalA
       // do nothing.
     }
   };
-  /* Handle SignUp submission. Create user account and a profile entry, then redirect to the home page. */
+  /* Handle SignUp submission. Create the event and populate events, orgEvents collections. */
   const submit = (data, formRef) => {
     if (isValidDate(data.eventDate)) {
       // eslint-disable-next-line no-param-reassign
@@ -152,7 +154,7 @@ const addEvent = ({ location, ready, interestsArray, skillsArray, environmentalA
     }
   };
 
-  /* Display the signup form. Redirect to add page after successful registration and login. */
+  /* Display the event creation form. Redirect to the event profile page after successful registration and login. */
   const { from } = location.state || { from: { pathname: '/event-profile' } };
   // if correct authentication, redirect to from: page instead of signup screen
   if (redirectToReferer) {
@@ -169,84 +171,47 @@ const addEvent = ({ location, ready, interestsArray, skillsArray, environmentalA
           <Header as="h2" textAlign="center">
             Create A New Opportunity!
           </Header>
-
           <AutoForm ref={ref => {
             fRef = ref;
           }} schema={bridge} onSubmit={data => submit(data, fRef)}>
             <Segment>
-              <TextField name='eventName' type='name' label='Event Name' placeholder='Beach Cleanup' iconLeft='certificate'
-                id={COMPONENT_IDS.ADD_EVENT_NAME}/>
-              <TextField name='eventDescription' type='description' placeholder='Looking for ocean loving volunteers to clean up...' iconLeft='bullhorn' id={COMPONENT_IDS.ADD_EVENT_DESCRIPTION}/>
+              <TextField name='eventName' type='name' label='Event Name' placeholder='Beach Cleanup' iconLeft='certificate' id={COMPONENT_IDS.ADD_EVENT_NAME}/>
+              <TextField name='organizationName' type='name' label='Organization Name' placeholder='The Red Cross' iconLeft='lock' id={COMPONENT_IDS.ADD_EVENT_NAME}/>
+              <TextField name='eventDate' type='date' label='Event Date' placeholder='04/20/1989' iconLeft='calendar' id={COMPONENT_IDS.ADD_EVENT_NAME}/>
+              <LongTextField name='eventDescription' type='description' placeholder='Looking for ocean loving volunteers to clean up...' iconLeft='bullhorn' id={COMPONENT_IDS.ADD_EVENT_DESCRIPTION}/>
+              <HiddenField name='eventDate' label='Event Date' value={eventDate} />
               <Form.Input
-                label="Confirm Password"
-                id={COMPONENT_IDS.VOLUNTEER_SIGNUP_FORM_CONFIRM_PASSWORD}
-                name="confirmPassword"
-                type="password"
-                placeholder="Confirm Your Password"
-                icon='lock'
-                iconPosition='left'
-                required
-                onChange={handleChange}
-              />
-              <HiddenField name='dob' label='Date of Birth (You must be at least 16 years old to join Volunteer Ally)' value={dateOfBirth} />
-              <Form.Input
-                label="Date Of Birth (You must be at least 16 years old to join Volunteer Ally)"
-                id={COMPONENT_IDS.VOLUNTEER_SIGNUP_FORM_BIRTH}
+                label="Event Date"
+                id={COMPONENT_IDS.ADD_EVENT_DATE}
                 icon="calendar alternate outline"
                 iconPosition="left"
-                name="dateOfBirth"
-                placeholder="mm/dd/yyyy"
+                name="eventDate"
+                placeholder="04/20/1989"
                 onChange={handleChange}
                 required
                 error={ isValueEmpty[0] }
               />
-              <div className="two fields">
-                <div className="field">
-                  <TextField name='firstName' label='First Name' placeholder='First Name' id={COMPONENT_IDS.VOLUNTEER_SIGNUP_FORM_FIRST}/>
-                </div>
-                <div className="field">
-                  <TextField name='lastName' label='Last Name' placeholder='Last Name' id={COMPONENT_IDS.VOLUNTEER_SIGNUP_FORM_LAST}/>
-                </div>
-              </div>
               <HiddenField name='gender' value={gender}/>
-              <Form.Group inline>
-                <label>Gender </label>
-                {genderAllowValues.map((value, index) => (
-                  <Form.Radio
-                    key={`volunteer-signup-gender-${index}`}
-                    id={genderComponentID[index]}
-                    label={value}
-                    name='gender'
-                    value={value}
-                    checked={gender === value}
-                    onChange={handleChange}
-                  />
-                ))}
-              </Form.Group>
               <TextField name='address' placeholder='1234 Example Street' iconLeft='map marker alternate'
-                id={COMPONENT_IDS.VOLUNTEER_SIGNUP_FORM_ADDRESS} required/>
+                id={COMPONENT_IDS.ADD_EVENT_ADDRESS} required/>
               <div className="two fields">
                 <div className="field">
                   <TextField name='city' placeholder='Honolulu' iconLeft='map marker alternate'
-                    id={COMPONENT_IDS.VOLUNTEER_SIGNUP_FORM_CITY} required/>
+                    id={COMPONENT_IDS.ADD_EVENT_CITY} required/>
                 </div>
                 <div className="field">
                   <TextField name='state' placeholder='Hawaii' iconLeft='map marker alternate'
-                    id={COMPONENT_IDS.VOLUNTEER_SIGNUP_FORM_STATE} required/>
+                    id={COMPONENT_IDS.ADD_EVENT_STATE} required/>
                 </div>
               </div>
               <div className="two fields">
                 <div className="field">
                   <TextField name='code' placeholder='96822' label='Zip/Postal Code' iconLeft='map marker alternate'
-                    id={COMPONENT_IDS.VOLUNTEER_SIGNUP_FORM_ZIPCODE} required/>
-                </div>
-                <div className="field">
-                  <TextField name='phoneNumber' placeholder='18081234567' label='Phone Number' iconLeft='phone'
-                    id={COMPONENT_IDS.VOLUNTEER_SIGNUP_FORM_PHONE} required/>
+                    id={COMPONENT_IDS.ADD_EVENT_ZIPCODE} required/>
                 </div>
               </div>
               <div className="field">
-                <h4>Upload a Profile Picture</h4>
+                <h4>Upload an Event Card Picture (smaller image)</h4>
                 <Form.Input
                   style={{ marginTop: '10px' }}
                   type='file' onChange={(event) => {
@@ -254,15 +219,24 @@ const addEvent = ({ location, ready, interestsArray, skillsArray, environmentalA
                   }}
                 />
               </div>
-              <label style={{ paddingTop: '20px' }}>Interests </label>
+              <div className="field">
+                <h4>Upload an Event Profile Banner Picture (larger image)</h4>
+                <Form.Input
+                  style={{ marginTop: '10px' }}
+                  type='file' onChange={(event) => {
+                  uploadImg(event.target.files);
+                }}
+                />
+              </div>
+              <label style={{ paddingTop: '20px' }}>Special Interests for the Opportunity? </label>
               <Form.Group>
                 <Grid columns={2} container>
                   <Grid.Row>
                     {interestsArray.map((interest, index) => (
-                      <Grid.Column key={`volunteer-signup-grid-interests-${index}`}>
+                      <Grid.Column key={`add-event-interests-${index}`}>
                         <Form.Checkbox
-                          key={`volunteer-signup-interests-${interest._id}`}
-                          id={`volunteer-signup-interests-${index}`}
+                          key={`add-event-interests-${interest._id}`}
+                          id={`add-event-interests-${index}`}
                           label={interest.name}
                           name='interests'
                           value={interest._id}
@@ -273,15 +247,15 @@ const addEvent = ({ location, ready, interestsArray, skillsArray, environmentalA
                   </Grid.Row>
                 </Grid>
               </Form.Group>
-              <label style={{ paddingTop: '20px' }}>Special Skills (optional) </label>
+              <label style={{ paddingTop: '20px' }}>Special Skills wanted for the opportunity? (optional) </label>
               <Form.Group>
                 <Grid columns={2} container>
                   <Grid.Row>
                     {skillsArray.map((skill, index) => (
-                      <Grid.Column key={`volunteer-signup-grid-skills-${index}`}>
+                      <Grid.Column key={`add-event-skills-${index}`}>
                         <Form.Checkbox
-                          key={`volunteer-signup-skill-${skill._id}`}
-                          id={`volunteer-signup-skill-${index}`}
+                          key={`add-event-skill-${skill._id}`}
+                          id={`add-event-skill-${index}`}
                           label={skill.name}
                           name='specialSkills'
                           value={skill._id}
@@ -292,12 +266,12 @@ const addEvent = ({ location, ready, interestsArray, skillsArray, environmentalA
                   </Grid.Row>
                 </Grid>
               </Form.Group>
-              <div style={{ paddingTop: '6px' }}>Environmental Preference</div>
+              <div style={{ paddingTop: '6px' }}>Environmental setting of the opportunity?</div>
               <Form.Group inline>
                 {environmentalArray.map((environmental, index) => (
                   <Form.Radio
-                    key={`volunteer-signup-environmental-preference-${environmental._id}`}
-                    id={`volunteer-signup-environmental-preference-${index}`}
+                    key={`add-event-environmental-preference-${environmental._id}`}
+                    id={`add-event-environmental-preference-${index}`}
                     label={environmental.name}
                     name='environmentalPreference'
                     value={environmental._id}
@@ -306,43 +280,10 @@ const addEvent = ({ location, ready, interestsArray, skillsArray, environmentalA
                   />
                 ))}
               </Form.Group>
-              <label style={{ paddingTop: '20px' }}>Availability </label>
-              <Form.Group>
-                <Grid columns={2} container>
-                  <Grid.Row>
-                    {availabilitiesArray.map((ava, index) => (
-                      <Grid.Column key={`volunteer-signup-grid-availability-${index}`}>
-                        <Form.Checkbox
-                          key={`volunteer-signup-availability-${ava._id}`}
-                          id={`volunteer-signup-availability-${index}`}
-                          label={ava.name}
-                          name='availability'
-                          value={ava._id}
-                          onChange={handleChange}
-                        />
-                      </Grid.Column>
-                    ))}
-                  </Grid.Row>
-                </Grid>
-              </Form.Group>
-              <Link to="/privacy" target="_blank" >Privacy Policy</Link>
-              <br/>
-              <Link to="/terms" target="_blank" >Term & Conditions</Link>
-              <Form.Checkbox style={{ paddingLeft: '8px' }}
-                id={COMPONENT_IDS.VOLUNTEER_SIGNUP_FORM_POLICY}
-                label='Please confirm that you agree to our Privacy Policy and Term & Conditions'
-                name = 'privacyPolicy'
-                value = 'agree'
-                onChange={handleChange}
-                error={ isValueEmpty[1] }
-              />
-              <SubmitField value='Sign up' id={COMPONENT_IDS.VOLUNTEER_SIGNUP_FORM_SUBMIT}/>
+              <SubmitField value='Create This Opportunity!' id={COMPONENT_IDS.ADD_EVENT_FORM_SUBMIT}/>
               <ErrorsField />
             </Segment>
           </AutoForm>
-          <Message>
-            Already have an volunteer? Login <Link to="/signin">here</Link>
-          </Message>
         </Grid.Column>
       </Grid>
     </Container>
@@ -350,12 +291,11 @@ const addEvent = ({ location, ready, interestsArray, skillsArray, environmentalA
 };
 
 /* Ensure that the React Router location object is available in case we need to redirect. */
-VolunteerSignUp.propTypes = {
+AddEvent.propTypes = {
   location: PropTypes.object,
   interestsArray: PropTypes.array.isRequired,
   skillsArray: PropTypes.array.isRequired,
   environmentalArray: PropTypes.array.isRequired,
-  availabilitiesArray: PropTypes.array.isRequired,
   ready: PropTypes.bool.isRequired,
 };
 
@@ -364,19 +304,16 @@ export default withTracker(() => {
   const subscription1 = Interests.subscribe();
   const subscription2 = SpecialSkills.subscribe();
   const subscription3 = Environmental.subscribe();
-  const subscription4 = Availabilities.subscribe();
   // Determine if the subscription is ready
-  const ready = subscription1.ready() && subscription2.ready() && subscription3.ready() && subscription4.ready();
+  const ready = subscription1.ready() && subscription2.ready() && subscription3.ready();
   // Get the document
   const interestsArray = Interests.find({}, {}).fetch();
   const skillsArray = SpecialSkills.find({}, {}).fetch();
   const environmentalArray = Environmental.find({}, {}).fetch();
-  const availabilitiesArray = Availabilities.find({}, {}).fetch();
   return {
     interestsArray,
     skillsArray,
     environmentalArray,
-    availabilitiesArray,
     ready,
   };
-})(addEvent);
+})(AddEvent);
