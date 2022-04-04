@@ -60,7 +60,12 @@ class OrganizationProfileCollection extends BaseProfileCollection {
     primaryContactFirstName, primaryContactLastName, primaryContactEmail, primaryContactPhone,
     secondContactFirstName, secondContactLastName, secondContactEmail, secondContactPhone, username }) {
     if (Meteor.isServer) {
-      // const username = email;
+      // eslint-disable-next-line no-param-reassign
+      username = (username) || email;
+      // eslint-disable-next-line no-param-reassign
+      primaryContactFirstName = (primaryContactFirstName) || firstName;
+      // eslint-disable-next-line no-param-reassign
+      primaryContactLastName = (primaryContactLastName) || lastName;
       const user = this.findOne({ email, firstName, lastName });
       if (!user) {
         const role = ROLE.ORGANIZATION;
