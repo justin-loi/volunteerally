@@ -1,5 +1,5 @@
 import React from 'react';
-import { Container, Table, Header, Loader } from 'semantic-ui-react';
+import {Container, Table, Header, Loader, Icon} from 'semantic-ui-react';
 import { withTracker } from 'meteor/react-meteor-data';
 import PropTypes from 'prop-types';
 import { Stuffs } from '../../api/stuff/StuffCollection';
@@ -14,10 +14,10 @@ const ListVolunteersAdmin = ({ volunteers, ready }) => ((ready) ? (
     <Table celled>
       <Table.Header>
         <Table.Row>
-          <Table.HeaderCell>Name</Table.HeaderCell>
-          <Table.HeaderCell>Email</Table.HeaderCell>
-          <Table.HeaderCell>Phone Number</Table.HeaderCell>
-          <Table.HeaderCell>Actions</Table.HeaderCell>
+          <Table.HeaderCell>Volunteer <Icon name='user'/></Table.HeaderCell>
+          <Table.HeaderCell>Email <Icon name='mail'/></Table.HeaderCell>
+          <Table.HeaderCell>Phone Number<Icon name='phone'/></Table.HeaderCell>
+          <Table.HeaderCell>Actions<Icon name='pencil alternate'/></Table.HeaderCell>
         </Table.Row>
       </Table.Header>
       <Table.Body>
