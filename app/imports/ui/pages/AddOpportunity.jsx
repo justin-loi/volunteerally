@@ -13,7 +13,7 @@ import { COMPONENT_IDS } from '../utilities/ComponentIDs';
 import { Interests } from '../../api/interest/InterestCollection';
 import { SpecialSkills } from '../../api/special_skills/SpecialSkillCollection';
 import { Environmental } from '../../api/environmental_preference/EnvironmentalPreferenceCollection';
-import { checkboxHelper } from '../components/VolunteerUsefulFunction';
+import { checkboxHelper, numberOnly } from '../components/VolunteerUsefulFunction';
 import { addNewEventMethod } from '../../api/event/EventCollection.methods';
 
 // Create a schema to specify the structure of the data to appear in the form.
@@ -28,8 +28,7 @@ const formSchema = new SimpleSchema({
   eventZip: String,
   eventTime: String,
   orgName: String,
-  eventLocation: String,
-  eventDate: Date,
+  eventDate: String,
 });
 
 const bridge = new SimpleSchema2Bridge(formSchema);
@@ -37,7 +36,7 @@ const bridge = new SimpleSchema2Bridge(formSchema);
 /**
  * Add Event, adds a new event.
  */
-const AddEvent = ({ location, ready, interestsArray, skillsArray, environmentalArray, }) => {
+const AddEvent = ({ location, ready, interestsArray, skillsArray, environmentalArray }) => {
   const [interests, setInterests] = useState([]);
   const [specialSkills, setSpecialSkills] = useState([]);
   const [environmentalPreference, setEnvironmentalPreference] = useState('');
@@ -51,6 +50,7 @@ const AddEvent = ({ location, ready, interestsArray, skillsArray, environmentalA
     setIsValueEmpty(isValueEmpty);
   };
 
+  const isNotEmpty = (value) => (!value);
   // reference: https://stackoverflow.com/questions/6177975/how-to-validate-date-with-format-mm-dd-yyyy-in-javascript
   // Validates that the input string is a valid date formatted as "mm/dd/yyyy"
   const isValidDate = (dateString) => {
@@ -98,12 +98,17 @@ const AddEvent = ({ location, ready, interestsArray, skillsArray, environmentalA
       setImage(r.data.url);
     });
   };
-  const isNotEmpty = (value) => (!value);
   const handleChange = (e, { name, value }) => {
     switch (name) {
     case 'eventDate':
       setIsValueEmptyHelper(0, isNotEmpty(value));
       setDate(value);
+      break;
+    case 'eventProfileImage':
+      setImage2(value);
+      break;
+    case 'eventCardImage':
+      setImage(value);
       break;
     case 'interests':
       setInterests(checkboxHelper(interests, value));
@@ -114,41 +119,40 @@ const AddEvent = ({ location, ready, interestsArray, skillsArray, environmentalA
     case 'environmentalPreference':
       setEnvironmentalPreference(value);
       break;
-    case 'eventCardImage' || 'eventProfileImage':
-      setImage(value);
-      break;
     default:
       // do nothing.
     }
   };
   /* Handle SignUp submission. Create the event and populate events, orgEvents collections. */
   const submit = (data, formRef) => {
-    if (isValidDate(data.eventDate)) {
+    if (isValidDate(data.dob) &&
+      numberOnly(data.zipcode)) {
+      // eslint-disable-next-line no-param-reassign
+      data.username = data.email;
       // eslint-disable-next-line no-param-reassign
       data.interests = interests;
       // eslint-disable-next-line no-param-reassign
       data.skills = specialSkills;
       // eslint-disable-next-line no-param-reassign
       data.environmental = environmentalPreference;
-      data.eventCardImage = eventCardImage;
-      data.eventProfileImage = eventProfileImage;
       // eslint-disable-next-line no-param-reassign
+      // eslint-disable-next-line no-param-reassign
+      data.image = eventProfileImage;
+      // data.image2 = eventCardImage;
       addNewEventMethod.callPromise(data)
         .catch(error => {
           swal('Error', error.message, 'error');
         })
         .then(() => {
-          // Not sure why it catches the error but still executes
           formRef.reset();
-          setDate('');
           setInterests([]);
           setSpecialSkills([]);
           setEnvironmentalPreference('');
           setImage('');
           setImage2('');
           swal({
-            title: 'Opportunity Added Successfully!',
-            text: 'This event now has an event card and event profile!',
+            title: 'Signed Up',
+            text: 'You now have an account. Next you need to login.',
             icon: 'success',
             timer: 1500,
           });
@@ -160,6 +164,7 @@ const AddEvent = ({ location, ready, interestsArray, skillsArray, environmentalA
   /* Display the event creation form. Redirect to the event profile page after successful registration and login. */
   const { from } = location.state || { from: { pathname: '/event-profile' } };
   // if correct authentication, redirect to from: page instead of signup screen
+
   if (redirectToReferer) {
     return <Redirect to={from}/>;
   }

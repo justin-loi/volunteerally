@@ -16,7 +16,7 @@ class EventCollection extends BaseCollection {
       owner: String,
       eventCardImage: String,
       eventProfileImage: String,
-      eventCity, String,
+      eventCity: String,
     }));
   }
 
