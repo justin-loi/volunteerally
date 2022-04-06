@@ -1,11 +1,11 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
-import { Link, Redirect } from 'react-router-dom';
+import { Redirect } from 'react-router-dom';
 import { Container, Grid, Header, Segment, Form, Loader } from 'semantic-ui-react';
 import SimpleSchema from 'simpl-schema';
 import SimpleSchema2Bridge from 'uniforms-bridge-simple-schema-2';
 import swal from 'sweetalert';
-import { AutoForm, ErrorsField, SubmitField, TextField, HiddenField, LongTextField } from 'uniforms-semantic';
+import { AutoForm, ErrorsField, SubmitField, TextField, LongTextField } from 'uniforms-semantic';
 import { withTracker } from 'meteor/react-meteor-data';
 import Axios from 'axios';
 import { PAGE_IDS } from '../utilities/PageIDs';
@@ -13,7 +13,7 @@ import { COMPONENT_IDS } from '../utilities/ComponentIDs';
 import { Interests } from '../../api/interest/InterestCollection';
 import { SpecialSkills } from '../../api/special_skills/SpecialSkillCollection';
 import { Environmental } from '../../api/environmental_preference/EnvironmentalPreferenceCollection';
-import { checkboxHelper, numberOnly } from '../components/VolunteerUsefulFunction';
+import { checkboxHelper } from '../components/VolunteerUsefulFunction';
 import { addNewEventMethod } from '../../api/event/EventCollection.methods';
 
 // Create a schema to specify the structure of the data to appear in the form.
@@ -28,7 +28,7 @@ const formSchema = new SimpleSchema({
   eventZip: String,
   eventTime: String,
   orgName: String,
-  eventDate: String,
+  eventDate: Date,
 });
 
 const bridge = new SimpleSchema2Bridge(formSchema);
@@ -37,55 +37,12 @@ const bridge = new SimpleSchema2Bridge(formSchema);
  * Add Event, adds a new event.
  */
 const AddEvent = ({ location, ready, interestsArray, skillsArray, environmentalArray }) => {
+  const [redirectToReferer, setRedirectToReferer] = useState(false);
   const [interests, setInterests] = useState([]);
   const [specialSkills, setSpecialSkills] = useState([]);
   const [environmentalPreference, setEnvironmentalPreference] = useState('');
-  const [eventDate, setDate] = useState('');
   const [eventCardImage, setImage] = useState('');
   const [eventProfileImage, setImage2] = useState('');
-  const [isValueEmpty, setIsValueEmpty] = useState(Array(2).fill(false));
-
-  const setIsValueEmptyHelper = (index, value) => {
-    isValueEmpty[index] = value;
-    setIsValueEmpty(isValueEmpty);
-  };
-
-  const isNotEmpty = (value) => (!value);
-  // reference: https://stackoverflow.com/questions/6177975/how-to-validate-date-with-format-mm-dd-yyyy-in-javascript
-  // Validates that the input string is a valid date formatted as "mm/dd/yyyy"
-  const isValidDate = (dateString) => {
-    // declare and initialize variables
-    const today = new Date();
-    // First check for the pattern
-    if (!/^\d{1,2}\/\d{1,2}\/\d{4}$/.test(dateString)) {
-      setIsValueEmptyHelper(0, true);
-      swal('Error!', 'Please enter the correct date format mm/dd/yyyy', 'error');
-      return false;
-    }
-    // Parse the date parts to integers
-    const parts = dateString.split('/');
-    const day = parseInt(parts[1], 10);
-    const month = parseInt(parts[0], 10);
-    const year = parseInt(parts[2], 10);
-    // Check the ranges of month and year
-    if (year < (today.getFullYear) || month === 0 || month > 12) {
-      setIsValueEmptyHelper(0, true);
-      swal('Error!', 'Invalid date', 'error');
-      return false;
-    }
-    const monthLength = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
-    // Adjust for leap years
-    if (year % 400 === 0 || (year % 100 !== 0 && year % 4 === 0)) {
-      monthLength[1] = 29;
-    }
-    // Check the range of the day
-    if (day < 0 && day >= monthLength[month - 1]) {
-      setIsValueEmptyHelper(0, true);
-      swal('Error!', 'Invalid date', 'error');
-      return false;
-    }
-    return true;
-  };
 
   const uploadImg = (files) => {
     // eslint-disable-next-line no-undef
@@ -100,10 +57,6 @@ const AddEvent = ({ location, ready, interestsArray, skillsArray, environmentalA
   };
   const handleChange = (e, { name, value }) => {
     switch (name) {
-    case 'eventDate':
-      setIsValueEmptyHelper(0, isNotEmpty(value));
-      setDate(value);
-      break;
     case 'eventProfileImage':
       setImage2(value);
       break;
@@ -125,40 +78,37 @@ const AddEvent = ({ location, ready, interestsArray, skillsArray, environmentalA
   };
   /* Handle SignUp submission. Create the event and populate events, orgEvents collections. */
   const submit = (data, formRef) => {
-    if (isValidDate(data.dob) &&
-      numberOnly(data.zipcode)) {
-      // eslint-disable-next-line no-param-reassign
-      data.username = data.email;
-      // eslint-disable-next-line no-param-reassign
-      data.interests = interests;
-      // eslint-disable-next-line no-param-reassign
-      data.skills = specialSkills;
-      // eslint-disable-next-line no-param-reassign
-      data.environmental = environmentalPreference;
-      // eslint-disable-next-line no-param-reassign
-      // eslint-disable-next-line no-param-reassign
-      data.image = eventProfileImage;
-      // data.image2 = eventCardImage;
-      addNewEventMethod.callPromise(data)
-        .catch(error => {
-          swal('Error', error.message, 'error');
-        })
-        .then(() => {
-          formRef.reset();
-          setInterests([]);
-          setSpecialSkills([]);
-          setEnvironmentalPreference('');
-          setImage('');
-          setImage2('');
-          swal({
-            title: 'Signed Up',
-            text: 'You now have an account. Next you need to login.',
-            icon: 'success',
-            timer: 1500,
-          });
-          setRedirectToReferer(true);
+    // eslint-disable-next-line no-param-reassign
+    data.username = data.email;
+    // eslint-disable-next-line no-param-reassign
+    data.interests = interests;
+    // eslint-disable-next-line no-param-reassign
+    data.skills = specialSkills;
+    // eslint-disable-next-line no-param-reassign
+    data.environmental = environmentalPreference;
+    // eslint-disable-next-line no-param-reassign
+    data.eventProfileImage = eventProfileImage;
+    // eslint-disable-next-line no-param-reassign
+    data.eventCardImage = eventCardImage;
+    addNewEventMethod.callPromise(data)
+      .catch(error => {
+        swal('Error', error.message, 'error');
+      })
+      .then(() => {
+        formRef.reset();
+        setInterests([]);
+        setSpecialSkills([]);
+        setEnvironmentalPreference('');
+        setImage('');
+        setImage2('');
+        swal({
+          title: 'Signed Up',
+          text: 'You now have an account. Next you need to login.',
+          icon: 'success',
+          timer: 1500,
         });
-    }
+        setRedirectToReferer(true);
+      });
   };
 
   /* Display the event creation form. Redirect to the event profile page after successful registration and login. */
@@ -184,42 +134,31 @@ const AddEvent = ({ location, ready, interestsArray, skillsArray, environmentalA
           }} schema={bridge} onSubmit={data => submit(data, fRef)}>
             <Segment>
               <TextField name='eventName' type='name' label='Event Name' placeholder='Beach Cleanup' iconLeft='certificate' id={COMPONENT_IDS.ADD_EVENT_NAME}/>
-              <TextField name='organizationName' type='name' label='Organization Name' placeholder='The Red Cross' iconLeft='lock' id={COMPONENT_IDS.ADD_EVENT_NAME}/>
-              <TextField name='eventDate' type='date' label='Event Date' placeholder='04/20/1989' iconLeft='calendar' id={COMPONENT_IDS.ADD_EVENT_NAME}/>
-              <LongTextField name='eventDescription' type='description' placeholder='Looking for ocean loving volunteers to clean up...' iconLeft='bullhorn' id={COMPONENT_IDS.ADD_EVENT_DESCRIPTION}/>
-              <HiddenField name='eventDate' label='Event Date' value={eventDate} />
-              <Form.Input
-                label="Event Date"
-                id={COMPONENT_IDS.ADD_EVENT_DATE}
-                icon="calendar alternate outline"
-                iconPosition="left"
-                name="eventDate"
-                placeholder="04/20/1989"
-                onChange={handleChange}
-                required
-                error={ isValueEmpty[0] }
-              />
-              <TextField name='address' placeholder='1234 Example Street' iconLeft='map marker alternate'
+              <TextField name='orgName' type='name' label='Organization Name' placeholder='The Red Cross' iconLeft='lock' id={COMPONENT_IDS.ADD_EVENT_NAME}/>
+              <TextField name='eventDate' type='date' label='Opportunity Date' placeholder='04/20/2023' iconLeft='calendar' id={COMPONENT_IDS.ADD_EVENT_TIME}/>
+              <TextField name='eventTime' type='time' label='Opportunity Time' placeholder='8:00am- 8:00pm' iconLeft='clock' id={COMPONENT_IDS.ADD_EVENT_TIME}/>
+              <LongTextField name='eventDescription' type='description' placeholder='Looking for ocean loving volunteers to clean up...' icon='bullhorn' id={COMPONENT_IDS.ADD_EVENT_DESCRIPTION}/>
+              <TextField name='eventAddress' placeholder='1234 Example Street' iconLeft='map marker alternate'
                 id={COMPONENT_IDS.ADD_EVENT_ADDRESS} required/>
               <div className="two fields">
                 <div className="field">
-                  <TextField name='city' placeholder='Honolulu' iconLeft='map marker alternate'
+                  <TextField name='eventCity' placeholder='Honolulu' iconLeft='map marker alternate'
                     id={COMPONENT_IDS.ADD_EVENT_CITY} required/>
                 </div>
                 <div className="field">
-                  <TextField name='state' placeholder='Hawaii' iconLeft='map marker alternate'
+                  <TextField name='eventState' placeholder='Hawaii' iconLeft='map marker alternate'
                     id={COMPONENT_IDS.ADD_EVENT_STATE} required/>
                 </div>
               </div>
               <div className="two fields">
                 <div className="field">
-                  <TextField name='code' placeholder='96822' label='Zip/Postal Code' iconLeft='map marker alternate'
+                  <TextField name='eventZip' placeholder='96822' label='Zip/Postal Code' iconLeft='map marker alternate'
                     id={COMPONENT_IDS.ADD_EVENT_ZIPCODE} required/>
                 </div>
               </div>
               <div className="field">
                 <h4>Upload an Event Card Picture (smaller image)</h4>
-                <Form.Input
+                <Form.Input name="eventProfileImage"
                   style={{ marginTop: '10px' }}
                   type='file' onChange={(event) => {
                     uploadImg(event.target.files);
@@ -228,7 +167,7 @@ const AddEvent = ({ location, ready, interestsArray, skillsArray, environmentalA
               </div>
               <div className="field">
                 <h4>Upload an Event Profile Banner Picture (larger image)</h4>
-                <Form.Input
+                <Form.Input name="eventCardImage"
                   style={{ marginTop: '10px' }}
                   type='file' onChange={(event) => {
                     uploadImg(event.target.files);

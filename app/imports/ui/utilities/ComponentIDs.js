@@ -74,4 +74,5 @@ export const COMPONENT_IDS = {
   ADD_EVENT_STATE: 'add-event-state',
   ADD_EVENT_ZIPCODE: 'add-event-zipcode',
   ADD_EVENT_FORM_SUBMIT: 'add-event-form-submit',
+  ADD_EVENT_TIME: 'add-event-time',
 };

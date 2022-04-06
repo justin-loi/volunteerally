@@ -7,7 +7,7 @@ class EventCollection extends BaseCollection {
     super('Events', new SimpleSchema({
       eventName: String,
       eventDescription: String,
-      eventDate: String,
+      eventDate: Date,
       eventTime: String,
       eventAddress: String,
       eventState: String,
