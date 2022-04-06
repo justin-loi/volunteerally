@@ -28,7 +28,7 @@ const formSchema = new SimpleSchema({
   eventZip: String,
   eventTime: String,
   orgName: String,
-  eventDate: Date,
+  eventDate: String,
 });
 
 const bridge = new SimpleSchema2Bridge(formSchema);
