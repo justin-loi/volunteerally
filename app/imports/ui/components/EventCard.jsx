@@ -33,7 +33,7 @@ const EventCard = ({ event }) => {
   };
   return (
     <Card as={NavLink} exact to={`/details/${event._id}`}>
-      <Image src='images/event_card_default_image.png' wrapped ui={false}/>
+      <Image src= {event.eventCardImage} wrapped ui={false}/>
       <Card.Content>
         <Card.Header> {event.eventName}</Card.Header>
         <Card.Meta>
@@ -41,7 +41,7 @@ const EventCard = ({ event }) => {
           <br/>
           <span>Time: {event.eventTime}</span>
           <br/>
-          <span>Location: {event.location}</span>
+          <span>Location: {event.eventAddress} {event.eventCity}, {event.eventState} {event.eventZip}</span>
           <br/>
         </Card.Meta>
         <Card.Description>
@@ -78,13 +78,26 @@ EventCard.propTypes = {
     eventName: PropTypes.string,
     eventDate: PropTypes.string,
     eventTime: PropTypes.string,
-    location: PropTypes.string,
+    eventAddress: PropTypes.string,
+    eventZip: PropTypes.string,
+    eventCity: PropTypes.string,
+    eventCardImage: PropTypes.string,
+    eventState: PropTypes.string,
     categories: PropTypes.string,
     orgName: PropTypes.string,
     _id: PropTypes.string,
   }).isRequired,
   volunteer: PropTypes.shape({
     _id: PropTypes.string,
+  }),
+  skill: PropTypes.shape({
+    _id: PropTypes.array,
+  }),
+  interest: PropTypes.shape({
+    _id: PropTypes.array,
+  }),
+  environment: PropTypes.shape({
+    _id: PropTypes.array,
   }),
 };
 

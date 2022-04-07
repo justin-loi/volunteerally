@@ -21,7 +21,7 @@ const EventProfile = ({ event, orgProfile, currentUser, ready }) => ((ready) ? (
           </Grid.Column>
           <Grid.Column>
             <Header as='h3' inverted block>
-              Opportunity Date: {event.date} {event.time}
+              Opportunity Date: {event.eventDate} {event.eventTime}
             </Header>
           </Grid.Column>
           <Grid.Column>
@@ -50,20 +50,14 @@ const EventProfile = ({ event, orgProfile, currentUser, ready }) => ((ready) ? (
             <Header as="h3">
               <Icon name="location arrow"/> Location
             </Header>
-            <Image src="images/red-cross-map.jpeg"/>
+            <Image src={event.eventCardImage}/>
           </Segment>
           <Segment>
             <Header as="h3">
               <Icon name="write"/> Description
             </Header>
             <p>
-              This event requires orientation and training, please revert to website for additional information.*
-              Disaster Action Team volunteers help local families cope with emergencies. Home fires and other
-              disasters can occur at any time, any place. As a Disaster Action Team volunteer, you&apos;ll provide
-              emotional support, financial assistance, and information to help families begin the process of
-              recovery. After your initial training, your shifts will include responding to emergencies within 2
-              hours, night or day, rain or shine, either on the scene or coordinating remotely to provide immediate
-              compassion and care. Location will vary base on the situation.
+              {event.eventDescription}
             </p>
           </Segment>
           <Segment>
@@ -77,7 +71,7 @@ const EventProfile = ({ event, orgProfile, currentUser, ready }) => ((ready) ? (
             <Header as="">
               <Icon name="calendar"/> Upcoming Dates
             </Header>
-            {event.date} {event.time}
+            {event.eventDate} {event.eventTime}
           </Segment>
         </Grid.Column>
         <Grid.Column>
@@ -99,13 +93,13 @@ const EventProfile = ({ event, orgProfile, currentUser, ready }) => ((ready) ? (
             <Header as="h3">
               <Icon name="globe"/> Gallery
             </Header>
-            <Image src="images/red-cross-gallery.jpeg"/>
+            <Image src={event.eventProfileImage}/>
           </Segment>
           <Segment>
             <Header as="h3">
               <Icon name="sort"/> Categories
             </Header>
-            {event.categories}
+
           </Segment>
           <Segment>
             <Header as="h3">

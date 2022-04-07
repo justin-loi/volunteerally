@@ -3,17 +3,21 @@ import _ from 'lodash';
 import { Container, Search, Divider, Header, Card } from 'semantic-ui-react';
 import PropTypes from 'prop-types';
 import { withTracker } from 'meteor/react-meteor-data';
+import { EventEnvironmental } from '../../api/environmental_preference/EventEnvironmentalCollection';
+import { EventInterest } from '../../api/interest/EventInterestCollection';
+import { EventSkill } from '../../api/special_skills/EventSkillCollection';
+
 // import { PAGE_IDS } from '../utilities/PageIDs';
 import EventCard from '../components/EventCard';
 import { Events } from '../../api/event/EventCollection';
 
 /* Renders a list of events. Use <EventCard> to render each event card. */
-const BrowseOpportunities = ({ events }) => {
+const BrowseOpportunities = ({ events, interests, skills, environments }) => {
 
   const [results, setResult] = useState(events);
   const [value, setValue] = useState('');
 
-  const resultRenderer = (event) => <EventCard event={event}/>;
+  const resultRenderer = (event) => <EventCard event={event} />;
 
   const handleSearchChange = (e, data) => {
     setValue(data.value);
@@ -48,7 +52,7 @@ const BrowseOpportunities = ({ events }) => {
       />
 
       <Card.Group centered>
-        {events.map((event) => <EventCard key={event._id} event={event}/>)}
+        {events.map((event) => <EventCard key={event._id} event={event} />)}
       </Card.Group>
     </Container>
 
@@ -58,6 +62,9 @@ const BrowseOpportunities = ({ events }) => {
 // Require an array of BrowseOpportunities documents in the props.
 BrowseOpportunities.propTypes = {
   events: PropTypes.array.isRequired,
+  interests: PropTypes.array.isRequired,
+  environments: PropTypes.array.isRequired,
+  skills: PropTypes.array.isRequired,
   ready: PropTypes.bool.isRequired,
   volunteerInterests: PropTypes.array.isRequired,
 };
@@ -65,11 +72,20 @@ BrowseOpportunities.propTypes = {
 // withTracker connects Meteor data to React components. https://guide.meteor.com/react.html#using-withTracker
 export default withTracker(() => {
   const subscription = Events.subscribe();
-  const ready = subscription.ready();
+  const subscription2 = EventInterest.subscribe();
+  const subscription3 = EventSkill.subscribe();
+  const subscription4 = EventEnvironmental.subscribe();
+  const ready = subscription.ready() && subscription2.ready() && subscription3.ready() && subscription4.ready();
   const events = Events.find({}, { sort: { name: 1 } }).fetch();
+  const interests = EventInterest.find({}, { sort: { name: 1 } }).fetch();
+  const skills = EventSkill.find({}, { sort: { name: 1 } }).fetch();
+  const environments = EventEnvironmental.find({}, { sort: { name: 1 } }).fetch();
 
   return {
     events,
+    interests,
+    skills,
+    environments,
     ready,
   };
 })(BrowseOpportunities);

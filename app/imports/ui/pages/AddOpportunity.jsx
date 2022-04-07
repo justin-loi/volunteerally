@@ -56,6 +56,7 @@ const AddEvent = ({ location, ready, interestsArray, skillsArray, environmentalA
     Axios.post('https://api.cloudinary.com/v1_1/irene-ma/image/upload', data).then((r) => {
       console.log(r.data.url);
       setImage(r.data.url);
+      setImage2(r.data.url);
     });
   };
   const handleChange = (e, { name, value }) => {
