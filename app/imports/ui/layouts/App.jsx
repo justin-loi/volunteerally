@@ -17,6 +17,7 @@ import Signout from '../pages/Signout';
 import ManageDatabase from '../pages/ManageDatabase';
 import EventProfile from '../pages/EventProfile';
 import { ROLE } from '../../api/role/Role';
+import Inbox from '../pages/Inbox';
 // new page
 import VolunteerSignUp from '../pages/VolunteerSignUp';
 import AboutUs from '../pages/AboutUs';
@@ -59,6 +60,7 @@ class App extends React.Component {
             <Route path="/signup" component={Signup}/>
             <Route path="/signout" component={Signout}/>
             <VolProtectedRoute path="/volunteer-profile" component={VolunteerProfile}/>
+            <ProtectedRoute path="/inbox" component={Inbox}/>
             <Route path="/organization-profile/:_id" component={OrganizationProfile}/>
             <Route path="/volunteer-send-email/:_id" component={SendEmailToOrg}/>
             <OrgProtectedRoute path="/edit-organization-profile/:_id" component={EditOrganizationProfile}/>

@@ -114,7 +114,7 @@ client/
 
 imports/
   api/           # Define collections.
-    base/        # The BaseCollection class. Wraps the Mongo collections.
+    base/        # The MailCollection class. Wraps the Mongo collections.
     matrp/       # Singleton instance holding all the collections.
     role/        # The defined roles in this application.
     stuff/       # The Stuffs collection definition.
@@ -219,11 +219,11 @@ This page supports dumping and loading all the collections' data.
 
 ### Collections
 
-The application implements several Collections: Stuffs, AdminProfiles, and UserProfiles. We also wrap the `Meteor.users` collection to manage the creation of Meteor users. All the collection are extensions of `BaseCollection`.
+The application implements several Collections: Stuffs, AdminProfiles, and UserProfiles. We also wrap the `Meteor.users` collection to manage the creation of Meteor users. All the collection are extensions of `MailCollection`.
 
-#### BaseCollection
+#### MailCollection
 
-The BaseCollection class wraps the Mongo.collection. It defines several helpful methods.
+The MailCollection class wraps the Mongo.collection. It defines several helpful methods.
 
 #### Stuffs
 Each Stuffs document has the following fields: name, quantity, condition, and username.
