@@ -6,9 +6,11 @@ import { withTracker } from 'meteor/react-meteor-data';
 import PropTypes from 'prop-types';
 import SimpleSchema2Bridge from 'uniforms-bridge-simple-schema-2';
 import SimpleSchema from 'simpl-schema';
+import swal from 'sweetalert';
 import { OrganizationProfiles } from '../../api/organization/OrganizationProfileCollection';
 import { PAGE_IDS } from '../utilities/PageIDs';
 import { VolunteerProfiles } from '../../api/volunteer/VolunteerProfileCollection';
+import { volunteerSendEmailToOrg } from '../../api/volunteer/VolunteerProfileCollection.methods';
 
 const formSchema = new SimpleSchema({
   title: String,
@@ -23,12 +25,20 @@ const SendEmailToOrg = ({ organization, volunteer, ready }) => {
   // On successful submit, insert the data.
   const submit = (data) => {
     const { title, content } = data;
-    console.log(data);
-    console.log(organization.email);
-    console.log(volunteer.email);
-    const sendEmailData = { title: title, content: content,
-      organizationEmail: organization.email, volunteerEmail: volunteer.email };
-    console.log(sendEmailData);
+    volunteerSendEmailToOrg.callPromise({ title, content,
+      organizationEmail: organization.email, volunteerEmail: volunteer.email })
+      .catch(error => {
+        swal('Error', error.message, 'error');
+      })
+      .then(() => {
+        swal({
+          title: 'Message has been sent',
+          text: 'Message has been sent',
+          icon: 'success',
+          timer: 1500,
+        });
+        // setRedirectToReferer(true);
+      });
   };
 
   return (ready) ? (
@@ -68,7 +78,6 @@ export default withTracker(({ match }) => {
   // Get the document
   const organization = OrganizationProfiles.find({ _id: orgProfileId }, {}).fetch().pop();
   const volunteer = VolunteerProfiles.findOne({}, {});
-  // console.log(doc);
   return {
     organization,
     volunteer,

@@ -1,6 +1,8 @@
 import { Meteor } from 'meteor/meteor';
 import { CallPromiseMixin } from 'meteor/didericis:callpromise-mixin';
 import { ValidatedMethod } from 'meteor/mdg:validated-method';
+import { Email } from 'meteor/email';
+import { check } from 'meteor/check';
 import { VolunteerProfiles } from './VolunteerProfileCollection';
 import { VolunteerInterest } from '../interest/VolunteerInterestCollection';
 import { VolunteerSkill } from '../special_skills/VolunteerSkillCollection';
@@ -62,7 +64,13 @@ export const editVolunteerLinkedCollectionMethod = new ValidatedMethod({
   },
 });
 
-/*
+if (Meteor.isServer) {
+  Meteor.startup(() => {
+    console.log('Set Up Mail Url');
+    process.env.MAIL_URL = 'smtps://username:password@smtp.gmail.com:465/';
+  });
+}
+
 export const volunteerSendEmailToOrg = new ValidatedMethod({
   name: 'Volunteer.SendEmailToOrg',
   mixins: [CallPromiseMixin],
@@ -70,7 +78,22 @@ export const volunteerSendEmailToOrg = new ValidatedMethod({
   run({ title, content, organizationEmail, volunteerEmail }) {
     if (Meteor.isServer) {
 
+      const subject = title;
+      const text = `${content} \n\n Please, reply to: ${volunteerEmail}`;
+
+      console.log(`send email to ${organizationEmail}`);
+      const to = `${organizationEmail}`;
+      // const to = 'stoked4kindness@gmail.com';
+      const from = `${volunteerEmail}`;
+
+      // Make sure that all arguments are strings.
+      check([subject, text], [String]);
+
+      // Let other method calls from the same client start running, without
+      // waiting for the email sending to complete.
+      this.unblock();
+
+      Email.send({ to, from, subject, text });
     }
   },
 });
-*/
