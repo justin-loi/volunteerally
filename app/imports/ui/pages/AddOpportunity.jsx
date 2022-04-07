@@ -79,7 +79,7 @@ const AddEvent = ({ location, ready, interestsArray, skillsArray, environmentalA
   /* Handle SignUp submission. Create the event and populate events, orgEvents collections. */
   const submit = (data, formRef) => {
     // eslint-disable-next-line no-param-reassign
-    data.username = data.email;
+    data.owner = data.email;
     // eslint-disable-next-line no-param-reassign
     data.interests = interests;
     // eslint-disable-next-line no-param-reassign
