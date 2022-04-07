@@ -147,7 +147,7 @@ const EventProfile = ({ event, orgProfile, currentUser, ready }) => {
     setSubject(value);
   };
 
-  const handleSendSubmit = (formRef) => {
+  const handleSendSubmit = () => {
     const recipient = orgProfile.email;
     const name = currentUser;
     const beRead = false;
@@ -161,7 +161,6 @@ const EventProfile = ({ event, orgProfile, currentUser, ready }) => {
       })
       .then(() => {
         // Not sure why it catches the error but still executes
-        formRef.reset();
         setContent('');
         setSubject('');
         swal({
