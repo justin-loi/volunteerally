@@ -3,10 +3,10 @@ import { CallPromiseMixin } from 'meteor/didericis:callpromise-mixin';
 import { ValidatedMethod } from 'meteor/mdg:validated-method';
 import { OrganizationEvent } from './OrganizationEventCollection';
 import { Events } from './EventCollection';
-import { OrganizationProfiles } from '../organization/OrganizationProfileCollection';
 import { EventInterest } from '../interest/EventInterestCollection';
 import { EventSkill } from '../special_skills/EventSkillCollection';
 import { EventEnvironmental } from '../environmental_preference/EventEnvironmentalCollection';
+import { OrganizationProfiles } from '../organization/OrganizationProfileCollection';
 
 export const addNewEventMethod = new ValidatedMethod({
   name: 'Event.addNewEventMethod',
@@ -16,7 +16,7 @@ export const addNewEventMethod = new ValidatedMethod({
     if (Meteor.isServer) {
       const eventID = Events.define({
         eventName, eventDescription, eventDate, eventTime, eventAddress, eventState, eventZip, orgName, owner, eventCardImage, eventProfileImage, eventCity });
-      console.log(eventID);
+      // console.log(eventID);
       // eslint-disable-next-line no-unused-expressions
       interests.map((interestID) => (EventInterest.define({ eventID, interestID })));
       skills.map((skillID) => (EventSkill.define({ eventID, skillID })));
@@ -24,8 +24,8 @@ export const addNewEventMethod = new ValidatedMethod({
         // console.log(environmental);
         EventEnvironmental.define({ eventID, environmentalID: environmental });
       }
-      const orgID = OrganizationProfiles.getID(owner);
-      OrganizationEvent.define({ eventID: eventID, orgID: orgID });
+      const organization = OrganizationProfiles.findOne({ email: owner }, {});
+      OrganizationEvent.define({ eventID: eventID, organizationID: organization.userID });
     }
   },
 });

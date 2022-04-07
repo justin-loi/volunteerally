@@ -31,7 +31,7 @@ const formSchema = new SimpleSchema({
   eventTime: String,
   orgName: String,
   eventDate: String,
-  owner: String,
+  // owner: String,
 });
 
 const bridge = new SimpleSchema2Bridge(formSchema);
@@ -39,7 +39,7 @@ const bridge = new SimpleSchema2Bridge(formSchema);
 /**
  * Add Event, adds a new event.
  */
-const AddEvent = ({ location, ready, interestsArray, skillsArray, environmentalArray, organizationID }) => {
+const AddEvent = ({ location, ready, interestsArray, skillsArray, environmentalArray, organization }) => {
   const [redirectToReferer, setRedirectToReferer] = useState(false);
   const [interests, setInterests] = useState([]);
   const [specialSkills, setSpecialSkills] = useState([]);
@@ -81,7 +81,8 @@ const AddEvent = ({ location, ready, interestsArray, skillsArray, environmentalA
   };
   /* Handle SignUp submission. Create the event and populate events, orgEvents collections. */
   const submit = (data, formRef) => {
-    data.owner = organizationID;
+    // eslint-disable-next-line no-param-reassign
+    data.owner = organization.email;
     // eslint-disable-next-line no-param-reassign
     data.interests = interests;
     // eslint-disable-next-line no-param-reassign
@@ -135,7 +136,6 @@ const AddEvent = ({ location, ready, interestsArray, skillsArray, environmentalA
             fRef = ref;
           }} schema={bridge} onSubmit={data => submit(data, fRef)}>
             <Segment>
-              <TextField name='owner' type='email' label='Email Address' placeholder='john@foo.com' iconLeft='certificate' id={COMPONENT_IDS.ADD_EVENT_NAME}/>
               <TextField name='eventName' type='name' label='Event Name' placeholder='Beach Cleanup' iconLeft='certificate' id={COMPONENT_IDS.ADD_EVENT_NAME}/>
               <TextField name='orgName' type='name' label='Organization Name' placeholder='The Red Cross' iconLeft='lock' id={COMPONENT_IDS.ADD_EVENT_NAME}/>
               <TextField name='eventDate' type='date' label='Opportunity Date' placeholder='04/20/2023' iconLeft='calendar' id={COMPONENT_IDS.ADD_EVENT_TIME}/>
@@ -245,6 +245,7 @@ AddEvent.propTypes = {
   interestsArray: PropTypes.array.isRequired,
   skillsArray: PropTypes.array.isRequired,
   environmentalArray: PropTypes.array.isRequired,
+  organization: PropTypes.object,
   ready: PropTypes.bool.isRequired,
 };
 
@@ -260,12 +261,12 @@ export default withTracker(() => {
   const interestsArray = Interests.find({}, {}).fetch();
   const skillsArray = SpecialSkills.find({}, {}).fetch();
   const environmentalArray = Environmental.find({}, {}).fetch();
-  const organizationID = OrganizationProfiles.findDoc(Meteor.getUserID());
+  const organization = OrganizationProfiles.findOne({ userID: Meteor.userId() }, {});
   return {
+    organization,
     interestsArray,
     skillsArray,
     environmentalArray,
-    organizationID,
     ready,
   };
 })(AddEvent);
