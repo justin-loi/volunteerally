@@ -16,6 +16,7 @@ export const addNewEventMethod = new ValidatedMethod({
     if (Meteor.isServer) {
       const eventID = Events.define({
         eventName, eventDescription, eventDate, eventTime, eventAddress, eventState, eventZip, orgName, owner, eventCardImage, eventProfileImage, eventCity });
+      console.log(eventID);
       // eslint-disable-next-line no-unused-expressions
       interests.map((interestID) => (EventInterest.define({ eventID, interestID })));
       skills.map((skillID) => (EventSkill.define({ eventID, skillID })));
@@ -23,7 +24,8 @@ export const addNewEventMethod = new ValidatedMethod({
         // console.log(environmental);
         EventEnvironmental.define({ eventID, environmentalID: environmental });
       }
-      const orgID = Organizations.getID(owner);
+      const orgID = Organizations.getProfile(owner);
+      console.log(orgID);
       OrganizationEvent.define({ eventID: eventID, orgID: orgID });
     }
   },
