@@ -16,7 +16,7 @@ const OrganizationProfile = ({ orgProfile, ready }) => ((ready) ? (
       {(Meteor.userId() && Roles.userIsInRole(Meteor.userId(), [ROLE.ORGANIZATION])) ? (
         <Button as={NavLink} exact to={`/edit-organization-profile/${orgProfile._id}`}>Edit Profile</Button>
       ) : ''}
-      <Button>Send an email</Button>
+      <Button as={NavLink} exact to={`/volunteer-send-email/${orgProfile._id}`}>Send an email</Button>
     </Grid.Row>
     <Grid.Row columns={2}>
       <Grid.Column>
