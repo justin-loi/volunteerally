@@ -2,8 +2,8 @@ import React from 'react';
 import { Button, Header, Image, Table } from 'semantic-ui-react';
 import PropTypes from 'prop-types';
 
-/** Renders a single row in the List Stuff (Admin) table. See pages/ListVolunteersAdmin.jsx. */
-const VolunteerAdmin = ({ volunteer }) => (
+/** Renders a single row in the List Stuff (Admin) table. See pages/AdminManageBoard.jsx. */
+const ListVolunteersAdmin = ({ volunteer }) => (
   <Table.Row>
     <Table.Cell>
       <Header as='h4' image>
@@ -23,7 +23,7 @@ const VolunteerAdmin = ({ volunteer }) => (
 );
 
 // Require a document to be passed to this component.
-VolunteerAdmin.propTypes = {
+ListVolunteersAdmin.propTypes = {
   volunteer: PropTypes.shape({
     firstName: PropTypes.string,
     lastName: PropTypes.string,
@@ -34,4 +34,4 @@ VolunteerAdmin.propTypes = {
   }).isRequired,
 };
 
-export default VolunteerAdmin;
+export default ListVolunteersAdmin;
