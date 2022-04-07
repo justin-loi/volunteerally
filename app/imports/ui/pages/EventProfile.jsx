@@ -7,9 +7,10 @@ import { Events } from '../../api/event/EventCollection';
 import { OrganizationProfiles } from '../../api/organization/OrganizationProfileCollection';
 
 // Renders a Event Info page that connects with the current Event collection.
+
 const gridStyle = { height: '500px', fontSize: '75px' };
 
-const EventProfile = ({ event, orgProfile, currentUser, ready }) => ((ready) ? (
+const EventProfile = ({ event, orgProfile, currentUser, ready, variable }) => ((ready) ? (
   <div>
     <div className="event-profile-top-background">
       <Grid stackable container verticalAlign="bottom" textAlign='center' style={gridStyle} columns={3}>
@@ -116,6 +117,7 @@ const EventProfile = ({ event, orgProfile, currentUser, ready }) => ((ready) ? (
           </Segment>
         </Grid.Column>
       </Grid>
+      {variable ? "Hi": "Bye"}
     </Container>
   </div>
 ) : <Loader active>Getting data</Loader>);
@@ -126,6 +128,7 @@ EventProfile.propTypes = {
   orgProfile: PropTypes.object,
   ready: PropTypes.bool.isRequired,
   currentUser: PropTypes.bool.isRequired,
+  variable: PropTypes.bool.isRequired,
 };
 
 // withTracker connects Meteor data to React components. https://guide.meteor.com/react.html#using-withTracker
@@ -147,11 +150,13 @@ export default withTracker(({ match }) => {
     // console.log(event);
   }
 
+  const variable = false;
   return {
     event,
     currentUser,
     orgProfile,
     ready,
+    variable,
   };
 
 })(EventProfile);
