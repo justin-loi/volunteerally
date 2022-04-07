@@ -3,7 +3,7 @@ import { CallPromiseMixin } from 'meteor/didericis:callpromise-mixin';
 import { ValidatedMethod } from 'meteor/mdg:validated-method';
 import { OrganizationEvent } from './OrganizationEventCollection';
 import { Events } from './EventCollection';
-import { Organizations } from '../organization/OrganizationCollection';
+import { OrganizationProfiles } from '../organization/OrganizationProfileCollection';
 import { EventInterest } from '../interest/EventInterestCollection';
 import { EventSkill } from '../special_skills/EventSkillCollection';
 import { EventEnvironmental } from '../environmental_preference/EventEnvironmentalCollection';
@@ -24,8 +24,7 @@ export const addNewEventMethod = new ValidatedMethod({
         // console.log(environmental);
         EventEnvironmental.define({ eventID, environmentalID: environmental });
       }
-      const orgID = Organizations.getProfile(owner);
-      console.log(orgID);
+      const orgID = OrganizationProfiles.getID(owner);
       OrganizationEvent.define({ eventID: eventID, orgID: orgID });
     }
   },

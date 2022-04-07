@@ -37,9 +37,9 @@ const EventCard = ({ event }) => {
       <Card.Content>
         <Card.Header> {event.eventName}</Card.Header>
         <Card.Meta>
-          <span>Date: {event.date}</span>
+          <span>Date: {event.eventDate}</span>
           <br/>
-          <span>Time: {event.time}</span>
+          <span>Time: {event.eventTime}</span>
           <br/>
           <span>Location: {event.location}</span>
           <br/>
@@ -76,8 +76,8 @@ const EventCard = ({ event }) => {
 EventCard.propTypes = {
   event: PropTypes.shape({
     eventName: PropTypes.string,
-    date: PropTypes.string,
-    time: PropTypes.string,
+    eventDate: PropTypes.string,
+    eventTime: PropTypes.string,
     location: PropTypes.string,
     categories: PropTypes.string,
     orgName: PropTypes.string,

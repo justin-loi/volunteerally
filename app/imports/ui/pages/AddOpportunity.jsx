@@ -1,3 +1,4 @@
+import { Meteor } from 'meteor/meteor';
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { Redirect } from 'react-router-dom';
@@ -15,6 +16,7 @@ import { SpecialSkills } from '../../api/special_skills/SpecialSkillCollection';
 import { Environmental } from '../../api/environmental_preference/EnvironmentalPreferenceCollection';
 import { checkboxHelper } from '../components/VolunteerUsefulFunction';
 import { addNewEventMethod } from '../../api/event/EventCollection.methods';
+import { OrganizationProfiles } from '../../api/organization/OrganizationProfileCollection';
 
 // Create a schema to specify the structure of the data to appear in the form.
 const formSchema = new SimpleSchema({
@@ -29,6 +31,7 @@ const formSchema = new SimpleSchema({
   eventTime: String,
   orgName: String,
   eventDate: String,
+  owner: String,
 });
 
 const bridge = new SimpleSchema2Bridge(formSchema);
@@ -36,7 +39,7 @@ const bridge = new SimpleSchema2Bridge(formSchema);
 /**
  * Add Event, adds a new event.
  */
-const AddEvent = ({ location, ready, interestsArray, skillsArray, environmentalArray }) => {
+const AddEvent = ({ location, ready, interestsArray, skillsArray, environmentalArray, organizationID }) => {
   const [redirectToReferer, setRedirectToReferer] = useState(false);
   const [interests, setInterests] = useState([]);
   const [specialSkills, setSpecialSkills] = useState([]);
@@ -78,8 +81,7 @@ const AddEvent = ({ location, ready, interestsArray, skillsArray, environmentalA
   };
   /* Handle SignUp submission. Create the event and populate events, orgEvents collections. */
   const submit = (data, formRef) => {
-    // eslint-disable-next-line no-param-reassign
-    data.owner = data.email;
+    data.owner = organizationID;
     // eslint-disable-next-line no-param-reassign
     data.interests = interests;
     // eslint-disable-next-line no-param-reassign
@@ -133,6 +135,7 @@ const AddEvent = ({ location, ready, interestsArray, skillsArray, environmentalA
             fRef = ref;
           }} schema={bridge} onSubmit={data => submit(data, fRef)}>
             <Segment>
+              <TextField name='owner' type='email' label='Email Address' placeholder='john@foo.com' iconLeft='certificate' id={COMPONENT_IDS.ADD_EVENT_NAME}/>
               <TextField name='eventName' type='name' label='Event Name' placeholder='Beach Cleanup' iconLeft='certificate' id={COMPONENT_IDS.ADD_EVENT_NAME}/>
               <TextField name='orgName' type='name' label='Organization Name' placeholder='The Red Cross' iconLeft='lock' id={COMPONENT_IDS.ADD_EVENT_NAME}/>
               <TextField name='eventDate' type='date' label='Opportunity Date' placeholder='04/20/2023' iconLeft='calendar' id={COMPONENT_IDS.ADD_EVENT_TIME}/>
@@ -250,16 +253,19 @@ export default withTracker(() => {
   const subscription1 = Interests.subscribe();
   const subscription2 = SpecialSkills.subscribe();
   const subscription3 = Environmental.subscribe();
+  const subscription4 = OrganizationProfiles.subscribe();
   // Determine if the subscription is ready
-  const ready = subscription1.ready() && subscription2.ready() && subscription3.ready();
+  const ready = subscription1.ready() && subscription2.ready() && subscription3.ready() && subscription4.ready();
   // Get the document
   const interestsArray = Interests.find({}, {}).fetch();
   const skillsArray = SpecialSkills.find({}, {}).fetch();
   const environmentalArray = Environmental.find({}, {}).fetch();
+  const organizationID = OrganizationProfiles.findDoc(Meteor.getUserID());
   return {
     interestsArray,
     skillsArray,
     environmentalArray,
+    organizationID,
     ready,
   };
 })(AddEvent);

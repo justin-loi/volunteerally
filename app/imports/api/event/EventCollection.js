@@ -14,8 +14,8 @@ class EventCollection extends BaseCollection {
       eventZip: String,
       orgName: String,
       owner: String,
-      eventCardImage: String,
-      eventProfileImage: String,
+      eventCardImage: { type: String, optional: true },
+      eventProfileImage: { type: String, optional: true },
       eventCity: String,
     }));
   }
