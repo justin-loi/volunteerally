@@ -41,7 +41,6 @@ const bridge = new SimpleSchema2Bridge(formSchema);
 const VolunteerSignUp = ({ location, ready, interestsArray, skillsArray, environmentalArray, availabilitiesArray }) => {
   const [redirectToReferer, setRedirectToReferer] = useState(false);
   const [confirmPassword, setConfirmPassword] = useState('');
-  const [dateOfBirth, setDateOfBirth] = useState('');
   const [gender, setGender] = useState('');
   const [interests, setInterests] = useState([]);
   const [specialSkills, setSpecialSkills] = useState([]);
@@ -75,8 +74,6 @@ const VolunteerSignUp = ({ location, ready, interestsArray, skillsArray, environ
     return false;
   };
 
-  const isNotEmpty = (value) => (!value);
-
   const agreePolicyAndTerm = (value) => {
     if (!value || value === '') {
       swal('Error!', 'Please confirm that you agree to our Privacy Policy and Term & Conditions', 'error');
@@ -104,34 +101,10 @@ const VolunteerSignUp = ({ location, ready, interestsArray, skillsArray, environ
   const isValidDate = (dateString) => {
     // declare and initialize variables
     const today = new Date();
-    // First check for the pattern
-    if (!/^\d{1,2}\/\d{1,2}\/\d{4}$/.test(dateString)) {
-      setIsValueEmptyHelper(0, true);
-      swal('Error!', 'Please enter the correct date format mm/dd/yyyy', 'error');
-      return false;
-    }
     // Parse the date parts to integers
-    const parts = dateString.split('/');
-    const day = parseInt(parts[1], 10);
-    const month = parseInt(parts[0], 10);
-    const year = parseInt(parts[2], 10);
-    // Check the ranges of month and year
-    if (year < (today.getFullYear() - 300) || year > today.getFullYear() || month === 0 || month > 12) {
-      setIsValueEmptyHelper(0, true);
-      swal('Error!', 'Invalid date', 'error');
-      return false;
-    }
-    const monthLength = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
-    // Adjust for leap years
-    if (year % 400 === 0 || (year % 100 !== 0 && year % 4 === 0)) {
-      monthLength[1] = 29;
-    }
-    // Check the range of the day
-    if (day < 0 && day >= monthLength[month - 1]) {
-      setIsValueEmptyHelper(0, true);
-      swal('Error!', 'Invalid date', 'error');
-      return false;
-    }
+    const parts = dateString.split('-');
+    const month = parseInt(parts[1], 10);
+    const year = parseInt(parts[0], 10);
 
     // Checks are volunteers over 16
     if ((today.getFullYear() - year) <= 16) {
@@ -159,10 +132,6 @@ const VolunteerSignUp = ({ location, ready, interestsArray, skillsArray, environ
 
   const handleChange = (e, { name, value }) => {
     switch (name) {
-    case 'dateOfBirth':
-      setIsValueEmptyHelper(0, isNotEmpty(value));
-      setDateOfBirth(value);
-      break;
     case 'confirmPassword':
       setConfirmPassword(value);
       break;
@@ -278,18 +247,8 @@ const VolunteerSignUp = ({ location, ready, interestsArray, skillsArray, environ
                 required
                 onChange={handleChange}
               />
-              <HiddenField name='dob' label='Date of Birth (You must be at least 16 years old to join Volunteer Ally)' value={dateOfBirth} />
-              <Form.Input
-                label="Date Of Birth (You must be at least 16 years old to join Volunteer Ally)"
-                id={COMPONENT_IDS.VOLUNTEER_SIGNUP_FORM_BIRTH}
-                icon="calendar alternate outline"
-                iconPosition="left"
-                name="dateOfBirth"
-                placeholder="mm/dd/yyyy"
-                onChange={handleChange}
-                required
-                error={ isValueEmpty[0] }
-              />
+              <TextField name='dob' type='date'
+                label='Date of Birth (You must be at least 16 years old to join Volunteer Ally)'/>
               <div className="two fields">
                 <div className="field">
                   <TextField name='firstName' label='First Name' placeholder='First Name' id={COMPONENT_IDS.VOLUNTEER_SIGNUP_FORM_FIRST}/>

@@ -9,9 +9,9 @@ import { VolunteerProfiles } from '../../api/volunteer/VolunteerProfileCollectio
 import EmailItem from '../components/EmailItem';
 
 let openSendMail = false;
-let currSendTo = '';
-let currSubject = '';
-let currContent = '';
+const currSendTo = '';
+const currSubject = '';
+const currContent = '';
 
 const handleClose = () => {
   openSendMail = false;

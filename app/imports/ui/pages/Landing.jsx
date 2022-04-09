@@ -31,7 +31,7 @@ Landing.propTypes = {
 
 // withTracker connects Meteor data to React components. https://guide.meteor.com/react.html#using-withTracker
 export default withTracker(() => {
-  const currentUser = Meteor.user() ? Meteor.user().username : '';
+  const currentUser = !!Meteor.user();
   const subscription = Events.subscribe();
   // Determine if the subscription is ready
   const ready = subscription.ready();

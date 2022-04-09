@@ -18,6 +18,7 @@ export const COMPONENT_IDS = {
   NAVBAR_BROWSE_OPPORTUNITY: 'navbar-browse-opportunity',
   NAVBAR_ORGANIZATION_SIGNUP: 'navbar-organization-library',
   NAVBAR_ADD_OPPORTUNITY: 'navbar-add-opportunity',
+  NAVBAR_INBOX: 'navbar-inbox-message',
   SIGN_IN_FORM_EMAIL: 'sign-in-form-email',
   SIGN_IN_FORM_PASSWORD: 'sign-in-form-password',
   SIGN_IN_FORM_SUBMIT: 'sign-in-form-submit',
