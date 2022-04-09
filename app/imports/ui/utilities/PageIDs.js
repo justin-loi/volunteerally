@@ -21,4 +21,5 @@ export const PAGE_IDS = {
   GOOGLE_MAP: 'google-map',
   ORGANIZATION_PROFILE: 'organization-profile',
   SEND_EMAIL_TO_ORG: 'send-email-to-org',
+  LIST_VOLUNTEER_AT_EVENT: 'list-volunteer-at-event',
 };

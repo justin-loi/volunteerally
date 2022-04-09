@@ -6,7 +6,6 @@ import PropTypes from 'prop-types';
 import swal from 'sweetalert';
 import { Events } from '../../api/event/EventCollection';
 import { OrganizationProfiles } from '../../api/organization/OrganizationProfileCollection';
-import { Messages } from '../../api/message/MessageCollection';
 import { createNewMessageMethod } from '../../api/message/MessageCollection.methods';
 
 // Renders a Event Info page that connects with the current Event collection.

@@ -1,6 +1,7 @@
 import React from 'react';
-import { Button, Header, Image, Table } from 'semantic-ui-react';
+import { Button, Header, Table } from 'semantic-ui-react';
 import PropTypes from 'prop-types';
+import { NavLink } from 'react-router-dom';
 
 /** Renders a single row in the List Stuff (Admin) table. See pages/AdminManageBoard.jsx. */
 const ListEventsAdmin = ({ event }) => (
@@ -16,7 +17,7 @@ const ListEventsAdmin = ({ event }) => (
     <Table.Cell>{event.orgName}</Table.Cell>
     <Table.Cell>{event.owner}</Table.Cell>
     <Table.Cell>
-      <Button>View</Button>
+      <Button as={NavLink} exact to={`/volunteer-list-for-event/${event._id}`}>View</Button>
       <Button>Delete</Button>
     </Table.Cell>
   </Table.Row>

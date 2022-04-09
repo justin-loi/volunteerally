@@ -18,6 +18,8 @@ const handleClose = () => {
 };
 
 const handleFormChange = (e, { name, value }) => {
+  // (temporary fix eslint)
+  // eslint-disable-next-line
   [name] = value;
 };
 
