@@ -247,7 +247,7 @@ const VolunteerSignUp = ({ location, ready, interestsArray, skillsArray, environ
                 required
                 onChange={handleChange}
               />
-              <TextField name='dob' type='date'
+              <TextField name='dob' type='date' id={COMPONENT_IDS.VOLUNTEER_SIGNUP_FORM_BIRTH}
                 label='Date of Birth (You must be at least 16 years old to join Volunteer Ally)'/>
               <div className="two fields">
                 <div className="field">
