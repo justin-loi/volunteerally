@@ -155,6 +155,7 @@ const EventProfile = ({ event, orgProfile, currentUser, ready }) => {
     const email = Meteor.user().username;
     const subject = cSubject;
     const content = cContent;
+    console.log(recipient, name, beRead, createdAt, email, subject, content);
     createNewMessageMethod.callPromise({ name, subject, content, email, createdAt, beRead, recipient })
       .catch(error => {
         swal('Error', error.message, 'error');
@@ -348,8 +349,9 @@ export default withTracker(({ match }) => {
   // Get access to Events documents.
   const subscription1 = Events.subscribe();
   const subscription2 = OrganizationProfiles.subscribe();
+  const sub = Messages.subscribe();
   // Determine if the subscription is ready
-  const ready = subscription1.ready() && subscription2.ready();
+  const ready = subscription1.ready() && subscription2.ready() && sub.ready();
   const event = Events.find({ _id: eventId }).fetch()[0];
   let orgProfile;
   if (event !== undefined) {

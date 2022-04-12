@@ -8,7 +8,9 @@ export const createNewMessageMethod = new ValidatedMethod({
   mixins: [CallPromiseMixin],
   validate: null,
   run({ name, subject, content, email, createdAt, beRead, recipient }) {
+    console.log("Hello");
     if (Meteor.isServer) {
+      console.log(name, subject, content, email, createdAt, beRead, recipient);
       Messages.define({
         name, subject, content, email, createdAt, beRead, recipient });
 
