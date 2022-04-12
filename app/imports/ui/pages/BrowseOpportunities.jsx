@@ -12,7 +12,7 @@ import EventCard from '../components/EventCard';
 import { Events } from '../../api/event/EventCollection';
 
 /* Renders a list of events. Use <EventCard> to render each event card. */
-const BrowseOpportunities = ({ events, interests, skills, environments }) => {
+const BrowseOpportunities = ({ events }) => {
 
   const [results, setResult] = useState(events);
   const [value, setValue] = useState('');
@@ -72,10 +72,7 @@ BrowseOpportunities.propTypes = {
 // withTracker connects Meteor data to React components. https://guide.meteor.com/react.html#using-withTracker
 export default withTracker(() => {
   const subscription = Events.subscribe();
-  const subscription2 = EventInterest.subscribe();
-  const subscription3 = EventSkill.subscribe();
-  const subscription4 = EventEnvironmental.subscribe();
-  const ready = subscription.ready() && subscription2.ready() && subscription3.ready() && subscription4.ready();
+  const ready = subscription.ready();
   const events = Events.find({}, { sort: { name: 1 } }).fetch();
   const interests = EventInterest.find({}, { sort: { name: 1 } }).fetch();
   const skills = EventSkill.find({}, { sort: { name: 1 } }).fetch();
