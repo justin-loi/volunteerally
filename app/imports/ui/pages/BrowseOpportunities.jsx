@@ -52,7 +52,7 @@ const BrowseOpportunities = ({ events }) => {
       />
 
       <Card.Group centered>
-        {events.map((event) => <EventCard key={event._id} event={event} />)}
+        {events.map((event) => <EventCard key={event._id} eventID={event._id} />)}
       </Card.Group>
     </Container>
 

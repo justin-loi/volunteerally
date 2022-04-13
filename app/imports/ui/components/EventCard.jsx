@@ -1,7 +1,7 @@
 import React from 'react';
-import { Button, Card, Icon, Image } from 'semantic-ui-react';
+import { Button, Card, Icon, Image, Label } from 'semantic-ui-react';
 import PropTypes from 'prop-types';
-import { NavLink, withRouter } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 import { Meteor } from 'meteor/meteor';
 import swal from 'sweetalert';
 import { Roles } from 'meteor/alanning:roles';
@@ -14,9 +14,16 @@ import { EventEnvironmental } from '../../api/environmental_preference/EventEnvi
 import { SpecialSkills } from '../../api/special_skills/SpecialSkillCollection';
 import { EventSkill } from '../../api/special_skills/EventSkillCollection';
 import { Events } from '../../api/event/EventCollection';
+import { Interests } from '../../api/interest/InterestCollection';
+import { Environmental } from '../../api/environmental_preference/EnvironmentalPreferenceCollection';
+
+
+const interestsStyle = {
+  marginTop: '8px',
+};
 
 /* Renders a single event card. */
-const EventCard = ({ event }) => {
+const EventCard = ({ event, environments, skills, interests, ready }) => {
   const handleClick = (e) => {
     e.preventDefault();
     const vID = Meteor.userId();
@@ -37,6 +44,7 @@ const EventCard = ({ event }) => {
 
     }
   };
+
   return (
     <Card as={NavLink} exact to={`/details/${event._id}`}>
       <Image src= {event.eventCardImage} wrapped ui={false}/>
@@ -51,7 +59,11 @@ const EventCard = ({ event }) => {
           <br/>
         </Card.Meta>
         <Card.Description>
-          <p>Placeholder for special skill.</p>
+          {/* eslint-disable-next-line react/prop-types */}
+          <p>{skills.map((skill, index) => (
+            <Label style={interestsStyle} key={`event-skill-${index}`}>
+              {skill.name}
+            </Label>))}</p>
         </Card.Description>
       </Card.Content>
       <Card.Content extra>
@@ -107,8 +119,6 @@ EventCard.propTypes = {
   }),
 };
 
-export default withRouter(EventCard);
-
 const EventCardCon = withTracker((eventID) => {
   const subscription = Events.subscribe();
   const subscription2 = EventInterest.subscribe();
@@ -116,11 +126,11 @@ const EventCardCon = withTracker((eventID) => {
   const subscription4 = EventEnvironmental.subscribe();
   const ready = subscription.ready() && subscription2.ready() && subscription3.ready() && subscription4.ready();
   const event = Events.findDoc(eventID);
-  const skillPairs = EventSkill.find(eventID).fetch();
+  const skillPairs = EventSkill.find({ eventID }, {}).fetch();
   const skills = skillPairs.map((pair) => SpecialSkills.findDoc(pair.skillID));
-  const interestPairs = EventInterest.find(eventID).fetch();
+  const interestPairs = EventInterest.find({ eventID }, {}).fetch();
   const interests = interestPairs.map((pair) => EventInterest.findDoc(pair.interestID));
-  const environmentPairs = EventEnvironmental.find(eventID).fetch();
+  const environmentPairs = EventEnvironmental.find({ eventID }, {}).fetch();
   const environments = environmentPairs.map((pair) => EventEnvironmental.findDoc(pair.environmentalID));
   return {
     event,
@@ -130,3 +140,5 @@ const EventCardCon = withTracker((eventID) => {
     ready,
   };
 })(EventCard);
+
+export default EventCardCon;
