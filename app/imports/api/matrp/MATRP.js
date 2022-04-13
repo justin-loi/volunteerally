@@ -18,6 +18,9 @@ import { Hours } from '../hours/HoursCollection';
 import { VolunteerEventHours } from '../hours/VolunteerEventHours';
 import { VolunteerEvent } from '../event/VolunteerEventCollection';
 import { OrganizationEvent } from '../event/OrganizationEventCollection';
+import { EventSkill } from '../special_skills/EventSkillCollection';
+import { EventInterest } from '../interest/EventInterestCollection';
+import { EventEnvironmental } from '../environmental_preference/EventEnvironmentalCollection';
 
 class MATRPClass {
   collections;
@@ -47,6 +50,9 @@ class MATRPClass {
       VolunteerEventHours,
       VolunteerEvent,
       OrganizationEvent,
+      EventSkill,
+      EventInterest,
+      EventEnvironmental,
     ];
     /*
      * A list of collection class instances in the order required for them to be sequentially loaded from a file.
@@ -70,6 +76,9 @@ class MATRPClass {
       VolunteerEventHours,
       VolunteerEvent,
       OrganizationEvent,
+      EventSkill,
+      EventInterest,
+      EventEnvironmental,
     ];
 
     /*

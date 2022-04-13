@@ -60,10 +60,10 @@ const EventCard = ({ event, environments, skills, interests, ready }) => {
         </Card.Meta>
         <Card.Description>
           {/* eslint-disable-next-line react/prop-types */}
-          <p>{skills.map((skill, index) => (
+          {skills.map((skill, index) => (
             <Label style={interestsStyle} key={`event-skill-${index}`}>
               {skill.name}
-            </Label>))}</p>
+            </Label>))}
         </Card.Description>
       </Card.Content>
       <Card.Content extra>
@@ -124,14 +124,18 @@ const EventCardCon = withTracker((eventID) => {
   const subscription2 = EventInterest.subscribe();
   const subscription3 = EventSkill.subscribe();
   const subscription4 = EventEnvironmental.subscribe();
-  const ready = subscription.ready() && subscription2.ready() && subscription3.ready() && subscription4.ready();
-  const event = Events.findDoc(eventID);
-  const skillPairs = EventSkill.find({ eventID }, {}).fetch();
-  const skills = skillPairs.map((pair) => SpecialSkills.findDoc(pair.skillID));
-  const interestPairs = EventInterest.find({ eventID }, {}).fetch();
-  const interests = interestPairs.map((pair) => EventInterest.findDoc(pair.interestID));
-  const environmentPairs = EventEnvironmental.find({ eventID }, {}).fetch();
-  const environments = environmentPairs.map((pair) => EventEnvironmental.findDoc(pair.environmentalID));
+  const subscription5 = SpecialSkills.subscribe();
+  const subscription6 = Interests.subscribe();
+  const subscription7 = Environmental.subscribe();
+  const ready = subscription.ready() && subscription2.ready() && subscription3.ready() && subscription4.ready() &&
+  subscription5.ready() && subscription6.ready() && subscription7.ready();
+  const event = eventID.event;
+  const skillPairs = EventSkill.find({ eventID: event._id }, {}).fetch();
+  const skills = skillPairs.map((pair) => SpecialSkills.findOne({ _id: pair.skillID }, {}));
+  const interestPairs = EventInterest.find({ eventID: event._id }, {}).fetch();
+  const interests = interestPairs.map((pair) => Interests.findOne({ _id: pair.interestID }, {}));
+  const environmentPairs = EventEnvironmental.find({ eventID: event._id }, {}).fetch();
+  const environments = environmentPairs.map((pair) => Environmental.findOne({ _id: pair.environmentalID }, {}));
   return {
     event,
     skills,
