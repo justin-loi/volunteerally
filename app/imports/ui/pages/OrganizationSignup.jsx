@@ -211,7 +211,7 @@ const OrganizationSignup = ({ location, ready, industriesArray }) => {
                     <Grid.Row style={{ paddingLeft: '8px' }}>
                       {industriesArray.map((industry, index) => (
                         <Grid.Column key={`organization-signup-grid-industries-${index}`}>
-                          <Form.Checkbox
+                          <Form.Radio
                             key={`organization-signup-industries-${industry._id}`}
                             id={`organization-signup-industries-${index}`}
                             label={industry.name}
@@ -287,7 +287,7 @@ const OrganizationSignup = ({ location, ready, industriesArray }) => {
                 />
                 <Form.Field>
                   <br/>
-                  <Message>Please confirm that you agree to our Privacy Policy and Terms & Conditions</Message>
+                  <Message>Please confirm that you agree to our <Link to="/privacy" target="_blank">Privacy Policy</Link> and <Link to="/terms" target="_blank">Terms & Conditions</Link></Message>
                   <Form.Checkbox
                     label='I agree to the Privacy Policy'
                     name='privacyPolicy'
