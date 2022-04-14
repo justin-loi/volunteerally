@@ -19,6 +19,7 @@ import { VolunteerEventHours } from '../hours/VolunteerEventHours';
 import { VolunteerEvent } from '../event/VolunteerEventCollection';
 import { OrganizationEvent } from '../event/OrganizationEventCollection';
 import { Industries } from '../industry/IndustryCollection';
+import { Messages } from '../message/MessageCollection';
 
 class MATRPClass {
   collections;
@@ -45,6 +46,7 @@ class MATRPClass {
       VolunteerEnvironmental,
       VolunteerAvailability,
       Hours,
+      Messages,
       VolunteerEventHours,
       VolunteerEvent,
       OrganizationEvent,
@@ -69,6 +71,7 @@ class MATRPClass {
       VolunteerEnvironmental,
       VolunteerAvailability,
       Hours,
+      Messages,
       VolunteerEventHours,
       VolunteerEvent,
       OrganizationEvent,

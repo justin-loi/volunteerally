@@ -6,7 +6,7 @@ Best practices for unit, integration, and acceptance testing.
 
 ### TU-01: Each Collection has unit tests.
 
-Collections are defined in the api/ directory. They are typically defined as a single Class instance that extend a base class such as "BaseCollection".
+Collections are defined in the api/ directory. They are typically defined as a single Class instance that extend a base class such as "MailCollection".
 
 For each collection, there should be associated unit tests that check that all the fundamental operations on the Collection operate correctly for reasonable input values.
 

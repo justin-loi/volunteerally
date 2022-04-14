@@ -14,7 +14,7 @@ import { loadCollectionNewDataOnly } from '../utilities/load-fixtures';
  * @memberOf api/base
  */
 export const defineMethod = new ValidatedMethod({
-  name: 'BaseCollection.define',
+  name: 'MailCollection.define',
   mixins: [CallPromiseMixin],
   validate: null,
   run({ collectionName, definitionData }) {
@@ -29,7 +29,7 @@ export const defineMethod = new ValidatedMethod({
 });
 
 export const updateMethod = new ValidatedMethod({
-  name: 'BaseCollection.update',
+  name: 'MailCollection.update',
   mixins: [CallPromiseMixin],
   validate: null,
   run({ collectionName, updateData }) {
@@ -43,7 +43,7 @@ export const updateMethod = new ValidatedMethod({
 });
 
 export const removeItMethod = new ValidatedMethod({
-  name: 'BaseCollection.removeIt',
+  name: 'MailCollection.removeIt',
   mixins: [CallPromiseMixin],
   validate: null,
   run({ collectionName, instance }) {

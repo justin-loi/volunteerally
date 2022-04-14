@@ -297,7 +297,6 @@ export default withTracker(({ match }) => {
   const volInterests = VolunteerInterest.find({ volunteerID: volunteer.userID }, { }).fetch();
   const volSkills = VolunteerSkill.find({ volunteerID: volunteer.userID }, { }).fetch();
   const volEnv = VolunteerEnvironmental.findOne({ volunteerID: volunteer.userID }, {});
-  console.log(volEnv);
   const volAvas = VolunteerAvailability.find({ volunteerID: volunteer.userID }, { }).fetch();
 
   const interestsArray = Interests.find({}, {}).fetch();

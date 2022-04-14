@@ -10,6 +10,7 @@ export const PAGE_IDS = {
   SIGN_IN: 'sigin-in',
   SIGN_OUT: 'sign-out',
   SIGN_UP: 'sign-up',
+  FORGOT_PASSWORD: 'forgot-password',
   VOLUNTEER_SIGNUP: 'volunteer-signup',
   ABOUT_US: 'about-us',
   ORGANIZATION_LIB: 'organization_library',
@@ -18,6 +19,7 @@ export const PAGE_IDS = {
   LIST_EVENTS: 'browse-opportunities',
   EDIT_VOLUNTEER_PROFILE: 'edit-volunteer-profile',
   GOOGLE_MAP: 'google-map',
-
   ORGANIZATION_PROFILE: 'organization-profile',
+  SEND_EMAIL_TO_ORG: 'send-email-to-org',
+  LIST_VOLUNTEER_AT_EVENT: 'list-volunteer-at-event',
 };

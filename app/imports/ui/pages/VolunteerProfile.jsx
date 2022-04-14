@@ -98,7 +98,7 @@ const VolunteerProfile = ({ volunteer, signedUpEvents, interests, skills, envPre
           {(signedUpEvents.length !== 0) ?
             signedUpEvents.map((events, index) => (
               <Card as={NavLink} exact to={`/details/${events._id}`} key={`vol-event-${index}`}>
-                <Image src='images/event_card_image_volunteer.jpg' size='medium'/>
+                <Image src='images/event_card_default_image.png' size='medium'/>
                 <Card.Content>
                   <Card.Header>{events.eventName}</Card.Header>
                   <Card.Meta>

@@ -8,7 +8,7 @@ import NavBar from '../components/NavBar';
 import Footer from '../components/Footer';
 import Landing from '../pages/Landing';
 import ListStuff from '../pages/ListStuff';
-import ListStuffAdmin from '../pages/ListStuffAdmin';
+import ListStuffAdmin from '../pages/AdminManageBoard';
 import EditStuff from '../pages/EditStuff';
 import NotFound from '../pages/NotFound';
 import Signin from '../pages/Signin';
@@ -17,6 +17,7 @@ import Signout from '../pages/Signout';
 import ManageDatabase from '../pages/ManageDatabase';
 import EventProfile from '../pages/EventProfile';
 import { ROLE } from '../../api/role/Role';
+import Inbox from '../pages/Inbox';
 // new page
 import VolunteerSignUp from '../pages/VolunteerSignUp';
 import AboutUs from '../pages/AboutUs';
@@ -32,6 +33,9 @@ import GoogleMap from '../pages/GoogleMap';
 import OrganizationProfile from '../pages/OrganizationProfile';
 import EditOrganizationProfile from '../pages/EditOrganizationProfile';
 import AddOpportunity from '../pages/AddOpportunity';
+import ForgotPassword from '../pages/ForgotPassword';
+import SendEmailToOrg from '../pages/SendEmailToOrg';
+import VolunteerListForEvent from '../pages/VolunteerListForEvent';
 
 /** Top-level layout component for this application. Called in imports/startup/client/startup.jsx. */
 class App extends React.Component {
@@ -57,7 +61,9 @@ class App extends React.Component {
             <Route path="/signup" component={Signup}/>
             <Route path="/signout" component={Signout}/>
             <VolProtectedRoute path="/volunteer-profile" component={VolunteerProfile}/>
+            <ProtectedRoute path="/inbox" component={Inbox}/>
             <Route path="/organization-profile/:_id" component={OrganizationProfile}/>
+            <VolProtectedRoute path="/volunteer-send-email/:_id" component={SendEmailToOrg}/>
             <OrgProtectedRoute path="/edit-organization-profile/:_id" component={EditOrganizationProfile}/>
             <Route path="/eprofile" component={EventProfile}/>
             <Route path="/about_us" component={AboutUs}/>
@@ -65,12 +71,14 @@ class App extends React.Component {
             <Route path="/terms" component={TermsAndConditions}/>
             <Route path="/signup" component={Signup}/>
             <Route path="/signout" component={Signout}/>
+            <Route path="/forgot_password" component={ForgotPassword}/>
             <Route path ="/map" component={GoogleMap}/>
             <OrgProtectedRoute path="/add" component={AddOpportunity}/>
             <ProtectedRoute path="/list" component={ListStuff}/>
             <ProtectedRoute path="/edit/:_id" component={EditStuff}/>
             <AdminProtectedRoute path="/admin" component={ListStuffAdmin}/>
             <AdminProtectedRoute path="/manage-database" component={ManageDatabase}/>
+            <Route path='/volunteer-list-for-event/:_id' component={VolunteerListForEvent}/>
             <Route component={NotFound}/>
           </Switch>
           <Footer/>
