@@ -61,3 +61,42 @@ export const editVolunteerLinkedCollectionMethod = new ValidatedMethod({
     }
   },
 });
+<<<<<<< Updated upstream
+=======
+
+if (Meteor.isServer) {
+  Meteor.startup(() => {
+    console.log('Set Up Mail Url');
+    process.env.MAIL_URL = 'smtps://stoked4kindness@gmail.com:LaChupacabra666@smtp.gmail.com:465/';
+    // 'smtps://username:password@smtp.gmail.com:465/';
+  });
+}
+
+export const volunteerSendEmailToOrg = new ValidatedMethod({
+  name: 'Volunteer.SendEmailToOrg',
+  mixins: [CallPromiseMixin],
+  validate: null,
+  run({ title, content, organizationEmail, volunteerEmail }) {
+    if (Meteor.isServer) {
+
+      const subject = title;
+      const text = `${content} \n\n Please, reply to: ${volunteerEmail}`;
+
+      console.log(`send email to ${organizationEmail}`);
+      //const to = `${organizationEmail}`;
+      //const to = 'stoked4kindness@gmail.com';
+      const to = 'jmloi@hawaii.edu';
+      const from = `${volunteerEmail}`;
+
+      // Make sure that all arguments are strings.
+      check([subject, text], [String]);
+
+      // Let other method calls from the same client start running, without
+      // waiting for the email sending to complete.
+      this.unblock();
+
+      Email.send({ to, from, subject, text });
+    }
+  },
+});
+>>>>>>> Stashed changes
