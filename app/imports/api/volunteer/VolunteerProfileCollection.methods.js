@@ -61,8 +61,6 @@ export const editVolunteerLinkedCollectionMethod = new ValidatedMethod({
     }
   },
 });
-<<<<<<< Updated upstream
-=======
 
 if (Meteor.isServer) {
   Meteor.startup(() => {
@@ -83,8 +81,8 @@ export const volunteerSendEmailToOrg = new ValidatedMethod({
       const text = `${content} \n\n Please, reply to: ${volunteerEmail}`;
 
       console.log(`send email to ${organizationEmail}`);
-      //const to = `${organizationEmail}`;
-      //const to = 'stoked4kindness@gmail.com';
+      // const to = `${organizationEmail}`;
+      // const to = 'stoked4kindness@gmail.com';
       const to = 'jmloi@hawaii.edu';
       const from = `${volunteerEmail}`;
 
@@ -99,4 +97,3 @@ export const volunteerSendEmailToOrg = new ValidatedMethod({
     }
   },
 });
->>>>>>> Stashed changes

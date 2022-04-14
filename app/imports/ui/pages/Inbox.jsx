@@ -8,60 +8,6 @@ import { Messages } from '../../api/message/MessageCollection';
 import { VolunteerProfiles } from '../../api/volunteer/VolunteerProfileCollection';
 import EmailItem from '../components/EmailItem';
 
-<<<<<<< Updated upstream
-let openSendMail = false;
-let currSendTo = '';
-let currSubject = '';
-let currContent = '';
-
-const handleClose = () => {
-  openSendMail = false;
-};
-
-const handleFormChange = (e, { name, value }) => {
-  [name] = value;
-};
-
-const handleSubmit = () => {
-  const { subject, content } = { currSubject, currContent };
-  const recipient = currSendTo;
-  const name = VolunteerProfiles.findOne().firstName;
-  const createdAt = new Date();
-  const beRead = false;
-  const email = Meteor.user().username;
-  Messages.insert({ name, subject, content, email, createdAt, beRead, recipient });
-  swal('Success', 'Message is sent', 'success');
-  handleClose();
-};
-
-const inboxStyle = {
-  width: '80%',
-  height: '663.59px',
-  margin: 'auto',
-};
-
-const popupStyle = {
-  position: 'fixed',
-  width: '100%',
-  height: '100%',
-  top: '0',
-  left: '0',
-  right: '0',
-  bottom: '0',
-  margin: 'auto',
-  backgroundColor: 'rgba(0,0,0, 0.5)',
-};
-
-const innerStyle = {
-  position: 'absolute',
-  width: '80%',
-  left: '10%',
-  top: '10%',
-  margin: 'auto',
-};
-
-=======
->>>>>>> Stashed changes
 // Shows all messages
 /*
 const Inbox = ({ message, ready }) => ((ready) ? (

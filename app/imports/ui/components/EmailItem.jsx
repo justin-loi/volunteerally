@@ -5,6 +5,8 @@ import { withRouter } from 'react-router-dom';
 import swal from 'sweetalert';
 import { Messages } from '../../api/message/MessageCollection';
 import { updateMessageMethod } from '../../api/message/MessageCollection.methods';
+import { Stuffs } from '../../api/stuff/StuffCollection';
+import { updateMethod } from '../../api/base/BaseCollection.methods';
 
 /** Renders a single row in the List Stuff table. See pages/ListStuff.jsx. */
 const EmailItem = ({ email, inbox }) => {
@@ -12,9 +14,12 @@ const EmailItem = ({ email, inbox }) => {
   const [openContent, setOpenContent] = useState(false);
 
   const handleRead = () => {
+    const updateData = {id: email._id, beRead: true};
+    updateMessageMethod.callPromise({ updateData })
+      .catch(error => swal('Error', error.message, 'error'))
+      .then(() => swal('Success', 'Item updated successfully', 'success'));
 
     console.log(email._id);
-    updateMessageMethod.callPromise();
     setOpenContent(false);
     console.log('I got pressed');
   };

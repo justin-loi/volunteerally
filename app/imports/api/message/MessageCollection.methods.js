@@ -9,7 +9,6 @@ export const createNewMessageMethod = new ValidatedMethod({
   mixins: [CallPromiseMixin],
   validate: null,
   run({ name, subject, content, email, createdAt, beRead, recipient }) {
-    console.log("Hello");
     if (Meteor.isServer) {
       console.log(name, subject, content, email, createdAt, beRead, recipient);
       Messages.define({
@@ -19,15 +18,14 @@ export const createNewMessageMethod = new ValidatedMethod({
 });
 
 export const updateMessageMethod = new ValidatedMethod({
-  name: 'MailCollection.update',
+  name: 'Message.UodateMessage',
   mixins: [CallPromiseMixin],
   validate: null,
   run({ updateData }) {
     if (Meteor.isServer) {
       // console.log('updateMethod(%o, %o)', collectionName, updateData);
-      const collection = MATRP.getCollection(Messages);
-      collection.assertValidRoleForMethod(this.userId);
-      collection.update(updateData.id, updateData);
+      console.log(updateData);
+      Messages.update(updateData.id, { beRead: updateData.beRead });
     }
   },
 });

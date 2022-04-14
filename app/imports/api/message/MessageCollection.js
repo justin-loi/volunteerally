@@ -54,6 +54,8 @@ class MessageCollection extends BaseCollection {
    * @param categories the condition of the item.
    */
   update(docID, { name, subject, content, email, createdAt, beRead, recipient }) {
+    console.log(docID);
+    console.log(beRead);
     const updateData = {};
     if (name) {
       updateData.name = name;
