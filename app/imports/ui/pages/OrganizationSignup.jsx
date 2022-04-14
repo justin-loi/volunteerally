@@ -7,6 +7,7 @@ import { withTracker } from 'meteor/react-meteor-data';
 import SimpleSchema from 'simpl-schema';
 import SimpleSchema2Bridge from 'uniforms-bridge-simple-schema-2';
 import swal from 'sweetalert';
+import Axios from 'axios';
 import { PAGE_IDS } from '../utilities/PageIDs';
 import { COMPONENT_IDS } from '../utilities/ComponentIDs';
 import { signUpNewOrganizationMethod } from '../../api/organization/OrganizationProfileCollection.methods';
@@ -27,8 +28,6 @@ const formSchema = new SimpleSchema({
   secondContactLastName: { type: String, optional: true },
   primaryContactEmail: String,
   primaryContactPhone: String,
-  secondContactEmail: { type: String, optional: true },
-  secondContactPhone: { type: String, optional: true },
   // username: String,
   password: String,
   // confirmPassword: String,
@@ -46,6 +45,7 @@ const OrganizationSignup = ({ location, ready, industriesArray }) => {
   const [termsConditions, setTermsConditions] = useState('');
   const [isValueEmpty, setIsValueEmpty] = useState(Array(2).fill(false));
   const [disableSecondContact, setDisableSecondContact] = useState(true);
+  const [image, setImage] = useState('');
 
   // const [image, setImage] = useState('');
 
@@ -85,6 +85,18 @@ const OrganizationSignup = ({ location, ready, industriesArray }) => {
     setIsValueEmpty(isValueEmpty);
   };
 
+  const uploadImage = (files) => {
+    // eslint-disable-next-line no-undef
+    const data = new FormData();
+    data.append('file', files[0]);
+    data.append('cloud_name', 'irene-ma');
+    data.append('upload_preset', 'nkv8kepo');
+    Axios.post('https://api.cloudinary.com/v1_1/irene-ma/image/upload', data).then((r) => {
+      console.log(r.data.url);
+      setImage(r.data.url);
+    });
+  };
+
   // Update the form controls each time the user interacts with them
   const handleChange = (e, { name, value }) => {
     switch (name) {
@@ -97,6 +109,9 @@ const OrganizationSignup = ({ location, ready, industriesArray }) => {
     case 'addSecondContact':
       // eslint-disable-next-line no-unused-expressions
       (disableSecondContact) ? setDisableSecondContact(false) : setDisableSecondContact(true);
+      break;
+    case 'image':
+      setImage(value);
       break;
     case 'privacyPolicy':
       if (privacyPolicy === '') {
@@ -129,14 +144,17 @@ const OrganizationSignup = ({ location, ready, industriesArray }) => {
       data.username = data.email;
       // eslint-disable-next-line no-param-reassign
       data.industries = industries;
-      // insert Organization Profile Collection method here
+      // eslint-disable-next-line no-param-reassign
+      data.image = image;
       console.log(data);
+      // insert Organization Profile Collection method here
       signUpNewOrganizationMethod.callPromise(data).catch(error => {
         swal('Error', error.message, 'error');
       })
         .then(() => {
           formRef.reset();
           setIndustries('');
+          setImage('');
           swal({
             title: 'Organization pending',
             text: 'Please wait for approval by admin',
@@ -240,41 +258,10 @@ const OrganizationSignup = ({ location, ready, industriesArray }) => {
                   name='primaryContactPhone'
                   label='Primary Phone Number'
                   id={COMPONENT_IDS.ORGANIZATION_SIGNUP_FORM_PRIMARY_CONTACT_PHONE_NUMBER}/>
-                <Form.Field>
-                  <Form.Checkbox
-                    label='Add a Secondary Contact'
-                    name ='addSecondContact'
-                    value = {1}
-                    onChange={handleChange}
-                  />
-                  <TextField
-                    name='secondContactFirstName'
-                    label='Secondary Contact First Name'
-                    id={COMPONENT_IDS.ORGANIZATION_SIGNUP_FORM_SECONDARY_CONTACT_FIRST_NAME}
-                    disabled={disableSecondContact}
-                  />
-                  <TextField
-                    name='secondContactLastName'
-                    label='Secondary Contact Last Name'
-                    id={COMPONENT_IDS.ORGANIZATION_SIGNUP_FORM_SECONDARY_CONTACT_LAST_NAME}
-                    disabled={disableSecondContact}
-                  />
-                  <TextField
-                    name='secondContactEmail'
-                    label='Secondary Contact E-mail Address'
-                    id={COMPONENT_IDS.ORGANIZATION_SIGNUP_FORM_SECONDARY_CONTACT_EMAIL}
-                    disabled={disableSecondContact}
-                  />
-                  <TextField
-                    name='secondContactPhone'
-                    label='Secondary Contact Phone Number'
-                    id={COMPONENT_IDS.ORGANIZATION_SIGNUP_FORM_SECONDARY_CONTACT_PHONE_NUMBER}
-                    disabled={disableSecondContact}
-                  />
-                </Form.Field>
                 <TextField
                   name='password'
                   label='Password'
+                  type='password'
                   id={COMPONENT_IDS.ORGANIZATION_SIGNUP_FORM_PASSWORD}/>
                 <Form.Input
                   label="Confirm Password"
@@ -284,6 +271,13 @@ const OrganizationSignup = ({ location, ready, industriesArray }) => {
                   placeholder="Confirm Your Password"
                   required
                   onChange={handleChange}
+                />
+                <Form.Input
+                  label="Upload a Profile Picture"
+                  type="file"
+                  onChange={(event) => {
+                    uploadImage(event.target.files);
+                  }}
                 />
                 <Form.Field>
                   <br/>
