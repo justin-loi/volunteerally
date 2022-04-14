@@ -11,6 +11,12 @@ class IndustryCollection extends BaseCollection {
     }));
   }
 
+  /**
+   * Defines a new Interests.
+   * @param name the name of the interest.
+   * @param description industry's description (optional).
+   * @return {String} the docID of the new document.
+   */
   define({ name, description }) {
     const docID = this._collection.insert({
       name,
@@ -19,6 +25,12 @@ class IndustryCollection extends BaseCollection {
     return docID;
   }
 
+  /**
+   * Updates the given document.
+   * @param docID the id of the document to update.
+   * @param name the new name (optional).
+   * @param description the new description (optional).
+   */
   update(docID, { name, description }) {
     const updateData = {};
     if (name) {
@@ -31,6 +43,11 @@ class IndustryCollection extends BaseCollection {
     this._collection.update(docID, { $set: updateData });
   }
 
+  /**
+   * A stricter form of remove that throws an error if the document or docID could not be found in this collection.
+   * @param { String | Object } name A document or docID in this collection.
+   * @returns true
+   */
   removeIt(name) {
     const doc = this.findDoc(name);
     check(doc, Object);
@@ -38,10 +55,21 @@ class IndustryCollection extends BaseCollection {
     return true;
   }
 
+  /**
+   * Default implementation of assertValidRoleForMethod. Asserts that userId is logged in as an Admin or User.
+   * This is used in the define, update, and removeIt Meteor methods associated with each class.
+   * @param userId The userId of the logged in user. Can be null or undefined
+   * @throws { Meteor.Error } If there is no logged in user, or the user is not an Admin or User.
+   */
   assertValidRoleForMethod(userId) {
     this.assertRole(userId, [ROLE.ADMIN, ROLE.USER, ROLE.VOLUNTEER, ROLE.ORGANIZATION]);
   }
 
+  /**
+   * Returns an object representing the definition of docID in a format appropriate to the restoreOne or define function.
+   * @param docID
+   * @return {{ name, description }}
+   */
   dumpOne(docID) {
     const doc = this.findDoc(docID);
     const name = doc.name;
@@ -50,4 +78,7 @@ class IndustryCollection extends BaseCollection {
   }
 }
 
+/**
+ * Provides the singleton instance of this class to all other entities.
+ */
 export const Industries = new IndustryCollection();
