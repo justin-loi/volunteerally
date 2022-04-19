@@ -3,44 +3,27 @@ import { check } from 'meteor/check';
 import BaseCollection from '../base/BaseCollection';
 import { ROLE } from '../role/Role';
 
-class IndustryCollection extends BaseCollection {
+class EndedEventsCollection extends BaseCollection {
   constructor() {
-    super('Industries', new SimpleSchema({
-      name: String,
-      description: { type: String, optional: true },
+    super('EndedEvent', new SimpleSchema({
+      eventID: SimpleSchema.RegEx.Id,
+      listID: SimpleSchema.RegEx.Id,
+      volunteerID: SimpleSchema.RegEx.Id,
     }));
   }
 
   /**
-   * Defines a new Interests.
-   * @param name the name of the interest.
-   * @param description industry's description (optional).
+   * Define a link between a volunteer and an event based on their ID.
+   * @param eventID the event ID
    * @return {String} the docID of the new document.
    */
-  define({ name, description }) {
+  define({ eventID, listID, volunteerID }) {
     const docID = this._collection.insert({
-      name,
-      description,
+      eventID,
+      listID,
+      volunteerID,
     });
     return docID;
-  }
-
-  /**
-   * Updates the given document.
-   * @param docID the id of the document to update.
-   * @param name the new name (optional).
-   * @param description the new description (optional).
-   */
-  update(docID, { name, description }) {
-    const updateData = {};
-    if (name) {
-      updateData.name = name;
-    }
-    if (description) {
-      updateData.description = description;
-    }
-
-    this._collection.update(docID, { $set: updateData });
   }
 
   /**
@@ -68,17 +51,18 @@ class IndustryCollection extends BaseCollection {
   /**
    * Returns an object representing the definition of docID in a format appropriate to the restoreOne or define function.
    * @param docID
-   * @return {{ name, description }}
+   * @return {{ eventID }}
    */
   dumpOne(docID) {
     const doc = this.findDoc(docID);
-    const name = doc.name;
-    const description = doc.description;
-    return { name, description };
+    const eventID = doc.eventID;
+    const listID = doc.listID;
+    const volunteerID = doc.volunteerID;
+    return { eventID, listID, volunteerID };
   }
 }
 
 /**
  * Provides the singleton instance of this class to all other entities.
  */
-export const Industries = new IndustryCollection();
+export const EndedEvent = new EndedEventsCollection();

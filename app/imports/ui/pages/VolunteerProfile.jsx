@@ -17,8 +17,8 @@ import { Environmental } from '../../api/environmental_preference/EnvironmentalP
 import { VolunteerEnvironmental } from '../../api/environmental_preference/VolunteerEnvironmentalCollection';
 import { Hours } from '../../api/hours/HoursCollection';
 import { VolunteerEventHours } from '../../api/hours/VolunteerEventHours';
-import { VolunteerEvent } from '../../api/event/VolunteerEventCollection';
 import { OrganizationEvent } from '../../api/event/OrganizationEventCollection';
+import { EndedEvent } from '../../api/event/EndedEventsCollection';
 
 const capitalizeFirstLetter = (string) => string.charAt(0).toUpperCase() + string.slice(1);
 const interestsStyle = {
@@ -98,7 +98,7 @@ const VolunteerProfile = ({ volunteer, signedUpEvents, interests, skills, envPre
           {(signedUpEvents.length !== 0) ?
             signedUpEvents.map((events, index) => (
               <Card as={NavLink} exact to={`/details/${events._id}`} key={`vol-event-${index}`}>
-                <Image src='images/event_card_image_volunteer.jpg' size='medium'/>
+                <Image src='images/event_card_default_image.png' size='medium'/>
                 <Card.Content>
                   <Card.Header>{events.eventName}</Card.Header>
                   <Card.Meta>
@@ -160,7 +160,8 @@ export default withTracker(() => {
   const subscription10 = VolunteerAvailability.subscribeCurr();
   const subscription11 = Hours.subscribe();
   const subscription12 = VolunteerEventHours.subscribe();
-  const subscription13 = VolunteerEvent.subscribe();
+  // const subscription13 = VolunteerEvent.subscribe();
+  const subscription13 = EndedEvent.subscribe();
   const subscription14 = OrganizationEvent.subscribe();
   // Determine if the subscription is ready
   const ready = subscription.ready() && subscription2.ready() && subscription3.ready() && subscription4.ready()
@@ -201,10 +202,10 @@ export default withTracker(() => {
   const totalHours = (typeof volTotalEventHours !== 'undefined' && ready) ? (Hours.findDoc({ _id: volTotalEventHours.hoursID })) : {};
 
   // get volunteer helped event count
-  const volEventsCount = VolunteerEvent.find({ volunteerID: Meteor.userId() }, {}).count();
+  const volEventsCount = EndedEvent.find({ volunteerID: Meteor.userId() }, {}).count();
 
   // get volunteer event
-  const volEvents = VolunteerEvent.find({ volunteerID: Meteor.userId() }, {}).fetch();
+  const volEvents = EndedEvent.find({ volunteerID: Meteor.userId() }, {}).fetch();
 
   // console.log(volEvents);
   const signedUpEvents = [];

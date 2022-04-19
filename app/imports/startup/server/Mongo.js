@@ -15,6 +15,7 @@ import { VolunteerEvent } from '../../api/event/VolunteerEventCollection';
 import { OrganizationEvent } from '../../api/event/OrganizationEventCollection';
 import { Hours } from '../../api/hours/HoursCollection';
 import { VolunteerEventHours } from '../../api/hours/VolunteerEventHours';
+import { Industries } from '../../api/industry/IndustryCollection';
 /* eslint-disable no-console */
 
 // Initialize the database with a default data document.
@@ -44,6 +45,28 @@ if (Events.count() === 0) {
 }
 
 function addOrganization(data) {
+  // this code need to be change
+  // console.log(data);
+  // eslint-disable-next-line no-param-reassign
+  data.primaryContactPhone = data.phoneNumber;
+  // eslint-disable-next-line no-param-reassign
+  data.primaryAddress = '1234 Example Address';
+  // eslint-disable-next-line no-param-reassign
+  data.primaryContactFirstName = data.firstName;
+  // eslint-disable-next-line no-param-reassign
+  data.primaryContactLastName = data.lastName;
+  // eslint-disable-next-line no-param-reassign
+  data.primaryContactEmail = data.email;
+  // eslint-disable-next-line no-param-reassign
+  data.ein = Math.floor(Math.random() * (99999999 - 10000000)) + 10000000;
+  // eslint-disable-next-line no-param-reassign
+  data.city = 'Honolulu';
+  // eslint-disable-next-line no-param-reassign
+  data.state = 'Hawaii';
+  // eslint-disable-next-line no-param-reassign
+  data.zipcode = '96xxx';
+  // console.log(data);
+  // above code need to be change
   console.log(`  Adding: ${data.email} (${data.organizationName})`);
   OrganizationProfiles.define(data);
 }
@@ -184,4 +207,16 @@ if (OrganizationEvent.count() === 0) {
   eventsArray.map((event) => orgIndex.push(organizationArray.findIndex((organization) => organization.email === event.owner)));
   eventsArray.map((event, index) => (OrganizationEvent.define({
     organizationID: organizationArray[orgIndex[index]].userID, eventID: event._id })));
+}
+
+function addIndustries(data) {
+  console.log(`  Adding industries: ${data.name}`);
+  Industries.define(data);
+}
+
+if (Industries.count() === 0) {
+  if (Meteor.settings.defaultIndustries) {
+    console.log('Creating default industries.');
+    Meteor.settings.defaultIndustries.map(data => addIndustries(data));
+  }
 }

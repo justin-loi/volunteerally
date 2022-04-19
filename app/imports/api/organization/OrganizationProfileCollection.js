@@ -10,9 +10,22 @@ class OrganizationProfileCollection extends BaseProfileCollection {
       username: { type: String, optional: true },
       eventBackgroundImage: { type: String, optional: true },
       logoImage: { type: String, optional: true },
-      organizationName: { type: String, optional: true },
       missionStatement: { type: String, optional: true },
       phoneNumber: { type: String, optional: true },
+      organizationName: { type: String, optional: true },
+      ein: { type: String, optional: true },
+      primaryAddress: { type: String, optional: true },
+      city: { type: String, optional: true },
+      state: { type: String, optional: true },
+      zipcode: { type: String, optional: true },
+      primaryContactFirstName: { type: String, optional: true },
+      primaryContactLastName: { type: String, optional: true },
+      primaryContactEmail: { type: String, optional: true },
+      primaryContactPhone: { type: String, optional: true },
+      secondContactFirstName: { type: String, optional: true },
+      secondContactLastName: { type: String, optional: true },
+      secondContactEmail: { type: String, optional: true },
+      secondContactPhone: { type: String, optional: true },
     }));
   }
 
@@ -27,14 +40,39 @@ class OrganizationProfileCollection extends BaseProfileCollection {
    * @param organizationName The organization name.
    * @param phoneNumber The volunteer representative phone number.
    * @param missionStatement The mission statement.
+   * @param ein The organization ein
+   * @param primaryAddress The organization primaryAddress
+   * @param city The organization primaryAddress city
+   * @param state The organization primaryAddress state
+   * @param zipcode The organization primaryAddress zipcode
+   * @param primaryContactFirstName The organization contact First
+   * @param primaryContactLastName The organization contact Last
+   * @param primaryContactEmail The organization contact Email
+   * @param primaryContactPhone The organization contact Phone
+   * @param secondContactFirstName
+   * @param secondContactLastName
+   * @param secondContactEmail
+   * @param secondContactPhone
+   * @param username  The organization username
    */
-  define({ email, firstName, lastName, password, logoImage, eventBackgroundImage, organizationName, phoneNumber, missionStatement }) {
+  define({ email, firstName, lastName, password, logoImage, eventBackgroundImage, organizationName, phoneNumber, missionStatement,
+    ein, primaryAddress, city, state, zipcode,
+    primaryContactFirstName, primaryContactLastName, primaryContactEmail, primaryContactPhone,
+    secondContactFirstName, secondContactLastName, secondContactEmail, secondContactPhone, username }) {
     if (Meteor.isServer) {
-      const username = email;
+      // eslint-disable-next-line no-param-reassign
+      username = (username) || email;
+      // eslint-disable-next-line no-param-reassign
+      primaryContactFirstName = (primaryContactFirstName) || firstName;
+      // eslint-disable-next-line no-param-reassign
+      primaryContactLastName = (primaryContactLastName) || lastName;
       const user = this.findOne({ email, firstName, lastName });
       if (!user) {
         const role = ROLE.ORGANIZATION;
-        const profileID = this._collection.insert({ email, firstName, lastName, logoImage, eventBackgroundImage, organizationName, phoneNumber, missionStatement, userID: this.getFakeUserId(), role });
+        const profileID = this._collection.insert({ email, firstName: primaryContactFirstName, lastName: primaryContactLastName, logoImage, eventBackgroundImage, organizationName, phoneNumber, missionStatement, userID: this.getFakeUserId(), role,
+          ein, primaryAddress, city, state, zipcode,
+          primaryContactFirstName, primaryContactLastName, primaryContactEmail, primaryContactPhone,
+          secondContactFirstName, secondContactLastName, secondContactEmail, secondContactPhone });
         const userID = Organizations.define({ username, role, password });
         this._collection.update(profileID, { $set: { userID } });
         return profileID;
@@ -56,8 +94,24 @@ class OrganizationProfileCollection extends BaseProfileCollection {
    * @param organizationName update the organization name.
    * @param phoneNumber update the volunteer representative phone number.
    * @param missionStatement update the mission statement.
+   * @param ein
+   * @param primaryAddress
+   * @param city
+   * @param state
+   * @param zipcode
+   * @param primaryContactFirstName
+   * @param primaryContactLastName
+   * @param primaryContactEmail
+   * @param primaryContactPhone
+   * @param secondContactFirstName
+   * @param secondContactLastName
+   * @param secondContactEmail
+   * @param secondContactPhone
    */
-  update(docID, { firstName, lastName, logoImage, eventBackgroundImage, organizationName, phoneNumber, missionStatement }) {
+  update(docID, { firstName, lastName, logoImage, eventBackgroundImage, organizationName, phoneNumber, missionStatement,
+    ein, primaryAddress, city, state, zipcode,
+    primaryContactFirstName, primaryContactLastName, primaryContactEmail, primaryContactPhone,
+    secondContactFirstName, secondContactLastName, secondContactEmail, secondContactPhone }) {
     this.assertDefined(docID);
     const updateData = {};
     if (firstName) {
@@ -80,6 +134,45 @@ class OrganizationProfileCollection extends BaseProfileCollection {
     }
     if (missionStatement) {
       updateData.missionStatement = missionStatement;
+    }
+    if (ein) {
+      updateData.ein = ein;
+    }
+    if (primaryAddress) {
+      updateData.primaryAddress = primaryAddress;
+    }
+    if (city) {
+      updateData.city = city;
+    }
+    if (state) {
+      updateData.state = state;
+    }
+    if (zipcode) {
+      updateData.zipcode = zipcode;
+    }
+    if (primaryContactFirstName) {
+      updateData.primaryContactFirstName = primaryContactFirstName;
+    }
+    if (primaryContactLastName) {
+      updateData.primaryContactLastName = primaryContactLastName;
+    }
+    if (primaryContactEmail) {
+      updateData.primaryContactEmail = primaryContactEmail;
+    }
+    if (primaryContactPhone) {
+      updateData.primaryContactEmail = primaryContactPhone;
+    }
+    if (secondContactFirstName) {
+      updateData.secondContactFirstName = secondContactFirstName;
+    }
+    if (secondContactLastName) {
+      updateData.secondContactFirstName = secondContactLastName;
+    }
+    if (secondContactEmail) {
+      updateData.secondContactEmail = secondContactEmail;
+    }
+    if (secondContactPhone) {
+      updateData.secondContactEmail = secondContactPhone;
     }
     this._collection.update(docID, { $set: updateData });
   }
@@ -138,6 +231,11 @@ class OrganizationProfileCollection extends BaseProfileCollection {
     const missionStatement = doc.missionStatement;
     const organizationName = doc.organizationName;
     return { email, firstName, lastName, logoImage, eventBackgroundImage, phoneNumber, missionStatement, organizationName };
+  }
+
+  dumpUserId(docID) {
+    const doc = this.findDoc(docID);
+    return doc.userID;
   }
 }
 
