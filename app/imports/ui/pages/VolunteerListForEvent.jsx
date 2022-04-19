@@ -46,7 +46,7 @@ const VolunteerListForEvent = ({ ready, event, volunteers, filledIn, endHourVolL
   const csvReport = {
     data: dataCsv,
     headers: headers,
-    filename: 'Volunteer_Hours_List.csv',
+    filename: `${event.eventName}_Volunteer_Hours_List.csv`,
   };
 
   const [temp, setTemp] = useState(1);
