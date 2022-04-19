@@ -96,11 +96,11 @@
   ],
 
   "defaultEvents": [
-    { "eventName": "Mowing Peoples Lawns", "eventTime":  "8:00am-8:00pm", "eventDate": "April 20th, 2023", "orgName": "Helping Hands", "eventDescription": "Come Help us mow some extremely out of control lawns. Bring Sunscreen!", "owner": "nah@foo.com", "eventAddress": "222 Banana Rd.", "eventCity": "Honolulu", "eventZip": "96815", "eventState": "HI", "eventCardImage": "event_card_default_image.png", "eventProfileImage": "red-cross-gallery.jpeg"
+    { "eventName": "Mowing Peoples Lawns", "eventStartTime": "8:00am", "eventEndTime": "8:00pm", "eventDate": "April 20th, 2023", "orgName": "Helping Hands", "eventDescription": "Come Help us mow some extremely out of control lawns. Bring Sunscreen!", "owner": "nah@foo.com", "eventAddress": "222 Banana Rd.", "eventCity": "Honolulu", "eventZip": "96815", "eventState": "HI", "eventProfileImage": "images/event_card_default_image.png"
      },
-    { "eventName": "Back 2 School", "eventTime":  "8:00am-8:00pm", "eventDate": "April 20th, 2023", "orgName": "Helping Hands", "eventDescription": "Time to come back to school!!", "owner": "nah@foo.com", "eventAddress": "222 Banana Rd.", "eventCity": "Honolulu", "eventZip": "96815", "eventState": "HI", "eventCardImage": "event_card_default_image.png", "eventProfileImage": "red-cross-gallery.jpeg"
+    { "eventName": "Back 2 School", "eventStartTime": "10:00am", "eventEndTime": "4:00pm", "eventDate": "April 20th, 2023", "orgName": "Helping Hands", "eventDescription": "Time to come back to school!!", "owner": "nah@foo.com", "eventAddress": "222 Banana Rd.", "eventCardImage": "event_card_default_image.png", "eventCity": "Honolulu", "eventZip": "96815", "eventState": "HI", "eventProfileImage": "images/event_card_default_image.png"
     },
-    { "eventName": "Dr. Moore Buy's Pizza", "eventTime":  "8:00am-8:00pm", "eventDate": "April 20th, 2022", "orgName": "Helping Hands", "eventDescription": "New Little Caesers on King St., time for some Krazy Bread!", "owner": "nah@foo.com", "eventAddress": "222 Banana Rd.", "eventCity": "Honolulu", "eventZip": "96815", "eventState": "HI", "eventCardImage": "event_card_default_image.png", "eventProfileImage": "red-cross-gallery.jpeg"
+    { "eventName": "Dr. Moore Buy's Pizza", "eventStartTime": "7:00am", "eventEndTime": "1:30pm", "eventDate": "April 20th, 2022", "orgName": "Helping Hands", "eventDescription": "New Little Caesers on King St., time for some Krazy Bread!", "owner": "nah@foo.com", "eventAddress": "222 Banana Rd.", "eventCity": "Honolulu", "eventZip": "96815", "eventState": "HI", "eventProfileImage": "images/event_card_default_image.png"
     }
    ],
   "defaultInterests": [

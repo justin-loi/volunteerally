@@ -12,10 +12,10 @@ export const addNewEventMethod = new ValidatedMethod({
   name: 'Event.addNewEventMethod',
   mixins: [CallPromiseMixin],
   validate: null,
-  run({ eventName, eventDescription, eventDate, eventTime, eventAddress, eventState, eventZip, orgName, owner, eventCardImage, eventProfileImage, eventCity, interests, skills, environmental }) {
+  run({ eventName, eventDescription, eventDate, eventStartTime, eventEndTime, eventAddress, eventState, eventZip, orgName, owner, eventProfileImage, eventCity, interests, skills, environmental }) {
     if (Meteor.isServer) {
       const eventID = Events.define({
-        eventName, eventDescription, eventDate, eventTime, eventAddress, eventState, eventZip, orgName, owner, eventCardImage, eventProfileImage, eventCity });
+        eventName, eventDescription, eventDate, eventStartTime, eventEndTime, eventAddress, eventState, eventZip, orgName, owner, eventProfileImage, eventCity });
       // console.log(eventID);
       // eslint-disable-next-line no-unused-expressions
       interests.map((interestID) => (EventInterest.define({ eventID, interestID })));

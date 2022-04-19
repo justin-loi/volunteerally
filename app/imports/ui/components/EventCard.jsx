@@ -1,5 +1,5 @@
 import React from 'react';
-import { Button, Card, Icon, Image, Label } from 'semantic-ui-react';
+import { Button, Card, Icon, Image } from 'semantic-ui-react';
 import PropTypes from 'prop-types';
 import { NavLink } from 'react-router-dom';
 import { Meteor } from 'meteor/meteor';
@@ -17,13 +17,8 @@ import { Events } from '../../api/event/EventCollection';
 import { Interests } from '../../api/interest/InterestCollection';
 import { Environmental } from '../../api/environmental_preference/EnvironmentalPreferenceCollection';
 
-
-const interestsStyle = {
-  marginTop: '8px',
-};
-
 /* Renders a single event card. */
-const EventCard = ({ event, environments, skills, interests, ready }) => {
+const EventCard = ({ event }) => {
   const handleClick = (e) => {
     e.preventDefault();
     const vID = Meteor.userId();
@@ -44,26 +39,21 @@ const EventCard = ({ event, environments, skills, interests, ready }) => {
 
     }
   };
-
   return (
     <Card as={NavLink} exact to={`/details/${event._id}`}>
-      <Image src= {event.eventCardImage} wrapped ui={false}/>
+      <Image src='images/event_card_default_image.png' wrapped ui={false}/>
       <Card.Content>
         <Card.Header> {event.eventName}</Card.Header>
         <Card.Meta>
           <span>Date: {event.eventDate}</span>
           <br/>
-          <span>Time: {event.eventTime}</span>
+          <span>Time: {event.eventStartTime} until {event.eventEndTime}</span>
           <br/>
           <span>Location: {event.eventAddress} {event.eventCity}, {event.eventState} {event.eventZip}</span>
           <br/>
         </Card.Meta>
         <Card.Description>
-          {/* eslint-disable-next-line react/prop-types */}
-          {skills.map((skill, index) => (
-            <Label style={interestsStyle} key={`event-skill-${index}`}>
-              {skill.name}
-            </Label>))}
+          <p>{event.eventDescription}</p>
         </Card.Description>
       </Card.Content>
       <Card.Content extra>
@@ -95,11 +85,12 @@ EventCard.propTypes = {
   event: PropTypes.shape({
     eventName: PropTypes.string,
     eventDate: PropTypes.string,
-    eventTime: PropTypes.string,
+    eventStartTime: PropTypes.string,
+    eventDescription: PropTypes.string,
+    eventEndTime: PropTypes.string,
     eventAddress: PropTypes.string,
     eventZip: PropTypes.string,
     eventCity: PropTypes.string,
-    eventCardImage: PropTypes.string,
     eventState: PropTypes.string,
     categories: PropTypes.string,
     orgName: PropTypes.string,
@@ -120,6 +111,7 @@ EventCard.propTypes = {
 };
 
 const EventCardCon = withTracker((eventID) => {
+  console.log(eventID);
   const subscription = Events.subscribe();
   const subscription2 = EventInterest.subscribe();
   const subscription3 = EventSkill.subscribe();

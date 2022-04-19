@@ -22,13 +22,13 @@ import { OrganizationProfiles } from '../../api/organization/OrganizationProfile
 const formSchema = new SimpleSchema({
   eventName: String,
   eventDescription: String,
-  eventCardImage: { type: String, optional: true },
   eventProfileImage: { type: String, optional: true },
   eventAddress: String,
   eventCity: String,
   eventState: String,
   eventZip: String,
-  eventTime: String,
+  eventStartTime: String,
+  eventEndTime: String,
   orgName: String,
   eventDate: String,
   // owner: String,
@@ -44,8 +44,7 @@ const AddEvent = ({ location, ready, interestsArray, skillsArray, environmentalA
   const [interests, setInterests] = useState([]);
   const [specialSkills, setSpecialSkills] = useState([]);
   const [environmentalPreference, setEnvironmentalPreference] = useState('');
-  const [eventCardImage, setImage] = useState('');
-  const [eventProfileImage, setImage2] = useState('');
+  const [eventProfileImage, setImage] = useState('');
 
   const uploadImg = (files) => {
     // eslint-disable-next-line no-undef
@@ -56,15 +55,11 @@ const AddEvent = ({ location, ready, interestsArray, skillsArray, environmentalA
     Axios.post('https://api.cloudinary.com/v1_1/irene-ma/image/upload', data).then((r) => {
       console.log(r.data.url);
       setImage(r.data.url);
-      setImage2(r.data.url);
     });
   };
   const handleChange = (e, { name, value }) => {
     switch (name) {
     case 'eventProfileImage':
-      setImage2(value);
-      break;
-    case 'eventCardImage':
       setImage(value);
       break;
     case 'interests':
@@ -93,7 +88,6 @@ const AddEvent = ({ location, ready, interestsArray, skillsArray, environmentalA
     // eslint-disable-next-line no-param-reassign
     data.eventProfileImage = eventProfileImage;
     // eslint-disable-next-line no-param-reassign
-    data.eventCardImage = eventCardImage;
     addNewEventMethod.callPromise(data)
       .catch(error => {
         swal('Error', error.message, 'error');
@@ -104,7 +98,6 @@ const AddEvent = ({ location, ready, interestsArray, skillsArray, environmentalA
         setSpecialSkills([]);
         setEnvironmentalPreference('');
         setImage('');
-        setImage2('');
         swal({
           title: 'Signed Up',
           text: 'You now have an account. Next you need to login.',
@@ -138,9 +131,10 @@ const AddEvent = ({ location, ready, interestsArray, skillsArray, environmentalA
           }} schema={bridge} onSubmit={data => submit(data, fRef)}>
             <Segment>
               <TextField name='eventName' type='name' label='Event Name' placeholder='Beach Cleanup' iconLeft='certificate' id={COMPONENT_IDS.ADD_EVENT_NAME}/>
-              <TextField name='orgName' type='name' label='Organization Name' placeholder='The Red Cross' iconLeft='lock' id={COMPONENT_IDS.ADD_EVENT_NAME}/>
-              <TextField name='eventDate' type='date' label='Opportunity Date' placeholder='04/20/2023' iconLeft='calendar' id={COMPONENT_IDS.ADD_EVENT_TIME}/>
-              <TextField name='eventTime' type='time' label='Opportunity Time' placeholder='8:00am- 8:00pm' iconLeft='clock' id={COMPONENT_IDS.ADD_EVENT_TIME}/>
+              <TextField name='orgName' type='name' label='Organization Name' placeholder='The Red Cross' iconLeft='lock' id={COMPONENT_IDS.ADD_EVENT_ORGANIZATION_NAME}/>
+              <TextField name='eventDate' type='date' label='Opportunity Date' placeholder='04/22/2022' iconLeft='lock' id={COMPONENT_IDS.ADD_EVENT_DATE}/>
+              <TextField name='eventStartTime' type='time' label='Opportunity Start Time' placeholder='8:00am' iconLeft='clock' id={COMPONENT_IDS.ADD_EVENT_START_TIME}/>
+              <TextField name='eventEndTime' type='time' label='Opportunity End Time' placeholder='8:00pm' iconLeft='clock' id={COMPONENT_IDS.ADD_EVENT_END_TIME}/>
               <LongTextField name='eventDescription' type='description' placeholder='Looking for ocean loving volunteers to clean up...' icon='bullhorn' id={COMPONENT_IDS.ADD_EVENT_DESCRIPTION}/>
               <TextField name='eventAddress' placeholder='1234 Example Street' iconLeft='map marker alternate'
                 id={COMPONENT_IDS.ADD_EVENT_ADDRESS} required/>
@@ -161,17 +155,8 @@ const AddEvent = ({ location, ready, interestsArray, skillsArray, environmentalA
                 </div>
               </div>
               <div className="field">
-                <h4>Upload an Event Card Picture (smaller image)</h4>
+                <h4>Upload an Event Profile Banner Image</h4>
                 <Form.Input name="eventProfileImage"
-                  style={{ marginTop: '10px' }}
-                  type='file' onChange={(event) => {
-                    uploadImg(event.target.files);
-                  }}
-                />
-              </div>
-              <div className="field">
-                <h4>Upload an Event Profile Banner Picture (larger image)</h4>
-                <Form.Input name="eventCardImage"
                   style={{ marginTop: '10px' }}
                   type='file' onChange={(event) => {
                     uploadImg(event.target.files);

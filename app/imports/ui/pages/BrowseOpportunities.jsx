@@ -17,7 +17,7 @@ const BrowseOpportunities = ({ events }) => {
   const [results, setResult] = useState(events);
   const [value, setValue] = useState('');
 
-  const resultRenderer = (event) => <EventCard event={event} />;
+  const resultRenderer = (event) => <EventCard key={event._id} event={event} />;
 
   const handleSearchChange = (e, data) => {
     setValue(data.value);
@@ -52,7 +52,7 @@ const BrowseOpportunities = ({ events }) => {
       />
 
       <Card.Group centered>
-        {events.map((event) => <EventCard key={event._id} eventID={event._id} />)}
+        {events.map((event) => <EventCard key={event._id} event={event} />)}
       </Card.Group>
     </Container>
 
@@ -62,11 +62,10 @@ const BrowseOpportunities = ({ events }) => {
 // Require an array of BrowseOpportunities documents in the props.
 BrowseOpportunities.propTypes = {
   events: PropTypes.array.isRequired,
-  interests: PropTypes.array.isRequired,
-  environments: PropTypes.array.isRequired,
-  skills: PropTypes.array.isRequired,
+  interests: PropTypes.array,
+  environments: PropTypes.array,
+  skills: PropTypes.array,
   ready: PropTypes.bool.isRequired,
-  volunteerInterests: PropTypes.array.isRequired,
 };
 
 // withTracker connects Meteor data to React components. https://guide.meteor.com/react.html#using-withTracker
