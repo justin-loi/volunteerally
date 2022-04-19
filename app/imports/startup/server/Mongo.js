@@ -45,6 +45,28 @@ if (Events.count() === 0) {
 }
 
 function addOrganization(data) {
+  // this code need to be change
+  // console.log(data);
+  // eslint-disable-next-line no-param-reassign
+  data.primaryContactPhone = data.phoneNumber;
+  // eslint-disable-next-line no-param-reassign
+  data.primaryAddress = '1234 Example Address';
+  // eslint-disable-next-line no-param-reassign
+  data.primaryContactFirstName = data.firstName;
+  // eslint-disable-next-line no-param-reassign
+  data.primaryContactLastName = data.lastName;
+  // eslint-disable-next-line no-param-reassign
+  data.primaryContactEmail = data.email;
+  // eslint-disable-next-line no-param-reassign
+  data.ein = Math.floor(Math.random() * (99999999 - 10000000)) + 10000000;
+  // eslint-disable-next-line no-param-reassign
+  data.city = 'Honolulu';
+  // eslint-disable-next-line no-param-reassign
+  data.state = 'Hawaii';
+  // eslint-disable-next-line no-param-reassign
+  data.zipcode = '96xxx';
+  // console.log(data);
+  // above code need to be change
   console.log(`  Adding: ${data.email} (${data.organizationName})`);
   OrganizationProfiles.define(data);
 }
