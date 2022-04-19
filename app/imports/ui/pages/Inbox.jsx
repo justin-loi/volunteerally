@@ -119,7 +119,7 @@ const Inbox = ({ message, ready }) => {
           content={'INBOX'}/>
         <Divider/>
         <div style={{ height: '80%' }}>
-          {message.map((email, index) => <EmailItem email={email}
+          {message.map((email, index) => <EmailItem cEmail={email}
             inbox={this}
             key={index}/>)}
           {message.length <= 0 ? <Header textAlign={'center'}

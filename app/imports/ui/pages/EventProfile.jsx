@@ -155,7 +155,6 @@ const EventProfile = ({ event, orgProfile, currentUser, ready }) => {
     const email = Meteor.user().username;
     const subject = cSubject;
     const content = cContent;
-    console.log(recipient, name, beRead, createdAt, email, subject, content);
     createNewMessageMethod.callPromise({ name, subject, content, email, createdAt, beRead, recipient })
       .catch(error => {
         swal('Error', error.message, 'error');
