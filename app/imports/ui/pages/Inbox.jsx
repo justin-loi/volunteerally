@@ -166,10 +166,11 @@ Inbox.propTypes = {
 export default withTracker(() => {
   const messages = Messages.subscribe();
   const volunteer = VolunteerProfiles.subscribeCurrVolProfile();
+  const currentUser = Meteor.user() ? Meteor.user().username : '';
   const ready = messages.ready() && volunteer.ready();
 
   return {
-    message: Messages.find({}, { sort: { createdAt: -1 } }).fetch(),
+    message: Messages.find({ recipient: currentUser }, { sort: { createdAt: -1 } }).fetch(),
     ready,
     volunteer,
   };

@@ -24,7 +24,6 @@ export const updateMessageMethod = new ValidatedMethod({
   run({ updateData }) {
     if (Meteor.isServer) {
       // console.log('updateMethod(%o, %o)', collectionName, updateData);
-      console.log(updateData);
       Messages.update(updateData.id, { beRead: updateData.beRead });
     }
   },
