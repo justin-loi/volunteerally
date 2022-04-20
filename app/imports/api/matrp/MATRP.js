@@ -22,6 +22,9 @@ import { Industries } from '../industry/IndustryCollection';
 import { Messages } from '../message/MessageCollection';
 import { EndedEvent } from '../event/EndedEventsCollection';
 import { EndedEventsVolunteerList } from '../event/EndedEventVolunteerListCollection';
+import { EventSkill } from '../special_skills/EventSkillCollection';
+import { EventEnvironmental } from '../environmental_preference/EventEnvironmentalCollection';
+import { EventInterest } from '../interest/EventInterestCollection';
 
 class MATRPClass {
   collections;
@@ -55,6 +58,9 @@ class MATRPClass {
       Industries,
       EndedEvent,
       EndedEventsVolunteerList,
+      EventSkill,
+      EventEnvironmental,
+      EventInterest,
     ];
     /*
      * A list of collection class instances in the order required for them to be sequentially loaded from a file.
