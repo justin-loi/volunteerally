@@ -3,11 +3,12 @@ import PropTypes from 'prop-types';
 import { Meteor } from 'meteor/meteor';
 import { withTracker } from 'meteor/react-meteor-data';
 import { withRouter, NavLink } from 'react-router-dom';
-import { Menu, Dropdown, Image } from 'semantic-ui-react';
+import { Menu, Dropdown, Image, Icon, Label } from 'semantic-ui-react';
 import { Roles } from 'meteor/alanning:roles';
 // eslint-disable-next-line import/named
 import { COMPONENT_IDS } from '../utilities/ComponentIDs';
 import { ROLE } from '../../api/role/Role';
+import { Messages } from '../../api/message/MessageCollection';
 
 /** The NavBar appears at the top of every page. Rendered by the App Layout component. */
 const NavBar = ({ currentUser }) => {
@@ -57,9 +58,17 @@ const NavBar = ({ currentUser }) => {
                 {Roles.userIsInRole(Meteor.userId(), [ROLE.ORGANIZATION]) ? (
                   <Dropdown.Item id={COMPONENT_IDS.ORGANIZATION_PROFILE} icon="user" text="My Profile" as={NavLink} exact to="/organization-profile/user" />
                 ) : ''}
-                {Roles.userIsInRole(Meteor.userId(), [ROLE.VOLUNTEER, ROLE.ORGANIZATION]) ? (
-                  <Dropdown.Item id={COMPONENT_IDS.NAVBAR_INBOX} icon="mail" text="Inbox" as={NavLink} exact to="/inbox" />
-                ) : '' }
+                <Dropdown.Item as={NavLink}
+                  exact
+                  to="/inbox">
+                  <Icon name={'mail'}/>
+                  Inbox
+                  {Messages.find({ beRead: false }).fetch().length > 0 ?
+                    <Label circular
+                      style={{ marginBottom: '8px' }}
+                      empty
+                      color={'red'}/> : ''}
+                </Dropdown.Item>
                 <Dropdown.Item id={COMPONENT_IDS.NAVBAR_SIGN_OUT} icon="sign out" text="Sign Out" as={NavLink} exact to="/signout" />
               </Dropdown.Menu>
             </Dropdown>
