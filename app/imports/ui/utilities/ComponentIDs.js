@@ -82,4 +82,14 @@ export const COMPONENT_IDS = {
   VOLUNTEER_PROFILE: 'volunteer-profile',
   ORGANIZATION_PROFILE: 'organization-profile',
   VOLUNTEER_HOUR_EVENT_FORM_CHECKBOX_CHECK_ALL: 'volunteer-hour-event-form-checkbox-check=all',
+  ADD_EVENT_NAME: 'add-event-name',
+  ADD_EVENT_ORGANIZATION_NAME: 'add-event-organization',
+  ADD_EVENT_DATE: 'add-event-date',
+  ADD_EVENT_START_TIME: 'add-event-start-time',
+  ADD_EVENT_END_TIME: 'add-event-end-time',
+  ADD_EVENT_DESCRIPTION: 'add-event-description',
+  ADD_EVENT_ADDRESS: 'add-event-address',
+  ADD_EVENT_CITY: 'add-event-city',
+  ADD_EVENT_STATE: 'add-event-state',
+  ADD_EVENT_ZIPCODE: 'add-event-zipcode'
 };

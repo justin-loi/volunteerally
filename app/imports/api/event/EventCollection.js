@@ -6,14 +6,17 @@ class EventCollection extends BaseCollection {
   constructor() {
     super('Events', new SimpleSchema({
       eventName: String,
-      date: String,
-      time: String,
-      location: String,
+      eventDescription: String,
+      eventDate: String,
+      eventStartTime: String,
+      eventEndTime: String,
+      eventAddress: String,
+      eventState: String,
+      eventZip: String,
       orgName: String,
-      categories: String,
-      environmentType: String,
       owner: String,
-      skillsNeeded: String,
+      eventProfileImage: { type: String, optional: true },
+      eventCity: String,
     }));
   }
 
@@ -31,17 +34,20 @@ class EventCollection extends BaseCollection {
    * @param skillsNeeded the condition of the item.
    * @return {String} the docID of the new document.
    */
-  define({ eventName, date, time, location, orgName, categories, environmentType, owner, skillsNeeded }) {
+  define({ eventName, eventDate, eventStartTime, eventDescription, orgName, eventEndTime, eventProfileImage, eventAddress, eventCity, eventState, eventZip, owner }) {
     const docID = this._collection.insert({
       eventName,
-      date,
-      time,
-      location,
+      eventDate,
+      eventStartTime,
+      eventEndTime,
       orgName,
-      categories,
-      environmentType,
+      eventDescription,
+      eventProfileImage,
+      eventAddress,
+      eventCity,
+      eventState,
+      eventZip,
       owner,
-      skillsNeeded,
     });
     return docID;
   }
@@ -57,35 +63,44 @@ class EventCollection extends BaseCollection {
    * @param location the event location.
    * @param categories the condition of the item.
    */
-  update(docID, { eventName, date, time, location, orgName, categories, environmentType, owner, skillsNeeded }) {
+  update(docID, { eventName, eventDate, eventStartTime, eventEndTime, eventDescription, orgName, eventProfileImage, eventAddress, eventCity, eventState, eventZip, owner }) {
     const updateData = {};
     if (eventName) {
       updateData.eventName = eventName;
     }
     // if (quantity) { NOTE: 0 is falsy so we need to check if the quantity is a number.
-    if (date) {
-      updateData.date = date;
+    if (eventDate) {
+      updateData.eventDate = eventDate;
     }
-    if (time) {
-      updateData.time = time;
+    if (eventStartTime) {
+      updateData.eventStartTime = eventStartTime;
     }
-    if (location) {
-      updateData.location = location;
+    if (eventEndTime) {
+      updateData.eventEndTime = eventEndTime;
+    }
+    if (eventDescription) {
+      updateData.eventDescription = eventDescription;
     }
     if (orgName) {
       updateData.orgName = orgName;
     }
-    if (categories) {
-      updateData.categories = categories;
-    }
-    if (environmentType) {
-      updateData.environmentType = environmentType;
-    }
-    if (skillsNeeded) {
-      updateData.skillsNeeded = skillsNeeded;
-    }
     if (owner) {
       updateData.owner = owner;
+    }
+    if (eventProfileImage) {
+      updateData.eventProfileImage = eventProfileImage;
+    }
+    if (eventAddress) {
+      updateData.eventAddress = eventAddress;
+    }
+    if (eventCity) {
+      updateData.eventCity = eventCity;
+    }
+    if (eventZip) {
+      updateData.eventZip = eventZip;
+    }
+    if (eventState) {
+      updateData.eventState = eventState;
     }
     this._collection.update(docID, { $set: updateData });
   }
@@ -110,15 +125,18 @@ class EventCollection extends BaseCollection {
   dumpOne(docID) {
     const doc = this.findDoc(docID);
     const eventName = doc.eventName;
-    const date = doc.date;
-    const time = doc.time;
+    const eventDate = doc.eventDate;
+    const eventStartTime = doc.eventStartTime;
+    const eventEndTime = doc.eventEndTime;
     const orgName = doc.orgName;
-    const location = doc.location;
-    const categories = doc.categories;
+    const eventDescription = doc.eventDescription;
+    const eventProfileImage = doc.eventProfileImage;
+    const eventAddress = doc.eventAddress;
+    const eventCity = doc.eventCity;
+    const eventState = doc.eventState;
+    const eventZip = doc.eventZip;
     const owner = doc.owner;
-    const environmentType = doc.owner;
-    const skillsNeeded = doc.skillsNeeded;
-    return { eventName, date, time, orgName, location, categories, environmentType, skillsNeeded, owner };
+    return { eventName, eventDate, eventStartTime, eventEndTime, orgName, eventDescription, eventProfileImage, eventAddress, eventCity, eventState, eventZip, owner };
   }
 }
 
