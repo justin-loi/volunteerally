@@ -2,6 +2,7 @@ import { Meteor } from 'meteor/meteor';
 import { CallPromiseMixin } from 'meteor/didericis:callpromise-mixin';
 import { ValidatedMethod } from 'meteor/mdg:validated-method';
 import { Messages } from './MessageCollection';
+import { MATRP } from '../matrp/MATRP';
 
 export const createNewMessageMethod = new ValidatedMethod({
   name: 'Message.CreateNewMessage',
@@ -9,7 +10,7 @@ export const createNewMessageMethod = new ValidatedMethod({
   validate: null,
   run({ name, subject, content, email, createdAt, beRead, recipient }) {
     if (Meteor.isServer) {
-      console.log({ name, subject, content, email, createdAt, beRead, recipient });
+      console.log(name, subject, content, email, createdAt, beRead, recipient);
       Messages.define({
         name, subject, content, email, createdAt, beRead, recipient });
     }
@@ -17,7 +18,7 @@ export const createNewMessageMethod = new ValidatedMethod({
 });
 
 export const updateMessageMethod = new ValidatedMethod({
-  name: 'Message.UpdateMessage',
+  name: 'Message.UodateMessage',
   mixins: [CallPromiseMixin],
   validate: null,
   run({ updateData }) {
@@ -25,17 +26,5 @@ export const updateMessageMethod = new ValidatedMethod({
       // console.log('updateMethod(%o, %o)', collectionName, updateData);
       Messages.update(updateData.id, { beRead: updateData.beRead });
     }
-  },
-});
-
-export const deleteMessageMethod = new ValidatedMethod({
-  name: 'Message.DeleteMessage',
-  mixins: [CallPromiseMixin],
-  validate: null,
-  run(instance) {
-    if (Meteor.isServer) {
-      return Messages.removeIt(instance);
-    }
-    return true;
   },
 });
