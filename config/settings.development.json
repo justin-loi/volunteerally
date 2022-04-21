@@ -20,7 +20,10 @@
   "defaultOrganizations": [
     { "email": "sup@foo.com", "password": "changeme", "role": "ORGANIZATION",
       "firstName": "Sup", "lastName": "Foo", "eventBackgroundImage": "images/red-cross-map.jpeg",
-      "logoImage": "images/red-cross-logo.png", "organizationName": "The Red Cross", "missionStatement": "To help everyone and cure everything!", "phoneNumber": "808-123-0420"
+      "logoImage": "images/red-cross-logo.png", "organizationName": "The Red Cross", "missionStatement": "To help everyone and cure everything!", "phoneNumber": "808-123-0420",
+      "ein": "123456789", "primaryAddress": "1111 Example Address", "city": "Honolulu", "state": "Hawaii", "zipcode": "96822",
+      "primaryContactFirstName": "Sup", "primaryContactLastName": "Foo", "primaryContactEmail": "sup@foo.com", "primaryContactPhone": "808-123-0420",
+      "secondContactFirstName": "Sup", "secondContactLastName": "Foo", "secondContactEmail": "sup@foo.com", "secondContactPhone": "808-123-0420"
     },
     {
       "email": "nah@foo.com", "password": "changeme", "role": "ORGANIZATION",
@@ -96,10 +99,12 @@
   ],
 
   "defaultEvents": [
-    { "eventName": "Mowing Peoples Lawns", "time":  "8:00am-8:00pm", "location": "Manoa", "date": "April 20th, 1989", "orgName": "Helping Hands", "categories": "crisis relief", "environmentType": "Outside", "owner": "nah@foo.com", "skillsNeeded": "Computerist"
-     },
-    { "eventName": "Back 2 Skewl", "time":  "8:00am-8:00pm", "location": "UH Manoa", "date": "Jan. 10th, 2022", "orgName": "UHM", "categories": "other", "environmentType": "Inside", "owner": "nah@foo.com", "skillsNeeded": "Writer" },
-    { "eventName": "Dr. Moore Buys Pizza", "time":  "8:00am-8:00pm", "location": "POST 319", "date": "Feb. 18 2022", "orgName": "Helping Hands", "categories": "education", "environmentType": "Virtual", "owner": "sup@foo.com", "skillsNeeded": "Hunger" }
+    { "eventName": "Mowing Peoples Lawns", "eventStartTime": "8:00am", "eventEndTime": "8:00pm", "eventDate": "April 20th, 2023", "orgName": "Helping Hands", "eventDescription": "Come Help us mow some extremely out of control lawns. Bring Sunscreen!", "owner": "nah@foo.com", "eventAddress": "222 Banana Rd.", "eventCity": "Honolulu", "eventZip": "96815", "eventState": "HI", "eventProfileImage": "images/event_card_default_image.png"
+    },
+    { "eventName": "Back 2 School", "eventStartTime": "10:00am", "eventEndTime": "4:00pm", "eventDate": "April 20th, 2023", "orgName": "Helping Hands", "eventDescription": "Time to come back to school!!", "owner": "nah@foo.com", "eventAddress": "222 Banana Rd.", "eventCardImage": "event_card_default_image.png", "eventCity": "Honolulu", "eventZip": "96815", "eventState": "HI", "eventProfileImage": "images/event_card_default_image.png"
+    },
+    { "eventName": "Dr. Moore Buy's Pizza", "eventStartTime": "7:00am", "eventEndTime": "1:30pm", "eventDate": "April 20th, 2022", "orgName": "Helping Hands", "eventDescription": "New Little Caesers on King St., time for some Krazy Bread!", "owner": "nah@foo.com", "eventAddress": "222 Banana Rd.", "eventCity": "Honolulu", "eventZip": "96815", "eventState": "HI", "eventProfileImage": "images/event_card_default_image.png"
+    }
   ],
 
   "defaultInterests": [

@@ -1,13 +1,21 @@
 import React from 'react';
 import { Button, Card, Icon, Image } from 'semantic-ui-react';
 import PropTypes from 'prop-types';
-import { NavLink, withRouter } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 import { Meteor } from 'meteor/meteor';
 import swal from 'sweetalert';
 import { Roles } from 'meteor/alanning:roles';
+import { withTracker } from 'meteor/react-meteor-data';
 import { ROLE } from '../../api/role/Role';
 import { defineMethod } from '../../api/base/BaseCollection.methods';
 import { VolunteerEvent } from '../../api/event/VolunteerEventCollection';
+import { EventInterest } from '../../api/interest/EventInterestCollection';
+import { EventEnvironmental } from '../../api/environmental_preference/EventEnvironmentalCollection';
+import { SpecialSkills } from '../../api/special_skills/SpecialSkillCollection';
+import { EventSkill } from '../../api/special_skills/EventSkillCollection';
+import { Events } from '../../api/event/EventCollection';
+import { Interests } from '../../api/interest/InterestCollection';
+import { Environmental } from '../../api/environmental_preference/EnvironmentalPreferenceCollection';
 
 /* Renders a single event card. */
 const EventCard = ({ event }) => {
@@ -37,15 +45,15 @@ const EventCard = ({ event }) => {
       <Card.Content>
         <Card.Header> {event.eventName}</Card.Header>
         <Card.Meta>
-          <span>Date: {event.date}</span>
+          <span>Date: {event.eventDate}</span>
           <br/>
-          <span>Time: {event.time}</span>
+          <span>Time: {event.eventStartTime} until {event.eventEndTime}</span>
           <br/>
-          <span>Location: {event.location}</span>
+          <span>Location: {event.eventAddress} {event.eventCity}, {event.eventState} {event.eventZip}</span>
           <br/>
         </Card.Meta>
         <Card.Description>
-          <p>Placeholder for special skill.</p>
+          <p>{event.eventDescription}</p>
         </Card.Description>
       </Card.Content>
       <Card.Content extra>
@@ -76,9 +84,14 @@ const EventCard = ({ event }) => {
 EventCard.propTypes = {
   event: PropTypes.shape({
     eventName: PropTypes.string,
-    date: PropTypes.string,
-    time: PropTypes.string,
-    location: PropTypes.string,
+    eventDate: PropTypes.string,
+    eventStartTime: PropTypes.string,
+    eventDescription: PropTypes.string,
+    eventEndTime: PropTypes.string,
+    eventAddress: PropTypes.string,
+    eventZip: PropTypes.string,
+    eventCity: PropTypes.string,
+    eventState: PropTypes.string,
     categories: PropTypes.string,
     orgName: PropTypes.string,
     _id: PropTypes.string,
@@ -86,6 +99,42 @@ EventCard.propTypes = {
   volunteer: PropTypes.shape({
     _id: PropTypes.string,
   }),
+  skill: PropTypes.shape({
+    _id: PropTypes.array,
+  }),
+  interest: PropTypes.shape({
+    _id: PropTypes.array,
+  }),
+  environment: PropTypes.shape({
+    _id: PropTypes.array,
+  }),
 };
 
-export default withRouter(EventCard);
+const EventCardCon = withTracker((eventID) => {
+  console.log(eventID);
+  const subscription = Events.subscribe();
+  const subscription2 = EventInterest.subscribe();
+  const subscription3 = EventSkill.subscribe();
+  const subscription4 = EventEnvironmental.subscribe();
+  const subscription5 = SpecialSkills.subscribe();
+  const subscription6 = Interests.subscribe();
+  const subscription7 = Environmental.subscribe();
+  const ready = subscription.ready() && subscription2.ready() && subscription3.ready() && subscription4.ready() &&
+    subscription5.ready() && subscription6.ready() && subscription7.ready();
+  const event = eventID.event;
+  const skillPairs = EventSkill.find({ eventID: event._id }, {}).fetch();
+  const skills = skillPairs.map((pair) => SpecialSkills.findOne({ _id: pair.skillID }, {}));
+  const interestPairs = EventInterest.find({ eventID: event._id }, {}).fetch();
+  const interests = interestPairs.map((pair) => Interests.findOne({ _id: pair.interestID }, {}));
+  const environmentPairs = EventEnvironmental.find({ eventID: event._id }, {}).fetch();
+  const environments = environmentPairs.map((pair) => Environmental.findOne({ _id: pair.environmentalID }, {}));
+  return {
+    event,
+    skills,
+    interests,
+    environments,
+    ready,
+  };
+})(EventCard);
+
+export default EventCardCon;
