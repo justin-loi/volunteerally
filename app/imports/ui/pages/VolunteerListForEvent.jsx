@@ -15,11 +15,29 @@ import { EndedEventsVolunteerList } from '../../api/event/EndedEventVolunteerLis
 /** Renders a table containing all of the Stuff documents. Use <StuffItem> to render each row. */
 const VolunteerListForEvent = ({ ready, event, volunteers, filledIn, endHourVolList }) => {
 
+  // eslint-disable-next-line consistent-return
+  const findTime = (startTime, endTime) => {
+    if (startTime && endTime) {
+      const startTimeArr = startTime.split(':');
+      const endTimeArr = endTime.split(':');
+      let hoursDiff = endTimeArr[0] - startTimeArr[0];
+      let minDiff = (endTimeArr[1] - startTimeArr[1]) * 0.01;
+      if (minDiff < 0) {
+        hoursDiff--;
+        minDiff = 0.60 + minDiff;
+      }
+      return hoursDiff + minDiff;
+    }
+  };
+
   const [volunteerHourArray, setVolunteerHourArray] = useState([]);
+  const [maxHours, setMaxHours] = useState();
   // https://thewebdev.info/2021/03/14/how-to-fix-the-react-usestate-hook-not-setting-initial-value-problem/
   useEffect(() => {
-    setVolunteerHourArray(volunteers.map((volunteer) => ({ volunteerID: volunteer.userID, participateHours: 0, attended: false })));
-  }, [volunteers]);
+    const timeDiff = findTime(event.eventStartTime, event.eventEndTime);
+    setMaxHours(timeDiff);
+    setVolunteerHourArray(volunteers.map((volunteer) => ({ volunteerID: volunteer.userID, participateHours: timeDiff, attended: false })));
+  }, [volunteers, event]);
 
   const [temp, setTemp] = useState(1);
   const [checkAll, setCheckAll] = useState(false);
@@ -129,6 +147,9 @@ const VolunteerListForEvent = ({ ready, event, volunteers, filledIn, endHourVolL
                       placeholder="8"
                       name="volunteer-hours"
                       index={index}
+                      defaultValue={maxHours}
+                      max={maxHours}
+                      min={0}
                       disabled={isChecked(index) === false}
                       onChange={handleChange}
                     />
@@ -200,7 +221,6 @@ export default withTracker(({ match }) => {
   const filledIn = !!(EndedEvent.findOne({ eventID: eventID }, {}));
   const endEventArray = EndedEvent.find({ eventID: eventID }, {}).fetch();
   const endHourVolList = (filledIn) ? endEventArray.map(endEvent => EndedEventsVolunteerList.findOne({ _id: endEvent.listID }, {})) : [];
-  // console.log(endHourVolList);
   return {
     event,
     volunteers,

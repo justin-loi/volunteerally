@@ -13,7 +13,7 @@ const ListEventsAdmin = ({ event }) => (
         </Header.Content>
       </Header>
     </Table.Cell>
-    <Table.Cell>{event.time}</Table.Cell>
+    <Table.Cell>{event.eventStartTime} - {event.eventEndTime}</Table.Cell>
     <Table.Cell>{event.orgName}</Table.Cell>
     <Table.Cell>{event.owner}</Table.Cell>
     <Table.Cell>
@@ -28,7 +28,8 @@ ListEventsAdmin.propTypes = {
   event: PropTypes.shape({
     eventName: PropTypes.string,
     date: PropTypes.string,
-    time: PropTypes.string,
+    eventStartTime: PropTypes.string,
+    eventEndTime: PropTypes.string,
     orgName: PropTypes.string,
     owner: PropTypes.string,
     _id: PropTypes.string,
