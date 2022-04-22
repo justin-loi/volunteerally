@@ -6,6 +6,7 @@ import { Meteor } from 'meteor/meteor';
 import swal from 'sweetalert';
 import { Roles } from 'meteor/alanning:roles';
 import { withTracker } from 'meteor/react-meteor-data';
+import { FacebookIcon, FacebookShareButton } from 'react-share';
 import { ROLE } from '../../api/role/Role';
 import { defineMethod } from '../../api/base/BaseCollection.methods';
 import { VolunteerEvent } from '../../api/event/VolunteerEventCollection';
@@ -16,6 +17,9 @@ import { EventSkill } from '../../api/special_skills/EventSkillCollection';
 import { Events } from '../../api/event/EventCollection';
 import { Interests } from '../../api/interest/InterestCollection';
 import { Environmental } from '../../api/environmental_preference/EnvironmentalPreferenceCollection';
+
+const shareUrl = 'http://165.22.207.71/#/browse_opportunities';
+const title = 'VolunteerAlly';
 
 /* Renders a single event card. */
 const EventCard = ({ event }) => {
@@ -40,6 +44,7 @@ const EventCard = ({ event }) => {
     }
   };
   return (
+
     <Card as={NavLink} exact to={`/details/${event._id}`}>
       <Image src='images/event_card_default_image.png' wrapped ui={false}/>
       <Card.Content>
@@ -69,7 +74,13 @@ const EventCard = ({ event }) => {
         {(Meteor.userId() && Roles.userIsInRole(Meteor.userId(), [ROLE.VOLUNTEER])) ? (
           <Icon circular inverted color='blue' name='twitter' />) : ''}
         {(Meteor.userId() && Roles.userIsInRole(Meteor.userId(), [ROLE.VOLUNTEER])) ? (
-          <Icon circular inverted color='blue' name='facebook' />) : ''}
+          <FacebookShareButton
+            url={shareUrl}
+            quote={title}
+            className="Demo__some-network__share-button"
+          >
+            <FacebookIcon size={32} round />
+          </FacebookShareButton>) : ''}
         {(Meteor.userId() && Roles.userIsInRole(Meteor.userId(), [ROLE.VOLUNTEER])) ? (
           <Icon circular inverted color='blue' name='mail' />) : ''}
         {(Meteor.userId() && Roles.userIsInRole(Meteor.userId(), [ROLE.VOLUNTEER])) ? (
