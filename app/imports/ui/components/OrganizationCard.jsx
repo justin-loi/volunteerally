@@ -15,7 +15,7 @@ const OrganizationCard = ({ organization }) => (
       </Card.Meta>
       <Card.Content extra>
         <Header as='h4'> Contact Us</Header>
-        {organization.phoneNumber}
+        {organization.primaryContactPhone}
       </Card.Content>
     </Card.Content>
   </Card>
@@ -28,7 +28,7 @@ OrganizationCard.propTypes = {
     logoImage: PropTypes.string,
     eventBackgroundImage: PropTypes.string,
     organizationName: PropTypes.string,
-    phoneNumber: PropTypes.string,
+    primaryContactPhone: PropTypes.string,
     firstName: PropTypes.string,
     lastName: PropTypes.string,
     missionStatement: PropTypes.string,
