@@ -1,8 +1,9 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Meteor } from 'meteor/meteor';
-import { Container, Button, Header, Loader, Grid, Icon, Segment, Image, Label } from 'semantic-ui-react';
+import { Container, Button, Header, Form, Divider, Loader, Grid, Icon, Segment, Image, Label } from 'semantic-ui-react';
 import { withTracker } from 'meteor/react-meteor-data';
 import PropTypes from 'prop-types';
+import swal from 'sweetalert';
 import { Events } from '../../api/event/EventCollection';
 import { OrganizationProfiles } from '../../api/organization/OrganizationProfileCollection';
 import { EventInterest } from '../../api/interest/EventInterestCollection';
@@ -12,124 +13,217 @@ import { SpecialSkills } from '../../api/special_skills/SpecialSkillCollection';
 import { Interests } from '../../api/interest/InterestCollection';
 import { Environmental } from '../../api/environmental_preference/EnvironmentalPreferenceCollection';
 import { OrganizationEvent } from '../../api/event/OrganizationEventCollection';
+import { createNewMessageMethod } from '../../api/message/MessageCollection.methods';
 // import { ROLE } from '../../api/role/Role';
 
 // Renders a Event Info page that connects with the current Event collection.
-const gridStyle = { height: '500px', fontSize: '75px' };
+const EventProfile = ({ currentUser, event, orgProfile, skills, environments, interests, ready }) => {
+  const [openSendMail, setOpenSendMail] = useState(false);
+  const [cSubject, setSubject] = useState('');
+  const [cContent, setContent] = useState('');
 
-const EventProfile = ({ event, orgProfile, skills, environments, interests, ready }) => ((ready) ? (
-  <div>
-    <Image src={event.eventProfileImage} size="massive"/>
-    <Grid stackable container verticalAlign="bottom" textAlign='center' style={gridStyle} columns={3}>
-      <Grid.Row>
-        <Grid.Column>
-          <Header as='h2' inverted block>
-            {event.eventName}
-          </Header>
-        </Grid.Column>
-        <Grid.Column>
-          <Header as='h3' inverted block>
-            Opportunity Date: {event.eventDate} from {event.eventStartTime} through {event.eventEndTime}
-          </Header>
-        </Grid.Column>
-        <Grid.Column>
-          <Header as='h3' inverted block>
-            {orgProfile.email}
-          </Header>
-        </Grid.Column>
-      </Grid.Row>
-    </Grid>
-    <Container>
-      <Header as='h1' textAlign='center'>General Information</Header>
+  const handleOpen = () => {
+    setOpenSendMail(true);
+  };
 
-      <Grid stackable columns={2}>
-        <Grid.Row centered>
-          <Button>Get directions</Button>
-          <Button>Bookmark</Button>
-          <Button>Share</Button>
-          <Button>Send an email</Button>
-          <Button>Direct Message</Button>
-          <Button>Report</Button>
-        </Grid.Row>
+  const handleClose = () => {
+    setOpenSendMail(false);
+  };
 
-        <Grid.Column>
-          <Segment>
-            <Header as="h3">
-              <Icon name="location arrow"/> Location
-            </Header>
-            <Image src={event.eventProfileImage}/>
-          </Segment>
-          <Segment>
-            <Header as="h3">
-              <Icon name="write"/> Description
-            </Header>
-            <p>
-              {event.eventDescription}
-            </p>
-          </Segment>
-          <Segment>
-            <Header as="h3">
-              <Icon name="grid layout"/> Other Details
-            </Header>
-            <Icon name='user circle'/> Family-Friendly, Adults <br/>
-            <Icon name='user plus'/> Mixed
-          </Segment>
-          <Segment>
-            <Header as="">
-              <Icon name="calendar"/> Upcoming Dates
-            </Header>
-            {event.eventDate}
-          </Segment>
-        </Grid.Column>
-        <Grid.Column>
-          <Segment>
-            <Header as="h3">
-              <Icon name="building"/> Organization
-            </Header>
-            {event.orgName}
-          </Segment>
-          <Segment>
-            <Header as="h3">
-              <Icon name="address card"/> Contact Details
-            </Header>
-            {orgProfile.firstName} {orgProfile.lastName}<br/>
-            {orgProfile.email} <br/>
+  const handleContentChange = (e, { value }) => {
+    setContent(value);
+  };
 
-          </Segment>
-          <Segment>
-            <Header as="h3">
-              <Icon name="globe"/> Gallery
-            </Header>
-            <Image src={event.eventProfileImage}/>
-          </Segment>
-          <Segment>
-            {/* eslint-disable-next-line react/prop-types */}
-            {skills.map((skill, index) => (
-              <Label key={`event-skill-${index}`}>
-                {skill.name}
-              </Label>))}
-            {/* eslint-disable-next-line react/prop-types */}
-            {environments.map((environment, index) => (
-              <Label key={`event-environment-${index}`}>
-                {environment.name}
-              </Label>))}
-            {/* eslint-disable-next-line react/prop-types */}
-            {interests.map((interest, index) => (
-              <Label key={`event-interest-${index}`}>
-                {interest.name}
-              </Label>))}
-          </Segment>
-          <Segment>
-            <Header as="h3">
-              <Icon name="group"/> RSVP
-            </Header>
+  const handleSubjectChange = (e, { value }) => {
+    setSubject(value);
+  };
 
-          </Segment>
-        </Grid.Column>
-      </Grid>
-    </Container>
-  </div>
-) : <Loader active>Getting data</Loader>);
+  const handleSendSubmit = () => {
+    const recipient = orgProfile.email;
+    const name = currentUser;
+    const beRead = false;
+    const createdAt = new Date();
+    const email = Meteor.user().username;
+    const subject = cSubject;
+    const content = cContent;
+    createNewMessageMethod.callPromise({ name, subject, content, email, createdAt, beRead, recipient })
+      .catch(error => {
+        swal('Error', error.message, 'error');
+      })
+      .then(() => {
+        // Not sure why it catches the error but still executes
+        setContent('');
+        setSubject('');
+        swal({
+          title: 'Message Sent',
+          text: 'Your message has been sent',
+          icon: 'success',
+          timer: 1500,
+        });
+      });
+
+  };
+  const popupStyle = {
+    position: 'fixed',
+    width: '100%',
+    height: '100%',
+    top: '0',
+    left: '0',
+    right: '0',
+    bottom: '0',
+    margin: 'auto',
+    backgroundColor: 'rgba(0,0,0, 0.5)',
+  };
+
+  const innerStyle = {
+    position: 'absolute',
+    width: '50%',
+    left: '25%',
+    top: '25%',
+    margin: 'auto',
+  };
+
+  return (
+    ((ready) ? (
+      <div>
+        <Grid stackable container verticalAlign="bottom" textAlign='center' columns={3}>
+          <Grid.Row>
+            <Image src={event.eventProfileImage} fluid/>
+            <Grid.Column>
+              <Header as='h2' inverted block>
+                {event.eventName}
+              </Header>
+            </Grid.Column>
+            <Grid.Column>
+              <Header as='h3' inverted block>
+                    Opportunity Date: {event.eventDate} from {event.eventStartTime} through {event.eventEndTime}
+              </Header>
+            </Grid.Column>
+            <Grid.Column>
+              <Header as='h3' inverted block>
+                {orgProfile.email}
+              </Header>
+            </Grid.Column>
+          </Grid.Row>
+        </Grid>
+        <Container>
+          <Divider/>
+          <Header as='h1' textAlign='center'>General Information</Header>
+
+          <Grid stackable columns={2}>
+            <Grid.Row centered>
+              <Button>Get directions</Button>
+              <Button>Send an email</Button>
+              <Button onClick={handleOpen}>Direct Message</Button>
+            </Grid.Row>
+
+            <Grid.Column>
+              <Segment>
+                <Header as="h3">
+                  <Icon name="location arrow"/> Location
+                </Header>
+                <Image src={event.eventProfileImage}/>
+              </Segment>
+              <Segment>
+                <Header as="h3">
+                  <Icon name="write"/> Description
+                </Header>
+                <p>
+                  {event.eventDescription}
+                </p>
+              </Segment>
+              <Segment>
+                <Header as="h3">
+                  <Icon name="grid layout"/> Other Details
+                </Header>
+                <Icon name='user circle'/> Family-Friendly, Adults <br/>
+                <Icon name='user plus'/> Mixed
+              </Segment>
+              <Segment>
+                <Header as="">
+                  <Icon name="calendar"/> Upcoming Dates
+                </Header>
+                {event.eventDate}
+              </Segment>
+            </Grid.Column>
+            <Grid.Column>
+              <Segment>
+                <Header as="h3">
+                  <Icon name="building"/> Organization
+                </Header>
+                {event.orgName}
+              </Segment>
+              <Segment>
+                <Header as="h3">
+                  <Icon name="address card"/> Contact Details
+                </Header>
+                {orgProfile.firstName} {orgProfile.lastName}<br/>
+                {orgProfile.email} <br/>
+
+              </Segment>
+              <Segment>
+                <Header as="h3">
+                  <Icon name="globe"/> Gallery
+                </Header>
+                <Image src={event.eventProfileImage}/>
+              </Segment>
+              <Segment>
+                {/* eslint-disable-next-line react/prop-types */}
+                {skills.map((skill, index) => (
+                  <Label key={`event-skill-${index}`}>
+                    {skill.name}
+                  </Label>))}
+                {/* eslint-disable-next-line react/prop-types */}
+                {environments.map((environment, index) => (
+                  <Label key={`event-environment-${index}`}>
+                    {environment.name}
+                  </Label>))}
+                {/* eslint-disable-next-line react/prop-types */}
+                {interests.map((interest, index) => (
+                  <Label key={`event-interest-${index}`}>
+                    {interest.name}
+                  </Label>))}
+              </Segment>
+              <Segment>
+                <Header as="h3">
+                  <Icon name="group"/> RSVP
+                </Header>
+
+              </Segment>
+            </Grid.Column>
+          </Grid>
+
+          {openSendMail ?
+            <div>
+              <div style={popupStyle}/>
+              <Segment style={innerStyle}>
+                <Button icon={'close'} floated={'right'} circular onClick={handleClose}/>
+                <Header as={'h1'} textAlign={'center'} content={'SEND MESSAGE'}/>
+                <Divider/>
+                <Form onSubmit={handleSendSubmit}>
+                  <Header content={`To: ${orgProfile.email}`}/>
+                  <Form.Input required
+                    label='Subject'
+                    type='subject'
+                    name='subject'
+                    onChange={handleSubjectChange}
+                    placeholder='Subject'/>
+                  <Form.TextArea style={{ maxHeight: 261, height: 261 }}
+                    required
+                    label='Content'
+                    name='content'
+                    onChange={handleContentChange}
+                    type='content'/>
+                  <Form.Button content='Send' color={'blue'}/>
+                </Form>
+              </Segment>
+            </div> : ''}
+
+        </Container>
+      </div>
+    ) : <Loader active>Getting data</Loader>)
+  );
+};
 
 // Require an Event object in the props.
 EventProfile.propTypes = {
@@ -160,6 +254,7 @@ EventProfile.propTypes = {
   interests: PropTypes.array,
   environments: PropTypes.array,
   ready: PropTypes.bool.isRequired,
+  currentUser: PropTypes.bool.isRequired,
 };
 
 // withTracker connects Meteor data to React components. https://guide.meteor.com/react.html#using-withTracker
