@@ -9,53 +9,6 @@ import { VolunteerProfiles } from '../../api/volunteer/VolunteerProfileCollectio
 import EmailItem from '../components/EmailItem';
 
 // Shows all messages
-/*
-const Inbox = ({ message, ready }) => ((ready) ? (
-  <div>
-    <div style={inboxStyle}>
-      <Header as={'h1'}
-        textAlign={'center'}
-        content={'INBOX'}/>
-      <Divider/>
-      <div style={{ height: '80%' }}>
-        {message.map((email, index) => <EmailItem email={email}
-          inbox={this}
-          key={index}/>)}
-        {message.length <= 0 ? <Header textAlign={'center'}
-          as={'h1'}
-          content={'There is no message for you'}/> : ''}
-      </div>
-    </div>
-
-    {openSendMail ? <div>
-      <div style={popupStyle}/>
-      <Segment style={innerStyle}>
-        <Button icon={'close'} floated={'right'} circular onClick={handleClose}/>
-        <Header as={'h1'} textAlign={'center'} content={'SEND EMAIL'}/>
-        <Divider/>
-        <Form onSubmit={handleSubmit}>
-          <Header content={`To: ${currSendTo}`}/>
-          <Form.Input required
-            label='Subject'
-            type='subject'
-            name='subject'
-            onChange={handleFormChange}
-            placeholder='Subject'/>
-          <Form.TextArea style={{ maxHeight: 261, height: 261 }}
-            required
-            label='Content'
-            name='content'
-            onChange={handleFormChange}
-            type='content'/>
-          <Form.Button content='Send' color={'blue'}/>
-        </Form>
-      </Segment>
-    </div> : ''}
-  </div>
-) : <Loader active>Getting data</Loader>);
-
-*/
-
 const Inbox = ({ message, ready }) => {
 
   const [openSendMail, setOpenSendMail] = useState(false);
@@ -112,47 +65,48 @@ const Inbox = ({ message, ready }) => {
   };
 
   return (
-    <div>
-      <div style={inboxStyle}>
-        <Header as={'h1'}
-          textAlign={'center'}
-          content={'INBOX'}/>
-        <Divider/>
-        <div style={{ height: '80%' }}>
-          {message.map((email, index) => <EmailItem cEmail={email}
-            inbox={this}
-            key={index}/>)}
-          {message.length <= 0 ? <Header textAlign={'center'}
-            as={'h1'}
-            content={'There is no message for you'}/> : ''}
+    ready ? (
+      <div>
+        {openSendMail ? <div>
+          <div style={popupStyle}/>
+          <Segment style={innerStyle}>
+            <Button icon={'close'} floated={'right'} circular onClick={handleClose}/>
+            <Header as={'h1'} textAlign={'center'} content={'SEND EMAIL'}/>
+            <Divider/>
+            <Form onSubmit={handleSubmit}>
+              <Header content={`To: ${currSendTo}`}/>
+              <Form.Input required
+                label='Subject'
+                type='subject'
+                name='subject'
+                onChange={handleFormChange}
+                placeholder='Subject'/>
+              <Form.TextArea style={{ maxHeight: 261, height: 261 }}
+                required
+                label='Content'
+                name='content'
+                onChange={handleFormChange}
+                type='content'/>
+              <Form.Button content='Send' color={'blue'}/>
+            </Form>
+          </Segment>
+        </div> : ''}
+        <div style={inboxStyle}>
+          <Header as={'h1'}
+            textAlign={'center'}
+            content={'INBOX'}/>
+          <Divider/>
+          <div style={{ height: '80%' }}>
+            {message.map((email, index) => <EmailItem cEmail={email}
+              inbox={this}
+              key={index}/>)}
+            {message.length <= 0 ? <Header textAlign={'center'}
+              as={'h1'}
+              content={'There is no message for you'}/> : ''}
+          </div>
         </div>
       </div>
-
-      {openSendMail ? <div>
-        <div style={popupStyle}/>
-        <Segment style={innerStyle}>
-          <Button icon={'close'} floated={'right'} circular onClick={handleClose}/>
-          <Header as={'h1'} textAlign={'center'} content={'SEND EMAIL'}/>
-          <Divider/>
-          <Form onSubmit={handleSubmit}>
-            <Header content={`To: ${currSendTo}`}/>
-            <Form.Input required
-              label='Subject'
-              type='subject'
-              name='subject'
-              onChange={handleFormChange}
-              placeholder='Subject'/>
-            <Form.TextArea style={{ maxHeight: 261, height: 261 }}
-              required
-              label='Content'
-              name='content'
-              onChange={handleFormChange}
-              type='content'/>
-            <Form.Button content='Send' color={'blue'}/>
-          </Form>
-        </Segment>
-      </div> : ''}
-    </div>
+    ) : ''
   );
 };
 

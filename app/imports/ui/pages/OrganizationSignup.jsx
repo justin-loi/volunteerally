@@ -31,8 +31,9 @@ const formSchema = new SimpleSchema({
   // username: String,
   password: String,
   // confirmPassword: String,
-  image: { type: String, optional: true },
+  logoImage: { type: String, optional: true },
   organizationName: String,
+  missionStatement: { type: String, optional: true },
 });
 
 const bridge = new SimpleSchema2Bridge(formSchema);
@@ -145,7 +146,7 @@ const OrganizationSignup = ({ location, ready, industriesArray }) => {
       // eslint-disable-next-line no-param-reassign
       data.industries = industries;
       // eslint-disable-next-line no-param-reassign
-      data.image = image;
+      data.logoImage = image;
       console.log(data);
       // insert Organization Profile Collection method here
       signUpNewOrganizationMethod.callPromise(data).catch(error => {
@@ -156,8 +157,8 @@ const OrganizationSignup = ({ location, ready, industriesArray }) => {
           setIndustries('');
           setImage('');
           swal({
-            title: 'Organization pending',
-            text: 'Please wait for approval by admin',
+            title: 'Success',
+            text: 'Organization has been added',
             icon: 'success',
             timer: 1500,
           });
@@ -259,6 +260,10 @@ const OrganizationSignup = ({ location, ready, industriesArray }) => {
                   label='Primary Phone Number'
                   id={COMPONENT_IDS.ORGANIZATION_SIGNUP_FORM_PRIMARY_CONTACT_PHONE_NUMBER}/>
                 <TextField
+                  name='missionStatement'
+                  label='Mission Statement'
+                  id={COMPONENT_IDS.ORGANIZATION_SIGNUP_FORM_MISSION_STATEMENT}/>
+                <TextField
                   name='password'
                   label='Password'
                   type='password'
@@ -273,6 +278,7 @@ const OrganizationSignup = ({ location, ready, industriesArray }) => {
                   onChange={handleChange}
                 />
                 <Form.Input
+                  name='image'
                   label="Upload a Profile Picture"
                   type="file"
                   onChange={(event) => {
@@ -280,7 +286,6 @@ const OrganizationSignup = ({ location, ready, industriesArray }) => {
                   }}
                 />
                 <Form.Field>
-                  <br/>
                   <Message>Please confirm that you agree to our <Link to="/privacy" target="_blank">Privacy Policy</Link> and <Link to="/terms" target="_blank">Terms & Conditions</Link></Message>
                   <Form.Checkbox
                     label='I agree to the Privacy Policy'
@@ -288,6 +293,7 @@ const OrganizationSignup = ({ location, ready, industriesArray }) => {
                     value='agree'
                     onChange={handleChange}
                     error={ isValueEmpty[1] }
+                    required
                   />
                   <Form.Checkbox
                     label='I agree to the Terms & Conditions'
@@ -295,6 +301,7 @@ const OrganizationSignup = ({ location, ready, industriesArray }) => {
                     value='agree'
                     onChange={handleChange}
                     error={ isValueEmpty[1] }
+                    required
                   />
                 </Form.Field>
                 <Grid centered>

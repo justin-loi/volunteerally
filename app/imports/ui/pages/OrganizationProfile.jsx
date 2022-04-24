@@ -31,7 +31,7 @@ const OrganizationProfile = ({ orgProfile, ready }) => ((ready) ? (
           <Header as="h3">
             <Icon name="phone"/>Phone Number
           </Header>
-          <p>{orgProfile.phoneNumber}</p>
+          <p>{orgProfile.primaryContactPhone}</p>
           <Header as="h3">
             <Icon name="tag"/>Mission Statement
           </Header>

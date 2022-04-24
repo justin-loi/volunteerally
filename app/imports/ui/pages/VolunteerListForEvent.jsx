@@ -15,18 +15,59 @@ import { EndedEventsVolunteerList } from '../../api/event/EndedEventVolunteerLis
 /** Renders a table containing all of the Stuff documents. Use <StuffItem> to render each row. */
 const VolunteerListForEvent = ({ ready, event, volunteers, filledIn, endHourVolList }) => {
 
+  // eslint-disable-next-line consistent-return
+  const findTime = (startTime, endTime) => {
+    if (startTime && endTime) {
+      const startTimeArr = startTime.split(':');
+      const endTimeArr = endTime.split(':');
+      let hoursDiff = endTimeArr[0] - startTimeArr[0];
+      let minDiff = (endTimeArr[1] - startTimeArr[1]) * 0.01;
+      if (minDiff < 0) {
+        hoursDiff--;
+        minDiff = 0.60 + minDiff;
+      }
+      return hoursDiff + minDiff;
+    }
+  };
+
   const [volunteerHourArray, setVolunteerHourArray] = useState([]);
+  const [maxHours, setMaxHours] = useState();
   // https://thewebdev.info/2021/03/14/how-to-fix-the-react-usestate-hook-not-setting-initial-value-problem/
   useEffect(() => {
-    setVolunteerHourArray(volunteers.map((volunteer) => ({ volunteerID: volunteer.userID, participateHours: 0, attended: false })));
-  }, [volunteers]);
+    const timeDiff = findTime(event.eventStartTime, event.eventEndTime);
+    setMaxHours(timeDiff);
+    setVolunteerHourArray(volunteers.map((volunteer) => ({ volunteerID: volunteer.userID, participateHours: timeDiff, attended: false })));
+  }, [volunteers, event]);
 
   const [temp, setTemp] = useState(1);
   const [checkAll, setCheckAll] = useState(false);
+  const [hoursOverLimit, setHourOverLimit] = useState(false);
 
   const isChecked = (index) => ((typeof volunteerHourArray[index] === 'undefined') ? false : volunteerHourArray[index].attended);
 
   const findVolunteer = (element) => (volunteers.find(volunteer => volunteer.userID === element.volunteerID));
+
+  const notOverLimited = (num, min, max) => {
+    if (num > max) {
+      swal({
+        title: 'Error',
+        text: `Participation time cannot be larger than ${max} hours`,
+        icon: 'error',
+        timer: 1500,
+      });
+      return false;
+    }
+    if (num < min) {
+      swal({
+        title: 'Error',
+        text: `Participation time cannot be less than ${min} hour`,
+        icon: 'error',
+        timer: 1500,
+      });
+      return false;
+    }
+    return true;
+  };
 
   // Update the form controls each time the user interacts with them.
   const handleChange = (e, { name, value, index }) => {
@@ -34,6 +75,8 @@ const VolunteerListForEvent = ({ ready, event, volunteers, filledIn, endHourVolL
     case 'volunteer-hours':
       volunteerHourArray[index].participateHours = value;
       setVolunteerHourArray(volunteerHourArray);
+      // console.log(volunteerHourArray.map(data => notOverLimited(data.participateHours, 0, maxHours)).includes(false));
+      setHourOverLimit(volunteerHourArray.map(data => notOverLimited(data.participateHours, 0, maxHours)).includes(false));
       break;
     case 'attended-checkbox':
       volunteerHourArray[index].attended = (!volunteerHourArray[index].attended);
@@ -66,19 +109,21 @@ const VolunteerListForEvent = ({ ready, event, volunteers, filledIn, endHourVolL
   /* Handle Signup submission. Create user account and a profile entry, then redirect to the home page. */
   const submit = () => {
     // console.log(volunteerHourArray);
-    EndedEventVolunteerHoursUpdateMethod.callPromise({ eventID: event._id, volunteerHourArray })
-      .catch(error => {
-        swal('Error', error.message, 'error');
-      })
-      .then(() => {
-        swal({
-          title: 'Success',
-          text: 'Volunteer Hour Confirmed',
-          icon: 'success',
-          timer: 1500,
+    if (!hoursOverLimit) {
+      EndedEventVolunteerHoursUpdateMethod.callPromise({ eventID: event._id, volunteerHourArray })
+        .catch(error => {
+          swal('Error', error.message, 'error');
+        })
+        .then(() => {
+          swal({
+            title: 'Success',
+            text: 'Volunteer Hour Confirmed',
+            icon: 'success',
+            timer: 1500,
+          });
+          // setRedirectToReferer(true);
         });
-        // setRedirectToReferer(true);
-      });
+    }
   };
 
   if (filledIn) {
@@ -126,9 +171,12 @@ const VolunteerListForEvent = ({ ready, event, volunteers, filledIn, endHourVolL
                       icon="clock outline"
                       iconPosition="left"
                       type="decimal"
-                      placeholder="8"
+                      placeholder="0"
                       name="volunteer-hours"
                       index={index}
+                      defaultValue={maxHours}
+                      max={maxHours}
+                      min={0}
                       disabled={isChecked(index) === false}
                       onChange={handleChange}
                     />
@@ -200,7 +248,6 @@ export default withTracker(({ match }) => {
   const filledIn = !!(EndedEvent.findOne({ eventID: eventID }, {}));
   const endEventArray = EndedEvent.find({ eventID: eventID }, {}).fetch();
   const endHourVolList = (filledIn) ? endEventArray.map(endEvent => EndedEventsVolunteerList.findOne({ _id: endEvent.listID }, {})) : [];
-  // console.log(endHourVolList);
   return {
     event,
     volunteers,
