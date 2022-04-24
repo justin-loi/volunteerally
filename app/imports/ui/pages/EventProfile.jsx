@@ -186,6 +186,7 @@ export default withTracker(({ match }) => {
   const skillPairs = EventSkill.find({ eventID: eventID }, {}).fetch();
   const skills = skillPairs.map((pair) => SpecialSkills.findOne({ _id: pair.skillID }, {}));
   const interestPairs = EventInterest.find({ eventID: eventID }, {}).fetch();
+  console.log(interestPairs);
   const interests = interestPairs.map((pair) => Interests.findOne({ _id: pair.interestID }, {}));
   const environmentPairs = EventEnvironmental.find({ eventID: eventID }, {}).fetch();
   const environments = environmentPairs.map((pair) => Environmental.findOne({ _id: pair.environmentalID }, {}));

@@ -4,8 +4,16 @@ import { Container, Search, Divider, Header, Card } from 'semantic-ui-react';
 import PropTypes from 'prop-types';
 import { withTracker } from 'meteor/react-meteor-data';
 // import { PAGE_IDS } from '../utilities/PageIDs';
+import { AutoForm, SubmitField } from 'uniforms-semantic';
 import EventCard from '../components/EventCard';
 import { Events } from '../../api/event/EventCollection';
+import { Interests } from '../../api/interest/InterestCollection';
+import MultiSelectField from '../components/form-fields/MultiSelectField';
+
+const makeSchema = (allEvents) => new SimpleSchema({
+  interests: { type: Array, label: 'Interests', optional: true },
+  'interests.$': { type: String, allowedValues: allEvents },
+});
 
 /* Renders a list of events. Use <EventCard> to render each event card. */
 const BrowseOpportunities = ({ events }) => {
@@ -64,12 +72,14 @@ BrowseOpportunities.propTypes = {
 
 // withTracker connects Meteor data to React components. https://guide.meteor.com/react.html#using-withTracker
 export default withTracker(() => {
-  const subscription = Events.subscribe();
-  const ready = subscription.ready();
+  const subscription1 = Events.subscribe();
+  const subscription2 = Interests.subscribe();
+  const ready = subscription1.ready() && subscription2.ready();
   const events = Events.find({}, { sort: { name: 1 } }).fetch();
-
+  const interests = Interests.find({}, {}).fetch();
   return {
     events,
+    interests,
     ready,
   };
 })(BrowseOpportunities);
