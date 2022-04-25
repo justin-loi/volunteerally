@@ -42,12 +42,14 @@ const FilterEvents = ({ ready }) => {
   return (
     <Container id="filter-page">
       <AutoForm schema={bridge} onSubmit={data => submit(data)} >
+        //a submit function using submit field that plays nicely
         <Segment>
           <MultiSelectField id='interests' name='interests' showInlineError={true} placeholder={'Interests'}/>
           <SubmitField id='submit' value='Submit'/>
         </Segment>
       </AutoForm>
       <Card.Group style={{ paddingTop: '10px' }}>
+        {_.map(eventIDList, (event, index) => <EventCard key={index} event={event}/>)}
       </Card.Group>
     </Container>
   );

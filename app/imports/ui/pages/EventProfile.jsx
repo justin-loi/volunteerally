@@ -175,17 +175,17 @@ const EventProfile = ({ currentUser, event, orgProfile, skills, environments, in
               <Segment>
                 {/* eslint-disable-next-line react/prop-types */}
                 {skills.map((skill, index) => (
-                  <Label key={`event-skill-${index}`}>
+                  <Label color='purple' key={`event-skill-${index}`}>
                     {skill.name}
                   </Label>))}
                 {/* eslint-disable-next-line react/prop-types */}
                 {environments.map((environment, index) => (
-                  <Label key={`event-environment-${index}`}>
+                  <Label color='blue' key={`event-environment-${index}`}>
                     {environment.name}
                   </Label>))}
                 {/* eslint-disable-next-line react/prop-types */}
                 {interests.map((interest, index) => (
-                  <Label key={`event-interest-${index}`}>
+                  <Label color='green' key={`event-interest-${index}`}>
                     {interest.name}
                   </Label>))}
               </Segment>
