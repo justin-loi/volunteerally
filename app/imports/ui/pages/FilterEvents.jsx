@@ -1,10 +1,9 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import SimpleSchema2Bridge from 'uniforms-bridge-simple-schema-2';
 import SimpleSchema from 'simpl-schema';
 import { Container, Loader, Card, Segment } from 'semantic-ui-react';
 import { withTracker } from 'meteor/react-meteor-data';
 import PropTypes from 'prop-types';
-import { _ } from 'meteor/underscore';
 import { AutoForm, SubmitField } from 'uniforms-semantic';
 import MultiSelectField from '../components/form-fields/MultiSelectField';
 import { Events } from '../../api/event/EventCollection';
@@ -19,51 +18,55 @@ const makeSchema = (allEvents) => new SimpleSchema({
 });
 
 /** Renders the Profile Collection as a set of Cards. */
-class FilterEvents extends React.Component {
+const FilterEvents = ({ ready, events, interests, eventInterests }) => {
+  const [eventsArray, setEventsArray] = useState([]);
+  const [bridge, setBridge] = useState();
+  useEffect(() => {
+    setEventsArray(events);
+    const formSchema = makeSchema(interests.map(interest => interest._id));
+    // console.log(interests.map(interest => interest._id));
+    const tempBridge = new SimpleSchema2Bridge(formSchema);
+    setBridge(tempBridge);
+  }, [events, interests]);
 
-  constructor(props) {
-    super(props);
-    this.state = { events: [] };
-  }
+  const submit = (data) => {
+    // this.setState({ events: data.events || [] });
+    console.log(data);
+  };
+  // const eventsByInterest = _.pluck(EventInterest.find({}, {}).fetch(), '_id');
+  // console.log(eventsByInterest);
+  // const eventIDArray = eventsByInterest.map(eventByInterest => eventByInterest.eventID);
+  // console.log(eventIDArray);
+  // const events = eventIDArray.map(eventID => _.unique(Events.findOne({ eventID: eventID }, {})));
+  // console.log(events);
+  // const formSchema = makeSchema(events);
+  // const bridge = new SimpleSchema2Bridge(formSchema);
 
-  submit(data) {
-    this.setState({ events: data.events || [] });
-  }
-
-  /** If the subscription(s) have been received, render the page, otherwise show a loading icon. */
-  render() {
-    return (this.props.ready) ? this.renderPage() : <Loader active>Getting data</Loader>;
+  if (!ready) {
+    return <Loader active>Getting data</Loader>;
   }
 
   /** Render the page once subscriptions have been received. */
-  renderPage() {
-    const eventsByInterest = _.pluck(EventInterest.find({}, {}).fetch(), '_id');
-    //console.log(eventsByInterest);
-    const eventIDArray = eventsByInterest.map(eventByInterest => eventByInterest.eventID);
-    console.log(eventIDArray);
-    const events = eventIDArray.map(eventID => _.unique(Events.findOne({ eventID: eventID }, {})));
-    //console.log(events);
-    const formSchema = makeSchema(events);
-    const bridge = new SimpleSchema2Bridge(formSchema);
-    return (
-      <Container id="filter-page">
-        <AutoForm schema={bridge} onSubmit={data => this.submit(data)} >
-          <Segment>
-            <MultiSelectField id='interests' name='interests' showInlineError={true} placeholder={'Interests Name'}/>
-            <SubmitField id='submit' value='Submit'/>
-          </Segment>
-        </AutoForm>
-        <Card.Group style={{ paddingTop: '10px' }}>
-          {_.map(events, (event, index) => <EventCard key={index} profile={event}/>)}
-        </Card.Group>
-      </Container>
-    );
-  }
-}
+  return (
+    <Container id="filter-page">
+      <AutoForm schema={bridge} onSubmit={data => submit(data)} >
+        <Segment>
+          <SubmitField id='submit' value='Submit'/>
+        </Segment>
+      </AutoForm>
+      <Card.Group style={{ paddingTop: '10px' }}>
+        {eventsArray.map((event, index) => (<EventCard key={index} event={event}/>))}
+      </Card.Group>
+    </Container>
+  );
+};
 
 /** Require an array of Stuff documents in the props. */
 FilterEvents.propTypes = {
   ready: PropTypes.bool.isRequired,
+  events: PropTypes.array.isRequired,
+  interests: PropTypes.array.isRequired,
+  eventInterests: PropTypes.array.isRequired,
 };
 
 /** withTracker connects Meteor data to React components. https://guide.meteor.com/react.html#using-withTracker */
