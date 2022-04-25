@@ -22,6 +22,11 @@ const EventProfile = ({ currentUser, event, orgProfile, skills, environments, in
   const [cSubject, setSubject] = useState('');
   const [cContent, setContent] = useState('');
 
+  const getDirections = () => {
+    const link = `https://www.google.com/maps/place/${event.eventAddress}`;
+    window.open(link);
+  };
+
   const handleOpen = () => {
     setOpenSendMail(true);
   };
@@ -112,7 +117,7 @@ const EventProfile = ({ currentUser, event, orgProfile, skills, environments, in
 
           <Grid stackable columns={2}>
             <Grid.Row centered>
-              <Button>Get directions</Button>
+              <Button onClick={getDirections}>Get directions</Button>
               <Button>Send an email</Button>
               <Button onClick={handleOpen}>Direct Message</Button>
             </Grid.Row>
