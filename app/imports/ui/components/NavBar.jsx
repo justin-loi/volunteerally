@@ -11,8 +11,8 @@ import { ROLE } from '../../api/role/Role';
 import { Messages } from '../../api/message/MessageCollection';
 
 /** The NavBar appears at the top of every page. Rendered by the App Layout component. */
-const NavBar = ({ currentUser }) => {
-  const menuStyle = { marginBottom: '10px', backgroundColor: '#024731', flexShrink: 0 };
+const NavBar = ({ currentUser, colorUsage }) => {
+  const menuStyle = { marginBottom: '10px', backgroundColor: colorUsage, flexShrink: 0 };
 
   return (
     <Menu id={COMPONENT_IDS.NAVBAR_NAVBAR} style={menuStyle} attached="top" borderless inverted stackable>
@@ -87,13 +87,26 @@ const NavBar = ({ currentUser }) => {
 NavBar.propTypes =
 {
   currentUser: PropTypes.string,
+  colorUsage: PropTypes.string,
 };
 
 // withTracker connects Meteor data to React components. https://guide.meteor.com/react.html#using-withTracker
 const NavBarContainer = withTracker(() => {
   const currentUser = Meteor.user() ? Meteor.user().username : '';
+  const colors = ['#FF0000', '#024731', '#0000FF', '#FFFF00'];
+  let colorUsage;
+  if (Roles.userIsInRole(Meteor.userId(), [ROLE.VOLUNTEER])) {
+    colorUsage = colors[0];
+  } else if (Roles.userIsInRole(Meteor.userId(), [ROLE.ORGANIZATION])) {
+    colorUsage = colors[1];
+  } else if (Roles.userIsInRole(Meteor.userId(), [ROLE.ADMIN])) {
+    colorUsage = colors[2];
+  } else {
+    colorUsage = colors[3];
+  }
   return {
     currentUser,
+    colorUsage,
   };
 })(NavBar);
 
