@@ -1,23 +1,60 @@
-import React from 'react';
+import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { Meteor } from 'meteor/meteor';
 import { withTracker } from 'meteor/react-meteor-data';
 import { withRouter, NavLink } from 'react-router-dom';
-import { Menu, Dropdown, Image, Icon, Label } from 'semantic-ui-react';
+import { Menu, Dropdown, Image, Icon, Label, Search } from 'semantic-ui-react';
 import { Roles } from 'meteor/alanning:roles';
 // eslint-disable-next-line import/named
+import _ from 'lodash';
 import { COMPONENT_IDS } from '../utilities/ComponentIDs';
 import { ROLE } from '../../api/role/Role';
 import { Messages } from '../../api/message/MessageCollection';
+import { Events } from '../../api/event/EventCollection';
+import EventCard from './EventCard';
 
 /** The NavBar appears at the top of every page. Rendered by the App Layout component. */
-const NavBar = ({ currentUser, colorUsage }) => {
+const NavBar = ({ currentUser, colorUsage, events }) => {
   const menuStyle = { marginBottom: '10px', backgroundColor: colorUsage, flexShrink: 0 };
+
+  const [results, setResult] = useState(events);
+  const [value, setValue] = useState('');
+
+  const resultRenderer = (event) => <EventCard event={event}/>;
+
+  const handleSearchChange = (e, data) => {
+    setValue(data.value);
+    if (data.value.length === 0) {
+      setResult([]);
+      setValue('');
+    }
+
+    const re = new RegExp(_.escapeRegExp(data.value), 'i');
+    const isMatch = (result) => re.test(result.eventName) || re.test(result.orgName);
+    setResult(_.filter(events, isMatch));
+  };
+
+  const onResultSelect = (e, data) => {
+    setValue(data.result.eventName);
+    const re = new RegExp(_.escapeRegExp(data.result.eventName), 'i');
+    const isMatch = (result) => re.test(result.eventName);
+
+    setResult(_.filter(events, isMatch));
+  };
 
   return (
     <Menu id={COMPONENT_IDS.NAVBAR_NAVBAR} style={menuStyle} attached="top" borderless inverted stackable>
       <Menu.Item id={COMPONENT_IDS.NAVBAR_LANDING_PAGE} as={NavLink} activeClassName="" exact to="/">
         <Image size='small' circular src="/images/volunteer-ally-temp-logo.png" centered/>
+      </Menu.Item>
+      <Menu.Item>
+        <Search style={{ marginBottom: 50 }} id='searchbar' placeholder='Search for any position, location, or skill!'
+          onResultSelect={onResultSelect}
+          onSearchChange={handleSearchChange}
+          resultRenderer={resultRenderer}
+          results={results}
+          value={value}
+        />
       </Menu.Item>
       {currentUser ? (
         [<Menu.Item id={COMPONENT_IDS.NAVBAR_LIST_STUFF} as={NavLink} activeClassName="active" exact to="/list" key='list'> </Menu.Item>]
@@ -88,12 +125,16 @@ NavBar.propTypes =
 {
   currentUser: PropTypes.string,
   colorUsage: PropTypes.string,
+  events: PropTypes.array,
 };
 
 // withTracker connects Meteor data to React components. https://guide.meteor.com/react.html#using-withTracker
 const NavBarContainer = withTracker(() => {
+  const subscription1 = Events.subscribe();
+  const ready = subscription1.ready();
+  const events = Events.find({}, { sort: { name: 1 } }).fetch();
   const currentUser = Meteor.user() ? Meteor.user().username : '';
-  const colors = ['#FF0000', '#024731', '#0000FF', '#FFFF00'];
+  const colors = ['#FF0000', '#024731', '#0000FF', '#D8BFD8'];
   let colorUsage;
   if (Roles.userIsInRole(Meteor.userId(), [ROLE.VOLUNTEER])) {
     colorUsage = colors[0];
@@ -107,6 +148,7 @@ const NavBarContainer = withTracker(() => {
   return {
     currentUser,
     colorUsage,
+    events,
   };
 })(NavBar);
 

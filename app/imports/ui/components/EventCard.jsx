@@ -61,7 +61,7 @@ const EventCard = ({ event }) => {
           <p>{event.eventDescription}</p>
         </Card.Description>
       </Card.Content>
-      <Card.Content centered>
+      <Card.Content>
         {(Meteor.userId() && Roles.userIsInRole(Meteor.userId(), [ROLE.VOLUNTEER])) ? (
           <Button onClick={handleClick} color='green'>
             Add Event!
@@ -124,20 +124,10 @@ EventCard.propTypes = {
   volunteer: PropTypes.shape({
     _id: PropTypes.string,
   }),
-  skill: PropTypes.shape({
-    _id: PropTypes.array,
-  }),
-  interest: PropTypes.shape({
-    _id: PropTypes.array,
-  }),
-  environments: PropTypes.shape({
-    _id: PropTypes.array,
-    name: PropTypes.string,
-  }),
 };
 
 const EventCardCon = withTracker((eventID) => {
-  console.log(eventID);
+  // console.log('Eventcard', eventID);
   const subscription = Events.subscribe();
   const subscription2 = EventInterest.subscribe();
   const subscription3 = EventSkill.subscribe();
@@ -148,17 +138,8 @@ const EventCardCon = withTracker((eventID) => {
   const ready = subscription.ready() && subscription2.ready() && subscription3.ready() && subscription4.ready() &&
     subscription5.ready() && subscription6.ready() && subscription7.ready();
   const event = eventID.event;
-  const skillPairs = EventSkill.find({ eventID: event._id }, {}).fetch();
-  const skills = skillPairs.map((pair) => SpecialSkills.findOne({ _id: pair.skillID }, {}));
-  const interestPairs = EventInterest.find({ eventID: event._id }, {}).fetch();
-  const interests = interestPairs.map((pair) => Interests.findOne({ _id: pair.interestID }, {}));
-  const environmentPairs = EventEnvironmental.find({ eventID: event._id }, {}).fetch();
-  const environments = environmentPairs.map((pair) => Environmental.findOne({ _id: pair.environmentalID }, {}));
   return {
     event,
-    skills,
-    interests,
-    environments,
     ready,
   };
 })(EventCard);

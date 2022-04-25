@@ -4,7 +4,7 @@ import SimpleSchema from 'simpl-schema';
 import { Container, Loader, Card, Segment } from 'semantic-ui-react';
 import { withTracker } from 'meteor/react-meteor-data';
 import PropTypes from 'prop-types';
-import { AutoForm, SubmitField } from 'uniforms-semantic';
+import { AutoForm, SubmitField, SelectField } from 'uniforms-semantic';
 import { _ } from 'meteor/underscore';
 import MultiSelectField from '../components/form-fields/MultiSelectField';
 import { Events } from '../../api/event/EventCollection';
@@ -20,19 +20,29 @@ const makeSchema = (allInterests) => new SimpleSchema({
 
 /** Renders the Profile Collection as a set of Cards. */
 const FilterEvents = ({ ready }) => {
-
+  const [interests, setInterests] = useState([]);
   const allInterests = _.pluck(Interests.find({}, {}).fetch(), 'name');
-  //pull each interest from the collection to populate form
+  // pull each interest from the collection to populate form
   const formSchema = makeSchema(allInterests);
-  //make the schema into an array
+  // make the schema into an array
   const bridge = new SimpleSchema2Bridge(formSchema);
-  //bridge for the form options
-  //need build an array using state to collect selected interest to find associated events
-  const eventInterests = EventInterest.find({ category: { $in: this.state.interests } }, {}).fetch();
-  //find the events with the similar interest
-  const eventIDList = eventInterests.map(eventInterest => eventInterest.eventID);
-  //get the list of event id's
-  console.log(eventInterests);
+  // bridge for the form options
+  // need build an array using state to collect selected interest to find associated events
+  const interestIDs = interests.map(name => Interests.findDoc(name)._id);
+  console.log('interestIDs', interestIDs);
+  const eventInterests = EventInterest.find({ interestID: { $in: interestIDs } }, {}).fetch();
+  console.log('eventInterests', eventInterests);
+  // const eventIDs
+
+  // get the list of event id's
+  const eventIDList = _.uniq(eventInterests.map(eventInterest => eventInterest.eventID));
+  console.log('eventIDList', eventIDList);
+  const events = eventIDList.map(id => Events.findDoc(id));
+
+  const submit = (data) => {
+    // console.log(data);
+    setInterests(data.interests);
+  };
 
   if (!ready) {
     return <Loader active>Getting data</Loader>;
@@ -44,12 +54,12 @@ const FilterEvents = ({ ready }) => {
       <AutoForm schema={bridge} onSubmit={data => submit(data)} >
         //a submit function using submit field that plays nicely
         <Segment>
-          <MultiSelectField id='interests' name='interests' showInlineError={true} placeholder={'Interests'}/>
+          <SelectField id='interests' name='interests' showInlineError={true} placeholder={'Interests'} multiple checkboxes/>
           <SubmitField id='submit' value='Submit'/>
         </Segment>
       </AutoForm>
       <Card.Group style={{ paddingTop: '10px' }}>
-        {_.map(eventIDList, (event, index) => <EventCard key={index} event={event}/>)}
+        {_.map(events, (event, index) => <EventCard key={index} event={event}/>)}
       </Card.Group>
     </Container>
   );

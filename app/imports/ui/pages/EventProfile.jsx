@@ -259,7 +259,7 @@ EventProfile.propTypes = {
   interests: PropTypes.array,
   environments: PropTypes.array,
   ready: PropTypes.bool.isRequired,
-  currentUser: PropTypes.bool.isRequired,
+  currentUser: PropTypes.string,
 };
 
 // withTracker connects Meteor data to React components. https://guide.meteor.com/react.html#using-withTracker
