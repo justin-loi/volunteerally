@@ -8,6 +8,13 @@
   background-size: cover;
 }
 
+.Demo__some-network {
+  vertical-align: top;
+  display: inline-block;
+  margin-right: 10px;
+  text-align: center;
+}
+
 .volunteer-profile-banner {
   background-image: url("/images/volunteer_profile_banner.png");
   background-size: cover;

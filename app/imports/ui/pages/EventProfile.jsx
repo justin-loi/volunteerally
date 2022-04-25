@@ -175,17 +175,17 @@ const EventProfile = ({ currentUser, event, orgProfile, skills, environments, in
               <Segment>
                 {/* eslint-disable-next-line react/prop-types */}
                 {skills.map((skill, index) => (
-                  <Label key={`event-skill-${index}`}>
+                  <Label color='purple' key={`event-skill-${index}`}>
                     {skill.name}
                   </Label>))}
                 {/* eslint-disable-next-line react/prop-types */}
                 {environments.map((environment, index) => (
-                  <Label key={`event-environment-${index}`}>
+                  <Label color='blue' key={`event-environment-${index}`}>
                     {environment.name}
                   </Label>))}
                 {/* eslint-disable-next-line react/prop-types */}
                 {interests.map((interest, index) => (
-                  <Label key={`event-interest-${index}`}>
+                  <Label color='green' key={`event-interest-${index}`}>
                     {interest.name}
                   </Label>))}
               </Segment>
@@ -259,7 +259,7 @@ EventProfile.propTypes = {
   interests: PropTypes.array,
   environments: PropTypes.array,
   ready: PropTypes.bool.isRequired,
-  currentUser: PropTypes.bool.isRequired,
+  currentUser: PropTypes.string,
 };
 
 // withTracker connects Meteor data to React components. https://guide.meteor.com/react.html#using-withTracker
@@ -286,6 +286,7 @@ export default withTracker(({ match }) => {
   const skillPairs = EventSkill.find({ eventID: eventID }, {}).fetch();
   const skills = skillPairs.map((pair) => SpecialSkills.findOne({ _id: pair.skillID }, {}));
   const interestPairs = EventInterest.find({ eventID: eventID }, {}).fetch();
+  console.log(interestPairs);
   const interests = interestPairs.map((pair) => Interests.findOne({ _id: pair.interestID }, {}));
   const environmentPairs = EventEnvironmental.find({ eventID: eventID }, {}).fetch();
   const environments = environmentPairs.map((pair) => Environmental.findOne({ _id: pair.environmentalID }, {}));
