@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Container, Table, Header, Loader, Form } from 'semantic-ui-react';
+import { Container, Table, Header, Loader, Form, Label } from 'semantic-ui-react';
 import { withTracker } from 'meteor/react-meteor-data';
 import PropTypes from 'prop-types';
 import swal from 'sweetalert';
@@ -47,19 +47,12 @@ const VolunteerListForEvent = ({ ready, event, volunteers, filledIn, endHourVolL
     { label: 'Hours Volunteered', key: 'hours' },
   ];
 
-  const dataCsv = [
-    { firstName: 'Warren', lastName: 'Morrow', email: 'sokyt@mailinator.com', hours: '8' },
-    { firstName: 'Gwendolyn', lastName: 'Galloway', email: 'weciz@mailinator.com', hours: '8' },
-    { firstName: 'Astra', lastName: 'Wyatt', email: 'quvyn@mailinator.com', hours: '8' },
-    { firstName: 'Jasmine', lastName: 'Wong', email: 'toxazoc@mailinator.com', hours: '8' },
-    { firstName: 'Brooke', lastName: 'Mcconnell', email: 'vyry@mailinator.com', hours: '0' },
-    { firstName: 'Christen', lastName: 'Haney', email: 'pagevolal@mailinator.com', hours: '6' },
-    { firstName: 'Tate', lastName: 'Vega', email: 'dycubo@mailinator.com', hours: '8' },
-    { firstName: 'Amber', lastName: 'Brady', email: 'vyconixy@mailinator.com', hours: '8' },
-    { firstName: 'Philip', lastName: 'Whitfield', email: 'velyfi@mailinator.com', hours: '8' },
-    { firstName: 'Kitra', lastName: 'Hammond', email: 'fiwiloqu@mailinator.com', hours: '8' },
-    { firstName: 'Charity', lastName: 'Mathews', email: 'fubigonero@mailinator.com', hours: '8' },
-  ];
+  const dataCsv =
+    volunteers.map((volunteer) => (
+      { firstName: volunteer.firstName, lastName: volunteer.lastName, email: volunteer.email, hours: volunteer.participateHours }
+    ));
+  console.log(volunteers.length);
+  console.log(dataCsv);
 
   const csvReport = {
     data: dataCsv,
