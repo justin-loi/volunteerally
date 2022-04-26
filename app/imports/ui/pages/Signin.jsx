@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { Link, Redirect } from 'react-router-dom';
 import { Meteor } from 'meteor/meteor';
+import { Accounts } from 'meteor/accounts-base';
 import { Container, Form, Grid, Header, Item, Message, Segment } from 'semantic-ui-react';
 import { PAGE_IDS } from '../utilities/PageIDs';
 import { COMPONENT_IDS } from '../utilities/ComponentIDs';
@@ -10,11 +11,13 @@ import { COMPONENT_IDS } from '../utilities/ComponentIDs';
  * Signin page overrides the form’s submit event and call Meteor’s loginWithPassword().
  * Authentication errors modify the component’s state to be displayed
  */
+
 const Signin = ({ location }) => {
 
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
+  const [rememberMe, setRememberMe] = useState(false);
   const [redirectToReferer, setRedirectToReferer] = useState(false);
 
   // Update the form controls each time the user interacts with them.
@@ -26,6 +29,9 @@ const Signin = ({ location }) => {
     case 'password':
       setPassword(value);
       break;
+    case 'rememberMe':
+      setRememberMe(true);
+      break;
     default:
       // do nothing.
     }
@@ -33,14 +39,20 @@ const Signin = ({ location }) => {
 
   // Handle Signin submission using Meteor's account mechanism.
   const submit = () => {
+    const RememberMeVal = rememberMe;
     Meteor.loginWithPassword(email, password, (err) => {
       if (err) {
         setError(err.reason);
       } else {
         setError('');
+        if (RememberMeVal === false) {
+          Accounts._unstoreLoginToken();
+          Accounts._autoLoginEnabled = false;
+        }
         setRedirectToReferer(true);
       }
     });
+
   };
 
   // Render the signin form.
@@ -91,7 +103,11 @@ const Signin = ({ location }) => {
               </Item>
               <br/>
               <Form.Button id={COMPONENT_IDS.SIGN_IN_FORM_SUBMIT} content="Submit" fluid/>
-              <Form.Checkbox label="Remember me"/>
+              <Form.Checkbox
+                label="Remember me"
+                name="rememberMe"
+                onChange={handleChange}
+              />
               <br/>
               <br/>
               <Grid textAlign="center">
