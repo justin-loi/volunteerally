@@ -168,6 +168,7 @@ EmailItem.propTypes = {
 
 // withTracker connects Meteor data to React components. https://guide.meteor.com/react.html#using-withTracker
 const EmailItemContainer = withTracker(() => {
+  // eslint-disable-next-line no-unused-vars
   const sub = Messages.subscribe();
 })(EmailItem);
 

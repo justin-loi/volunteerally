@@ -4,8 +4,6 @@ import PropTypes from 'prop-types';
 import { Meteor } from 'meteor/meteor';
 import { withTracker } from 'meteor/react-meteor-data';
 import { NavLink, withRouter } from 'react-router-dom';
-import { Roles } from 'meteor/alanning:roles';
-import { ROLE } from '../../api/role/Role';
 
 /** The Footer appears at the bottom of every page. Rendered by the App Layout component. */
 const Footer = ({ currentUser }) => {

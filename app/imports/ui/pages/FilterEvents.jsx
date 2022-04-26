@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import SimpleSchema2Bridge from 'uniforms-bridge-simple-schema-2';
 import SimpleSchema from 'simpl-schema';
 import { Container, Loader, Card, Segment } from 'semantic-ui-react';
@@ -6,7 +6,6 @@ import { withTracker } from 'meteor/react-meteor-data';
 import PropTypes from 'prop-types';
 import { AutoForm, SubmitField, SelectField } from 'uniforms-semantic';
 import { _ } from 'meteor/underscore';
-import MultiSelectField from '../components/form-fields/MultiSelectField';
 import { Events } from '../../api/event/EventCollection';
 import { Interests } from '../../api/interest/InterestCollection';
 import { EventInterest } from '../../api/interest/EventInterestCollection';
@@ -52,7 +51,9 @@ const FilterEvents = ({ ready }) => {
   return (
     <Container id="filter-page">
       <AutoForm schema={bridge} onSubmit={data => submit(data)} >
-        //a submit function using submit field that plays nicely
+        {
+          // a submit function using submit field that plays nicely
+        }
         <Segment>
           <SelectField id='interests' name='interests' showInlineError={true} placeholder={'Interests'} multiple checkboxes/>
           <SubmitField id='submit' value='Submit'/>

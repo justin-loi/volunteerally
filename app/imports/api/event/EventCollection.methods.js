@@ -62,7 +62,9 @@ export const addNewEventMethod = new ValidatedMethod({
       }
       const organization = OrganizationProfiles.findOne({ email: owner }, {});
       OrganizationEvent.define({ eventID: eventID, organizationID: organization.userID });
+      return eventID;
     }
+    return null;
   },
 });
 

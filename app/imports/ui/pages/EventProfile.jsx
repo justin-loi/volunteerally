@@ -24,6 +24,7 @@ const EventProfile = ({ currentUser, event, orgProfile, skills, environments, in
 
   const getDirections = () => {
     const link = `https://www.google.com/maps/place/${event.eventAddress}`;
+    // eslint-disable-next-line no-undef
     window.open(link);
   };
 
@@ -280,18 +281,13 @@ export default withTracker(({ match }) => {
   const ready = subscription1.ready() && subscription2.ready() && subscription3.ready() && subscription4.ready() &&
     subscription5.ready() && subscription6.ready() && subscription7.ready() && subscription8.ready() && subscription9.ready();
   const event = Events.find({ _id: eventID }).fetch()[0];
-  console.log(event);
-  console.log(event.owner);
   const orgProfile = OrganizationProfiles.findOne({ email: event.owner }, {});
   const skillPairs = EventSkill.find({ eventID: eventID }, {}).fetch();
   const skills = skillPairs.map((pair) => SpecialSkills.findOne({ _id: pair.skillID }, {}));
   const interestPairs = EventInterest.find({ eventID: eventID }, {}).fetch();
-  console.log(interestPairs);
   const interests = interestPairs.map((pair) => Interests.findOne({ _id: pair.interestID }, {}));
   const environmentPairs = EventEnvironmental.find({ eventID: eventID }, {}).fetch();
   const environments = environmentPairs.map((pair) => Environmental.findOne({ _id: pair.environmentalID }, {}));
-  console.log(orgProfile);
-  console.log(event);
   return {
     event,
     skills,

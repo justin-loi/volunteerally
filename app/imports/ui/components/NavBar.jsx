@@ -131,6 +131,7 @@ NavBar.propTypes =
 // withTracker connects Meteor data to React components. https://guide.meteor.com/react.html#using-withTracker
 const NavBarContainer = withTracker(() => {
   const subscription1 = Events.subscribe();
+  // eslint-disable-next-line no-unused-vars
   const ready = subscription1.ready();
   const events = Events.find({}, { sort: { name: 1 } }).fetch();
   const currentUser = Meteor.user() ? Meteor.user().username : '';

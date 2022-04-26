@@ -61,46 +61,43 @@ const EventCard = ({ event }) => {
           <p>{event.eventDescription}</p>
         </Card.Description>
       </Card.Content>
-      <Card.Content>
-        {(Meteor.userId() && Roles.userIsInRole(Meteor.userId(), [ROLE.VOLUNTEER])) ? (
+      {(Meteor.userId() && Roles.userIsInRole(Meteor.userId(), [ROLE.VOLUNTEER])) ? (
+        <Card.Content>
           <Button onClick={handleClick} color='green'>
             Add Event!
-          </Button>) : ''}
-      </Card.Content>
-      <Card.Content>
-        {(Meteor.userId() && Roles.userIsInRole(Meteor.userId(), [ROLE.VOLUNTEER])) ? (
+          </Button>
+        </Card.Content>) : ''}
+      {(Meteor.userId() && Roles.userIsInRole(Meteor.userId(), [ROLE.VOLUNTEER])) ? (
+        <Card.Content>
           <TwitterShareButton
             url={shareUrl}
             quote={title}
             className="Demo__some-network__share-button"
           >
             <TwitterIcon size={32} round />
-          </TwitterShareButton>) : ''}
-        {(Meteor.userId() && Roles.userIsInRole(Meteor.userId(), [ROLE.VOLUNTEER])) ? (
+          </TwitterShareButton>
           <FacebookShareButton
             url={shareUrl}
             quote={title}
             className="Demo__some-network__share-button"
           >
             <FacebookIcon size={32} round />
-          </FacebookShareButton>) : ''}
-        {(Meteor.userId() && Roles.userIsInRole(Meteor.userId(), [ROLE.VOLUNTEER])) ? (
+          </FacebookShareButton>
           <PinterestShareButton
             url={shareUrl}
             quote={title}
             className="Demo__some-network__share-button"
           >
             <PinterestIcon size={32} round />
-          </PinterestShareButton>) : ''}
-        {(Meteor.userId() && Roles.userIsInRole(Meteor.userId(), [ROLE.VOLUNTEER])) ? (
+          </PinterestShareButton>
           <EmailShareButton
             url={shareUrl}
             quote={title}
             className="Demo__some-network__share-button"
           >
             <EmailIcon size={32} round />
-          </EmailShareButton>) : ''}
-      </Card.Content>
+          </EmailShareButton>
+        </Card.Content>) : ''}
     </Card>
   );
 };
