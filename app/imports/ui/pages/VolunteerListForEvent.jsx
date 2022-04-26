@@ -46,12 +46,13 @@ const VolunteerListForEvent = ({ ready, event, volunteers, filledIn, endHourVolL
     { label: 'Email', key: 'email' },
     { label: 'Hours Volunteered', key: 'hours' },
   ];
+  const findVolunteer = (element) => (volunteers.find(volunteer => volunteer.userID === element.volunteerID));
 
   const dataCsv =
-    volunteers.map((volunteer) => (
-      { firstName: volunteer.firstName, lastName: volunteer.lastName, email: volunteer.email, hours: volunteer.participateHours }
+    endHourVolList.map((data) => (
+      { firstName: findVolunteer(data).firstName, lastName: findVolunteer(data).lastName, email: findVolunteer(data).email, hours: data.participateHours }
     ));
-  console.log(volunteers.length);
+  console.log(endHourVolList.participateHours);
   console.log(dataCsv);
 
   const csvReport = {
@@ -65,8 +66,6 @@ const VolunteerListForEvent = ({ ready, event, volunteers, filledIn, endHourVolL
   const [hoursOverLimit, setHourOverLimit] = useState(false);
 
   const isChecked = (index) => ((typeof volunteerHourArray[index] === 'undefined') ? false : volunteerHourArray[index].attended);
-
-  const findVolunteer = (element) => (volunteers.find(volunteer => volunteer.userID === element.volunteerID));
 
   const notOverLimited = (num, min, max) => {
     if (num > max) {
