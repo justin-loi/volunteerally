@@ -48,7 +48,7 @@ const NavBar = ({ currentUser, colorUsage, events }) => {
         <Image size='small' circular src="/images/volunteer-ally-temp-logo.png" centered/>
       </Menu.Item>
       <Menu.Item>
-        <Search style={{ marginBottom: 50 }} id='searchbar' placeholder='Search for any position, location, or skill!'
+        <Search id='searchbar' placeholder='Search for any position, location, or skill!'
           onResultSelect={onResultSelect}
           onSearchChange={handleSearchChange}
           resultRenderer={resultRenderer}
@@ -134,7 +134,7 @@ const NavBarContainer = withTracker(() => {
   const ready = subscription1.ready();
   const events = Events.find({}, { sort: { name: 1 } }).fetch();
   const currentUser = Meteor.user() ? Meteor.user().username : '';
-  const colors = ['#FF0000', '#024731', '#0000FF', '#D8BFD8'];
+  const colors = ['rgba(245,102,102,0.39)', 'rgba(2,71,49,0.37)', 'rgba(88,88,236,0.37)', 'rgb(209, 51, 209, 0.37)'];
   let colorUsage;
   if (Roles.userIsInRole(Meteor.userId(), [ROLE.VOLUNTEER])) {
     colorUsage = colors[0];
