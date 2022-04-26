@@ -11,13 +11,13 @@ export const signUpNewOrganizationMethod = new ValidatedMethod({
   run({ organizationName, email, ein, primaryAddress, city, state, zipcode,
     industry, primaryContactFirstName, primaryContactLastName, primaryContactEmail,
     primaryContactPhone, secondContactFirstName, secondContactLastName,
-    secondContactEmail, secondContactPhone, username, password, industries }) {
+    secondContactEmail, secondContactPhone, missionStatement, username, password, industries, logoImage }) {
     if (Meteor.isServer) {
       const profileId = OrganizationProfiles.define({
         organizationName, email, ein, primaryAddress, city, state, zipcode,
         industry, primaryContactFirstName, primaryContactLastName, primaryContactEmail,
         primaryContactPhone, secondContactFirstName, secondContactLastName,
-        secondContactEmail, secondContactPhone, username, password });
+        secondContactEmail, secondContactPhone, missionStatement, username, password, logoImage });
       const organizationID = OrganizationProfiles.dumpUserId(profileId);
       industries.map((industryID) => (OrganizationIndustry.define({ organizationID, industryID })));
     }

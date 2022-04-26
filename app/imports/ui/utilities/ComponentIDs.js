@@ -73,6 +73,7 @@ export const COMPONENT_IDS = {
   ORGANIZATION_SIGNUP_FORM_PRIMARY_CONTACT_PHONE_NUMBER: 'organization-signup-form-primary-phone-number',
   ORGANIZATION_SIGNUP_FORM_USERNAME: 'organization-signup-form-username',
   ORGANIZATION_SIGNUP_FORM_PASSWORD: 'organization-signup-form-password',
+  ORGANIZATION_SIGNUP_FORM_MISSION_STATEMENT: 'organization-signup-form-mission-statement',
   ORGANIZATION_SIGNUP_FORM_CONFIRM_PASSWORD: 'organization-signup-form-confirm-password',
   ORGANIZATION_SIGNUP_FORM_SECONDARY_CONTACT_FIRST_NAME: 'organization-signup-form-secondary-contact-first-name',
   ORGANIZATION_SIGNUP_FORM_SECONDARY_CONTACT_LAST_NAME: 'organization-signup-form-secondary-contact-last-name',
@@ -91,5 +92,5 @@ export const COMPONENT_IDS = {
   ADD_EVENT_ADDRESS: 'add-event-address',
   ADD_EVENT_CITY: 'add-event-city',
   ADD_EVENT_STATE: 'add-event-state',
-  ADD_EVENT_ZIPCODE: 'add-event-zipcode'
+  ADD_EVENT_ZIPCODE: 'add-event-zipcode',
 };

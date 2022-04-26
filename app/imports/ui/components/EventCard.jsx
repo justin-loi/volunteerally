@@ -1,11 +1,12 @@
 import React from 'react';
-import { Button, Card, Icon, Image } from 'semantic-ui-react';
+import { Button, Card, Image } from 'semantic-ui-react';
 import PropTypes from 'prop-types';
 import { NavLink } from 'react-router-dom';
 import { Meteor } from 'meteor/meteor';
 import swal from 'sweetalert';
 import { Roles } from 'meteor/alanning:roles';
 import { withTracker } from 'meteor/react-meteor-data';
+import { FacebookIcon, FacebookShareButton, TwitterIcon, TwitterShareButton, PinterestShareButton, PinterestIcon, EmailShareButton, EmailIcon } from 'react-share';
 import { ROLE } from '../../api/role/Role';
 import { defineMethod } from '../../api/base/BaseCollection.methods';
 import { VolunteerEvent } from '../../api/event/VolunteerEventCollection';
@@ -16,6 +17,9 @@ import { EventSkill } from '../../api/special_skills/EventSkillCollection';
 import { Events } from '../../api/event/EventCollection';
 import { Interests } from '../../api/interest/InterestCollection';
 import { Environmental } from '../../api/environmental_preference/EnvironmentalPreferenceCollection';
+
+const shareUrl = 'http://165.22.207.71/#/browse_opportunities';
+const title = 'VolunteerAlly';
 
 /* Renders a single event card. */
 const EventCard = ({ event }) => {
@@ -40,6 +44,7 @@ const EventCard = ({ event }) => {
     }
   };
   return (
+
     <Card as={NavLink} exact to={`/details/${event._id}`}>
       <Image src='images/event_card_default_image.png' wrapped ui={false}/>
       <Card.Content>
@@ -47,7 +52,7 @@ const EventCard = ({ event }) => {
         <Card.Meta>
           <span>Date: {event.eventDate}</span>
           <br/>
-          <span>Time: {event.eventStartTime} until {event.eventEndTime}</span>
+          <span>Time: {event.eventStartTime} - {event.eventEndTime}</span>
           <br/>
           <span>Location: {event.eventAddress} {event.eventCity}, {event.eventState} {event.eventZip}</span>
           <br/>
@@ -56,26 +61,43 @@ const EventCard = ({ event }) => {
           <p>{event.eventDescription}</p>
         </Card.Description>
       </Card.Content>
-      <Card.Content extra>
-        <p>
-          {event.categories}
-        </p>
-      </Card.Content>
-      <Card.Content>
-        {(Meteor.userId() && Roles.userIsInRole(Meteor.userId(), [ROLE.VOLUNTEER])) ? (
+      {(Meteor.userId() && Roles.userIsInRole(Meteor.userId(), [ROLE.VOLUNTEER])) ? (
+        <Card.Content>
           <Button onClick={handleClick} color='green'>
             Add Event!
-          </Button>) : ''}
-        {(Meteor.userId() && Roles.userIsInRole(Meteor.userId(), [ROLE.VOLUNTEER])) ? (
-          <Icon circular inverted color='blue' name='twitter' />) : ''}
-        {(Meteor.userId() && Roles.userIsInRole(Meteor.userId(), [ROLE.VOLUNTEER])) ? (
-          <Icon circular inverted color='blue' name='facebook' />) : ''}
-        {(Meteor.userId() && Roles.userIsInRole(Meteor.userId(), [ROLE.VOLUNTEER])) ? (
-          <Icon circular inverted color='blue' name='mail' />) : ''}
-        {(Meteor.userId() && Roles.userIsInRole(Meteor.userId(), [ROLE.VOLUNTEER])) ? (
-          <Icon circular inverted color='blue' name='pinterest' />) : ''}
-
-      </Card.Content>
+          </Button>
+        </Card.Content>) : ''}
+      {(Meteor.userId() && Roles.userIsInRole(Meteor.userId(), [ROLE.VOLUNTEER])) ? (
+        <Card.Content>
+          <TwitterShareButton
+            url={shareUrl}
+            quote={title}
+            className="Demo__some-network__share-button"
+          >
+            <TwitterIcon size={32} round />
+          </TwitterShareButton>
+          <FacebookShareButton
+            url={shareUrl}
+            quote={title}
+            className="Demo__some-network__share-button"
+          >
+            <FacebookIcon size={32} round />
+          </FacebookShareButton>
+          <PinterestShareButton
+            url={shareUrl}
+            quote={title}
+            className="Demo__some-network__share-button"
+          >
+            <PinterestIcon size={32} round />
+          </PinterestShareButton>
+          <EmailShareButton
+            url={shareUrl}
+            quote={title}
+            className="Demo__some-network__share-button"
+          >
+            <EmailIcon size={32} round />
+          </EmailShareButton>
+        </Card.Content>) : ''}
     </Card>
   );
 };
@@ -99,19 +121,10 @@ EventCard.propTypes = {
   volunteer: PropTypes.shape({
     _id: PropTypes.string,
   }),
-  skill: PropTypes.shape({
-    _id: PropTypes.array,
-  }),
-  interest: PropTypes.shape({
-    _id: PropTypes.array,
-  }),
-  environment: PropTypes.shape({
-    _id: PropTypes.array,
-  }),
 };
 
 const EventCardCon = withTracker((eventID) => {
-  console.log(eventID);
+  // console.log('Eventcard', eventID);
   const subscription = Events.subscribe();
   const subscription2 = EventInterest.subscribe();
   const subscription3 = EventSkill.subscribe();
@@ -122,17 +135,8 @@ const EventCardCon = withTracker((eventID) => {
   const ready = subscription.ready() && subscription2.ready() && subscription3.ready() && subscription4.ready() &&
     subscription5.ready() && subscription6.ready() && subscription7.ready();
   const event = eventID.event;
-  const skillPairs = EventSkill.find({ eventID: event._id }, {}).fetch();
-  const skills = skillPairs.map((pair) => SpecialSkills.findOne({ _id: pair.skillID }, {}));
-  const interestPairs = EventInterest.find({ eventID: event._id }, {}).fetch();
-  const interests = interestPairs.map((pair) => Interests.findOne({ _id: pair.interestID }, {}));
-  const environmentPairs = EventEnvironmental.find({ eventID: event._id }, {}).fetch();
-  const environments = environmentPairs.map((pair) => Environmental.findOne({ _id: pair.environmentalID }, {}));
   return {
     event,
-    skills,
-    interests,
-    environments,
     ready,
   };
 })(EventCard);

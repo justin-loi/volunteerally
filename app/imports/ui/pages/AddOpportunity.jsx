@@ -45,6 +45,7 @@ const AddEvent = ({ location, ready, interestsArray, skillsArray, environmentalA
   const [specialSkills, setSpecialSkills] = useState([]);
   const [environmentalPreference, setEnvironmentalPreference] = useState('');
   const [eventProfileImage, setImage] = useState('');
+  const [createdEventID, setCreatedEventID] = useState('');
 
   const uploadImg = (files) => {
     // eslint-disable-next-line no-undef
@@ -92,7 +93,7 @@ const AddEvent = ({ location, ready, interestsArray, skillsArray, environmentalA
       .catch(error => {
         swal('Error', error.message, 'error');
       })
-      .then(() => {
+      .then((result) => {
         formRef.reset();
         setInterests([]);
         setSpecialSkills([]);
@@ -104,12 +105,14 @@ const AddEvent = ({ location, ready, interestsArray, skillsArray, environmentalA
           icon: 'success',
           timer: 1500,
         });
+        // console.log(result);
+        setCreatedEventID(result);
         setRedirectToReferer(true);
       });
   };
 
   /* Display the event creation form. Redirect to the event profile page after successful registration and login. */
-  const { from } = location.state || { from: { pathname: '/event-profile' } };
+  const { from } = location.state || { from: { pathname: `/details/${createdEventID}` } };
   // if correct authentication, redirect to from: page instead of signup screen
 
   if (redirectToReferer) {
