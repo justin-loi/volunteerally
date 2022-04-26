@@ -8,15 +8,16 @@ import { Roles } from 'meteor/alanning:roles';
 import { ROLE } from '../../api/role/Role';
 
 /** The Footer appears at the bottom of every page. Rendered by the App Layout component. */
-const Footer = ({ currentUser, colorUsage }) => {
-  const divStyle = { marginTop: '20px', paddingTop: '20px', paddingBottom: '20px', backgroundColor: colorUsage, flexShrink: 0 };
+const Footer = ({ currentUser }) => {
+  const divStyle = { marginTop: '20px', paddingTop: '20px', paddingBottom: '20px', flexShrink: 0 };
   return (
     <footer style={divStyle}>
+      <div className="ui divider"> </div>
       <Grid columns={3} relaxed container style={{ marginTop: 0, marginBottom: 0 }}>
         <Grid.Column width={5}>
-          <Header as={'h3'} inverted>INFORMATION</Header>
+          <Header as={'h3'} >INFORMATION</Header>
           <hr/>
-          <List size={'large'} inverted>
+          <List size={'large'} >
             <List.Item><a href={'/#/about_us'}><Icon name={'users'}/> About Us
             </a></List.Item>
             <List.Item><a href={'/#/terms'}><Icon name={'file'}/> Terms & Conditions</a></List.Item>
@@ -27,19 +28,19 @@ const Footer = ({ currentUser, colorUsage }) => {
         </Grid.Column>
         <Grid.Column width={1}/>
         <Grid.Column width={5}>
-          <Header as={'h3'} inverted>SUPPORT</Header>
+          <Header as={'h3'} >SUPPORT</Header>
           <hr/>
-          <List size={'large'} inverted>
+          <List size={'large'} >
             <List.Item><a href={'/#/contact'}><Icon name={'mail'}/> Contact Us</a></List.Item>
           </List>
         </Grid.Column>
         <Grid.Column width={1}/>
         <Grid.Column width={4} textAlign={'left'}>
           {currentUser ? (
-            <Header as={'h3'} inverted>Welcome {currentUser}!</Header>
+            <Header as={'h3'} >Welcome {currentUser}!</Header>
           ) : (
             <Container>
-              <Header as={'h3'} inverted>NOT A MEMBER?</Header>
+              <Header as={'h3'} >NOT A MEMBER?</Header>
               <Button
                 content={'REGISTER'}
                 size={'small'}
@@ -62,20 +63,8 @@ Footer.propTypes = {
 
 const FooterContainer = withTracker(() => {
   const currentUser = Meteor.user() ? Meteor.user().username : '';
-  const colors = ['#FF0000', '#024731', '#0000FF', '#FFFF00'];
-  let colorUsage;
-  if (Roles.userIsInRole(Meteor.userId(), [ROLE.VOLUNTEER])) {
-    colorUsage = colors[0];
-  } else if (Roles.userIsInRole(Meteor.userId(), [ROLE.ORGANIZATION])) {
-    colorUsage = colors[1];
-  } else if (Roles.userIsInRole(Meteor.userId(), [ROLE.ADMIN])) {
-    colorUsage = colors[2];
-  } else {
-    colorUsage = colors[3];
-  }
   return {
     currentUser,
-    colorUsage,
   };
 })(Footer);
 
