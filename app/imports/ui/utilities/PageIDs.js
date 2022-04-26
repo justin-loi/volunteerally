@@ -22,4 +22,5 @@ export const PAGE_IDS = {
   ORGANIZATION_PROFILE: 'organization-profile',
   SEND_EMAIL_TO_ORG: 'send-email-to-org',
   LIST_VOLUNTEER_AT_EVENT: 'list-volunteer-at-event',
+  TERMS_AND_CONDITIONS: 'terms-and-conditions',
 };
