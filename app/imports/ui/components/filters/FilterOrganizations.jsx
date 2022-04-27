@@ -23,7 +23,7 @@ const FilterOrganizations = ({ ready }) => {
   const allOrganizations = _.pluck(OrganizationProfiles.find({}, {}).fetch(), 'organizationName');
   const organizationFormSchema = makeOrganizationSchema(allOrganizations);
   const organizationBridge = new SimpleSchema2Bridge(organizationFormSchema);
-  const organizationIDs = organizations.map(name => OrganizationProfiles.getID(name));
+  const organizationIDs = organizations.map(name => OrganizationProfiles.getIDVerTwo(name));
   console.log(organizationIDs);
   const eventOrganizations = OrganizationEvent.find({ organizationID: { $in: organizationIDs } }, {}).fetch();
   const eventIDList = _.uniq(eventOrganizations.map(eventOrganization => eventOrganization.eventID));
