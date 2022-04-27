@@ -220,7 +220,7 @@
     },
     { "eventName": "Dr. Moore Buy's Pizza", "eventStartTime": "7:45", "eventEndTime": "11:30", "eventDate": "April 20th, 2022", "orgName": "Helping Hands", "eventDescription": "New Little Caesers on King St., time for some Krazy Bread!", "owner": "nah@foo.com", "eventAddress": "222 Banana Rd.", "eventCity": "Honolulu", "eventZip": "96815", "eventState": "HI", "eventProfileImage": "images/event_card_default_image.png"
     },
-    { "eventName": "Red Cross Blood Driver", "eventStartTime": "12:30", "eventEndTime": "18:30", "eventDate": "May 7th, 2022", "orgName": "The Red Cross", "eventDescription": "", "owner": "nah@foo.com", "eventAddress": "222 Banana Rd.", "eventCity": "Honolulu", "eventZip": "96815", "eventState": "HI", "eventProfileImage": "images/event_card_default_image.png"
+    { "eventName": "Red Cross Blood Driver", "eventStartTime": "12:30", "eventEndTime": "18:30", "eventDate": "May 7th, 2022", "orgName": "The Red Cross", "eventDescription": "Yumm", "owner": "nah@foo.com", "eventAddress": "222 Banana Rd.", "eventCity": "Honolulu", "eventZip": "96815", "eventState": "HI", "eventProfileImage": "images/event_card_default_image.png"
     },
     { "eventName": "Emergency Preparedness Course", "eventStartTime": "12:30", "eventEndTime": "16:30", "eventDate": "June 4th, 2022", "orgName": "The Red Cross", "eventDescription": "New Little Caesers on King St., time for some Krazy Bread!", "owner": "nah@foo.com", "eventAddress": "222 Banana Rd.", "eventCity": "Honolulu", "eventZip": "96815", "eventState": "HI", "eventProfileImage": "images/event_card_default_image.png"
     },
