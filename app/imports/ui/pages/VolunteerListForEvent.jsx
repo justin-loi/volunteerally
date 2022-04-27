@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from 'react';
-import { Container, Table, Header, Loader, Form } from 'semantic-ui-react';
+import { Container, Table, Header, Loader, Form, Label } from 'semantic-ui-react';
 import { withTracker } from 'meteor/react-meteor-data';
 import PropTypes from 'prop-types';
 import swal from 'sweetalert';
+import { CSVLink } from 'react-csv';
 import { VolunteerEvent } from '../../api/event/VolunteerEventCollection';
 import { PAGE_IDS } from '../utilities/PageIDs';
 import { VolunteerProfiles } from '../../api/volunteer/VolunteerProfileCollection';
@@ -39,13 +40,30 @@ const VolunteerListForEvent = ({ ready, event, volunteers, filledIn, endHourVolL
     setVolunteerHourArray(volunteers.map((volunteer) => ({ volunteerID: volunteer.userID, participateHours: timeDiff, attended: false })));
   }, [volunteers, event]);
 
+  const headers = [
+    { label: 'First Name', key: 'firstName' },
+    { label: 'Last Name', key: 'lastName' },
+    { label: 'Email', key: 'email' },
+    { label: 'Hours Volunteered', key: 'hours' },
+  ];
+  const findVolunteer = (element) => (volunteers.find(volunteer => volunteer.userID === element.volunteerID));
+
+  const dataCsv =
+    endHourVolList.map((data) => (
+      { firstName: findVolunteer(data).firstName, lastName: findVolunteer(data).lastName, email: findVolunteer(data).email, hours: data.participateHours }
+    ));
+
+  const csvReport = {
+    data: dataCsv,
+    headers: headers,
+    filename: `${event.eventName}_Volunteer_Hours_List.csv`,
+  };
+
   const [temp, setTemp] = useState(1);
   const [checkAll, setCheckAll] = useState(false);
   const [hoursOverLimit, setHourOverLimit] = useState(false);
 
   const isChecked = (index) => ((typeof volunteerHourArray[index] === 'undefined') ? false : volunteerHourArray[index].attended);
-
-  const findVolunteer = (element) => (volunteers.find(volunteer => volunteer.userID === element.volunteerID));
 
   const notOverLimited = (num, min, max) => {
     if (num > max) {
@@ -211,6 +229,11 @@ const VolunteerListForEvent = ({ ready, event, volunteers, filledIn, endHourVolL
         </Table>
         <div style={{ paddingBottom: '30px' }} >
           <Form.Button floated='right' type='submit' >Confirm</Form.Button>
+        </div>
+        <div style={{ paddingBottom: '30px', paddingTop: '10px' }}>
+          <Form.Button floated='right'>
+            <CSVLink style={{ color: 'rgba(0, 0, 0, 0.6)' }}{...csvReport}>Export to CSV</CSVLink>
+          </Form.Button>
         </div>
       </Form>
     </Container>

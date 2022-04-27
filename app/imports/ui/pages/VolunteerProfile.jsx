@@ -45,7 +45,7 @@ const VolunteerProfile = ({ volunteer, signedUpEvents, interests, skills, envPre
     </Grid.Row>
     <Grid.Row columns={2}>
       <Grid.Column>
-        <Label color='teal' size='massive' ribbon>
+        <Label size='massive' ribbon>
           {`${(capitalizeFirstLetter(volunteer.firstName))} ${(capitalizeFirstLetter(volunteer.lastName))}`}
         </Label>
         <Image src={volunteer.image} size='medium' circular centered />
