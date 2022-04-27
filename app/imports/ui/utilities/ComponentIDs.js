@@ -93,4 +93,7 @@ export const COMPONENT_IDS = {
   ADD_EVENT_CITY: 'add-event-city',
   ADD_EVENT_STATE: 'add-event-state',
   ADD_EVENT_ZIPCODE: 'add-event-zipcode',
+  NAVBAR_BROWSE_OPPORTUNITIES: 'browse-opportunities',
+  NAVBAR_FILTER_OPPORTUNITIES: 'filter-opportunities',
+  NAVBAR_BROWSE_DROPDOWN: 'browse-dropdown',
 };
