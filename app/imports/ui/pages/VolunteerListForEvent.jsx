@@ -52,8 +52,6 @@ const VolunteerListForEvent = ({ ready, event, volunteers, filledIn, endHourVolL
     endHourVolList.map((data) => (
       { firstName: findVolunteer(data).firstName, lastName: findVolunteer(data).lastName, email: findVolunteer(data).email, hours: data.participateHours }
     ));
-  console.log(endHourVolList.participateHours);
-  console.log(dataCsv);
 
   const csvReport = {
     data: dataCsv,
