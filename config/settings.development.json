@@ -5,25 +5,145 @@
   ],
 
   "defaultVolunteers": [
-    { "email": "tom@foo.com", "password": "changeme", "role": "VOLUNTEER", "firstName": "tom", "lastName": "tom",
-      "username": "tom", "gender": "Male", "dob": "12/31/2000",
-      "address": "2500 Campus Rd", "city": "Honolulu", "state": "Hawaii", "code": "96822", "phoneNumber": "808-123-1234",
+    { "email": "tom@foo.com", "password": "changeme", "role": "VOLUNTEER", "firstName": "Tom", "lastName": "Green",
+      "username": "tom", "gender": "Male", "dob": "01/31/1969",
+      "address": "832 Kamaka Lane", "city": "Honolulu", "state": "Hawaii", "code": "96817", "phoneNumber": "808-523-9421",
       "image": "images/profile.png"
     },
-    { "email": "jerry@foo.com", "password": "changeme", "role": "VOLUNTEER" , "firstName": "jerry", "lastName": "jerry",
+    { "email": "jerry@foo.com", "password": "changeme", "role": "VOLUNTEER" , "firstName": "Jerry", "lastName": "Roman",
       "username": "jerry", "gender": "Male", "dob": "12/31/2000",
-      "address": "2500 Campus Rd", "city": "Honolulu", "state": "Hawaii", "code": "96822", "phoneNumber": "808-123-1234",
-      "image": "images/profile.png"
+      "address": "2500 Campus Rd", "city": "Honolulu", "state": "Hawaii", "code": "96822", "phoneNumber": "808-974-1234",
+      "image": "images/jerry_image.jpg"
+    },
+    { "email": "billy@foo.com", "password": "changeme", "role": "VOLUNTEER" , "firstName": "Billy", "lastName": "Jones",
+      "username": "billy", "gender": "Male", "dob": "02/12/1991",
+      "address": "1089 Ala Moana Blvd", "city": "Honolulu", "state": "Hawaii", "code": "96814", "phoneNumber": "808-391-2848",
+      "image": "images/billy_image.jpg"
+      },
+    { "email": "marnie@foo.com", "password": "changeme", "role": "VOLUNTEER" , "firstName": "Marnie", "lastName": "Thompson",
+      "username": "marnie", "gender": "Female", "dob": "04/02/1919",
+      "address": "981 Piikoi St", "city": "Honolulu", "state": "Hawaii", "code": "96822", "phoneNumber": "808-841-1093",
+      "image": "images/marnie_image.jpg"
+    },
+    { "email": "kai@foo.com", "password": "changeme", "role": "VOLUNTEER" , "firstName": "Kai", "lastName": "Jeong",
+      "username": "kai", "gender": "Male", "dob": "12/12/2001",
+      "address": "1092 Maunakea St", "city": "Honolulu", "state": "Hawaii", "code": "96817", "phoneNumber": "312-931-9938",
+      "image": "images/kai_image.jpg"
+    },
+    { "email": "robin@foo.com", "password": "changeme", "role": "VOLUNTEER" , "firstName": "Robin", "lastName": "Kim",
+      "username": "robin", "gender": "Female", "dob": "10/09/1972",
+      "address": "398 Green St", "city": "Honolulu", "state": "Hawaii", "code": "96822", "phoneNumber": "731-288-4892",
+      "image": "images/robin_image.jpg"
+    },
+    { "email": "yuki@foo.com", "password": "changeme", "role": "VOLUNTEER" , "firstName": "Yuki", "lastName": "Norman",
+      "username": "yuki", "gender": "Female", "dob": "08/19/1999",
+      "address": "932 Date St", "city": "Honolulu", "state": "Hawaii", "code": "96826", "phoneNumber": "808-392-4892",
+      "image": "images/yuki_image.jpg"
+    },
+    { "email": "gary@foo.com", "password": "changeme", "role": "VOLUNTEER" , "firstName": "Gary", "lastName": "Lin",
+      "username": "gary", "gender": "Male", "dob": "02/13/1988",
+      "address": "291 Metcalf St", "city": "Honolulu", "state": "Hawaii", "code": "96844", "phoneNumber": "808-458-1786",
+      "image": "images/gary_image.jpg"
+    },
+    { "email": "liam@foo.com", "password": "changeme", "role": "VOLUNTEER" , "firstName": "Liam", "lastName": "Chang",
+      "username": "liam", "gender": "Male", "dob": "07/14/2002",
+      "address": "243 Liliha St", "city": "Honolulu", "state": "Hawaii", "code": "96817", "phoneNumber": "943-549-8934",
+      "image": "images/liam_image.jpg"
+    },
+    { "email": "jeff@foo.com", "password": "changeme", "role": "VOLUNTEER" , "firstName": "Jeff", "lastName": "Yamashiro",
+      "username": "jeff", "gender": "Male", "dob": "10/29/1989",
+      "address": "1211 Kuhio Ave", "city": "Honolulu", "state": "Hawaii", "code": "96830", "phoneNumber": "808-890-3471",
+      "image": "images/jeff_image.jpg"
+    },
+    { "email": "van@foo.com", "password": "changeme", "role": "VOLUNTEER" , "firstName": "Van", "lastName": "Rosa",
+      "username": "van", "gender": "Male", "dob": "01/01/1958",
+      "address": "3081 Austin Road", "city": "Honolulu", "state": "Hawaii", "code": "96819", "phoneNumber": "808-901-8384",
+      "image": "images/van.jpg"
+    },
+    { "email": "jackson@foo.com", "password": "changeme", "role": "VOLUNTEER" , "firstName": "Jackson", "lastName": "Wong",
+      "username": "jackson", "gender": "Male", "dob": "04/13/1990",
+      "address": "9349 Apollo Ave", "city": "Honolulu", "state": "Hawaii", "code": "96853", "phoneNumber": "808-938-8012",
+      "image": "images/jackson_image.jpg"
+    },
+    { "email": "julia@foo.com", "password": "changeme", "role": "VOLUNTEER" , "firstName": "Julia", "lastName": "Kim",
+      "username": "julia", "gender": "Female", "dob": "09/12/1969",
+      "address": "893 Skyview Loop", "city": "Honolulu", "state": "Hawaii", "code": "96818", "phoneNumber": "808-674-8381",
+      "image": "images/julia_image.jpg"
+    },
+    { "email": "penny@foo.com", "password": "changeme", "role": "VOLUNTEER" , "firstName": "Penny", "lastName": "Labert",
+      "username": "penny", "gender": "Female", "dob": "01/09/1991",
+      "address": "3241 Calamondin Way", "city": "Honolulu", "state": "Hawaii", "code": "96818", "phoneNumber": "203-383-2922",
+      "image": "images/penny_image.jpg"
+    },
+    { "email": "camilia@foo.com", "password": "changeme", "role": "VOLUNTEER" , "firstName": "Camilia", "lastName": "Binstid",
+      "username": "camilia", "gender": "Female", "dob": "05/14/1929",
+      "address": "564 Vought Ave", "city": "Honolulu", "state": "Hawaii", "code": "96786", "phoneNumber": "129-844-9291",
+      "image": "images/camilia_image.jpg"
+    },
+    { "email": "matthew@foo.com", "password": "changeme", "role": "VOLUNTEER" , "firstName": "Matthew", "lastName": "Quad",
+      "username": "matthew", "gender": "Male", "dob": "11/23/1948",
+      "address": "4566 Aleshire Ave", "city": "Honolulu", "state": "Hawaii", "code": "96757", "phoneNumber": "808-342-8938",
+      "image": "images/matthew_image.jpg"
+    },
+    { "email": "leila@foo.com", "password": "changeme", "role": "VOLUNTEER" , "firstName": "Leila", "lastName": "Pans",
+      "username": "leila", "gender": "Female", "dob": "08/04/1973",
+      "address": "2094 Cane Haul Road", "city": "Honolulu", "state": "Hawaii", "code": "96712", "phoneNumber": "808-213-2923",
+      "image": "images/leila_image.jpg"
+    },
+    { "email":"athelstan@foo.com", "password": "changeme", "role": "VOLUNTEER" , "firstName": "Athelstan", "lastName": "Abhilasha",
+      "username": "athelstan", "gender": "Male", "dob": "01/03/1953",
+      "address": "939 Ashley Road", "city": "Honolulu", "state": "Hawaii", "code": "96712", "phoneNumber": "349-389-2294",
+      "image": "images/athelstan_image.jpg"
+    },
+    { "email": "hadia@foo.com", "password": "changeme", "role": "VOLUNTEER" , "firstName": "Hadia", "lastName": "Kynthia",
+      "username": "hadia", "gender": "Female", "dob": "04/15/1983",
+      "address": "742 Charlie Road", "city": "Honolulu", "state": "Hawaii", "code": "96731", "phoneNumber": "934-292-0923",
+      "image": "images/hadia_image.jpg"
+    },
+    { "email": "nalini@foo.com", "password": "changeme", "role": "VOLUNTEER" , "firstName": "Nalini", "lastName": "Swathi",
+      "username": "nalini", "gender": "Female", "dob": "07/18/1964",
+      "address": "865 Adams Road", "city": "Honolulu", "state": "Hawaii", "code": "96731", "phoneNumber": "808-223-3912",
+      "image": "images/nalini.jpg"
+    },
+    { "email": "aigneis@foo.com", "password": "changeme", "role": "VOLUNTEER" , "firstName": "Aigneis", "lastName": "Claudia",
+      "username": "aigneis", "gender": "Male", "dob": "01/18/1978",
+      "address": "109 Napela Drive", "city": "Honolulu", "state": "Hawaii", "code": "96762", "phoneNumber": "808-383-2994",
+      "image": "images/aigneis_image.jpg"
+    },
+    { "email": "kjeld@foo.com", "password": "changeme", "role": "VOLUNTEER" , "firstName": "Kjeld", "lastName": "Marisa",
+      "username": "kjeld", "gender": "Male", "dob": "04/11/1987",
+      "address": "2192 Kawaipuna St", "city": "Honolulu", "state": "Hawaii", "code": "96717", "phoneNumber": "808-939-8457",
+      "image": "images/kjeld_image.jpg"
+    },
+    { "email": "annika@foo.com", "password": "changeme", "role": "VOLUNTEER" , "firstName": "Annika", "lastName": "Gunay",
+      "username": "annika", "gender": "Female", "dob": "10/09/1963",
+      "address": "256 Mapele Road", "city": "Honolulu", "state": "Hawaii", "code": "96744", "phoneNumber": "808-483-1654",
+      "image": "images/annika_image.jpg"
+    },
+    { "email": "vitya@foo.com", "password": "changeme", "role": "VOLUNTEER" , "firstName": "Vitya", "lastName": "Dewey",
+      "username": "vitya", "gender": "Female", "dob": "11/16/1994",
+      "address": "111 Luluku Road", "city": "Honolulu", "state": "Hawaii", "code": "96744", "phoneNumber": "808-421-3930",
+      "image": "images/vitya_image.jpg"
+    },
+    { "email": "frea@foo.com", "password": "changeme", "role": "VOLUNTEER" , "firstName": "Frea", "lastName": "Stefana",
+      "username": "frea", "gender": "Female", "dob": "09/30/1942",
+      "address": "9523 Puha St", "city": "Honolulu", "state": "Hawaii", "code": "96765", "phoneNumber": "348-852-8943",
+      "image": "images/frea_image.jpg"
+    },
+    { "email": "oscar@foo.com", "password": "changeme", "role": "VOLUNTEER" , "firstName": "Oscar", "lastName": "Damir",
+      "username": "oscar", "gender": "Male", "dob": "08/31/1988",
+      "address": "4342 Opaekaa St", "city": "Honolulu", "state": "Hawaii", "code": "96825", "phoneNumber": "808-343-9583",
+      "image": "images/oscar_image.jpg"
     }
   ],
 
   "defaultOrganizations": [
-    { "email": "sup@foo.com", "password": "changeme", "role": "ORGANIZATION",
-      "firstName": "Sup", "lastName": "Foo", "eventBackgroundImage": "images/red-cross-map.jpeg",
+    { "email": "redcross@foo.com", "password": "changeme", "role": "ORGANIZATION",
+      "firstName": "Robert", "lastName": "Fong", "eventBackgroundImage": "images/red-cross-map.jpeg",
       "logoImage": "images/red-cross-logo.png", "organizationName": "The Red Cross", "missionStatement": "To help everyone and cure everything!", "phoneNumber": "808-123-0420",
       "ein": "123456789", "primaryAddress": "1111 Example Address", "city": "Honolulu", "state": "Hawaii", "zipcode": "96822",
-      "primaryContactFirstName": "Sup", "primaryContactLastName": "Foo", "primaryContactEmail": "sup@foo.com", "primaryContactPhone": "808-123-0420",
-      "secondContactFirstName": "Sup", "secondContactLastName": "Foo", "secondContactEmail": "sup@foo.com", "secondContactPhone": "808-123-0420"
+      "primaryContactFirstName": "Robert", "primaryContactLastName": "Fong", "primaryContactEmail": "robert@foo.com", "primaryContactPhone": "808-123-0420",
+      "secondContactFirstName": "Jamie", "secondContactLastName": "Yang", "secondContactEmail": "jamie@foo.com", "secondContactPhone": "808-931-3804"
     },
     {
       "email": "nah@foo.com", "password": "changeme", "role": "ORGANIZATION",
@@ -99,6 +219,66 @@
     { "eventName": "Back 2 School", "eventStartTime": "10:00", "eventEndTime": "14:00", "eventDate": "April 20th, 2023", "orgName": "Helping Hands", "eventDescription": "Time to come back to school!!", "owner": "nah@foo.com", "eventAddress": "222 Banana Rd.", "eventCardImage": "event_card_default_image.png", "eventCity": "Honolulu", "eventZip": "96815", "eventState": "HI", "eventProfileImage": "images/event_card_default_image.png"
     },
     { "eventName": "Dr. Moore Buy's Pizza", "eventStartTime": "7:45", "eventEndTime": "11:30", "eventDate": "April 20th, 2022", "orgName": "Helping Hands", "eventDescription": "New Little Caesers on King St., time for some Krazy Bread!", "owner": "nah@foo.com", "eventAddress": "222 Banana Rd.", "eventCity": "Honolulu", "eventZip": "96815", "eventState": "HI", "eventProfileImage": "images/event_card_default_image.png"
+    },
+    { "eventName": "Red Cross Blood Driver", "eventStartTime": "12:30", "eventEndTime": "18:30", "eventDate": "May 7th, 2022", "orgName": "The Red Cross", "eventDescription": "", "owner": "nah@foo.com", "eventAddress": "222 Banana Rd.", "eventCity": "Honolulu", "eventZip": "96815", "eventState": "HI", "eventProfileImage": "images/event_card_default_image.png"
+    },
+    { "eventName": "Emergency Preparedness Course", "eventStartTime": "12:30", "eventEndTime": "16:30", "eventDate": "June 4th, 2022", "orgName": "The Red Cross", "eventDescription": "New Little Caesers on King St., time for some Krazy Bread!", "owner": "nah@foo.com", "eventAddress": "222 Banana Rd.", "eventCity": "Honolulu", "eventZip": "96815", "eventState": "HI", "eventProfileImage": "images/event_card_default_image.png"
+    },
+    { "eventName": "Red Cross Blood Drive", "eventStartTime": "10:30", "eventEndTime": "16:30", "eventDate": "July 2nd, 2022", "orgName": "The Red Cross", "eventDescription": "New Little Caesers on King St., time for some Krazy Bread!", "owner": "nah@foo.com", "eventAddress": "222 Banana Rd.", "eventCity": "Honolulu", "eventZip": "96815", "eventState": "HI", "eventProfileImage": "images/event_card_default_image.png"
+    },
+    { "eventName": "UH Manoa Food Distribution", "eventStartTime": "8:30", "eventEndTime": "20:30", "eventDate": "May 18th, 2022", "orgName": "Food Bank", "eventDescription": "New Little Caesers on King St., time for some Krazy Bread!", "owner": "nah@foo.com", "eventAddress": "222 Banana Rd.", "eventCity": "Honolulu", "eventZip": "96815", "eventState": "HI", "eventProfileImage": "images/event_card_default_image.png"
+    },
+    { "eventName": "Canned Food Donation", "eventStartTime": "8:45", "eventEndTime": "12:30", "eventDate": "June 10th, 2022", "orgName": "Food Bank", "eventDescription": "New Little Caesers on King St., time for some Krazy Bread!", "owner": "nah@foo.com", "eventAddress": "222 Banana Rd.", "eventCity": "Honolulu", "eventZip": "96815", "eventState": "HI", "eventProfileImage": "images/event_card_default_image.png"
+    },
+    { "eventName": "Food Bank's Culinary Class", "eventStartTime": "13:00", "eventEndTime": "17:30", "eventDate": "July 20th, 2022", "orgName": "Food Bank", "eventDescription": "New Little Caesers on King St., time for some Krazy Bread!", "owner": "nah@foo.com", "eventAddress": "222 Banana Rd.", "eventCity": "Honolulu", "eventZip": "96815", "eventState": "HI", "eventProfileImage": "images/event_card_default_image.png"
+    },
+    { "eventName": "Repair: Houses Affected by the Storm", "eventStartTime": "8:45", "eventEndTime": "20:30", "eventDate": "May 21st, 2022", "orgName": "Habitat For Humanity", "eventDescription": "New Little Caesers on King St., time for some Krazy Bread!", "owner": "nah@foo.com", "eventAddress": "222 Banana Rd.", "eventCity": "Honolulu", "eventZip": "96815", "eventState": "HI", "eventProfileImage": "images/event_card_default_image.png"
+    },
+    { "eventName": "Dr. Moore Buy's Pizza", "eventStartTime": "8:45", "eventEndTime": "12:30", "eventDate": "May 20th, 2022", "orgName": "Habitat For Humanity", "eventDescription": "New Little Caesers on King St., time for some Krazy Bread!", "owner": "nah@foo.com", "eventAddress": "222 Banana Rd.", "eventCity": "Honolulu", "eventZip": "96815", "eventState": "HI", "eventProfileImage": "images/event_card_default_image.png"
+    },
+    { "eventName": "Dr. Moore Buy's Pizza", "eventStartTime": "8:45", "eventEndTime": "12:30", "eventDate": "May 20th, 2022", "orgName": "Habitat For Humanity", "eventDescription": "New Little Caesers on King St., time for some Krazy Bread!", "owner": "nah@foo.com", "eventAddress": "222 Banana Rd.", "eventCity": "Honolulu", "eventZip": "96815", "eventState": "HI", "eventProfileImage": "images/event_card_default_image.png"
+    },
+    { "eventName": "Pet Play Date", "eventStartTime": "10:30", "eventEndTime": "13:30", "eventDate": "May 20th, 2022", "orgName": "Humane Society", "eventDescription": "New Little Caesers on King St., time for some Krazy Bread!", "owner": "nah@foo.com", "eventAddress": "222 Banana Rd.", "eventCity": "Honolulu", "eventZip": "96815", "eventState": "HI", "eventProfileImage": "images/event_card_default_image.png"
+    },
+    { "eventName": "Volunteer for Pet care", "eventStartTime": "", "eventEndTime": "", "eventDate": "", "orgName": "Humane Society", "eventDescription": "New Little Caesers on King St., time for some Krazy Bread!", "owner": "nah@foo.com", "eventAddress": "222 Banana Rd.", "eventCity": "Honolulu", "eventZip": "96815", "eventState": "HI", "eventProfileImage": "images/event_card_default_image.png"
+    },
+    { "eventName": "Pet Play Date", "eventStartTime": "10:30", "eventEndTime": "13:30", "eventDate": "June 20th, 2022", "orgName": "Humane Society", "eventDescription": "New Little Caesers on King St., time for some Krazy Bread!", "owner": "nah@foo.com", "eventAddress": "222 Banana Rd.", "eventCity": "Honolulu", "eventZip": "96815", "eventState": "HI", "eventProfileImage": "images/event_card_default_image.png"
+    },
+    { "eventName": "Dr. Moore Buy's Pizza", "eventStartTime": "8:45", "eventEndTime": "12:30", "eventDate": "May 20th, 2022", "orgName": "Malama Maunalua", "eventDescription": "New Little Caesers on King St., time for some Krazy Bread!", "owner": "nah@foo.com", "eventAddress": "222 Banana Rd.", "eventCity": "Honolulu", "eventZip": "96815", "eventState": "HI", "eventProfileImage": "images/event_card_default_image.png"
+    },
+    { "eventName": "Dr. Moore Buy's Pizza", "eventStartTime": "8:45", "eventEndTime": "12:30", "eventDate": "May 20th, 2022", "orgName": "Malama Maunalua", "eventDescription": "New Little Caesers on King St., time for some Krazy Bread!", "owner": "nah@foo.com", "eventAddress": "222 Banana Rd.", "eventCity": "Honolulu", "eventZip": "96815", "eventState": "HI", "eventProfileImage": "images/event_card_default_image.png"
+    },
+    { "eventName": "Dr. Moore Buy's Pizza", "eventStartTime": "8:45", "eventEndTime": "12:30", "eventDate": "May 20th, 2022", "orgName": "Malama Maunalua", "eventDescription": "New Little Caesers on King St., time for some Krazy Bread!", "owner": "nah@foo.com", "eventAddress": "222 Banana Rd.", "eventCity": "Honolulu", "eventZip": "96815", "eventState": "HI", "eventProfileImage": "images/event_card_default_image.png"
+    },
+    { "eventName": "Dr. Moore Buy's Pizza", "eventStartTime": "8:45", "eventEndTime": "12:30", "eventDate": "May 20th, 2022", "orgName": "Maunalua Fishpond", "eventDescription": "New Little Caesers on King St., time for some Krazy Bread!", "owner": "nah@foo.com", "eventAddress": "222 Banana Rd.", "eventCity": "Honolulu", "eventZip": "96815", "eventState": "HI", "eventProfileImage": "images/event_card_default_image.png"
+    },
+    { "eventName": "Dr. Moore Buy's Pizza", "eventStartTime": "8:45", "eventEndTime": "12:30", "eventDate": "May 20th, 2022", "orgName": "Maunalua Fishpond", "eventDescription": "New Little Caesers on King St., time for some Krazy Bread!", "owner": "nah@foo.com", "eventAddress": "222 Banana Rd.", "eventCity": "Honolulu", "eventZip": "96815", "eventState": "HI", "eventProfileImage": "images/event_card_default_image.png"
+    },
+    { "eventName": "Dr. Moore Buy's Pizza", "eventStartTime": "8:45", "eventEndTime": "12:30", "eventDate": "May 20th, 2022", "orgName": "Maunalua Fishpond", "eventDescription": "New Little Caesers on King St., time for some Krazy Bread!", "owner": "nah@foo.com", "eventAddress": "222 Banana Rd.", "eventCity": "Honolulu", "eventZip": "96815", "eventState": "HI", "eventProfileImage": "images/event_card_default_image.png"
+    },
+    { "eventName": "Dr. Moore Buy's Pizza", "eventStartTime": "8:45", "eventEndTime": "12:30", "eventDate": "May 20th, 2022", "orgName": "Meals on Wheels", "eventDescription": "New Little Caesers on King St., time for some Krazy Bread!", "owner": "nah@foo.com", "eventAddress": "222 Banana Rd.", "eventCity": "Honolulu", "eventZip": "96815", "eventState": "HI", "eventProfileImage": "images/event_card_default_image.png"
+    },
+    { "eventName": "Dr. Moore Buy's Pizza", "eventStartTime": "8:45", "eventEndTime": "12:30", "eventDate": "May 20th, 2022", "orgName": "Meals on Wheels", "eventDescription": "New Little Caesers on King St., time for some Krazy Bread!", "owner": "nah@foo.com", "eventAddress": "222 Banana Rd.", "eventCity": "Honolulu", "eventZip": "96815", "eventState": "HI", "eventProfileImage": "images/event_card_default_image.png"
+    },
+    { "eventName": "Dr. Moore Buy's Pizza", "eventStartTime": "8:45", "eventEndTime": "12:30", "eventDate": "May 20th, 2022", "orgName": "Meals on Wheels", "eventDescription": "New Little Caesers on King St., time for some Krazy Bread!", "owner": "nah@foo.com", "eventAddress": "222 Banana Rd.", "eventCity": "Honolulu", "eventZip": "96815", "eventState": "HI", "eventProfileImage": "images/event_card_default_image.png"
+    },
+    { "eventName": "Dr. Moore Buy's Pizza", "eventStartTime": "8:45", "eventEndTime": "12:30", "eventDate": "May 20th, 2022", "orgName": "Aloha Sanctuary", "eventDescription": "New Little Caesers on King St., time for some Krazy Bread!", "owner": "nah@foo.com", "eventAddress": "222 Banana Rd.", "eventCity": "Honolulu", "eventZip": "96815", "eventState": "HI", "eventProfileImage": "images/event_card_default_image.png"
+    },
+    { "eventName": "Dr. Moore Buy's Pizza", "eventStartTime": "8:45", "eventEndTime": "12:30", "eventDate": "May 20th, 2022", "orgName": "Aloha Sanctuary", "eventDescription": "New Little Caesers on King St., time for some Krazy Bread!", "owner": "nah@foo.com", "eventAddress": "222 Banana Rd.", "eventCity": "Honolulu", "eventZip": "96815", "eventState": "HI", "eventProfileImage": "images/event_card_default_image.png"
+    },
+    { "eventName": "Dr. Moore Buy's Pizza", "eventStartTime": "8:45", "eventEndTime": "12:30", "eventDate": "May 20th, 2022", "orgName": "Aloha Sanctuary", "eventDescription": "New Little Caesers on King St., time for some Krazy Bread!", "owner": "nah@foo.com", "eventAddress": "222 Banana Rd.", "eventCity": "Honolulu", "eventZip": "96815", "eventState": "HI", "eventProfileImage": "images/event_card_default_image.png"
+    },
+    { "eventName": "Dr. Moore Buy's Pizza", "eventStartTime": "8:45", "eventEndTime": "12:30", "eventDate": "May 20th, 2022", "orgName": "Big Brother, Big Sister", "eventDescription": "New Little Caesers on King St., time for some Krazy Bread!", "owner": "nah@foo.com", "eventAddress": "222 Banana Rd.", "eventCity": "Honolulu", "eventZip": "96815", "eventState": "HI", "eventProfileImage": "images/event_card_default_image.png"
+    },
+    { "eventName": "Dr. Moore Buy's Pizza", "eventStartTime": "8:45", "eventEndTime": "12:30", "eventDate": "May 20th, 2022", "orgName": "Big Brother, Big Sister", "eventDescription": "New Little Caesers on King St., time for some Krazy Bread!", "owner": "nah@foo.com", "eventAddress": "222 Banana Rd.", "eventCity": "Honolulu", "eventZip": "96815", "eventState": "HI", "eventProfileImage": "images/event_card_default_image.png"
+    },
+    { "eventName": "Dr. Moore Buy's Pizza", "eventStartTime": "8:45", "eventEndTime": "12:30", "eventDate": "May 20th, 2022", "orgName": "Big Brother, Big Sister", "eventDescription": "New Little Caesers on King St., time for some Krazy Bread!", "owner": "nah@foo.com", "eventAddress": "222 Banana Rd.", "eventCity": "Honolulu", "eventZip": "96815", "eventState": "HI", "eventProfileImage": "images/event_card_default_image.png"
+    },
+    { "eventName": "Afternoon Reading Session", "eventStartTime": "12:30", "eventEndTime": "16:30", "eventDate": "May 13th, 2022", "orgName": "Read To Me", "eventDescription": "Come and read stories to kids of all ages in group session or one on one. ", "owner": "nah@foo.com", "eventAddress": "222 Banana Rd.", "eventCity": "Honolulu", "eventZip": "96815", "eventState": "HI", "eventProfileImage": "images/event_card_default_image.png"
+    },
+    { "eventName": "Afternoon Reading Session", "eventStartTime": "12:30", "eventEndTime": "16:30", "eventDate": "May 20th, 2022", "orgName": "Read To Me", "eventDescription": "Come and read stories to kids of all ages in group session or one on one", "owner": "nah@foo.com", "eventAddress": "222 Banana Rd.", "eventCity": "Honolulu", "eventZip": "96815", "eventState": "HI", "eventProfileImage": "images/event_card_default_image.png"
+    },
+    { "eventName": "Afternoon Reading Session", "eventStartTime": "12:30", "eventEndTime": "16:30", "eventDate": "May 27th, 2022", "orgName": "Read To Me", "eventDescription": "Come and read stories to kids of all ages in group session or one on one", "owner": "nah@foo.com", "eventAddress": "222 Banana Rd.", "eventCity": "Honolulu", "eventZip": "96815", "eventState": "HI", "eventProfileImage": "images/event_card_default_image.png"
     }
   ],
 

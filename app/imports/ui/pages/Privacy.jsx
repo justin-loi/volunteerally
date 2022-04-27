@@ -6,7 +6,7 @@ import { PAGE_IDS } from '../utilities/PageIDs';
 const Privacy = () => (
   <Grid id={PAGE_IDS.PRIVACY} container centered>
     <Grid.Column>
-      <div className="about-us-header">
+      <div className="privacy-policy-header">
         <Header as="h1" textAlign="center" inverted>Privacy Policy</Header>
       </div>
       <div className="row, about-us-section">
