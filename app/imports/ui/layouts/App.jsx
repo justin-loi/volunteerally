@@ -35,7 +35,7 @@ import AddOpportunity from '../pages/AddOpportunity';
 import ForgotPassword from '../pages/ForgotPassword';
 import SendEmailToOrg from '../pages/SendEmailToOrg';
 import VolunteerListForEvent from '../pages/VolunteerListForEvent';
-import FilterEvents from '../pages/FilterEvents';
+import FilterTabPanes from '../pages/FilterTabPanes';
 
 /** Top-level layout component for this application. Called in imports/startup/client/startup.jsx. */
 class App extends React.Component {
@@ -50,7 +50,7 @@ class App extends React.Component {
             <Route path="/volunteer_signup" component={VolunteerSignUp}/>
             <VolProtectedRoute path="/edit-volunteer-profile/:_id" component={EditVolunteerProfile}/>
             <Route path="/browse_opportunities" component={BrowseOpportunities}/>
-            <Route path="/filter_events" component={FilterEvents}/>
+            <Route path="/filter_events" component={FilterTabPanes}/>
             <Route path="/volunteer_signup" component={VolunteerSignUp}/>
             <Route path="/organization_signup" component={OrganizationSignup}/>
             <Route path="/about_us" component={AboutUs}/>
