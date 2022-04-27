@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Meteor } from 'meteor/meteor';
 import { Container, Button, Header, Form, Divider, Loader, Grid, Icon, Segment, Image, Label } from 'semantic-ui-react';
 import { withTracker } from 'meteor/react-meteor-data';
+import { NavLink } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import swal from 'sweetalert';
 import { Events } from '../../api/event/EventCollection';
@@ -95,6 +96,11 @@ const EventProfile = ({ currentUser, event, orgProfile, skills, environments, in
         <Grid stackable container verticalAlign="bottom" textAlign='center' columns={3}>
           <Grid.Row>
             <Image src={event.eventProfileImage} fluid/>
+          </Grid.Row>
+
+          <Divider/>
+
+          <Grid.Row>
             <Grid.Column>
               <Header as='h2' inverted block>
                 {event.eventName}
@@ -119,7 +125,7 @@ const EventProfile = ({ currentUser, event, orgProfile, skills, environments, in
           <Grid stackable columns={2}>
             <Grid.Row centered>
               <Button onClick={getDirections}>Get directions</Button>
-              <Button>Send an email</Button>
+              <Button as={NavLink} exact to={`/volunteer-send-email/${orgProfile._id}`}>Send an email</Button>
               <Button onClick={handleOpen}>Direct Message</Button>
             </Grid.Row>
 
@@ -128,7 +134,7 @@ const EventProfile = ({ currentUser, event, orgProfile, skills, environments, in
                 <Header as="h3">
                   <Icon name="location arrow"/> Location
                 </Header>
-                <Image src={event.eventProfileImage}/>
+                <Image src={'/images/red-cross-map.jpeg'}/>
               </Segment>
               <Segment>
                 <Header as="h3">
@@ -190,12 +196,6 @@ const EventProfile = ({ currentUser, event, orgProfile, skills, environments, in
                     {interest.name}
                   </Label>))}
               </Segment>
-              <Segment>
-                <Header as="h3">
-                  <Icon name="group"/> RSVP
-                </Header>
-
-              </Segment>
             </Grid.Column>
           </Grid>
 
@@ -255,6 +255,7 @@ EventProfile.propTypes = {
     firstName: PropTypes.string,
     lastName: PropTypes.string,
     email: PropTypes.string,
+    _id: PropTypes.string,
   }),
   skills: PropTypes.array,
   interests: PropTypes.array,

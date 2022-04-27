@@ -113,7 +113,7 @@ const Signin = ({ location }) => {
               <Grid textAlign="center">
                 <Item>
                   <Item.Content>
-                  Not registered? Click here to <Link to="/signup">Register</Link>
+                  Not registered? Click here to <Link to="/volunteer_signup">Register</Link>
                   </Item.Content>
                 </Item>
               </Grid>
