@@ -66,14 +66,12 @@ const Signin = ({ location }) => {
     <Container id={PAGE_IDS.SIGN_IN}
       style={{ paddingLeft: '130px',
         paddingRight: '130px',
-        marginTop: '50px',
         marginBottom: '95px' }}>
       <Grid textAlign="center" verticalAlign="middle" centered columns={2}>
         <Grid.Column>
-          <br/>
-          <Header as="h2" textAlign="center">
-            Sign In
-          </Header>
+          <div className="sign-in-header">
+            <Header as="h2" textAlign="center" inverted>Sign In</Header>
+          </div>
           <Form onSubmit={submit}>
             <Segment style={{ boxShadow: 'none', border: 'none' }}>
               <Form.Input
