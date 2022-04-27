@@ -104,4 +104,12 @@
   margin-top: 30px;
 }
 
+.profile-banner {
+  background-color: darkolivegreen;
+  background-image: url("/images/volunteer_profile_banner.png");
+  background-size: 100%;
+  padding-top: 100px;
+  padding-bottom: 100px;
+}
+
 
