@@ -71,11 +71,6 @@
       "logoImage": "images/big-bros-big-sis-logo.png", "organizationName": "Big Brothers, Big Sisters", "missionStatement": "We got the biggest siblings around!", "phoneNumber": "808-909-9999"
     },
     {
-      "email": "protect@foo.com", "password": "changeme", "role": "ORGANIZATION",
-      "firstName": "Coppy", "lastName": "Copperson", "eventBackgroundImage": "images/volunteer.jpg",
-      "logoImage": "images/protect-preserve-logo.png", "organizationName": "Helping Hands", "missionStatement": "Protect and Preserve!!", "phoneNumber": "808-655-7777"
-    },
-    {
       "email": "read@foo.com", "password": "changeme", "role": "ORGANIZATION",
       "firstName": "Ready", "lastName": "McReaderson", "eventBackgroundImage": "images/volunteer.jpg",
       "logoImage": "images/read-to-me-logo.png", "organizationName": "Read to Me", "missionStatement": "Ready! Set! Read!", "phoneNumber": "808-221-1212"
