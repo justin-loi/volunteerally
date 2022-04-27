@@ -39,7 +39,7 @@ test('Test that user pages show up', async () => {
   await signOutPage.isDisplayed();
 });
 
-test('Test that admin pages show up', async () => {
+test.only('Test that admin pages show up', async () => {
   await navBar.gotoSigninPage();
   await signInPage.signin(adminCredentials.username, adminCredentials.password);
   await navBar.isLoggedIn(adminCredentials.username);
