@@ -45,6 +45,19 @@ const EventProfile = ({ currentUser, event, orgProfile, skills, environments, in
     setSubject(value);
   };
 
+  const convertTime = (time) => {
+    const splitArray = time.split(':');
+    if (splitArray[0] > 12) {
+      splitArray[0] -= 12;
+      splitArray[3] = ' PM';
+    } else {
+      splitArray[3] = ' AM';
+    }
+    splitArray[2] = splitArray[1];
+    splitArray[1] = ':';
+    return splitArray[0] + splitArray[1] + splitArray[2] + splitArray[3];
+  };
+
   const handleSendSubmit = () => {
     const recipient = orgProfile.email;
     const name = currentUser;
@@ -108,7 +121,7 @@ const EventProfile = ({ currentUser, event, orgProfile, skills, environments, in
             </Grid.Column>
             <Grid.Column>
               <Header as='h3' inverted block>
-                    Opportunity Date: {event.eventDate} from {event.eventStartTime} through {event.eventEndTime}
+                    Opportunity Date: {event.eventDate} from {convertTime(event.eventStartTime)} through {convertTime(event.eventEndTime)}
               </Header>
             </Grid.Column>
             <Grid.Column>
