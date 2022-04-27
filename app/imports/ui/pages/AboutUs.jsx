@@ -7,7 +7,7 @@ const AboutUs = () => (
   <Grid id={PAGE_IDS.ABOUT_US} container centered>
     <Grid.Column>
       <div className="about-us-header">
-        <Header as="h1" textAlign="center">About VolunteerAlly</Header>
+        <Header as="h1" textAlign="center" inverted>About VolunteerAlly</Header>
       </div>
       <div className="row, about-us-section">
         <Header as="h2" textAlign='left'> An Easier Way To Volunteer. </Header>

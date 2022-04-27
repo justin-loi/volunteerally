@@ -6,7 +6,7 @@ import { PAGE_IDS } from '../utilities/PageIDs';
 const TermsAndConditions = () => (
   <Grid id={PAGE_IDS.TERMS_AND_CONDITIONS} container centered>
     <Grid.Column>
-      <div className="about-us-header">
+      <div className="terms-header">
         <Header as="h1" textAlign="center" inverted>Terms & Conditions</Header>
       </div>
       <div className="row, about-us-section">

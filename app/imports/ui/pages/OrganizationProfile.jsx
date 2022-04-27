@@ -15,7 +15,7 @@ import { Events } from '../../api/event/EventCollection';
 /** Renders the Page for adding a document. */
 const OrganizationProfile = ({ orgProfile, events, ready }) => ((ready) ? (
   <Grid id={PAGE_IDS.ORGANIZATION_PROFILE} container centered>
-    <Grid.Row >
+    <Grid.Row>
       {(Meteor.userId() && Roles.userIsInRole(Meteor.userId(), [ROLE.ORGANIZATION])) ? (
         <Button as={NavLink} exact to={`/edit-organization-profile/${orgProfile._id}`}>Edit Profile</Button>
       ) : ''}
