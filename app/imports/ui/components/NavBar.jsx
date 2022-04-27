@@ -135,7 +135,7 @@ const NavBarContainer = withTracker(() => {
   const ready = subscription1.ready();
   const events = Events.find({}, { sort: { name: 1 } }).fetch();
   const currentUser = Meteor.user() ? Meteor.user().username : '';
-  const colors = ['rgba(245,102,102,0.39)', 'rgba(2,71,49,0.37)', 'rgba(88,88,236,0.37)', 'rgb(209, 51, 209, 0.37)'];
+  const colors = ['rgba(0, 72, 48, 1)', 'rgba(86, 79, 61, 1)', 'rgba(134,196,222,1)', 'rgb(0, 72, 48, 1)'];
   let colorUsage;
   if (Roles.userIsInRole(Meteor.userId(), [ROLE.VOLUNTEER])) {
     colorUsage = colors[0];

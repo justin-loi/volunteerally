@@ -26,11 +26,6 @@ const Footer = ({ currentUser }) => {
         </Grid.Column>
         <Grid.Column width={1}/>
         <Grid.Column width={5}>
-          <Header as={'h3'} >SUPPORT</Header>
-          <hr/>
-          <List size={'large'} >
-            <List.Item><a href={'/#/contact'}><Icon name={'mail'}/> Contact Us</a></List.Item>
-          </List>
         </Grid.Column>
         <Grid.Column width={1}/>
         <Grid.Column width={4} textAlign={'left'}>
