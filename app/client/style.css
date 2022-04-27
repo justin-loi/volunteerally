@@ -62,11 +62,33 @@
 }
 
 .about-us-header {
-  background-color: darkolivegreen;
   background-image: url("/images/volunteer.jpeg");
-  background-size: 100%;
-  padding-top: 100px;
-  padding-bottom: 100px;
+  background-size: cover;
+  padding-top: 150px;
+  padding-bottom: 150px;
+  margin-top: -10px;
+  margin-left: -50vw;
+  margin-right: -50vw;
+}
+
+.browse-opportunity-header {
+  background-image: url("/images/volunteer.jpeg");
+  background-size: cover;
+  padding-top: 150px;
+  padding-bottom: 150px;
+  margin-top: -10px;
+  margin-left: -50vw;
+  margin-right: -50vw;
+}
+
+.org-lib-header {
+  background-image: url("/images/volunteer.jpeg");
+  background-size: cover;
+  padding-top: 123px;
+  padding-bottom: 123px;
+  margin-top: -10px;
+  margin-left: -50vw;
+  margin-right: -50vw;
 }
 
 .about-us-section {
@@ -81,20 +103,14 @@
 .event-profile-top-background {
   background: url('images/red-cross.jpeg') no-repeat center center fixed;
   background-size: cover;
-  height: 500px;
+  height: 400px;
 }
 
 .organization-signup-background {
-    background: url('images/young-people.jpg') no-repeat center center fixed;
-    background-size: cover;
-    height: 400px;
+  background: url('images/young-people.jpg') no-repeat center center fixed;
+  background-size: cover;
+  height: 400px;
 }
-/*.org-lib-header {*/
-/*  background-image: url("/images/org-group.jpg");*/
-/*  background-size: 100%;*/
-/*  padding-top: 100px;*/
-/*  padding-bottom: 100px;*/
-/*}*/
 
 .landing-events {
   padding-top: 30px;

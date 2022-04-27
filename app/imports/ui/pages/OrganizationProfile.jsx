@@ -12,7 +12,7 @@ import { ROLE } from '../../api/role/Role';
 /** Renders the Page for adding a document. */
 const OrganizationProfile = ({ orgProfile, ready }) => ((ready) ? (
   <Grid id={PAGE_IDS.ORGANIZATION_PROFILE} container centered>
-    <Grid.Row >
+    <Grid.Row>
       {(Meteor.userId() && Roles.userIsInRole(Meteor.userId(), [ROLE.ORGANIZATION])) ? (
         <Button as={NavLink} exact to={`/edit-organization-profile/${orgProfile._id}`}>Edit Profile</Button>
       ) : ''}

@@ -96,11 +96,6 @@ const Signin = ({ location }) => {
                 focus
                 onChange={handleChange}
               />
-              <Item>
-                <Item.Content>
-                  <Link to="/forgot_password">Forgot your password?</Link>
-                </Item.Content>
-              </Item>
               <br/>
               <Form.Button id={COMPONENT_IDS.SIGN_IN_FORM_SUBMIT} content="Submit" fluid/>
               <Form.Checkbox
