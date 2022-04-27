@@ -8,7 +8,7 @@ import { Events } from '../../api/event/EventCollection';
 /* Renders a list of events. Use <EventCard> to render each event card. */
 const BrowseOpportunities = ({ events }) => (
   <Container>
-    <div className="about-us-header">
+    <div className="browse-opportunity-header">
       <Header as="h1" textAlign="center" inverted>Browse Opportunities</Header>
     </div>
     <Card.Group centered style={{ paddingTop: '40px' }}>

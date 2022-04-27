@@ -62,7 +62,27 @@
 }
 
 .about-us-header {
-  background-image: url("/images/volunteer.jpeg");
+  background-image: url("/images/about_us_image.jpg");
+  background-size: cover;
+  padding-top: 150px;
+  padding-bottom: 150px;
+  margin-top: -10px;
+  margin-left: -50vw;
+  margin-right: -50vw;
+}
+
+.terms-header {
+  background-image: url("/images/terms_image.jpg");
+  background-size: cover;
+  padding-top: 150px;
+  padding-bottom: 150px;
+  margin-top: -10px;
+  margin-left: -50vw;
+  margin-right: -50vw;
+}
+
+.privacy-policy-header {
+  background-image: url("/images/privacy_policy_image.jpg");
   background-size: cover;
   padding-top: 150px;
   padding-bottom: 150px;
@@ -72,7 +92,7 @@
 }
 
 .browse-opportunity-header {
-  background-image: url("/images/volunteer.jpeg");
+  background-image: url("/images/browse_opportunity_image.jpg");
   background-size: cover;
   padding-top: 150px;
   padding-bottom: 150px;
