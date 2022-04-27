@@ -10,7 +10,6 @@ import { Events } from '../../../api/event/EventCollection';
 import EventCard from '../EventCard';
 import { OrganizationProfiles } from '../../../api/organization/OrganizationProfileCollection';
 import { OrganizationEvent } from '../../../api/event/OrganizationEventCollection';
-import { Organizations } from '../../../api/organization/OrganizationCollection';
 
 /** Create a schema to specify the structure of the data to appear in the form. */
 const makeOrganizationSchema = (allOrganizations) => new SimpleSchema({
@@ -24,7 +23,7 @@ const FilterOrganizations = ({ ready }) => {
   const allOrganizations = _.pluck(OrganizationProfiles.find({}, {}).fetch(), 'organizationName');
   const organizationFormSchema = makeOrganizationSchema(allOrganizations);
   const organizationBridge = new SimpleSchema2Bridge(organizationFormSchema);
-  const organizationIDs = organizations.map(name => OrganizationProfiles.getIDVerTwo(name));
+  const organizationIDs = organizations.map(name => OrganizationProfiles.getID(name));
   console.log(organizationIDs);
   const eventOrganizations = OrganizationEvent.find({ organizationID: { $in: organizationIDs } }, {}).fetch();
   const eventIDList = _.uniq(eventOrganizations.map(eventOrganization => eventOrganization.eventID));
