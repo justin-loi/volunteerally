@@ -19,15 +19,19 @@ const makeOrganizationSchema = (allOrganizations) => new SimpleSchema({
 
 /** Renders the Profile Collection as a set of Cards. */
 const FilterOrganizations = ({ ready }) => {
+  console.log(ready);
   const [organizations, setOrganizations] = useState([]);
   const allOrganizations = _.pluck(OrganizationProfiles.find({}, {}).fetch(), 'organizationName');
   const organizationFormSchema = makeOrganizationSchema(allOrganizations);
   const organizationBridge = new SimpleSchema2Bridge(organizationFormSchema);
-  const organizationIDs = organizations.map(name => OrganizationProfiles.getIDVerTwo(name));
+  const organizationIDs = organizations.map(name => OrganizationProfiles.findDoc({ organizationName: name })._id);
   console.log(organizationIDs);
   const eventOrganizations = OrganizationEvent.find({ organizationID: { $in: organizationIDs } }, {}).fetch();
   const eventIDList = _.uniq(eventOrganizations.map(eventOrganization => eventOrganization.eventID));
   const eventsByOrganization = eventIDList.map(id => Events.findDoc(id));
+  console.log(eventOrganizations);
+  console.log(eventIDList);
+  console.log(eventsByOrganization);
   const submitOrganizations = (data) => {
     setOrganizations(data.organizations);
   };
