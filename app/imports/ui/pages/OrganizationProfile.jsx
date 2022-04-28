@@ -178,7 +178,7 @@ export default withTracker(({ match }) => {
   // Determine if the subscription is ready
   const ready = subscription.ready() && subscription2.ready() && subscription3.ready();
   const orgProfile = (orgProfileId !== 'user') ? OrganizationProfiles.findOne({ _id: orgProfileId }, {}) : OrganizationProfiles.findOne({ userID: Meteor.userId() }, {});
-  const eventOrganizations = OrganizationEvent.find({ organizationID: orgProfileId }, {}).fetch();
+  const eventOrganizations = (typeof orgProfile !== 'undefined') ? OrganizationEvent.find({ organizationID: orgProfile._id }, {}).fetch() : [];
   const eventIDList = _.uniq(eventOrganizations.map(eventOrganization => eventOrganization.eventID));
   const events = eventIDList.map((eventID) => Events.findOne({ _id: eventID }, {}));
   return {
