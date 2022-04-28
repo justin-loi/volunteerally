@@ -86,6 +86,10 @@ class NavBar {
     await t.click(`#${COMPONENT_IDS.INBOX}`);
   }
 
+  async goToAddOpportunity() {
+    await t.click(`#${COMPONENT_IDS.NAVBAR_ADD_OPPORTUNITY}`);
+  }
+
   /** Go to the organization library page. */
   async gotoOrganizationLibraryPage() {
     await t.expect(Selector(`#${COMPONENT_IDS.NAVBAR_ORGANIZATION_LIBRARY}`).exists).ok();
