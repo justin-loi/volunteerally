@@ -139,7 +139,7 @@
 
   "defaultOrganizations": [
     { "email": "redcross@foo.com", "password": "changeme", "role": "ORGANIZATION",
-      "firstName": "Robert", "lastName": "Fong", "eventBackgroundImage": "images/red-cross-map.jpeg",
+      "firstName": "Robert", "lastName": "Fong", "eventBackgroundImage": "images/red-cross-gallery.jpeg",
       "logoImage": "images/red-cross-logo.png", "organizationName": "The Red Cross", "missionStatement": "To help everyone and cure everything!", "phoneNumber": "808-123-0420",
       "ein": "123456789", "primaryAddress": "1111 Example Address", "city": "Honolulu", "state": "Hawaii", "zipcode": "96822",
       "primaryContactFirstName": "Robert", "primaryContactLastName": "Fong", "primaryContactEmail": "robert@foo.com", "primaryContactPhone": "808-123-0420",
