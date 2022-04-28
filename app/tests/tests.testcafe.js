@@ -8,6 +8,7 @@ import { editVolunteerProfilePage } from './editvolunteerporfile.page';
 import { browseOpportunityPage } from './browseopport.page';
 import { eventProfilePage } from './eventprofile.page';
 import { inboxPage } from './inbox.page';
+import { organizationLibraryPage } from './organizationlibrary.page';
 
 /* global fixture:false, test:false */
 
@@ -81,7 +82,7 @@ test('Test that event profile works', async () => {
   await eventProfilePage.isDisplayed();
 });
 
-test.only('Test that every role has the inbox pages', async () => {
+test('Test that every role has the inbox pages', async () => {
   await navBar.gotoSigninPage();
   await signInPage.signin(adminCredentials.username, adminCredentials.password);
   await navBar.goToInboxPage();
@@ -97,4 +98,10 @@ test.only('Test that every role has the inbox pages', async () => {
   await navBar.goToInboxPage();
   await inboxPage.isDisplayed();
   await navBar.logout();
+});
+
+test('Test the organization library', async () => {
+  await navBar.gotoOrganizationLibraryPage();
+  await organizationLibraryPage.isDisplayed();
+  await organizationLibraryPage.isOrgCardDisplayed();
 });

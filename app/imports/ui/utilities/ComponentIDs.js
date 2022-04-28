@@ -100,4 +100,5 @@ export const COMPONENT_IDS = {
   EDIT_VOLUNTEER_ADDRESS: 'edit-volunteer-page-address',
   EVENT_CARD: 'event-card',
   INBOX: 'inbox',
+  ORGANIZATION_LIB_CARD: 'organization-library-card-1',
 };

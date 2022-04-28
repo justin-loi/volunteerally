@@ -85,6 +85,12 @@ class NavBar {
     await t.click(`#${COMPONENT_IDS.NAVBAR_CURRENT_USER}`);
     await t.click(`#${COMPONENT_IDS.INBOX}`);
   }
+
+  /** Go to the organization library page. */
+  async gotoOrganizationLibraryPage() {
+    await t.expect(Selector(`#${COMPONENT_IDS.NAVBAR_ORGANIZATION_LIBRARY}`).exists).ok();
+    await t.click(`#${COMPONENT_IDS.NAVBAR_ORGANIZATION_LIBRARY}`);
+  }
 }
 
 export const navBar = new NavBar();
