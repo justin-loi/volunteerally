@@ -221,13 +221,15 @@ const VolunteerSignUp = ({ location, ready, interestsArray, skillsArray, environ
     <Container id={PAGE_IDS.VOLUNTEER_SIGNUP}>
       <Grid textAlign="center" verticalAlign="middle" centered>
         <Grid.Column>
-          <Header as="h2" textAlign="center">
+          <div className="volunteer-sign-header">
+          <Header as="h2" textAlign="center" inverted>
             Volunteer Sign Up Form
           </Header>
-
+          </div>
           <AutoForm ref={ref => {
             fRef = ref;
           }} schema={bridge} onSubmit={data => submit(data, fRef)}>
+            <Container style={{ paddingTop: '20px' }}>
             <Segment>
               {
                 // <TextField name='username' placeholder='Username' iconLeft='user'
@@ -388,6 +390,7 @@ const VolunteerSignUp = ({ location, ready, interestsArray, skillsArray, environ
               <SubmitField value='Sign up' id={COMPONENT_IDS.VOLUNTEER_SIGNUP_FORM_SUBMIT}/>
               <ErrorsField />
             </Segment>
+            </Container>
           </AutoForm>
           <Message>
               Already have an volunteer? Login <Link to="/signin">here</Link>
