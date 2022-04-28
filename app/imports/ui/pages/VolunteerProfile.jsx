@@ -19,6 +19,7 @@ import { Hours } from '../../api/hours/HoursCollection';
 import { VolunteerEventHours } from '../../api/hours/VolunteerEventHours';
 import { OrganizationEvent } from '../../api/event/OrganizationEventCollection';
 import { EndedEvent } from '../../api/event/EndedEventsCollection';
+import { COMPONENT_IDS } from '../utilities/ComponentIDs';
 
 const capitalizeFirstLetter = (string) => string.charAt(0).toUpperCase() + string.slice(1);
 const interestsStyle = {
@@ -35,13 +36,13 @@ const VolunteerProfile = ({ volunteer, signedUpEvents, interests, skills, envPre
       <Image src='/images/volunteer_profile_banner.png' size='big' />
     </Grid.Row>
     <Grid.Row >
-      <Button as={NavLink} exact to={`/edit-volunteer-profile/${volunteer._id}`}>Edit Profile</Button>
+      <Button as={NavLink} exact to={`/edit-volunteer-profile/${volunteer._id}`} id={COMPONENT_IDS.EDIT_VOLUNTEER_BUTTON}>Edit Profile</Button>
       {
         // <Button>Settings</Button>
         // <Button>Preferences</Button>
+        // <Button>Log Volunteer Hours</Button>
+        //       <Button>Send an email</Button>
       }
-      <Button>Log Volunteer Hours</Button>
-      <Button>Send an email</Button>
     </Grid.Row>
     <Grid.Row columns={2}>
       <Grid.Column>

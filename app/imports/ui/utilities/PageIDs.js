@@ -3,6 +3,7 @@ export const PAGE_IDS = {
   ADD_OPPORTUNITY: 'add-opportunity',
   EDIT_STUFF: 'edit-stuff',
   LANDING: 'landing',
+  LANDING_TOP_SECTION: 'landing-top-section',
   LIST_STUFF: 'list-stuff',
   LIST_STUFF_ADMIN: 'list-stuff-admin',
   MANAGE_DATABASE: 'manage-database',
@@ -23,4 +24,8 @@ export const PAGE_IDS = {
   SEND_EMAIL_TO_ORG: 'send-email-to-org',
   LIST_VOLUNTEER_AT_EVENT: 'list-volunteer-at-event',
   TERMS_AND_CONDITIONS: 'terms-and-conditions',
+  BROWSE_OPPORTUNITIES: 'browse-opportunity',
+  EVENT_PROFILE: 'event-profile',
+  INBOX: 'inbox',
+  ADD_EVENT: 'add-event',
 };

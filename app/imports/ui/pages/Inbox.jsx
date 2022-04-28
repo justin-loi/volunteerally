@@ -7,6 +7,7 @@ import swal from 'sweetalert';
 import { Messages } from '../../api/message/MessageCollection';
 import { VolunteerProfiles } from '../../api/volunteer/VolunteerProfileCollection';
 import EmailItem from '../components/EmailItem';
+import { PAGE_IDS } from '../utilities/PageIDs';
 
 // Shows all messages
 const Inbox = ({ message, ready }) => {
@@ -66,7 +67,7 @@ const Inbox = ({ message, ready }) => {
 
   return (
     ready ? (
-      <div>
+      <div id={PAGE_IDS.INBOX} >
         {openSendMail ? <div>
           <div style={popupStyle}/>
           <Segment style={innerStyle}>

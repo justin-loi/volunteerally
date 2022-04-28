@@ -16,7 +16,6 @@ const ListVolunteersAdmin = ({ volunteer }) => (
     <Table.Cell>{volunteer.email}</Table.Cell>
     <Table.Cell>{volunteer.phoneNumber}</Table.Cell>
     <Table.Cell>
-      <Button>Verify Hours</Button>
       <Button>Delete</Button>
     </Table.Cell>
   </Table.Row>

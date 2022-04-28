@@ -61,6 +61,46 @@ class NavBar {
     await t.click(`#${COMPONENT_IDS.NAVBAR_MANAGE_DROPDOWN}`);
     await t.click(`#${COMPONENT_IDS.NAVBAR_MANAGE_DROPDOWN_DATABASE}`);
   }
+
+  /** Go to the list stuff page. */
+  async gotoVolunteerProfilePage() {
+    await t.expect(Selector(`#${COMPONENT_IDS.NAVBAR_CURRENT_USER}`).exists).ok();
+    await t.click(`#${COMPONENT_IDS.NAVBAR_CURRENT_USER}`);
+    await t.expect(Selector(`#${COMPONENT_IDS.VOLUNTEER_PROFILE}`).exists).ok();
+    await t.click(`#${COMPONENT_IDS.VOLUNTEER_PROFILE}`);
+  }
+
+  async gotoBrowseOpportunityPage() {
+    await t.click(`#${COMPONENT_IDS.NAVBAR_BROWSE_DROPDOWN}`);
+    await t.click(`#${COMPONENT_IDS.NAVBAR_BROWSE_OPPORTUNITIES}`);
+  }
+
+  async gotoEventProfilePage() {
+    await t.click(`#${COMPONENT_IDS.NAVBAR_BROWSE_DROPDOWN}`);
+    await t.click(`#${COMPONENT_IDS.NAVBAR_BROWSE_OPPORTUNITIES}`);
+    await t.click(`#${COMPONENT_IDS.EVENT_CARD}`);
+  }
+
+  async goToInboxPage() {
+    await t.click(`#${COMPONENT_IDS.NAVBAR_CURRENT_USER}`);
+    await t.click(`#${COMPONENT_IDS.INBOX}`);
+  }
+
+  async goToAddOpportunity() {
+    await t.click(`#${COMPONENT_IDS.NAVBAR_ADD_OPPORTUNITY}`);
+  }
+
+  /** Go to the organization library page. */
+  async gotoOrganizationLibraryPage() {
+    await t.expect(Selector(`#${COMPONENT_IDS.NAVBAR_ORGANIZATION_LIBRARY}`).exists).ok();
+    await t.click(`#${COMPONENT_IDS.NAVBAR_ORGANIZATION_LIBRARY}`);
+  }
+
+  /** Go to the admin page. */
+  async gotoAdminVolunteerAndEventPage() {
+    await t.expect(Selector(`#${COMPONENT_IDS.NAVBAR_LIST_STUFF_ADMIN}`).exists).ok();
+    await t.click(`#${COMPONENT_IDS.NAVBAR_LIST_STUFF_ADMIN}`);
+  }
 }
 
 export const navBar = new NavBar();

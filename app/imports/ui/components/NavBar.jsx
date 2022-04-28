@@ -75,7 +75,13 @@ const NavBar = ({ currentUser, colorUsage, events }) => {
         {Roles.userIsInRole(Meteor.userId(), [ROLE.ORGANIZATION]) ? (
           <Menu.Item id={COMPONENT_IDS.NAVBAR_ADD_OPPORTUNITY} as={NavLink} activeClassName="active" exact to="/add" key='add_event'>Add Opportunity</Menu.Item>
         ) : ''}
-        <Menu.Item id={COMPONENT_IDS.NAVBAR_BROWSE_OPPORTUNITY} as={NavLink} activeClassName="active" exact to="/browse_opportunities" key='browse_opportunity'>Browse Opportunities</Menu.Item>
+        <Menu.Item>
+          <Dropdown id={COMPONENT_IDS.NAVBAR_BROWSE_DROPDOWN} text="Browse Opportunities">
+            <Dropdown.Menu>
+              <Dropdown.Item id={COMPONENT_IDS.NAVBAR_BROWSE_OPPORTUNITIES} as={NavLink} exact to="/browse_opportunities" text="Browse Opportunities" key='browse_opportunities'/>
+              <Dropdown.Item id={COMPONENT_IDS.NAVBAR_FILTER_OPPORTUNITIES} as={NavLink} exact to="/filter_events" text="Filter Opportunities" key='filter_events'/>
+            </Dropdown.Menu>
+          </Dropdown></Menu.Item>
         <Menu.Item id={COMPONENT_IDS.NAVBAR_ORGANIZATION_LIBRARY} as={NavLink} activeClassName="active" exact to="/find_volunteers" key='organization_library'>Organization Library</Menu.Item>
         <Menu.Item id={COMPONENT_IDS.NAVBAR_ABOUT_US} as={NavLink} activeClassName="active" exact to="/about_us" key='about_us'>About Us</Menu.Item>
         <Menu.Item>
@@ -95,7 +101,7 @@ const NavBar = ({ currentUser, colorUsage, events }) => {
                 {Roles.userIsInRole(Meteor.userId(), [ROLE.ORGANIZATION]) ? (
                   <Dropdown.Item id={COMPONENT_IDS.ORGANIZATION_PROFILE} icon="user" text="My Profile" as={NavLink} exact to="/organization-profile/user" />
                 ) : ''}
-                <Dropdown.Item as={NavLink}
+                <Dropdown.Item id={COMPONENT_IDS.INBOX} as={NavLink}
                   exact
                   to="/inbox">
                   <Icon name={'mail'}/>
@@ -106,10 +112,12 @@ const NavBar = ({ currentUser, colorUsage, events }) => {
                       empty
                       color={'red'}/> : ''}
                 </Dropdown.Item>
-                <Dropdown.Item as={NavLink} exact to="organization_signup">
-                  <Icon name={'building'}/>
-                    Organization Sign Up
-                </Dropdown.Item>
+                {Roles.userIsInRole(Meteor.userId(), [ROLE.ADMIN]) ? (
+                  <Dropdown.Item as={NavLink} exact to="organization_signup">
+                    <Icon name={'building'}/>
+                      Organization Sign Up
+                  </Dropdown.Item>
+                ) : ''}
                 <Dropdown.Item id={COMPONENT_IDS.NAVBAR_SIGN_OUT} icon="sign out" text="Sign Out" as={NavLink} exact to="/signout" />
               </Dropdown.Menu>
             </Dropdown>

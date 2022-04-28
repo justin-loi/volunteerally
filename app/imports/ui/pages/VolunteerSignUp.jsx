@@ -222,174 +222,174 @@ const VolunteerSignUp = ({ location, ready, interestsArray, skillsArray, environ
       <Grid textAlign="center" verticalAlign="middle" centered>
         <Grid.Column>
           <div className="volunteer-sign-header">
-          <Header as="h2" textAlign="center" inverted>
+            <Header as="h2" textAlign="center" inverted>
             Volunteer Sign Up Form
-          </Header>
+            </Header>
           </div>
           <AutoForm ref={ref => {
             fRef = ref;
           }} schema={bridge} onSubmit={data => submit(data, fRef)}>
             <Container style={{ paddingTop: '20px' }}>
-            <Segment>
-              {
+              <Segment>
+                {
                 // <TextField name='username' placeholder='Username' iconLeft='user'
                 //                 id={COMPONENT_IDS.VOLUNTEER_SIGNUP_FORM_USERNAME} required />
-              }
-              <TextField name='email' type='email' label='E-mail Address' placeholder='E-mail Address' iconLeft='mail'
-                id={COMPONENT_IDS.VOLUNTEER_SIGNUP_FORM_EMAIL}/>
-              <TextField name='password' type='password' placeholder='Password' iconLeft='lock' id={COMPONENT_IDS.VOLUNTEER_SIGNUP_FORM_PASSWORD}/>
-              <Form.Input
-                label="Confirm Password"
-                id={COMPONENT_IDS.VOLUNTEER_SIGNUP_FORM_CONFIRM_PASSWORD}
-                name="confirmPassword"
-                type="password"
-                placeholder="Confirm Your Password"
-                icon='lock'
-                iconPosition='left'
-                required
-                onChange={handleChange}
-              />
-              <TextField name='dob' type='date' id={COMPONENT_IDS.VOLUNTEER_SIGNUP_FORM_BIRTH}
-                label='Date of Birth (You must be at least 16 years old to join Volunteer Ally)'/>
-              <div className="two fields">
-                <div className="field">
-                  <TextField name='firstName' label='First Name' placeholder='First Name' id={COMPONENT_IDS.VOLUNTEER_SIGNUP_FORM_FIRST}/>
-                </div>
-                <div className="field">
-                  <TextField name='lastName' label='Last Name' placeholder='Last Name' id={COMPONENT_IDS.VOLUNTEER_SIGNUP_FORM_LAST}/>
-                </div>
-              </div>
-              <HiddenField name='gender' value={gender}/>
-              <Form.Group inline>
-                <label>Gender </label>
-                {genderAllowValues.map((value, index) => (
-                  <Form.Radio
-                    key={`volunteer-signup-gender-${index}`}
-                    id={genderComponentID[index]}
-                    label={value}
-                    name='gender'
-                    value={value}
-                    checked={gender === value}
-                    onChange={handleChange}
-                  />
-                ))}
-              </Form.Group>
-              <TextField name='address' placeholder='1234 Example Street' iconLeft='map marker alternate'
-                id={COMPONENT_IDS.VOLUNTEER_SIGNUP_FORM_ADDRESS} required/>
-              <div className="two fields">
-                <div className="field">
-                  <TextField name='city' placeholder='Honolulu' iconLeft='map marker alternate'
-                    id={COMPONENT_IDS.VOLUNTEER_SIGNUP_FORM_CITY} required/>
-                </div>
-                <div className="field">
-                  <TextField name='state' placeholder='Hawaii' iconLeft='map marker alternate'
-                    id={COMPONENT_IDS.VOLUNTEER_SIGNUP_FORM_STATE} required/>
-                </div>
-              </div>
-              <div className="two fields">
-                <div className="field">
-                  <TextField name='code' placeholder='96822' label='Zip/Postal Code' iconLeft='map marker alternate'
-                    id={COMPONENT_IDS.VOLUNTEER_SIGNUP_FORM_ZIPCODE} required/>
-                </div>
-                <div className="field">
-                  <TextField name='phoneNumber' placeholder='18081234567' label='Phone Number' iconLeft='phone'
-                    id={COMPONENT_IDS.VOLUNTEER_SIGNUP_FORM_PHONE} required/>
-                </div>
-              </div>
-              <div className="field">
-                <h4>Upload a Profile Picture</h4>
+                }
+                <TextField name='email' type='email' label='E-mail Address' placeholder='E-mail Address' iconLeft='mail'
+                  id={COMPONENT_IDS.VOLUNTEER_SIGNUP_FORM_EMAIL}/>
+                <TextField name='password' type='password' placeholder='Password' iconLeft='lock' id={COMPONENT_IDS.VOLUNTEER_SIGNUP_FORM_PASSWORD}/>
                 <Form.Input
-                  style={{ marginTop: '10px' }}
-                  type='file' onChange={(event) => {
-                    uploadImg(event.target.files);
-                  }}
+                  label="Confirm Password"
+                  id={COMPONENT_IDS.VOLUNTEER_SIGNUP_FORM_CONFIRM_PASSWORD}
+                  name="confirmPassword"
+                  type="password"
+                  placeholder="Confirm Your Password"
+                  icon='lock'
+                  iconPosition='left'
+                  required
+                  onChange={handleChange}
                 />
-              </div>
-              <label style={{ paddingTop: '20px' }}>Interests </label>
-              <Form.Group>
-                <Grid columns={2} container>
-                  <Grid.Row>
-                    {interestsArray.map((interest, index) => (
-                      <Grid.Column key={`volunteer-signup-grid-interests-${index}`}>
-                        <Form.Checkbox
-                          key={`volunteer-signup-interests-${interest._id}`}
-                          id={`volunteer-signup-interests-${index}`}
-                          label={interest.name}
-                          name='interests'
-                          value={interest._id}
-                          onChange={handleChange}
-                        />
-                      </Grid.Column>
-                    ))}
-                  </Grid.Row>
-                </Grid>
-              </Form.Group>
-              <label style={{ paddingTop: '20px' }}>Special Skills (optional) </label>
-              <Form.Group>
-                <Grid columns={2} container>
-                  <Grid.Row>
-                    {skillsArray.map((skill, index) => (
-                      <Grid.Column key={`volunteer-signup-grid-skills-${index}`}>
-                        <Form.Checkbox
-                          key={`volunteer-signup-skill-${skill._id}`}
-                          id={`volunteer-signup-skill-${index}`}
-                          label={skill.name}
-                          name='specialSkills'
-                          value={skill._id}
-                          onChange={handleChange}
-                        />
-                      </Grid.Column>
-                    ))}
-                  </Grid.Row>
-                </Grid>
-              </Form.Group>
-              <div style={{ paddingTop: '6px' }}>Environmental Preference</div>
-              <Form.Group inline>
-                {environmentalArray.map((environmental, index) => (
-                  <Form.Radio
-                    key={`volunteer-signup-environmental-preference-${environmental._id}`}
-                    id={`volunteer-signup-environmental-preference-${index}`}
-                    label={environmental.name}
-                    name='environmentalPreference'
-                    value={environmental._id}
-                    checked={environmentalPreference === environmental._id}
-                    onChange={handleChange}
+                <TextField name='dob' type='date' id={COMPONENT_IDS.VOLUNTEER_SIGNUP_FORM_BIRTH}
+                  label='Date of Birth (You must be at least 16 years old to join Volunteer Ally)'/>
+                <div className="two fields">
+                  <div className="field">
+                    <TextField name='firstName' label='First Name' placeholder='First Name' id={COMPONENT_IDS.VOLUNTEER_SIGNUP_FORM_FIRST}/>
+                  </div>
+                  <div className="field">
+                    <TextField name='lastName' label='Last Name' placeholder='Last Name' id={COMPONENT_IDS.VOLUNTEER_SIGNUP_FORM_LAST}/>
+                  </div>
+                </div>
+                <HiddenField name='gender' value={gender}/>
+                <Form.Group inline>
+                  <label>Gender </label>
+                  {genderAllowValues.map((value, index) => (
+                    <Form.Radio
+                      key={`volunteer-signup-gender-${index}`}
+                      id={genderComponentID[index]}
+                      label={value}
+                      name='gender'
+                      value={value}
+                      checked={gender === value}
+                      onChange={handleChange}
+                    />
+                  ))}
+                </Form.Group>
+                <TextField name='address' placeholder='1234 Example Street' iconLeft='map marker alternate'
+                  id={COMPONENT_IDS.VOLUNTEER_SIGNUP_FORM_ADDRESS} required/>
+                <div className="two fields">
+                  <div className="field">
+                    <TextField name='city' placeholder='Honolulu' iconLeft='map marker alternate'
+                      id={COMPONENT_IDS.VOLUNTEER_SIGNUP_FORM_CITY} required/>
+                  </div>
+                  <div className="field">
+                    <TextField name='state' placeholder='Hawaii' iconLeft='map marker alternate'
+                      id={COMPONENT_IDS.VOLUNTEER_SIGNUP_FORM_STATE} required/>
+                  </div>
+                </div>
+                <div className="two fields">
+                  <div className="field">
+                    <TextField name='code' placeholder='96822' label='Zip/Postal Code' iconLeft='map marker alternate'
+                      id={COMPONENT_IDS.VOLUNTEER_SIGNUP_FORM_ZIPCODE} required/>
+                  </div>
+                  <div className="field">
+                    <TextField name='phoneNumber' placeholder='18081234567' label='Phone Number' iconLeft='phone'
+                      id={COMPONENT_IDS.VOLUNTEER_SIGNUP_FORM_PHONE} required/>
+                  </div>
+                </div>
+                <div className="field">
+                  <h4>Upload a Profile Picture</h4>
+                  <Form.Input
+                    style={{ marginTop: '10px' }}
+                    type='file' onChange={(event) => {
+                      uploadImg(event.target.files);
+                    }}
                   />
-                ))}
-              </Form.Group>
-              <label style={{ paddingTop: '20px' }}>Availability </label>
-              <Form.Group>
-                <Grid columns={2} container>
-                  <Grid.Row>
-                    {availabilitiesArray.map((ava, index) => (
-                      <Grid.Column key={`volunteer-signup-grid-availability-${index}`}>
-                        <Form.Checkbox
-                          key={`volunteer-signup-availability-${ava._id}`}
-                          id={`volunteer-signup-availability-${index}`}
-                          label={ava.name}
-                          name='availability'
-                          value={ava._id}
-                          onChange={handleChange}
-                        />
-                      </Grid.Column>
-                    ))}
-                  </Grid.Row>
-                </Grid>
-              </Form.Group>
-              <Link to="/privacy" target="_blank" >Privacy Policy</Link>
-              <br/>
-              <Link to="/terms" target="_blank" >Term & Conditions</Link>
-              <Form.Checkbox style={{ paddingLeft: '8px' }}
-                id={COMPONENT_IDS.VOLUNTEER_SIGNUP_FORM_POLICY}
-                label='Please confirm that you agree to our Privacy Policy and Term & Conditions'
-                name = 'privacyPolicy'
-                value = 'agree'
-                onChange={handleChange}
-                error={ isValueEmpty[1] }
-              />
-              <SubmitField value='Sign up' id={COMPONENT_IDS.VOLUNTEER_SIGNUP_FORM_SUBMIT}/>
-              <ErrorsField />
-            </Segment>
+                </div>
+                <label style={{ paddingTop: '20px' }}>Interests </label>
+                <Form.Group>
+                  <Grid columns={2} container>
+                    <Grid.Row>
+                      {interestsArray.map((interest, index) => (
+                        <Grid.Column key={`volunteer-signup-grid-interests-${index}`}>
+                          <Form.Checkbox
+                            key={`volunteer-signup-interests-${interest._id}`}
+                            id={`volunteer-signup-interests-${index}`}
+                            label={interest.name}
+                            name='interests'
+                            value={interest._id}
+                            onChange={handleChange}
+                          />
+                        </Grid.Column>
+                      ))}
+                    </Grid.Row>
+                  </Grid>
+                </Form.Group>
+                <label style={{ paddingTop: '20px' }}>Special Skills (optional) </label>
+                <Form.Group>
+                  <Grid columns={2} container>
+                    <Grid.Row>
+                      {skillsArray.map((skill, index) => (
+                        <Grid.Column key={`volunteer-signup-grid-skills-${index}`}>
+                          <Form.Checkbox
+                            key={`volunteer-signup-skill-${skill._id}`}
+                            id={`volunteer-signup-skill-${index}`}
+                            label={skill.name}
+                            name='specialSkills'
+                            value={skill._id}
+                            onChange={handleChange}
+                          />
+                        </Grid.Column>
+                      ))}
+                    </Grid.Row>
+                  </Grid>
+                </Form.Group>
+                <div style={{ paddingTop: '6px' }}>Environmental Preference</div>
+                <Form.Group inline>
+                  {environmentalArray.map((environmental, index) => (
+                    <Form.Radio
+                      key={`volunteer-signup-environmental-preference-${environmental._id}`}
+                      id={`volunteer-signup-environmental-preference-${index}`}
+                      label={environmental.name}
+                      name='environmentalPreference'
+                      value={environmental._id}
+                      checked={environmentalPreference === environmental._id}
+                      onChange={handleChange}
+                    />
+                  ))}
+                </Form.Group>
+                <label style={{ paddingTop: '20px' }}>Availability </label>
+                <Form.Group>
+                  <Grid columns={2} container>
+                    <Grid.Row>
+                      {availabilitiesArray.map((ava, index) => (
+                        <Grid.Column key={`volunteer-signup-grid-availability-${index}`}>
+                          <Form.Checkbox
+                            key={`volunteer-signup-availability-${ava._id}`}
+                            id={`volunteer-signup-availability-${index}`}
+                            label={ava.name}
+                            name='availability'
+                            value={ava._id}
+                            onChange={handleChange}
+                          />
+                        </Grid.Column>
+                      ))}
+                    </Grid.Row>
+                  </Grid>
+                </Form.Group>
+                <Link to="/privacy" target="_blank" >Privacy Policy</Link>
+                <br/>
+                <Link to="/terms" target="_blank" >Term & Conditions</Link>
+                <Form.Checkbox style={{ paddingLeft: '8px' }}
+                  id={COMPONENT_IDS.VOLUNTEER_SIGNUP_FORM_POLICY}
+                  label='Please confirm that you agree to our Privacy Policy and Term & Conditions'
+                  name = 'privacyPolicy'
+                  value = 'agree'
+                  onChange={handleChange}
+                  error={ isValueEmpty[1] }
+                />
+                <SubmitField value='Sign up' id={COMPONENT_IDS.VOLUNTEER_SIGNUP_FORM_SUBMIT}/>
+                <ErrorsField />
+              </Segment>
             </Container>
           </AutoForm>
           <Message>

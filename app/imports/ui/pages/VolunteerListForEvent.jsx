@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Container, Table, Header, Loader, Form, Label } from 'semantic-ui-react';
+import { Container, Table, Header, Loader, Form } from 'semantic-ui-react';
 import { withTracker } from 'meteor/react-meteor-data';
 import PropTypes from 'prop-types';
 import swal from 'sweetalert';
@@ -228,7 +228,7 @@ const VolunteerListForEvent = ({ ready, event, volunteers, filledIn, endHourVolL
           </Table.Body>
         </Table>
         <div style={{ paddingBottom: '30px' }} >
-          <Form.Button floated='right' type='submit' >Confirm</Form.Button>
+          <Form.Button floated='right' type='submit' id={COMPONENT_IDS.VOLUNTEER_LIST_FOR_EVENT_CONFIRM_BUTTON}>Confirm</Form.Button>
         </div>
         <div style={{ paddingBottom: '30px', paddingTop: '10px' }}>
           <Form.Button floated='right'>

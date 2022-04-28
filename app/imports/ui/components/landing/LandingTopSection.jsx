@@ -4,7 +4,7 @@ import { PAGE_IDS } from '../../utilities/PageIDs';
 
 /** The Footer appears at the bottom of every page. Rendered by the App Layout component. */
 const LandingTopSection = () => (
-  <Grid id={PAGE_IDS.LANDING} verticalAlign='middle' textAlign='center' rows='equal' className="landing-background-top">
+  <Grid id={PAGE_IDS.LANDING_TOP_SECTION} verticalAlign='middle' textAlign='center' rows='equal' className="landing-background-top">
     <Grid.Row>
       <Image className="landing-volunteer-ally-logo" size='medium' circular src="/images/volunteer-ally-temp-logo.png" centered/>
     </Grid.Row>

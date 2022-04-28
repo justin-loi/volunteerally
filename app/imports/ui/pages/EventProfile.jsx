@@ -1,6 +1,18 @@
 import React, { useState } from 'react';
 import { Meteor } from 'meteor/meteor';
-import { Container, Button, Header, Form, Divider, Loader, Grid, Icon, Segment, Image, Label } from 'semantic-ui-react';
+import {
+  Container,
+  Button,
+  Header,
+  Form,
+  Divider,
+  Loader,
+  Grid,
+  Icon,
+  Segment,
+  Image,
+  Label,
+} from 'semantic-ui-react';
 import { withTracker } from 'meteor/react-meteor-data';
 import { NavLink } from 'react-router-dom';
 import PropTypes from 'prop-types';
@@ -15,6 +27,7 @@ import { Interests } from '../../api/interest/InterestCollection';
 import { Environmental } from '../../api/environmental_preference/EnvironmentalPreferenceCollection';
 import { OrganizationEvent } from '../../api/event/OrganizationEventCollection';
 import { createNewMessageMethod } from '../../api/message/MessageCollection.methods';
+import { PAGE_IDS } from '../utilities/PageIDs';
 // import { ROLE } from '../../api/role/Role';
 
 // Renders a Event Info page that connects with the current Event collection.
@@ -43,6 +56,37 @@ const EventProfile = ({ currentUser, event, orgProfile, skills, environments, in
 
   const handleSubjectChange = (e, { value }) => {
     setSubject(value);
+  };
+
+  const convertDate = (date) => {
+    let returnValue;
+    let setter = false;
+    const splitArray = date.split('-');
+    if (splitArray[0] > 0) {
+      setter = true;
+      const months = ['January', 'February', 'March', 'April', 'May', 'June',
+        'July', 'August', 'September', 'October', 'November', 'December'];
+      const temp = splitArray[2];
+      splitArray[2] = splitArray[0];
+      splitArray[0] = months[splitArray[1] - 1];
+      splitArray[1] = temp;
+    }
+    // eslint-disable-next-line no-unused-expressions
+    (setter) ? returnValue = `${splitArray[0]} ${splitArray[1]}, ${splitArray[2]}` : returnValue = date;
+    return returnValue;
+  };
+
+  const convertTime = (time) => {
+    const splitArray = time.split(':');
+    if (splitArray[0] > 12) {
+      splitArray[0] -= 12;
+      splitArray[3] = ' PM';
+    } else {
+      splitArray[3] = ' AM';
+    }
+    splitArray[2] = splitArray[1];
+    splitArray[1] = ':';
+    return splitArray[0] + splitArray[1] + splitArray[2] + splitArray[3];
   };
 
   const handleSendSubmit = () => {
@@ -92,7 +136,7 @@ const EventProfile = ({ currentUser, event, orgProfile, skills, environments, in
 
   return (
     ((ready) ? (
-      <div>
+      <div id={PAGE_IDS.EVENT_PROFILE} >
         <Grid stackable container verticalAlign="bottom" textAlign='center' columns={3}>
           <Grid.Row>
             <Image src={event.eventProfileImage} fluid/>
@@ -108,7 +152,7 @@ const EventProfile = ({ currentUser, event, orgProfile, skills, environments, in
             </Grid.Column>
             <Grid.Column>
               <Header as='h3' inverted block>
-                    Opportunity Date: {event.eventDate} from {event.eventStartTime} through {event.eventEndTime}
+                    Opportunity Date: {convertDate(event.eventDate)} from {convertTime(event.eventStartTime)} through {convertTime(event.eventEndTime)}
               </Header>
             </Grid.Column>
             <Grid.Column>
@@ -155,7 +199,7 @@ const EventProfile = ({ currentUser, event, orgProfile, skills, environments, in
                 <Header as="">
                   <Icon name="calendar"/> Upcoming Dates
                 </Header>
-                {event.eventDate}
+                {convertDate(event.eventDate)}
               </Segment>
             </Grid.Column>
             <Grid.Column>
@@ -180,16 +224,22 @@ const EventProfile = ({ currentUser, event, orgProfile, skills, environments, in
                 <Image src={event.eventProfileImage}/>
               </Segment>
               <Segment>
+                <Header as={'h3'}> Skills </Header>
+                <Divider/>
                 {/* eslint-disable-next-line react/prop-types */}
                 {skills.map((skill, index) => (
                   <Label color='purple' key={`event-skill-${index}`}>
                     {skill.name}
                   </Label>))}
+                <Header as={'h3'}> Environment </Header>
+                <Divider/>
                 {/* eslint-disable-next-line react/prop-types */}
                 {environments.map((environment, index) => (
                   <Label color='blue' key={`event-environment-${index}`}>
                     {environment.name}
                   </Label>))}
+                <Header as={'h3'}> Interests </Header>
+                <Divider/>
                 {/* eslint-disable-next-line react/prop-types */}
                 {interests.map((interest, index) => (
                   <Label color='green' key={`event-interest-${index}`}>
