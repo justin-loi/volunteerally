@@ -7,10 +7,11 @@ import LandingTopSection from '../components/landing/LandingTopSection';
 import LandingBottomSection from '../components/landing/LandingBottomSection';
 import { Events } from '../../api/event/EventCollection';
 import EventCard from '../components/EventCard';
+import { PAGE_IDS } from '../utilities/PageIDs';
 
 /** A simple static component to render some text for the landing page. */
 const Landing = ({ currentUser, ready, events }) => ((ready) ? (
-  <div>
+  <div id={PAGE_IDS.LANDING}>
     <LandingTopSection/>
     <Container className="landing-events" textAlign='center'>
       <Header as='h1'>Upcoming Events!!!</Header>
