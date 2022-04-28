@@ -8,6 +8,7 @@ import { editVolunteerProfilePage } from './editvolunteerporfile.page';
 import { browseOpportunityPage } from './browseopport.page';
 import { eventProfilePage } from './eventprofile.page';
 import { inboxPage } from './inbox.page';
+import { addOppPage } from './addopportunity.page';
 
 /* global fixture:false, test:false */
 
@@ -81,7 +82,7 @@ test('Test that event profile works', async () => {
   await eventProfilePage.isDisplayed();
 });
 
-test.only('Test that every role has the inbox pages', async () => {
+test('Test that every role has the inbox pages', async () => {
   await navBar.gotoSigninPage();
   await signInPage.signin(adminCredentials.username, adminCredentials.password);
   await navBar.goToInboxPage();
@@ -96,5 +97,14 @@ test.only('Test that every role has the inbox pages', async () => {
   await signInPage.signin(credentials.username, credentials.password);
   await navBar.goToInboxPage();
   await inboxPage.isDisplayed();
+  await navBar.logout();
+});
+
+test('Test that add opportunity works', async () => {
+
+  await navBar.gotoSigninPage();
+  await signInPage.signin(orgCredentials.username, orgCredentials.password);
+  await navBar.goToAddOpportunity();
+  await addOppPage.isDisplayed();
   await navBar.logout();
 });

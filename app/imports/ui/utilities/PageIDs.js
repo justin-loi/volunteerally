@@ -27,4 +27,5 @@ export const PAGE_IDS = {
   BROWSE_OPPORTUNITIES: 'browse-opportunity',
   EVENT_PROFILE: 'event-profile',
   INBOX: 'inbox',
+  ADD_EVENT: 'add-event',
 };

@@ -85,6 +85,10 @@ class NavBar {
     await t.click(`#${COMPONENT_IDS.NAVBAR_CURRENT_USER}`);
     await t.click(`#${COMPONENT_IDS.INBOX}`);
   }
+
+  async goToAddOpportunity() {
+    await t.click(`#${COMPONENT_IDS.NAVBAR_ADD_OPPORTUNITY}`);
+  }
 }
 
 export const navBar = new NavBar();
