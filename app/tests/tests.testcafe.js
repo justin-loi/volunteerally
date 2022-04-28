@@ -7,8 +7,6 @@ import { volunteerProfilePage } from './volunteerporfile.page';
 import { editVolunteerProfilePage } from './editvolunteerporfile.page';
 import { browseOpportunityPage } from './browseopport.page';
 import { eventProfilePage } from './eventprofile.page';
-import { inboxPage } from './inbox.page';
-import { addOppPage } from './addopportunity.page';
 import { organizationLibraryPage } from './organizationlibrary.page';
 import { adminManageBoardPage } from './adminmanageboard.page';
 import { t } from 'testcafe';
@@ -17,7 +15,6 @@ import { t } from 'testcafe';
 
 /** Credentials for one of the sample users defined in settings.development.json. */
 const credentials = { username: 'john@foo.com', password: 'changeme' };
-const orgCredentials = { username: 'nah@foo.com', password: 'changeme' };
 const adminCredentials = { username: 'admin@foo.com', password: 'changeme' };
 const newCredentials = { username: 'janefonda@foo.com', password: 'changeme' };
 const volunteer = { username: 'jerry@foo.com', password: 'changeme' };
@@ -83,33 +80,6 @@ test('Test that browse opportunity works', async () => {
 test('Test that event profile works', async () => {
   await navBar.gotoEventProfilePage();
   await eventProfilePage.isDisplayed();
-});
-
-test('Test that every role has the inbox pages', async () => {
-  await navBar.gotoSigninPage();
-  await signInPage.signin(adminCredentials.username, adminCredentials.password);
-  await navBar.goToInboxPage();
-  await inboxPage.isDisplayed();
-  await navBar.logout();
-  await navBar.gotoSigninPage();
-  await signInPage.signin(orgCredentials.username, orgCredentials.password);
-  await navBar.goToInboxPage();
-  await inboxPage.isDisplayed();
-  await navBar.logout();
-  await navBar.gotoSigninPage();
-  await signInPage.signin(credentials.username, credentials.password);
-  await navBar.goToInboxPage();
-  await inboxPage.isDisplayed();
-  await navBar.logout();
-});
-
-test('Test that add opportunity works', async () => {
-
-  await navBar.gotoSigninPage();
-  await signInPage.signin(orgCredentials.username, orgCredentials.password);
-  await navBar.goToAddOpportunity();
-  await addOppPage.isDisplayed();
-  await navBar.logout();
 });
 
 test('Test the organization library', async () => {
