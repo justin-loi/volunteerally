@@ -4,8 +4,8 @@ import PropTypes from 'prop-types';
 import { NavLink, withRouter } from 'react-router-dom';
 
 /** Renders a single organization card. */
-const OrganizationCard = ({ organization }) => (
-  <Card as={NavLink} exact to={`/organization-profile/${organization._id}`}>
+const OrganizationCard = ({ organization, id }) => (
+  <Card id={id} as={NavLink} exact to={`/organization-profile/${organization._id}`}>
     <Image src='images/event_card_default_image.png' wrapped ui={false}/>
     <Card.Content>
       <Header as='h3'>{organization.organizationName}</Header>
@@ -33,6 +33,7 @@ OrganizationCard.propTypes = {
     lastName: PropTypes.string,
     missionStatement: PropTypes.string,
   }).isRequired,
+  id: PropTypes.string,
 };
 // Wrap this component in withRouter since we use the <Link> React Router element.
 export default withRouter(OrganizationCard);

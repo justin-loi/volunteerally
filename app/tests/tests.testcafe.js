@@ -9,6 +9,7 @@ import { browseOpportunityPage } from './browseopport.page';
 import { eventProfilePage } from './eventprofile.page';
 import { inboxPage } from './inbox.page';
 import { addOppPage } from './addopportunity.page';
+import { organizationLibraryPage } from './organizationlibrary.page';
 
 /* global fixture:false, test:false */
 
@@ -107,4 +108,10 @@ test('Test that add opportunity works', async () => {
   await navBar.goToAddOpportunity();
   await addOppPage.isDisplayed();
   await navBar.logout();
+});
+
+test('Test the organization library', async () => {
+  await navBar.gotoOrganizationLibraryPage();
+  await organizationLibraryPage.isDisplayed();
+  await organizationLibraryPage.isOrgCardDisplayed();
 });

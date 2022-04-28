@@ -18,7 +18,7 @@ const OrganizationLibrary = ({ ready, organizations }) => ((ready) ? (
       </div>
     </Grid.Column>
     <Card.Group centered style={{ paddingTop: '30px' }}>
-      {organizations.map((organization) => <OrganizationCard key={organization._id} organization={organization}/>)}
+      {organizations.map((organization, index) => <OrganizationCard id={`organization-library-card-${index}`} key={organization._id} organization={organization}/>)}
     </Card.Group>
     <Grid.Row style={{ paddingTop: '40px' }}>
       <Image size = 'huge' src= "/images/org-help-image.jpg"/>
