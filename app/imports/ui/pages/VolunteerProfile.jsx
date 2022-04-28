@@ -225,17 +225,10 @@ export default withTracker(() => {
   (typeof volEvents !== 'undefined' && ready) ? (
     volEvents.map((volEvent) => orgEvents.push(OrganizationEvent.findDoc({ eventID: volEvent.eventID })))) : '';
 
-  const endedEvents = [];
-  // eslint-disable-next-line no-unused-expressions
-  (volEvents.length !== 0 && ready) ? (
-    volEvents.map((volEvent) => endedEvents.push(Events.findDoc({ _id: volEvent.eventID })))) : [];
-  // console.log('signed up Events', signedUpEvents);
-  // { _id: volEvents[volEvents.length - 1].eventID }
-  // get OrgEvents
   const endedOrgEvents = [];
   // eslint-disable-next-line no-unused-expressions
-  (typeof volEvents !== 'undefined' && ready) ? (
-    volEvents.map((volEvent) => endedOrgEvents.push(OrganizationEvent.findDoc({ eventID: volEvent.eventID })))) : '';
+  (typeof endedVolEvents !== 'undefined' && ready) ? (
+    endedVolEvents.map((volEvent) => endedOrgEvents.push(OrganizationEvent.findDoc({ eventID: volEvent.eventID })))) : '';
   const orgEventsCount = endedOrgEvents.length;
 
   return {
