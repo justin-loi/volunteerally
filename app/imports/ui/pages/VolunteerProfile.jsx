@@ -20,6 +20,7 @@ import { VolunteerEventHours } from '../../api/hours/VolunteerEventHours';
 import { OrganizationEvent } from '../../api/event/OrganizationEventCollection';
 import { EndedEvent } from '../../api/event/EndedEventsCollection';
 import { COMPONENT_IDS } from '../utilities/ComponentIDs';
+import { VolunteerEvent } from '../../api/event/VolunteerEventCollection';
 
 const capitalizeFirstLetter = (string) => string.charAt(0).toUpperCase() + string.slice(1);
 const interestsStyle = {
@@ -161,13 +162,14 @@ export default withTracker(() => {
   const subscription10 = VolunteerAvailability.subscribeCurr();
   const subscription11 = Hours.subscribe();
   const subscription12 = VolunteerEventHours.subscribe();
-  // const subscription13 = VolunteerEvent.subscribe();
   const subscription13 = EndedEvent.subscribe();
   const subscription14 = OrganizationEvent.subscribe();
+  const subscription15 = VolunteerEvent.subscribe();
   // Determine if the subscription is ready
   const ready = subscription.ready() && subscription2.ready() && subscription3.ready() && subscription4.ready()
       && subscription5.ready() && subscription6.ready() && subscription7.ready() && subscription8.ready() && subscription9.ready()
-      && subscription10.ready() && subscription11.ready() && subscription12.ready() && subscription13.ready() && subscription14.ready();
+      && subscription10.ready() && subscription11.ready() && subscription12.ready() && subscription13.ready() && subscription14.ready()
+      && subscription15.ready();
   // Get the volunteer documents and sort them by name.
   // const volunteerProfile = VolunteerProfiles.findOne({ userID: Meteor.userId() }, {});
   // Get volunteer profile
@@ -206,7 +208,9 @@ export default withTracker(() => {
   const volEventsCount = EndedEvent.find({ volunteerID: Meteor.userId() }, {}).count();
 
   // get volunteer event
-  const volEvents = EndedEvent.find({ volunteerID: Meteor.userId() }, {}).fetch();
+  const volEvents = VolunteerEvent.find({ volunteerID: Meteor.userId() }, {}).fetch();
+
+  const endedVolEvents = EndedEvent.find({ volunteerID: Meteor.userId() }, {}).fetch();
 
   // console.log(volEvents);
   const signedUpEvents = [];
@@ -220,7 +224,19 @@ export default withTracker(() => {
   // eslint-disable-next-line no-unused-expressions
   (typeof volEvents !== 'undefined' && ready) ? (
     volEvents.map((volEvent) => orgEvents.push(OrganizationEvent.findDoc({ eventID: volEvent.eventID })))) : '';
-  const orgEventsCount = orgEvents.length;
+
+  const endedEvents = [];
+  // eslint-disable-next-line no-unused-expressions
+  (volEvents.length !== 0 && ready) ? (
+    volEvents.map((volEvent) => endedEvents.push(Events.findDoc({ _id: volEvent.eventID })))) : [];
+  // console.log('signed up Events', signedUpEvents);
+  // { _id: volEvents[volEvents.length - 1].eventID }
+  // get OrgEvents
+  const endedOrgEvents = [];
+  // eslint-disable-next-line no-unused-expressions
+  (typeof volEvents !== 'undefined' && ready) ? (
+    volEvents.map((volEvent) => endedOrgEvents.push(OrganizationEvent.findDoc({ eventID: volEvent.eventID })))) : '';
+  const orgEventsCount = endedOrgEvents.length;
 
   return {
     volunteer,

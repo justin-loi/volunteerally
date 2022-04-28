@@ -193,7 +193,7 @@ if (VolunteerEventHours.count() === 0) {
   console.log('Creating default VolunteerEventHours and Hours collection.');
   const volunteerArray = VolunteerProfiles.find({}, {}).fetch();
   volunteerArray.map((volunteer) => (VolunteerEventHours.define({
-    volunteerID: volunteer.userID, hoursID: Hours.define({ total: Math.floor(Math.random() * 10) + 1 }) })));
+    volunteerID: volunteer.userID, hoursID: Hours.define({ total: 0 }) })));
 }
 
 if (OrganizationEvent.count() === 0) {
