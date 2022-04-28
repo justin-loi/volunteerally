@@ -17,6 +17,7 @@ import { withTracker } from 'meteor/react-meteor-data';
 import { NavLink } from 'react-router-dom';
 import PropTypes from 'prop-types';
 import swal from 'sweetalert';
+import { Carousel } from 'react-carousel-minimal';
 import { Events } from '../../api/event/EventCollection';
 import { OrganizationProfiles } from '../../api/organization/OrganizationProfileCollection';
 import { EventInterest } from '../../api/interest/EventInterestCollection';
@@ -134,6 +135,46 @@ const EventProfile = ({ currentUser, event, orgProfile, skills, environments, in
     margin: 'auto',
   };
 
+  const data = [
+    {
+      image: 'images/cleaning-beaches.jpeg',
+      caption: 'Beach clean up at Sandys',
+    },
+    {
+      image: 'images/cleaning-pond.webp',
+      caption: 'Restoration of Hawaiian Fishponds',
+    },
+    {
+      image: 'images/field-trip.jpeg',
+      caption: 'Teaching our Keiki about Sustainability',
+    },
+    {
+      image: 'images/helping-line.webp',
+      caption: 'Giving Back to the Community',
+    },
+    {
+      image: 'images/school-volunteer.png',
+      caption: 'High school volunteers',
+    },
+    {
+      image: 'images/planting-trees.jpeg',
+      caption: 'Forest Restoration',
+    },
+    {
+      image: 'images/surfboards.jpeg',
+      caption: 'Supporting Local Hawaii Businesses',
+    },
+  ];
+
+  const captionStyle = {
+    fontSize: '2em',
+    fontWeight: 'bold',
+  };
+  const slideNumberStyle = {
+    fontSize: '20px',
+    fontWeight: 'bold',
+  };
+
   return (
     ((ready) ? (
       <div id={PAGE_IDS.EVENT_PROFILE} >
@@ -221,7 +262,31 @@ const EventProfile = ({ currentUser, event, orgProfile, skills, environments, in
                 <Header as="h3">
                   <Icon name="globe"/> Gallery
                 </Header>
-                <Image src={event.eventProfileImage}/>
+                <Carousel
+                  data={data}
+                  time={2000}
+                  width="850px"
+                  height="400px"
+                  captionStyle={captionStyle}
+                  radius="10px"
+                  slideNumber={true}
+                  slideNumberStyle={slideNumberStyle}
+                  captionPosition="bottom"
+                  automatic={true}
+                  dots={true}
+                  pauseIconColor="white"
+                  pauseIconSize="40px"
+                  slideBackgroundColor="darkgrey"
+                  slideImageFit="cover"
+                  thumbnails={true}
+                  thumbnailWidth="100px"
+                  style={{
+                    textAlign: 'center',
+                    maxWidth: '850px',
+                    maxHeight: '500px',
+                    margin: '40px auto',
+                  }}
+                />
               </Segment>
               <Segment>
                 <Header as={'h3'}> Skills </Header>
