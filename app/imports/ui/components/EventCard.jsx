@@ -57,6 +57,24 @@ const EventCard = ({ event }) => {
     return splitArray[0] + splitArray[1] + splitArray[2] + splitArray[3];
   };
 
+  const convertDate = (date) => {
+    let returnValue;
+    let setter = false;
+    const splitArray = date.split('-');
+    if (splitArray[0] > 0) {
+      setter = true;
+      const months = ['January', 'February', 'March', 'April', 'May', 'June',
+        'July', 'August', 'September', 'October', 'November', 'December'];
+      const temp = splitArray[2];
+      splitArray[2] = splitArray[0];
+      splitArray[0] = months[splitArray[1] - 1];
+      splitArray[1] = temp;
+    }
+    // eslint-disable-next-line no-unused-expressions
+    (setter) ? returnValue = `${splitArray[0]} ${splitArray[1]}, ${splitArray[2]}` : returnValue = date;
+    return returnValue;
+  };
+
   return (
 
     <Card as={NavLink} exact to={`/details/${event._id}`}>
@@ -64,7 +82,7 @@ const EventCard = ({ event }) => {
       <Card.Content>
         <Card.Header> {event.eventName}</Card.Header>
         <Card.Meta>
-          <span>Date: {event.eventDate}</span>
+          <span>Date: {convertDate(event.eventDate)}</span>
           <br/>
           <span>Time: {convertTime(event.eventStartTime)} - {convertTime(event.eventEndTime)}</span>
           <br/>
