@@ -140,75 +140,114 @@
   "defaultOrganizations": [
     { "email": "redcross@foo.com", "password": "changeme", "role": "ORGANIZATION",
       "firstName": "Robert", "lastName": "Fong", "eventBackgroundImage": "images/red-cross-map.jpeg",
-      "logoImage": "images/red-cross-logo.png", "organizationName": "The Red Cross", "missionStatement": "To help everyone and cure everything!", "phoneNumber": "808-123-0420",
-      "ein": "123456789", "primaryAddress": "1111 Example Address", "city": "Honolulu", "state": "Hawaii", "zipcode": "96822",
+      "logoImage": "images/red-cross-logo.png", "organizationName": "The Red Cross", "missionStatement": "To help everyone and cure everything!",
+      "phoneNumber": "808-123-0420", "ein": "123456789", "primaryAddress": "1111 Example Address", "city": "Honolulu", "state": "Hawaii", "zipcode": "96822",
       "primaryContactFirstName": "Robert", "primaryContactLastName": "Fong", "primaryContactEmail": "robert@foo.com", "primaryContactPhone": "808-123-0420",
       "secondContactFirstName": "Jamie", "secondContactLastName": "Yang", "secondContactEmail": "jamie@foo.com", "secondContactPhone": "808-931-3804"
     },
     {
-      "email": "nah@foo.com", "password": "changeme", "role": "ORGANIZATION",
-      "firstName": "Nah", "lastName": "Foo", "eventBackgroundImage": "images/young-people.jpg",
-      "logoImage": "images/helping-hands-logo.png", "organizationName": "Helping Hands", "missionStatement": "You know what the say about idle hands, we are helping hands!", "phoneNumber": "808-999-8888"
+      "email": "helpinghands@foo.com", "password": "changeme", "role": "ORGANIZATION",
+      "firstName": "Greg", "lastName": "Demar", "eventBackgroundImage": "images/young-people.jpg",
+      "logoImage": "images/helping-hands-logo.png", "organizationName": "Helping Hands", "missionStatement": "You know what the say about idle hands, we are helping hands!",
+      "phoneNumber": "808-999-8888", "ein":"920930217", "primaryAddress": "1049 Kamaka Lane", "city": "Honolulu", "state": "Hawaii", "zipcode": "96817",
+      "primaryContactFirstName": "Albert", "primaryContactLastName": "Adamina", "primaryContactEmail": "albert@foo.com", "primaryContactPhone": "808-347-4894",
+      "secondContactFirstName": "Jaco", "secondContactLastName": "Cleve", "secondContactEmail": "jaco@foo.com", "secondContactPhone": "808-128-5532"
     },
     {
-      "email": "ya@foo.com", "password": "changeme", "role": "ORGANIZATION",
-      "firstName": "Sha", "lastName": "Moo", "eventBackgroundImage": "images/volunteer.jpg",
-      "logoImage": "images/food-bank-logo.png", "organizationName": "Food Bank", "missionStatement": "Interest free food!", "phoneNumber": "808-420-1234"
+      "email": "foodbank@foo.com", "password": "changeme", "role": "ORGANIZATION",
+      "firstName": "Balbino", "lastName": "Floro", "eventBackgroundImage": "images/volunteer.jpg",
+      "logoImage": "images/food-bank-logo.png", "organizationName": "Food Bank", "missionStatement": "Interest free food!",
+      "phoneNumber": "808-589-3491", "ein":"102895245", "primaryAddress": "92 Palahia St", "city": "Kapolei", "state": "Hawaii", "zipcode": "96707",
+      "primaryContactFirstName": "Jayme", "primaryContactLastName": "Fabia", "primaryContactEmail": "jayme@foo.com", "primaryContactPhone": "808-200-1202",
+      "secondContactFirstName": "Yoshirou", "secondContactLastName": "Sonia", "secondContactEmail": "yoshiro@foo.com", "secondContactPhone": "808-402-5975"
     },
     {
-      "email": "aye@foo.com", "password": "changeme", "role": "ORGANIZATION",
-      "firstName": "Aye", "lastName": "Yu", "eventBackgroundImage": "images/volunteer.jpg",
-      "logoImage": "images/habitat-humanity-logo.png", "organizationName": "Habitat for Humanity", "missionStatement": "The habitat for humanity!", "phoneNumber": "808-333-8998"
+      "email": "habitathumanity@foo.com", "password": "changeme", "role": "ORGANIZATION",
+      "firstName": "Eulogia", "lastName": "Jacqui", "eventBackgroundImage": "images/volunteer.jpg",
+      "logoImage": "images/habitat-humanity-logo.png", "organizationName": "Habitat for Humanity", "missionStatement": "The habitat for humanity!",
+      "phoneNumber": "808-333-8998", "ein":"498103815", "primaryAddress": "889 Upalu St", "city": "Wailuku", "state": "Hawaii", "zipcode": "96793",
+      "primaryContactFirstName": "Carlito", "primaryContactLastName": "Roberto", "primaryContactEmail": "carlito@foo.com", "primaryContactPhone": "808-203-5840",
+      "secondContactFirstName": "Telma", "secondContactLastName": "Constanca", "secondContactEmail": "telma@foo.com", "secondContactPhone": "808-270-2328"
     },
     {
-      "email": "que@foo.com", "password": "changeme", "role": "ORGANIZATION",
+      "email": "humanesociety@foo.com", "password": "changeme", "role": "ORGANIZATION",
       "firstName": "Jim", "lastName": "Dean", "eventBackgroundImage": "images/volunteer.jpg",
-      "logoImage": "images/humane-society-logo.png", "organizationName": "Humane Society", "missionStatement": "Against inhumane societies!", "phoneNumber": "808-111-2233"
+      "logoImage": "images/humane-society-logo.png", "organizationName": "Humane Society", "missionStatement": "Against inhumane societies!",
+      "phoneNumber": "808-111-2233", "ein":"344559120", "primaryAddress": "89 Nene St", "city": "Hilo", "state": "Hawaii", "zipcode": "96720",
+      "primaryContactFirstName": "Shigeru", "primaryContactLastName": "Kailani", "primaryContactEmail": "shigeru@foo.com", "primaryContactPhone": "808-337-2199",
+      "secondContactFirstName": "Rupert", "secondContactLastName": "Delmar", "secondContactEmail": "rupert@foo.com", "secondContactPhone": "808-246-7294"
     },
     {
-      "email": "malama@foo.com", "password": "changeme", "role": "ORGANIZATION",
-      "firstName": "Malama", "lastName": "Aina", "eventBackgroundImage": "images/young-people.jpg",
-      "logoImage": "images/malama-maunalua-logo.png", "organizationName": "Malama Maunalua", "missionStatement": "Protect and serve!", "phoneNumber": "808-454-4444"
+      "email": "malamamaunalua@foo.com", "password": "changeme", "role": "ORGANIZATION",
+      "firstName": "Mayte", "lastName": "Lauressa", "eventBackgroundImage": "images/young-people.jpg",
+      "logoImage": "images/malama-maunalua-logo.png", "organizationName": "Malama Maunalua", "missionStatement": "Protect and serve!",
+      "phoneNumber": "808-454-4444", "ein":"381564530", "primaryAddress": "91 Kaimalie St #2R6", "city": "Ewa Beach", "state": "Hawaii", "zipcode": "96706",
+      "primaryContactFirstName": "Francisco Javier", "primaryContactLastName": "Minta", "primaryContactEmail": "francisoj@foo.com", "primaryContactPhone": "808-283-0255",
+      "secondContactFirstName": "Gillian", "secondContactLastName": "Ligia", "secondContactEmail": "gillian@foo.com", "secondContactPhone": "808-588-9181"
     },
     {
-      "email": "fish@foo.com", "password": "changeme", "role": "ORGANIZATION",
-      "firstName": "Jeff", "lastName": "Googlestein", "eventBackgroundImage": "images/young-people.jpg",
-      "logoImage": "images/maunalua-fishpond-logo.png", "organizationName": "Maunalua Fishpond", "missionStatement": "Fish for one, fish for all!", "phoneNumber": "808-933-3888"
+      "email": "maunaluafishpond@foo.com", "password": "changeme", "role": "ORGANIZATION",
+      "firstName": "Remy", "lastName": "Dollie", "eventBackgroundImage": "images/young-people.jpg",
+      "logoImage": "images/maunalua-fishpond-logo.png", "organizationName": "Maunalua Fishpond", "missionStatement": "Fish for one, fish for all!",
+      "phoneNumber": "808-933-3588", "ein":"819488175", "primaryAddress": "903 Akumu St", "city": "Kailua", "state": "Hawaii", "zipcode": "96734",
+      "primaryContactFirstName": "Madelaine", "primaryContactLastName": "Crescencia", "primaryContactEmail": "madelaine@foo.com", "primaryContactPhone": "808-728-7781",
+      "secondContactFirstName": "Zeke", "secondContactLastName": "Winifred", "secondContactEmail": "zekew@foo.com", "secondContactPhone": "808-768-3329"
     },
     {
-      "email": "meals@foo.com", "password": "changeme", "role": "ORGANIZATION",
+      "email": "mealsonwheels@foo.com", "password": "changeme", "role": "ORGANIZATION",
       "firstName": "Martha", "lastName": "Abernathy", "eventBackgroundImage": "images/young-people.jpg",
-      "logoImage": "images/meals-on-wheels-logo.png", "organizationName": "Meals On Wheels", "missionStatement": "The original!", "phoneNumber": "808-111-1111"
+      "logoImage": "images/meals-on-wheels-logo.png", "organizationName": "Meals On Wheels", "missionStatement": "The original!",
+      "phoneNumber": "808-846-9867", "ein": "894521445", "primaryAddress": "909 Coolidge St #APT 203", "city": "Honolulu", "state": "Hawaii", "zipcode": "96826",
+      "primaryContactFirstName": "Madelaine", "primaryContactLastName": "Crescencia", "primaryContactEmail": "madelaine@foo.com", "primaryContactPhone": "808-728-7781",
+      "secondContactFirstName": "Lewin", "secondContactLastName": "Langdon", "secondContactEmail": "lewin@foo.com", "secondContactPhone": "808-928-8799"
     },
     {
-      "email": "aloha@foo.com", "password": "changeme", "role": "ORGANIZATION",
+      "email": "alohasanctuary@foo.com", "password": "changeme", "role": "ORGANIZATION",
       "firstName": "Tim", "lastName": "Dowdy", "eventBackgroundImage": "images/young-people.jpg",
-      "logoImage": "images/aloha-sanctuary-logo.png", "organizationName": "Aloha Sanctuary", "missionStatement": "Kapu ALoha!", "phoneNumber": "808-888-9999"
+      "logoImage": "images/aloha-sanctuary-logo.png", "organizationName": "Aloha Sanctuary", "missionStatement": "Kapu ALoha!",
+      "phoneNumber": "808-999-4746", "ein": "221700937", "primaryAddress": "909 Coolidge St #APT 203", "city": "Honolulu", "state": "Hawaii", "zipcode": "96826",
+      "primaryContactFirstName": "Madelaine", "primaryContactLastName": "Crescencia", "primaryContactEmail": "madelaine@foo.com", "primaryContactPhone": "808-728-7781",
+      "secondContactFirstName": "Lewin", "secondContactLastName": "Langdon", "secondContactEmail": "lewin@foo.com", "secondContactPhone": "808-928-8799"
     },
     {
-      "email": "brotherh@foo.com", "password": "changeme", "role": "ORGANIZATION",
-      "firstName": "Bro", "lastName": "Sis", "eventBackgroundImage": "images/young-people.jpg",
-      "logoImage": "images/big-bros-big-sis-logo.png", "organizationName": "Big Brothers, Big Sisters", "missionStatement": "We got the biggest siblings around!", "phoneNumber": "808-909-9999"
+      "email": "bigbrothersister@foo.com", "password": "changeme", "role": "ORGANIZATION",
+      "firstName": "Georgina", "lastName": "Kortney", "eventBackgroundImage": "images/young-people.jpg",
+      "logoImage": "images/big-bros-big-sis-logo.png", "organizationName": "Big Brothers, Big Sisters", "missionStatement": "We got the biggest siblings around!",
+      "phoneNumber": "808-921-1961", "ein": "472379296", "primaryAddress": "89 Poinciana Rd", "city": "Lahaina", "state": "Hawaii", "zipcode": "96761",
+      "primaryContactFirstName": "Jonah", "primaryContactLastName": "Lane", "primaryContactEmail": "jonah@foo.com", "primaryContactPhone": "808-735-3968",
+      "secondContactFirstName": "Young-Ho", "secondContactLastName": "Agata", "secondContactEmail": "youngho@foo.com", "secondContactPhone": "808-574-3281"
     },
     {
-      "email": "read@foo.com", "password": "changeme", "role": "ORGANIZATION",
-      "firstName": "Ready", "lastName": "McReaderson", "eventBackgroundImage": "images/volunteer.jpg",
-      "logoImage": "images/read-to-me-logo.png", "organizationName": "Read to Me", "missionStatement": "Ready! Set! Read!", "phoneNumber": "808-221-1212"
+      "email": "readtome@foo.com", "password": "changeme", "role": "ORGANIZATION",
+      "firstName": "Myranda", "lastName": "Frankie", "eventBackgroundImage": "images/volunteer.jpg",
+      "logoImage": "images/read-to-me-logo.png", "organizationName": "Read to Me", "missionStatement": "Ready! Set! Read!",
+      "phoneNumber": "808-221-1212", "ein": "841526373", "primaryAddress": "4239 Independence Ave", "city": "Kapolei", "state": "Hawaii", "zipcode": "96707",
+      "primaryContactFirstName": "Adalberto", "primaryContactLastName": "Claudinho", "primaryContactEmail": "adalberto@foo.com", "primaryContactPhone": "808-479-3564",
+      "secondContactFirstName": "Vonda", "secondContactLastName": "Caryl", "secondContactEmail": "vonda@foo.com", "secondContactPhone": "808-329-4386"
     },
     {
-      "email": "salvy@foo.com", "password": "changeme", "role": "ORGANIZATION",
-      "firstName": "Ben", "lastName": "Sonyy", "eventBackgroundImage": "images/volunteer.jpg",
-      "logoImage": "images/salvation-army-logo.png", "organizationName": "Salvation Army", "missionStatement": "Upcycling everything!!", "phoneNumber": "808-667-7766"
+      "email": "salvationarmy@foo.com", "password": "changeme", "role": "ORGANIZATION",
+      "firstName": "Yuka", "lastName": "Sofia", "eventBackgroundImage": "images/volunteer.jpg",
+      "logoImage": "images/salvation-army-logo.png", "organizationName": "Salvation Army", "missionStatement": "Upcycling everything!!",
+      "phoneNumber": "808-667-7766", "ein": "515225106", "primaryAddress": "4274 Aalona St", "city": "Kilauea", "state": "Hawaii", "zipcode": "96754",
+      "primaryContactFirstName": "Edwina", "primaryContactLastName": "Nathan", "primaryContactEmail": "edwina@foo.com", "primaryContactPhone": "808-226-3600",
+      "secondContactFirstName": "Johnathon", "secondContactLastName": "Kamden", "secondContactEmail": "johnathon@foo.com", "secondContactPhone": "808-552-2548"
     },
     {
-      "email": "pantry@foo.com", "password": "changeme", "role": "ORGANIZATION",
+      "email": "thepantry@foo.com", "password": "changeme", "role": "ORGANIZATION",
       "firstName": "Howie", "lastName": "Mandel", "eventBackgroundImage": "images/young-people.jpg",
-      "logoImage": "images/the-pantry-logo.png", "organizationName": "The Pantry", "missionStatement": "We got your pantry!", "phoneNumber": "808-888-1008"
+      "logoImage": "images/the-pantry-logo.png", "organizationName": "The Pantry", "missionStatement": "We got your pantry!",
+      "phoneNumber": "808-888-1008", "ein": "979566106", "primaryAddress": "4327 Lower Honoapiilani Rd", "city": "Lahaina", "state": "Hawaii", "zipcode": "96761",
+      "primaryContactFirstName": "Darden", "primaryContactLastName": "Susumu", "primaryContactEmail": "darden@foo.com", "primaryContactPhone": "808-468-1350",
+      "secondContactFirstName": "Hyun-Jung", "secondContactLastName": "Kyra", "secondContactEmail": "hyunjung@foo.com", "secondContactPhone": "808-337-2199"
     },
     {
-      "email": "surf@foo.com", "password": "changeme", "role": "ORGANIZATION",
+      "email": "surfrider@foo.com", "password": "changeme", "role": "ORGANIZATION",
       "firstName": "Colton", "lastName": "Breckinridge", "eventBackgroundImage": "images/young-people.jpg",
-      "logoImage": "images/surf-rider-logo.png", "organizationName": "Surf Rider", "missionStatement": "Surf first!", "phoneNumber": "808-099-0000"
+      "logoImage": "images/surf-rider-logo.png", "organizationName": "Surf Rider", "missionStatement": "Surf first!",
+      "phoneNumber": "808-099-0000", "ein": "831600571", "primaryAddress": "42 Lokahi Pl #B", "city": "Hilo", "state": "Hawaii", "zipcode": "96720",
+      "primaryContactFirstName": "Chyna", "primaryContactLastName": "Geraldo", "primaryContactEmail": "chyna@foo.com", "primaryContactPhone": "808-643-7549",
+      "secondContactFirstName": "Alishia", "secondContactLastName": "Jodi", "secondContactEmail": "alishia@foo.com", "secondContactPhone": "808-936-6683"
     }
 
   ],
