@@ -112,10 +112,12 @@ const NavBar = ({ currentUser, colorUsage, events }) => {
                       empty
                       color={'red'}/> : ''}
                 </Dropdown.Item>
-                <Dropdown.Item as={NavLink} exact to="organization_signup">
-                  <Icon name={'building'}/>
-                    Organization Sign Up
-                </Dropdown.Item>
+                {Roles.userIsInRole(Meteor.userId(), [ROLE.ADMIN]) ? (
+                  <Dropdown.Item as={NavLink} exact to="organization_signup">
+                    <Icon name={'building'}/>
+                      Organization Sign Up
+                  </Dropdown.Item>
+                ) : ''}
                 <Dropdown.Item id={COMPONENT_IDS.NAVBAR_SIGN_OUT} icon="sign out" text="Sign Out" as={NavLink} exact to="/signout" />
               </Dropdown.Menu>
             </Dropdown>

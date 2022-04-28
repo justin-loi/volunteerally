@@ -14,18 +14,19 @@ import { OrganizationEvent } from '../../api/event/OrganizationEventCollection';
 import { Events } from '../../api/event/EventCollection';
 
 /** Renders the Page for adding a document. */
-const OrganizationProfile = ({ orgProfile, events, ready }) => ((ready) ? (
+const OrganizationProfile = ({ currentUser, orgProfile, events, ready }) => ((ready) ? (
   <Grid id={PAGE_IDS.ORGANIZATION_PROFILE} container centered>
     <Grid.Row>
       <Image src="images/event_card_default_image.png" size='big' />
     </Grid.Row>
     <Grid.Row >
-      <Button as={NavLink} exact to={`/edit-volunteer-profile/${orgProfile._id}`}>Edit Profile</Button>
       <Grid.Row>
-        {(Meteor.userId() && Roles.userIsInRole(Meteor.userId(), [ROLE.ORGANIZATION])) ? (
+        {(currentUser === orgProfile.primaryContactEmail && Roles.userIsInRole(Meteor.userId(), [ROLE.ORGANIZATION])) ? (
           <Button as={NavLink} exact to={`/edit-organization-profile/${orgProfile._id}`}>Edit Profile</Button>
         ) : ''}
-        <Button as={NavLink} exact to={`/volunteer-send-email/${orgProfile._id}`}>Send an email</Button>
+        {(Roles.userIsInRole(Meteor.userId(), [ROLE.VOLUNTEER])) ? (
+          <Button as={NavLink} exact to={`/volunteer-send-email/${orgProfile._id}`}>Send an email</Button>
+        ) : ''}
       </Grid.Row>
     </Grid.Row>
     <Grid.Row columns={2}>
@@ -74,7 +75,7 @@ const OrganizationProfile = ({ orgProfile, events, ready }) => ((ready) ? (
           <Header as="h3">
             <Icon name="globe"/> Gallery
           </Header>
-          <Image src="images/young-people.jpg"/>
+          <Image src="images/young_people_image.jpg"/>
         </Segment>
         <Segment>
           <Header as="h3">
@@ -93,6 +94,7 @@ const OrganizationProfile = ({ orgProfile, events, ready }) => ((ready) ? (
 ) : <Loader active>Getting data</Loader>);
 
 OrganizationProfile.propTypes = {
+  currentUser: PropTypes.string,
   orgProfile: PropTypes.object,
   events: PropTypes.array,
   ready: PropTypes.bool.isRequired,
@@ -100,6 +102,7 @@ OrganizationProfile.propTypes = {
 
 export default withTracker(({ match }) => {
   // Get access to organization documents.
+  const currentUser = Meteor.user() ? Meteor.user().username : '';
   const { _id } = match.params;
   const orgProfileId = _id;
   const subscription = OrganizationProfiles.subscribe();
@@ -115,5 +118,6 @@ export default withTracker(({ match }) => {
     orgProfile,
     events,
     ready,
+    currentUser,
   };
 })(OrganizationProfile);
