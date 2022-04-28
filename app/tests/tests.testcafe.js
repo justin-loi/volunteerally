@@ -31,7 +31,7 @@ test('Test that volunteer sign up and sign out work', async () => {
   await volunteerSignupPage.signupVolunteer(newCredentials.username, newCredentials.password);
 });
 
-test('Test that user pages show up', async () => {
+test.only('Test that user pages show up', async () => {
   await navBar.gotoSigninPage();
   await signInPage.signin(credentials.username, credentials.password);
   await navBar.isLoggedIn(credentials.username);
@@ -39,7 +39,7 @@ test('Test that user pages show up', async () => {
   await signOutPage.isDisplayed();
 });
 
-test.only('Test that admin pages show up', async () => {
+test('Test that admin pages show up', async () => {
   await navBar.gotoSigninPage();
   await signInPage.signin(adminCredentials.username, adminCredentials.password);
   await navBar.isLoggedIn(adminCredentials.username);
