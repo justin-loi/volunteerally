@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Container, Table, Header, Loader, Form, Label } from 'semantic-ui-react';
+import { Container, Table, Header, Loader, Form } from 'semantic-ui-react';
 import { withTracker } from 'meteor/react-meteor-data';
 import PropTypes from 'prop-types';
 import swal from 'sweetalert';
