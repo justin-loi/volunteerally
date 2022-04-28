@@ -3,6 +3,7 @@ import { Meteor } from 'meteor/meteor';
 import { Grid, Image, Loader, Button, Segment, Divider, Header, Icon, Card } from 'semantic-ui-react';
 import PropTypes from 'prop-types';
 import { withTracker } from 'meteor/react-meteor-data';
+import { _ } from 'meteor/underscore';
 import { NavLink } from 'react-router-dom';
 import { Roles } from 'meteor/alanning:roles';
 import { PAGE_IDS } from '../utilities/PageIDs';
@@ -69,11 +70,11 @@ export default withTracker(({ match }) => {
   const subscription3 = Events.subscribe();
   // Determine if the subscription is ready
   const ready = subscription.ready() && subscription2.ready() && subscription3.ready();
-
-  const orgProfile = (orgProfileId === 'user') ? OrganizationProfiles.findOne({ userID: Meteor.userId() }, {}) :
-    (OrganizationProfiles.findOne({ _id: orgProfileId }, {}));
-  const orgEventArr = (typeof orgProfile !== 'undefined') ? OrganizationEvent.find({ organizationID: orgProfile.userID }, {}).fetch() : [];
-  const events = orgEventArr.map((orgEvent) => Events.findOne({ _id: orgEvent.eventID }, {}));
+  const orgProfile = OrganizationProfiles.findDoc(orgProfileId);
+  console.log(orgProfileId);
+  const eventOrganizations = OrganizationEvent.find({ organizationID: orgProfileId }, {}).fetch();
+  const eventIDList = _.uniq(eventOrganizations.map(eventOrganization => eventOrganization.eventID));
+  const events = eventIDList.map((eventID) => Events.findOne({ _id: eventID }, {}));
   return {
     orgProfile,
     events,

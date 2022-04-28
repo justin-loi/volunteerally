@@ -204,12 +204,10 @@ if (OrganizationEvent.count() === 0) {
   if (length > eventsArray.length) {
     length = eventsArray.length;
   }
-  // console.log(organizationArray.findIndex((organization) => organization.organizationName === eventsArray[0].orgName));
-  // console.log(organizationArray[(organizationArray.findIndex((organization) => organization.organizationName === eventsArray[0].orgName))].userID);
   const orgIndex = [];
   eventsArray.map((event) => orgIndex.push(organizationArray.findIndex((organization) => organization.email === event.owner)));
   eventsArray.map((event, index) => (OrganizationEvent.define({
-    organizationID: organizationArray[orgIndex[index]].userID, eventID: event._id })));
+    organizationID: organizationArray[orgIndex[index]]._id, eventID: event._id })));
 }
 
 function addIndustries(data) {

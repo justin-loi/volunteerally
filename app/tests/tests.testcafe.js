@@ -14,7 +14,7 @@ const newCredentials = { username: 'janefonda@foo.com', password: 'changeme' };
 fixture('matrp localhost test with default db')
   .page('http://localhost:3000');
 
-test('Test that landing page shows up', async () => {
+test.only('Test that landing page shows up', async () => {
   await landingPage.isDisplayed();
 });
 
