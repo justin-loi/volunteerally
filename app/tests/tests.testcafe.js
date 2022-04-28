@@ -14,7 +14,7 @@ const newCredentials = { username: 'janefonda@foo.com', password: 'changeme' };
 fixture('matrp localhost test with default db')
   .page('http://localhost:3000');
 
-test('Test that landing page shows up', async () => {
+test.only('Test that landing page shows up', async () => {
   await landingPage.isDisplayed();
 });
 
@@ -31,7 +31,7 @@ test('Test that volunteer sign up and sign out work', async () => {
   await volunteerSignupPage.signupVolunteer(newCredentials.username, newCredentials.password);
 });
 
-test.only('Test that user pages show up', async () => {
+test('Test that user pages show up', async () => {
   await navBar.gotoSigninPage();
   await signInPage.signin(credentials.username, credentials.password);
   await navBar.isLoggedIn(credentials.username);
