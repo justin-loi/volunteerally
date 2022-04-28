@@ -6,7 +6,7 @@ import { NavLink, withRouter } from 'react-router-dom';
 /** Renders a single organization card. */
 const OrganizationCard = ({ organization, id }) => (
   <Card id={id} as={NavLink} exact to={`/organization-profile/${organization._id}`}>
-    <Image src='images/event_card_default_image.png' wrapped ui={false}/>
+    <Image src={organization.eventBackgroundImage} wrapped ui={false}/>
     <Card.Content>
       <Header as='h3'>{organization.organizationName}</Header>
       <Image src={organization.logoImage} size='mini' circular/>

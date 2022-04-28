@@ -139,150 +139,291 @@
 
   "defaultOrganizations": [
     { "email": "redcross@foo.com", "password": "changeme", "role": "ORGANIZATION",
-      "firstName": "Robert", "lastName": "Fong", "eventBackgroundImage": "images/red-cross-gallery.jpeg",
-      "logoImage": "images/red-cross-logo.png", "organizationName": "The Red Cross", "missionStatement": "To help everyone and cure everything!", "phoneNumber": "808-123-0420",
-      "ein": "123456789", "primaryAddress": "1111 Example Address", "city": "Honolulu", "state": "Hawaii", "zipcode": "96822",
+      "firstName": "Robert", "lastName": "Fong", "eventBackgroundImage": "images/red_cross_image.jpg",
+      "logoImage": "images/red-cross-logo.png", "organizationName": "The Red Cross", "missionStatement": "To help everyone and cure everything!",
+      "phoneNumber": "808-123-0420", "ein": "123456789", "primaryAddress": "1111 Example Address", "city": "Honolulu", "state": "Hawaii", "zipcode": "96822",
       "primaryContactFirstName": "Robert", "primaryContactLastName": "Fong", "primaryContactEmail": "robert@foo.com", "primaryContactPhone": "808-123-0420",
       "secondContactFirstName": "Jamie", "secondContactLastName": "Yang", "secondContactEmail": "jamie@foo.com", "secondContactPhone": "808-931-3804"
     },
     {
-      "email": "nah@foo.com", "password": "changeme", "role": "ORGANIZATION",
-      "firstName": "Nah", "lastName": "Foo", "eventBackgroundImage": "images/young-people.jpg",
-      "logoImage": "images/helping-hands-logo.png", "organizationName": "Helping Hands", "missionStatement": "You know what the say about idle hands, we are helping hands!", "phoneNumber": "808-999-8888"
+      "email": "helpinghands@foo.com", "password": "changeme", "role": "ORGANIZATION",
+      "firstName": "Greg", "lastName": "Demar", "eventBackgroundImage": "images/helping_hand_image.jpg",
+      "logoImage": "images/helping-hands-logo.png", "organizationName": "Helping Hands", "missionStatement": "You know what the say about idle hands, we are helping hands!",
+      "phoneNumber": "808-999-8888", "ein":"920930217", "primaryAddress": "1049 Kamaka Lane", "city": "Honolulu", "state": "Hawaii", "zipcode": "96817",
+      "primaryContactFirstName": "Albert", "primaryContactLastName": "Adamina", "primaryContactEmail": "albert@foo.com", "primaryContactPhone": "808-347-4894",
+      "secondContactFirstName": "Jaco", "secondContactLastName": "Cleve", "secondContactEmail": "jaco@foo.com", "secondContactPhone": "808-128-5532"
     },
     {
-      "email": "ya@foo.com", "password": "changeme", "role": "ORGANIZATION",
-      "firstName": "Sha", "lastName": "Moo", "eventBackgroundImage": "images/volunteer.jpg",
-      "logoImage": "images/food-bank-logo.png", "organizationName": "Food Bank", "missionStatement": "Interest free food!", "phoneNumber": "808-420-1234"
+      "email": "foodbank@foo.com", "password": "changeme", "role": "ORGANIZATION",
+      "firstName": "Balbino", "lastName": "Floro", "eventBackgroundImage": "images/food_bank_image.jpg",
+      "logoImage": "images/food-bank-logo.png", "organizationName": "Food Bank", "missionStatement": "Interest free food!",
+      "phoneNumber": "808-589-3491", "ein":"102895245", "primaryAddress": "92 Palahia St", "city": "Kapolei", "state": "Hawaii", "zipcode": "96707",
+      "primaryContactFirstName": "Jayme", "primaryContactLastName": "Fabia", "primaryContactEmail": "jayme@foo.com", "primaryContactPhone": "808-200-1202",
+      "secondContactFirstName": "Yoshirou", "secondContactLastName": "Sonia", "secondContactEmail": "yoshiro@foo.com", "secondContactPhone": "808-402-5975"
     },
     {
-      "email": "aye@foo.com", "password": "changeme", "role": "ORGANIZATION",
-      "firstName": "Aye", "lastName": "Yu", "eventBackgroundImage": "images/volunteer.jpg",
-      "logoImage": "images/habitat-humanity-logo.png", "organizationName": "Habitat for Humanity", "missionStatement": "The habitat for humanity!", "phoneNumber": "808-333-8998"
+      "email": "habitathumanity@foo.com", "password": "changeme", "role": "ORGANIZATION",
+      "firstName": "Eulogia", "lastName": "Jacqui", "eventBackgroundImage": "images/habitat_humanity_image.jpg",
+      "logoImage": "images/habitat-humanity-logo.png", "organizationName": "Habitat for Humanity", "missionStatement": "The habitat for humanity!",
+      "phoneNumber": "808-333-8998", "ein":"498103815", "primaryAddress": "889 Upalu St", "city": "Wailuku", "state": "Hawaii", "zipcode": "96793",
+      "primaryContactFirstName": "Carlito", "primaryContactLastName": "Roberto", "primaryContactEmail": "carlito@foo.com", "primaryContactPhone": "808-203-5840",
+      "secondContactFirstName": "Telma", "secondContactLastName": "Constanca", "secondContactEmail": "telma@foo.com", "secondContactPhone": "808-270-2328"
     },
     {
-      "email": "que@foo.com", "password": "changeme", "role": "ORGANIZATION",
-      "firstName": "Jim", "lastName": "Dean", "eventBackgroundImage": "images/volunteer.jpg",
-      "logoImage": "images/humane-society-logo.png", "organizationName": "Humane Society", "missionStatement": "Against inhumane societies!", "phoneNumber": "808-111-2233"
+      "email": "humanesociety@foo.com", "password": "changeme", "role": "ORGANIZATION",
+      "firstName": "Jim", "lastName": "Dean", "eventBackgroundImage": "images/humane_society_image.jpg",
+      "logoImage": "images/humane-society-logo.png", "organizationName": "Humane Society", "missionStatement": "Against inhumane societies!",
+      "phoneNumber": "808-111-2233", "ein":"344559120", "primaryAddress": "89 Nene SHumane Societyt", "city": "Hilo", "state": "Hawaii", "zipcode": "96720",
+      "primaryContactFirstName": "Shigeru", "primaryContactLastName": "Kailani", "primaryContactEmail": "shigeru@foo.com", "primaryContactPhone": "808-337-2199",
+      "secondContactFirstName": "Rupert", "secondContactLastName": "Delmar", "secondContactEmail": "rupert@foo.com", "secondContactPhone": "808-246-7294"
     },
     {
-      "email": "malama@foo.com", "password": "changeme", "role": "ORGANIZATION",
-      "firstName": "Malama", "lastName": "Aina", "eventBackgroundImage": "images/young-people.jpg",
-      "logoImage": "images/malama-maunalua-logo.png", "organizationName": "Malama Maunalua", "missionStatement": "Protect and serve!", "phoneNumber": "808-454-4444"
+      "email": "malamamaunalua@foo.com", "password": "changeme", "role": "ORGANIZATION",
+      "firstName": "Mayte", "lastName": "Lauressa", "eventBackgroundImage": "images/malama_maunalua_image.jpg",
+      "logoImage": "images/malama-maunalua-logo.png", "organizationName": "Malama Maunalua", "missionStatement": "Protect and serve!",
+      "phoneNumber": "808-454-4444", "ein":"381564530", "primaryAddress": "91 Kaimalie St #2R6", "city": "Ewa Beach", "state": "Hawaii", "zipcode": "96706",
+      "primaryContactFirstName": "Francisco Javier", "primaryContactLastName": "Minta", "primaryContactEmail": "francisoj@foo.com", "primaryContactPhone": "808-283-0255",
+      "secondContactFirstName": "Gillian", "secondContactLastName": "Ligia", "secondContactEmail": "gillian@foo.com", "secondContactPhone": "808-588-9181"
     },
     {
-      "email": "fish@foo.com", "password": "changeme", "role": "ORGANIZATION",
-      "firstName": "Jeff", "lastName": "Googlestein", "eventBackgroundImage": "images/young-people.jpg",
-      "logoImage": "images/maunalua-fishpond-logo.png", "organizationName": "Maunalua Fishpond", "missionStatement": "Fish for one, fish for all!", "phoneNumber": "808-933-3888"
+      "email": "maunaluafishpond@foo.com", "password": "changeme", "role": "ORGANIZATION",
+      "firstName": "Remy", "lastName": "Dollie", "eventBackgroundImage": "images/maunalua_fishpond_image.jpg",
+      "logoImage": "images/maunalua-fishpond-logo.png", "organizationName": "Maunalua Fishpond", "missionStatement": "Fish for one, fish for all!",
+      "phoneNumber": "808-933-3588", "ein":"819488175", "primaryAddress": "903 Akumu St", "city": "Kailua", "state": "Hawaii", "zipcode": "96734",
+      "primaryContactFirstName": "Madelaine", "primaryContactLastName": "Crescencia", "primaryContactEmail": "madelaine@foo.com", "primaryContactPhone": "808-728-7781",
+      "secondContactFirstName": "Zeke", "secondContactLastName": "Winifred", "secondContactEmail": "zekew@foo.com", "secondContactPhone": "808-768-3329"
     },
     {
-      "email": "meals@foo.com", "password": "changeme", "role": "ORGANIZATION",
-      "firstName": "Martha", "lastName": "Abernathy", "eventBackgroundImage": "images/young-people.jpg",
-      "logoImage": "images/meals-on-wheels-logo.png", "organizationName": "Meals On Wheels", "missionStatement": "The original!", "phoneNumber": "808-111-1111"
+      "email": "mealsonwheels@foo.com", "password": "changeme", "role": "ORGANIZATION",
+      "firstName": "Martha", "lastName": "Abernathy", "eventBackgroundImage": "images/meals_on_wheels_image.jpg",
+      "logoImage": "images/meals-on-wheels-logo.png", "organizationName": "Meals On Wheels", "missionStatement": "The original!",
+      "phoneNumber": "808-846-9867", "ein": "894521445", "primaryAddress": "909 Coolidge St #APT 203", "city": "Honolulu", "state": "Hawaii", "zipcode": "96826",
+      "primaryContactFirstName": "Madelaine", "primaryContactLastName": "Crescencia", "primaryContactEmail": "madelaine@foo.com", "primaryContactPhone": "808-728-7781",
+      "secondContactFirstName": "Lewin", "secondContactLastName": "Langdon", "secondContactEmail": "lewin@foo.com", "secondContactPhone": "808-928-8799"
     },
     {
-      "email": "aloha@foo.com", "password": "changeme", "role": "ORGANIZATION",
-      "firstName": "Tim", "lastName": "Dowdy", "eventBackgroundImage": "images/young-people.jpg",
-      "logoImage": "images/aloha-sanctuary-logo.png", "organizationName": "Aloha Sanctuary", "missionStatement": "Kapu ALoha!", "phoneNumber": "808-888-9999"
+      "email": "alohasanctuary@foo.com", "password": "changeme", "role": "ORGANIZATION",
+      "firstName": "Tim", "lastName": "Dowdy", "eventBackgroundImage": "images/aloha_sanctuary_image.jpg",
+      "logoImage": "images/aloha-sanctuary-logo.png", "organizationName": "Aloha Sanctuary", "missionStatement": "Kapu ALoha!",
+      "phoneNumber": "808-999-4746", "ein": "221700937", "primaryAddress": "909 Coolidge St #APT 203", "city": "Honolulu", "state": "Hawaii", "zipcode": "96826",
+      "primaryContactFirstName": "Madelaine", "primaryContactLastName": "Crescencia", "primaryContactEmail": "madelaine@foo.com", "primaryContactPhone": "808-728-7781",
+      "secondContactFirstName": "Lewin", "secondContactLastName": "Langdon", "secondContactEmail": "lewin@foo.com", "secondContactPhone": "808-928-8799"
     },
     {
-      "email": "brotherh@foo.com", "password": "changeme", "role": "ORGANIZATION",
-      "firstName": "Bro", "lastName": "Sis", "eventBackgroundImage": "images/young-people.jpg",
-      "logoImage": "images/big-bros-big-sis-logo.png", "organizationName": "Big Brothers, Big Sisters", "missionStatement": "We got the biggest siblings around!", "phoneNumber": "808-909-9999"
+      "email": "bigbrothersister@foo.com", "password": "changeme", "role": "ORGANIZATION",
+      "firstName": "Georgina", "lastName": "Kortney", "eventBackgroundImage": "images/big_brother_image.jpg",
+      "logoImage": "images/big-bros-big-sis-logo.png", "organizationName": "Big Brothers, Big Sisters", "missionStatement": "We got the biggest siblings around!",
+      "phoneNumber": "808-921-1961", "ein": "472379296", "primaryAddress": "89 Poinciana Rd", "city": "Lahaina", "state": "Hawaii", "zipcode": "96761",
+      "primaryContactFirstName": "Jonah", "primaryContactLastName": "Lane", "primaryContactEmail": "jonah@foo.com", "primaryContactPhone": "808-735-3968",
+      "secondContactFirstName": "Young-Ho", "secondContactLastName": "Agata", "secondContactEmail": "youngho@foo.com", "secondContactPhone": "808-574-3281"
     },
     {
-      "email": "read@foo.com", "password": "changeme", "role": "ORGANIZATION",
-      "firstName": "Ready", "lastName": "McReaderson", "eventBackgroundImage": "images/volunteer.jpg",
-      "logoImage": "images/read-to-me-logo.png", "organizationName": "Read to Me", "missionStatement": "Ready! Set! Read!", "phoneNumber": "808-221-1212"
+      "email": "readtome@foo.com", "password": "changeme", "role": "ORGANIZATION",
+      "firstName": "Myranda", "lastName": "Frankie", "eventBackgroundImage": "images/read_to_me_image.jpg",
+      "logoImage": "images/read-to-me-logo.png", "organizationName": "Read to Me", "missionStatement": "Ready! Set! Read!",
+      "phoneNumber": "808-221-1212", "ein": "841526373", "primaryAddress": "4239 Independence Ave", "city": "Kapolei", "state": "Hawaii", "zipcode": "96707",
+      "primaryContactFirstName": "Adalberto", "primaryContactLastName": "Claudinho", "primaryContactEmail": "adalberto@foo.com", "primaryContactPhone": "808-479-3564",
+      "secondContactFirstName": "Vonda", "secondContactLastName": "Caryl", "secondContactEmail": "vonda@foo.com", "secondContactPhone": "808-329-4386"
     },
     {
-      "email": "salvy@foo.com", "password": "changeme", "role": "ORGANIZATION",
-      "firstName": "Ben", "lastName": "Sonyy", "eventBackgroundImage": "images/volunteer.jpg",
-      "logoImage": "images/salvation-army-logo.png", "organizationName": "Salvation Army", "missionStatement": "Upcycling everything!!", "phoneNumber": "808-667-7766"
+      "email": "salvationarmy@foo.com", "password": "changeme", "role": "ORGANIZATION",
+      "firstName": "Yuka", "lastName": "Sofia", "eventBackgroundImage": "images/salvation_army_image.jpg",
+      "logoImage": "images/salvation-army-logo.png", "organizationName": "Salvation Army", "missionStatement": "Upcycling everything!!",
+      "phoneNumber": "808-667-7766", "ein": "515225106", "primaryAddress": "4274 Aalona St", "city": "Kilauea", "state": "Hawaii", "zipcode": "96754",
+      "primaryContactFirstName": "Edwina", "primaryContactLastName": "Nathan", "primaryContactEmail": "edwina@foo.com", "primaryContactPhone": "808-226-3600",
+      "secondContactFirstName": "Johnathon", "secondContactLastName": "Kamden", "secondContactEmail": "johnathon@foo.com", "secondContactPhone": "808-552-2548"
     },
     {
-      "email": "pantry@foo.com", "password": "changeme", "role": "ORGANIZATION",
-      "firstName": "Howie", "lastName": "Mandel", "eventBackgroundImage": "images/young-people.jpg",
-      "logoImage": "images/the-pantry-logo.png", "organizationName": "The Pantry", "missionStatement": "We got your pantry!", "phoneNumber": "808-888-1008"
+      "email": "thepantry@foo.com", "password": "changeme", "role": "ORGANIZATION",
+      "firstName": "Howie", "lastName": "Mandel", "eventBackgroundImage": "images/the_pantry_image.jpg",
+      "logoImage": "images/the-pantry-logo.png", "organizationName": "The Pantry", "missionStatement": "We got your pantry!",
+      "phoneNumber": "808-888-1008", "ein": "979566106", "primaryAddress": "4327 Lower Honoapiilani Rd", "city": "Lahaina", "state": "Hawaii", "zipcode": "96761",
+      "primaryContactFirstName": "Darden", "primaryContactLastName": "Susumu", "primaryContactEmail": "darden@foo.com", "primaryContactPhone": "808-468-1350",
+      "secondContactFirstName": "Hyun-Jung", "secondContactLastName": "Kyra", "secondContactEmail": "hyunjung@foo.com", "secondContactPhone": "808-337-2199"
     },
     {
-      "email": "surf@foo.com", "password": "changeme", "role": "ORGANIZATION",
-      "firstName": "Colton", "lastName": "Breckinridge", "eventBackgroundImage": "images/young-people.jpg",
-      "logoImage": "images/surf-rider-logo.png", "organizationName": "Surf Rider", "missionStatement": "Surf first!", "phoneNumber": "808-099-0000"
+      "email": "surfrider@foo.com", "password": "changeme", "role": "ORGANIZATION",
+      "firstName": "Colton", "lastName": "Breckinridge", "eventBackgroundImage": "images/surf_rider_image.jpg",
+      "logoImage": "images/surf-rider-logo.png", "organizationName": "Surf Rider", "missionStatement": "Surf first!",
+      "phoneNumber": "808-099-0000", "ein": "831600571", "primaryAddress": "42 Lokahi Pl #B", "city": "Hilo", "state": "Hawaii", "zipcode": "96720",
+      "primaryContactFirstName": "Chyna", "primaryContactLastName": "Geraldo", "primaryContactEmail": "chyna@foo.com", "primaryContactPhone": "808-643-7549",
+      "secondContactFirstName": "Alishia", "secondContactLastName": "Jodi", "secondContactEmail": "alishia@foo.com", "secondContactPhone": "808-936-6683"
     }
 
   ],
 
   "defaultEvents": [
-    { "eventName": "Mowing Peoples Lawns", "eventStartTime": "8:00", "eventEndTime": "18:00", "eventDate": "April 20th, 2023", "orgName": "Helping Hands", "eventDescription": "Come Help us mow some extremely out of control lawns. Bring Sunscreen!", "owner": "nah@foo.com", "eventAddress": "222 Banana Rd.", "eventCardImage": "event_card_default_image.png", "eventCity": "Honolulu", "eventZip": "96815", "eventState": "HI", "eventProfileImage": " "
+    { "eventName": "Mowing Peoples Lawns", "eventStartTime": "8:00", "eventEndTime": "18:00", "eventDate": "April 20th, 2023",
+      "orgName": "Helping Hands", "eventDescription": "Come Help us mow some extremely out of control lawns. Bring Sunscreen!",
+      "owner": "helpinghands@foo.com", "eventAddress": "222 Banana Rd.", "eventCardImage": "event_card_default_image.png",
+      "eventCity": "Honolulu", "eventZip": "96815", "eventState": "HI", "eventProfileImage": " "
     },
-    { "eventName": "Back 2 School", "eventStartTime": "10:00", "eventEndTime": "14:00", "eventDate": "April 20th, 2023", "orgName": "Helping Hands", "eventDescription": "Time to come back to school!!", "owner": "nah@foo.com", "eventAddress": "222 Banana Rd.", "eventCardImage": "event_card_default_image.png", "eventCity": "Honolulu", "eventZip": "96815", "eventState": "HI", "eventProfileImage": "images/event_card_default_image.png"
+    { "eventName": "Back 2 School", "eventStartTime": "10:00", "eventEndTime": "14:00", "eventDate": "April 20th, 2023",
+      "orgName": "Helping Hands", "eventDescription": "Time to come back to school!!", "owner": "helpinghands@foo.com",
+      "eventAddress": "222 Banana Rd.", "eventCardImage": "event_card_default_image.png", "eventCity": "Honolulu",
+      "eventZip": "96815", "eventState": "HI", "eventProfileImage": "images/event_card_default_image.png"
     },
-    { "eventName": "Dr. Moore Buy's Pizza", "eventStartTime": "7:45", "eventEndTime": "11:30", "eventDate": "April 20th, 2022", "orgName": "Helping Hands", "eventDescription": "New Little Caesers on King St., time for some Krazy Bread!", "owner": "nah@foo.com", "eventAddress": "222 Banana Rd.", "eventCardImage": "event_card_default_image.png", "eventCity": "Honolulu", "eventZip": "96815", "eventState": "HI", "eventProfileImage": "images/pizza-party.jpg"
+    { "eventName": "Dr. Moore Buy's Pizza", "eventStartTime": "7:45", "eventEndTime": "11:30", "eventDate": "April 20th, 2022",
+      "orgName": "Helping Hands", "eventDescription": "New Little Caesers on King St., time for some Krazy Bread!",
+      "owner": "helpinghands@foo.com", "eventAddress": "222 Banana Rd.", "eventCardImage": "event_card_default_image.png", "eventCity": "Honolulu", "eventZip": "96815", "eventState": "HI", "eventProfileImage": "images/pizza-party.jpg"
     },
-    { "eventName": "Red Cross Blood Driver", "eventStartTime": "12:30", "eventEndTime": "18:30", "eventDate": "May 7th, 2022", "orgName": "The Red Cross", "eventDescription": "Blood needed for blood things like living, give blood", "owner": "nah@foo.com", "eventAddress": "222 Banana Rd.", "eventCardImage": "red-cross-logo.png", "eventCity": "Honolulu", "eventZip": "96815", "eventState": "HI", "eventProfileImage": "images/blood-drive.jpg"
+    { "eventName": "Red Cross Blood Driver", "eventStartTime": "12:30", "eventEndTime": "18:30", "eventDate": "May 7th, 2022",
+      "orgName": "The Red Cross", "eventDescription": "Blood needed for blood things like living, give blood",
+      "owner": "redcross@foo.com", "eventAddress": "222 Banana Rd.", "eventCardImage": "red-cross-logo.png",
+      "eventCity": "Honolulu", "eventZip": "96815", "eventState": "HI", "eventProfileImage": "images/blood-drive.jpg"
     },
-    { "eventName": "Emergency Preparedness Course", "eventStartTime": "12:30", "eventEndTime": "16:30", "eventDate": "June 4th, 2022", "orgName": "The Red Cross", "eventDescription": "volunteers needed to help with demonstrations", "owner": "nah@foo.com", "eventAddress": "222 Banana Rd.", "eventCardImage": "red-cross-logo.png", "eventCity": "Honolulu", "eventZip": "96815", "eventState": "HI", "eventProfileImage": "images/event_card_default_image.png"
+    { "eventName": "Emergency Preparedness Course", "eventStartTime": "12:30", "eventEndTime": "16:30", "eventDate": "June 4th, 2022",
+      "orgName": "The Red Cross", "eventDescription": "volunteers needed to help with demonstrations",
+      "owner": "redcross@foo.com", "eventAddress": "222 Banana Rd.", "eventCardImage": "red-cross-logo.png", "eventCity": "Honolulu",
+      "eventZip": "96815", "eventState": "HI", "eventProfileImage": "images/event_card_default_image.png"
     },
-    { "eventName": "Red Cross Blood Drive", "eventStartTime": "10:30", "eventEndTime": "16:30", "eventDate": "July 2nd, 2022", "orgName": "The Red Cross", "eventDescription": "Blood needed for blood things like living, give blood", "owner": "nah@foo.com", "eventAddress": "222 Banana Rd.", "eventCardImage": "red-cross-logo.png", "eventCity": "Honolulu", "eventZip": "96815", "eventState": "HI", "eventProfileImage": "images/blood-drive.jpg"
+    { "eventName": "Red Cross Blood Drive", "eventStartTime": "10:30", "eventEndTime": "16:30", "eventDate": "July 2nd, 2022",
+      "orgName": "The Red Cross", "eventDescription": "Blood needed for blood things like living, give blood",
+      "owner": "redcross@foo.com", "eventAddress": "222 Banana Rd.", "eventCardImage": "red-cross-logo.png", "eventCity": "Honolulu", "eventZip": "96815", "eventState": "HI", "eventProfileImage": "images/blood-drive.jpg"
     },
-    { "eventName": "UH Manoa Food Distribution", "eventStartTime": "8:30", "eventEndTime": "20:30", "eventDate": "May 18th, 2022", "orgName": "Food Bank", "eventDescription": "bunch of volunteers needed to help with distributing", "owner": "nah@foo.com", "eventAddress": "222 Banana Rd.", "eventCardImage": "food-bank-logo.png", "eventCity": "Honolulu", "eventZip": "96815", "eventState": "HI", "eventProfileImage": "images/event_card_default_image.png"
+    { "eventName": "UH Manoa Food Distribution", "eventStartTime": "8:30", "eventEndTime": "20:30", "eventDate": "May 18th, 2022",
+      "orgName": "Food Bank", "eventDescription": "bunch of volunteers needed to help with distributing",
+      "owner": "foodbank@foo.com", "eventAddress": "222 Banana Rd.", "eventCardImage": "food-bank-logo.png", "eventCity": "Honolulu",
+      "eventZip": "96815", "eventState": "HI", "eventProfileImage": "images/event_card_default_image.png"
     },
-    { "eventName": "Canned Food Donation", "eventStartTime": "8:45", "eventEndTime": "12:30", "eventDate": "June 10th, 2022", "orgName": "Food Bank", "eventDescription": "volunteers needed to help with collecting and organizing the donation", "owner": "nah@foo.com", "eventAddress": "222 Banana Rd.", "eventCardImage": "food-bank-logo.png", "eventCity": "Honolulu", "eventZip": "96815", "eventState": "HI", "eventProfileImage": "images/event_card_default_image.png"
+    { "eventName": "Canned Food Donation", "eventStartTime": "8:45", "eventEndTime": "12:30", "eventDate": "June 10th, 2022",
+      "orgName": "Food Bank", "eventDescription": "volunteers needed to help with collecting and organizing the donation",
+      "owner": "foodbank@foo.com", "eventAddress": "222 Banana Rd.", "eventCardImage": "food-bank-logo.png", "eventCity": "Honolulu",
+      "eventZip": "96815", "eventState": "HI", "eventProfileImage": "images/event_card_default_image.png"
     },
-    { "eventName": "Food Bank's Culinary Class", "eventStartTime": "13:00", "eventEndTime": "17:30", "eventDate": "July 20th, 2022", "orgName": "Food Bank", "eventDescription": "A bunch of volunteers needed to help with demonstrations", "owner": "nah@foo.com", "eventAddress": "222 Banana Rd.", "eventCardImage": "food-bank-logo.png", "eventCity": "Honolulu", "eventZip": "96815", "eventState": "HI", "eventProfileImage": "images/event_card_default_image.png"
+    { "eventName": "Food Bank's Culinary Class", "eventStartTime": "13:00", "eventEndTime": "17:30", "eventDate": "July 20th, 2022",
+      "orgName": "Food Bank", "eventDescription": "A bunch of volunteers needed to help with demonstrations",
+      "owner": "foodbank@foo.com", "eventAddress": "222 Banana Rd.", "eventCardImage": "food-bank-logo.png",
+      "eventCity": "Honolulu", "eventZip": "96815", "eventState": "HI", "eventProfileImage": "images/event_card_default_image.png"
     },
-    { "eventName": "Repair: Houses Affected by the Storm", "eventStartTime": "8:45", "eventEndTime": "20:30", "eventDate": "May 21st, 2022", "orgName": "Habitat For Humanity", "eventDescription": "Looking for hands to help repair houses damaged by the storm", "owner": "nah@foo.com", "eventAddress": "222 Banana Rd.", "eventCardImage": "habitat-humanity-logo.png", "eventCity": "Honolulu", "eventZip": "96815", "eventState": "HI", "eventProfileImage": "images/event_card_default_image.png"
+    { "eventName": "Repair: Houses Affected by the Storm", "eventStartTime": "8:45", "eventEndTime": "20:30", "eventDate": "May 21st, 2022",
+      "orgName": "Habitat For Humanity", "eventDescription": "Looking for hands to help repair houses damaged by the storm",
+      "owner": "habitathumanity@foo.com", "eventAddress": "222 Banana Rd.", "eventCardImage": "habitat-humanity-logo.png",
+      "eventCity": "Honolulu", "eventZip": "96815", "eventState": "HI", "eventProfileImage": "images/event_card_default_image.png"
     },
-    { "eventName": "Hurricane Preparedness Seminar", "eventStartTime": "8:45", "eventEndTime": "12:30", "eventDate": "May 28th, 2022", "orgName": "Habitat For Humanity", "eventDescription": "Looking for hands to help repair homes damaged by the storm", "owner": "nah@foo.com", "eventAddress": "222 Banana Rd.", "eventCardImage": "habitat-humanity-logo.png", "eventCity": "Honolulu", "eventZip": "96815", "eventState": "HI", "eventProfileImage": "images/event_card_default_image.png"
+    { "eventName": "Hurricane Preparedness Seminar", "eventStartTime": "8:45", "eventEndTime": "12:30", "eventDate": "May 28th, 2022",
+      "orgName": "Habitat For Humanity", "eventDescription": "Looking for hands to help repair homes damaged by the storm",
+      "owner": "habitathumanity@foo.com", "eventAddress": "222 Banana Rd.", "eventCardImage": "habitat-humanity-logo.png",
+      "eventCity": "Honolulu", "eventZip": "96815", "eventState": "HI", "eventProfileImage": "images/event_card_default_image.png"
     },
-    { "eventName": "Feng Shui 101", "eventStartTime": "8:45", "eventEndTime": "12:30", "eventDate": "May 20th, 2022", "orgName": "Habitat For Humanity", "eventDescription": "A couple of volunteers needed to help with demonstration", "owner": "nah@foo.com", "eventAddress": "222 Banana Rd.", "eventCardImage": "habitat-humanity-logo.png", "eventCity": "Honolulu", "eventZip": "96815", "eventState": "HI", "eventProfileImage": "images/event_card_default_image.png"
+    { "eventName": "Feng Shui 101", "eventStartTime": "8:45", "eventEndTime": "12:30", "eventDate": "May 20th, 2022",
+      "orgName": "Habitat For Humanity", "eventDescription": "A couple of volunteers needed to help with demonstration",
+      "owner": "habitathumanity@foo.com", "eventAddress": "222 Banana Rd.", "eventCardImage": "habitat-humanity-logo.png", "eventCity": "Honolulu", "eventZip": "96815", "eventState": "HI", "eventProfileImage": "images/event_card_default_image.png"
     },
-    { "eventName": "Pet Play Date", "eventStartTime": "10:30", "eventEndTime": "13:30", "eventDate": "May 20th, 2022", "orgName": "Humane Society", "eventDescription": "Pets need love and care too, people are needed for a couple hours", "owner": "nah@foo.com", "eventAddress": "222 Banana Rd.", "eventCardImage": "humane-society-logo.png", "eventCity": "Honolulu", "eventZip": "96815", "eventState": "HI", "eventProfileImage": "images/pet_play.png"
+    { "eventName": "Pet Play Date", "eventStartTime": "10:30", "eventEndTime": "13:30", "eventDate": "May 20th, 2022",
+      "orgName": "Humane Society", "eventDescription": "Pets need love and care too, people are needed for a couple hours",
+      "owner": "humanesociety@foo.com", "eventAddress": "222 Banana Rd.", "eventCardImage": "humane-society-logo.png", "eventCity": "Honolulu",
+      "eventZip": "96815", "eventState": "HI", "eventProfileImage": "images/pet_play.png"
     },
-    { "eventName": "Volunteer for Pet care", "eventStartTime": "11:30", "eventEndTime": "13:30", "eventDate": "July 3rd, 2022", "orgName": "Humane Society", "eventDescription": "An open position for animal lover to help", "owner": "nah@foo.com", "eventAddress": "222 Banana Rd.", "eventCardImage": "humane-society-logo.png", "eventCity": "Honolulu", "eventZip": "96815", "eventState": "HI", "eventProfileImage": "images/event_card_default_image.png"
+    { "eventName": "Volunteer for Pet care", "eventStartTime": "11:30", "eventEndTime": "13:30", "eventDate": "July 3rd, 2022",
+      "orgName": "Humane Society", "eventDescription": "An open position for animal lover to help",
+      "owner": "humanesociety@foo.com", "eventAddress": "222 Banana Rd.", "eventCardImage": "humane-society-logo.png", "eventCity": "Honolulu",
+      "eventZip": "96815", "eventState": "HI", "eventProfileImage": "images/event_card_default_image.png"
     },
-    { "eventName": "Pet Play Date", "eventStartTime": "10:30", "eventEndTime": "13:30", "eventDate": "June 20th, 2022", "orgName": "Humane Society", "eventDescription": "Pets need love and care too, people are needed for a couple hours", "owner": "nah@foo.com", "eventAddress": "222 Banana Rd.", "eventCardImage": "humane-society-logo.png", "eventCity": "Honolulu", "eventZip": "96815", "eventState": "HI", "eventProfileImage": "images/pet_play.png"
+    { "eventName": "Pet Play Date", "eventStartTime": "10:30", "eventEndTime": "13:30", "eventDate": "June 20th, 2022",
+      "orgName": "Humane Society", "eventDescription": "Pets need love and care too, people are needed for a couple hours",
+      "owner": "humanesociety@foo.com", "eventAddress": "222 Banana Rd.", "eventCardImage": "humane-society-logo.png",
+      "eventCity": "Honolulu", "eventZip": "96815", "eventState": "HI", "eventProfileImage": "images/pet_play.png"
     },
-    { "eventName": "Beach Clean up", "eventStartTime": "8:45", "eventEndTime": "12:30", "eventDate": "May 14th, 2022", "orgName": "Malama Maunalua", "eventDescription": "Come help pick up trash and keep our beaches clean and cleared", "owner": "nah@foo.com", "eventAddress": "222 Banana Rd.", "eventCardImage": "malama-maunalua-logo.png", "eventCity": "Honolulu", "eventZip": "96815", "eventState": "HI", "eventProfileImage": "images/beach-clean-up.jpg"
+    { "eventName": "Beach Clean up", "eventStartTime": "8:45", "eventEndTime": "12:30", "eventDate": "May 14th, 2022",
+      "orgName": "Malama Maunalua", "eventDescription": "Come help pick up trash and keep our beaches clean and cleared",
+      "owner": "malamamaunalua@foo.com", "eventAddress": "222 Banana Rd.", "eventCardImage": "malama-maunalua-logo.png",
+      "eventCity": "Honolulu", "eventZip": "96815", "eventState": "HI", "eventProfileImage": "images/beach-clean-up.jpg"
     },
-    { "eventName": "Tree Seedling Planting", "eventStartTime": "8:45", "eventEndTime": "12:30", "eventDate": "May 21st, 2022", "orgName": "Malama Maunalua", "eventDescription": "Planting sapling now for the future generation, many hands make light work", "owner": "nah@foo.com", "eventAddress": "222 Banana Rd.", "eventCardImage": "malama-maunalua-logo.png", "eventCity": "Honolulu", "eventZip": "96815", "eventState": "HI", "eventProfileImage": "images/sapling-plant.jpg"
+    { "eventName": "Tree Seedling Planting", "eventStartTime": "8:45", "eventEndTime": "12:30", "eventDate": "May 21st, 2022",
+      "orgName": "Malama Maunalua", "eventDescription": "Planting sapling now for the future generation, many hands make light work",
+      "owner": "malamamaunalua@foo.com", "eventAddress": "222 Banana Rd.", "eventCardImage": "malama-maunalua-logo.png",
+      "eventCity": "Honolulu", "eventZip": "96815", "eventState": "HI", "eventProfileImage": "images/sapling-plant.jpg"
     },
-    { "eventName": "Huki Project", "eventStartTime": "8:45", "eventEndTime": "16:30", "eventDate": "May 28th, 2022", "orgName": "Malama Maunalua", "eventDescription": "Our annual event to go and remove invasive alien algae.", "owner": "nah@foo.com", "eventAddress": "222 Banana Rd.", "eventCardImage": "malama-maunalua-logo.png", "eventCity": "Honolulu", "eventZip": "96815", "eventState": "HI", "eventProfileImage": "images/event_card_default_image.png"
+    { "eventName": "Huki Project", "eventStartTime": "8:45", "eventEndTime": "16:30", "eventDate": "May 28th, 2022",
+      "orgName": "Malama Maunalua", "eventDescription": "Our annual event to go and remove invasive alien algae.",
+      "owner": "malamamaunalua@foo.com", "eventAddress": "222 Banana Rd.", "eventCardImage": "malama-maunalua-logo.png",
+      "eventCity": "Honolulu", "eventZip": "96815", "eventState": "HI", "eventProfileImage": "images/event_card_default_image.png"
     },
-    { "eventName": "Maunalua Fishpond Preservation", "eventStartTime": "8:45", "eventEndTime": "12:30", "eventDate": "June 18th, 2022", "orgName": "Maunalua Fishpond", "eventDescription": "Volunteer needed for cleaning and maintaining our natural springs", "owner": "nah@foo.com", "eventAddress": "222 Banana Rd.", "eventCardImage": "maunalua-fishpond-logo.png", "eventCity": "Honolulu", "eventZip": "96815", "eventState": "HI", "eventProfileImage": "images/fish_pond_help.jpg"
+    { "eventName": "Maunalua Fishpond Preservation", "eventStartTime": "8:45", "eventEndTime": "12:30", "eventDate": "June 18th, 2022",
+      "orgName": "Maunalua Fishpond", "eventDescription": "Volunteer needed for cleaning and maintaining our natural springs",
+      "owner": "maunaluafishpond@foo.com", "eventAddress": "222 Banana Rd.", "eventCardImage": "maunalua-fishpond-logo.png", "eventCity": "Honolulu",
+      "eventZip": "96815", "eventState": "HI", "eventProfileImage": "images/fish_pond_help.jpg"
     },
-    { "eventName": "Maunalua Fishpond Preservation", "eventStartTime": "8:45", "eventEndTime": "12:30", "eventDate": "July 16th, 2022", "orgName": "Maunalua Fishpond", "eventDescription": "Volunteer needed for cleaning and maintaining our natural springs", "owner": "nah@foo.com", "eventAddress": "222 Banana Rd.", "eventCardImage": "maunalua-fishpond-logo.png", "eventCity": "Honolulu", "eventZip": "96815", "eventState": "HI", "eventProfileImage": "images/fish_pond_help.jpg"
+    { "eventName": "Maunalua Fishpond Preservation", "eventStartTime": "8:45", "eventEndTime": "12:30", "eventDate": "July 16th, 2022",
+      "orgName": "Maunalua Fishpond", "eventDescription": "Volunteer needed for cleaning and maintaining our natural springs",
+      "owner": "maunaluafishpond@foo.com", "eventAddress": "222 Banana Rd.", "eventCardImage": "maunalua-fishpond-logo.png",
+      "eventCity": "Honolulu", "eventZip": "96815", "eventState": "HI", "eventProfileImage": "images/fish_pond_help.jpg"
     },
-    { "eventName": "Help Driver Delivery", "eventStartTime": "8:45", "eventEndTime": "12:30", "eventDate": "July 27th, 2022", "orgName": "Meals on Wheels", "eventDescription": "Description place holder", "owner": "nah@foo.com", "eventAddress": "222 Banana Rd.", "eventCardImage": "meals-on-wheels-logo.png", "eventCity": "Honolulu", "eventZip": "96815", "eventState": "HI", "eventProfileImage": "images/meals-wheel.jpg"
+    { "eventName": "Help Driver Delivery", "eventStartTime": "8:45", "eventEndTime": "12:30", "eventDate": "July 27th, 2022",
+      "orgName": "Meals on Wheels", "eventDescription": "Description place holder",
+      "owner": "mealsonwheels@foo.com", "eventAddress": "222 Banana Rd.", "eventCardImage": "meals-on-wheels-logo.png",
+      "eventCity": "Honolulu", "eventZip": "96815", "eventState": "HI", "eventProfileImage": "images/meals-wheel.jpg"
     },
-    { "eventName": "Food Distribution", "eventStartTime": "8:45", "eventEndTime": "12:30", "eventDate": "May 30th, 2022", "orgName": "Meals on Wheels", "eventDescription": "Description place holder", "owner": "nah@foo.com", "eventAddress": "222 Banana Rd.", "eventCardImage": "meals-on-wheels-logo.png", "eventCity": "Honolulu", "eventZip": "96815", "eventState": "HI", "eventProfileImage": "images/meals-wheel.jpg"
+    { "eventName": "Food Distribution", "eventStartTime": "8:45", "eventEndTime": "12:30", "eventDate": "May 30th, 2022",
+      "orgName": "Meals on Wheels", "eventDescription": "Description place holder",
+      "owner": "mealsonwheels@foo.com", "eventAddress": "222 Banana Rd.", "eventCardImage": "meals-on-wheels-logo.png",
+      "eventCity": "Honolulu", "eventZip": "96815", "eventState": "HI", "eventProfileImage": "images/meals-wheel.jpg"
     },
-    { "eventName": "Senior Meal Assistant", "eventStartTime": "8:45", "eventEndTime": "12:30", "eventDate": "June 15th, 2022", "orgName": "Meals on Wheels", "eventDescription": "Description place holder", "owner": "nah@foo.com", "eventAddress": "222 Banana Rd.", "eventCardImage": "meals-on-wheels-logo.png", "eventCity": "Honolulu", "eventZip": "96815", "eventState": "HI", "eventProfileImage": "images/meals-wheel.jpg"
+    { "eventName": "Senior Meal Assistant", "eventStartTime": "8:45", "eventEndTime": "12:30", "eventDate": "June 15th, 2022",
+      "orgName": "Meals on Wheels", "eventDescription": "Description place holder",
+      "owner": "mealsonwheels@foo.com", "eventAddress": "222 Banana Rd.", "eventCardImage": "meals-on-wheels-logo.png",
+      "eventCity": "Honolulu", "eventZip": "96815", "eventState": "HI", "eventProfileImage": "images/meals-wheel.jpg"
     },
-    { "eventName": "Animal Clean up", "eventStartTime": "8:45", "eventEndTime": "12:30", "eventDate": "May 10th, 2022", "orgName": "Aloha Sanctuary", "eventDescription": "Description place holder", "owner": "nah@foo.com", "eventAddress": "222 Banana Rd.", "eventCardImage": "aloha-sanctuary-logo.png", "eventCity": "Honolulu", "eventZip": "96815", "eventState": "HI", "eventProfileImage": "images/aloha-animals.jpg"
+    { "eventName": "Animal Clean up", "eventStartTime": "8:45", "eventEndTime": "12:30", "eventDate": "May 10th, 2022",
+      "orgName": "Aloha Sanctuary", "eventDescription": "Description place holder",
+      "owner": "alohasanctuary@foo.com", "eventAddress": "222 Banana Rd.", "eventCardImage": "aloha-sanctuary-logo.png",
+      "eventCity": "Honolulu", "eventZip": "96815", "eventState": "HI", "eventProfileImage": "images/aloha-animals.jpg"
     },
-    { "eventName": "Animal Clean up", "eventStartTime": "8:45", "eventEndTime": "12:30", "eventDate": "June 20th, 2022", "orgName": "Aloha Sanctuary", "eventDescription": "Description place holder", "owner": "nah@foo.com", "eventAddress": "222 Banana Rd.", "eventCardImage": "aloha-sanctuary-logo.png", "eventCity": "Honolulu", "eventZip": "96815", "eventState": "HI", "eventProfileImage": "images/aloha-animals.jpg"
+    { "eventName": "Animal Clean up", "eventStartTime": "8:45", "eventEndTime": "12:30", "eventDate": "June 20th, 2022",
+      "orgName": "Aloha Sanctuary", "eventDescription": "Description place holder",
+      "owner": "alohasanctuary@foo.com", "eventAddress": "222 Banana Rd.", "eventCardImage": "aloha-sanctuary-logo.png",
+      "eventCity": "Honolulu", "eventZip": "96815", "eventState": "HI", "eventProfileImage": "images/aloha-animals.jpg"
     },
-    { "eventName": "Animal Clean up", "eventStartTime": "8:45", "eventEndTime": "12:30", "eventDate": "July 20th, 2022", "orgName": "Aloha Sanctuary", "eventDescription": "Description place holder", "owner": "nah@foo.com", "eventAddress": "222 Banana Rd.", "eventCardImage": "aloha-sanctuary-logo.png", "eventCity": "Honolulu", "eventZip": "96815", "eventState": "HI", "eventProfileImage": "images/aloha-animals.jpg"
+    { "eventName": "Animal Clean up", "eventStartTime": "8:45", "eventEndTime": "12:30", "eventDate": "July 20th, 2022",
+      "orgName": "Aloha Sanctuary", "eventDescription": "Description place holder",
+      "owner": "alohasanctuary@foo.com", "eventAddress": "222 Banana Rd.", "eventCardImage": "aloha-sanctuary-logo.png",
+      "eventCity": "Honolulu", "eventZip": "96815", "eventState": "HI", "eventProfileImage": "images/aloha-animals.jpg"
     },
-    { "eventName": "Firework Party", "eventStartTime": "18:45", "eventEndTime": "20:30", "eventDate": "July 4th, 2022", "orgName": "Big Brother, Big Sister", "eventDescription": "Description place holder", "owner": "nah@foo.com", "eventAddress": "222 Banana Rd.", "eventCardImage": "big-bros-big-sis-logo.png", "eventCity": "Honolulu", "eventZip": "96815", "eventState": "HI", "eventProfileImage": "images/firework-hand.jpg"
+    { "eventName": "Firework Party", "eventStartTime": "18:45", "eventEndTime": "20:30", "eventDate": "July 4th, 2022",
+      "orgName": "Big Brother, Big Sister", "eventDescription": "Description place holder",
+      "owner": "bigbrothersister@foo.com", "eventAddress": "222 Banana Rd.", "eventCardImage": "big-bros-big-sis-logo.png",
+      "eventCity": "Honolulu", "eventZip": "96815", "eventState": "HI", "eventProfileImage": "images/firework-hand.jpg"
     },
-    { "eventName": "After School Homework Help", "eventStartTime": "8:45", "eventEndTime": "12:30", "eventDate": "May 20th, 2022", "orgName": "Big Brother, Big Sister", "eventDescription": "Description place holder", "owner": "nah@foo.com", "eventAddress": "222 Banana Rd.", "eventCardImage": "big-bros-big-sis-logo.png", "eventCity": "Honolulu", "eventZip": "96815", "eventState": "HI", "eventProfileImage": "images/event_card_default_image.png"
+    { "eventName": "After School Homework Help", "eventStartTime": "8:45", "eventEndTime": "12:30", "eventDate": "May 20th, 2022",
+      "orgName": "Big Brother, Big Sister", "eventDescription": "Description place holder",
+      "owner": "bigbrothersister@foo.com", "eventAddress": "222 Banana Rd.", "eventCardImage": "big-bros-big-sis-logo.png",
+      "eventCity": "Honolulu", "eventZip": "96815", "eventState": "HI", "eventProfileImage": "images/event_card_default_image.png"
     },
-    { "eventName": "Pizza Party", "eventStartTime": "19:45", "eventEndTime": "22:30", "eventDate": "June 3rd, 2022", "orgName": "Big Brother, Big Sister", "eventDescription": "Description place holder", "owner": "nah@foo.com", "eventAddress": "222 Banana Rd.", "eventCardImage": "big-bros-big-sis-logo.png", "eventCity": "Honolulu", "eventZip": "96815", "eventState": "HI", "eventProfileImage": "images/read-party.jpg"
+    { "eventName": "Pizza Party", "eventStartTime": "19:45", "eventEndTime": "22:30", "eventDate": "June 3rd, 2022",
+      "orgName": "Big Brother, Big Sister", "eventDescription": "Description place holder",
+      "owner": "bigbrothersister@foo.com", "eventAddress": "222 Banana Rd.", "eventCardImage": "big-bros-big-sis-logo.png",
+      "eventCity": "Honolulu", "eventZip": "96815", "eventState": "HI", "eventProfileImage": "images/read-party.jpg"
     },
-    { "eventName": "Afternoon Reading Session", "eventStartTime": "12:30", "eventEndTime": "16:30", "eventDate": "May 13th, 2022", "orgName": "Read To Me", "eventDescription": "Come and read stories to kids of all ages in group session or one on one. ", "owner": "nah@foo.com", "eventAddress": "222 Banana Rd.", "eventCardImage": "read-to-me-logo.png", "eventCity": "Honolulu", "eventZip": "96815", "eventState": "HI", "eventProfileImage": "images/read-party.jpg"
+    { "eventName": "Afternoon Reading Session", "eventStartTime": "12:30", "eventEndTime": "16:30", "eventDate": "May 13th, 2022",
+      "orgName": "Read To Me", "eventDescription": "Come and read stories to kids of all ages in group session or one on one. ",
+      "owner": "readtome@foo.com", "eventAddress": "222 Banana Rd.", "eventCardImage": "read-to-me-logo.png",
+      "eventCity": "Honolulu", "eventZip": "96815", "eventState": "HI", "eventProfileImage": "images/read-party.jpg"
     },
-    { "eventName": "Afternoon Reading Session", "eventStartTime": "12:30", "eventEndTime": "16:30", "eventDate": "May 20th, 2022", "orgName": "Read To Me", "eventDescription": "Come and read stories to kids of all ages in group session or one on one", "owner": "nah@foo.com", "eventAddress": "222 Banana Rd.", "eventCardImage": "read-to-me-logo.png", "eventCity": "Honolulu", "eventZip": "96815", "eventState": "HI", "eventProfileImage": "images/read-party.jpg"
+    { "eventName": "Afternoon Reading Session", "eventStartTime": "12:30", "eventEndTime": "16:30", "eventDate": "May 20th, 2022",
+      "orgName": "Read To Me", "eventDescription": "Come and read stories to kids of all ages in group session or one on one",
+      "owner": "readtome@foo.com", "eventAddress": "222 Banana Rd.", "eventCardImage": "read-to-me-logo.png", "eventCity": "Honolulu",
+      "eventZip": "96815", "eventState": "HI", "eventProfileImage": "images/read-party.jpg"
     },
-    { "eventName": "Afternoon Reading Session", "eventStartTime": "12:30", "eventEndTime": "16:30", "eventDate": "May 27th, 2022", "orgName": "Read To Me", "eventDescription": "Come and read stories to kids of all ages in group session or one on one", "owner": "nah@foo.com", "eventAddress": "222 Banana Rd.", "eventCardImage": "read-to-me-logo.png", "eventCity": "Honolulu", "eventZip": "96815", "eventState": "HI", "eventProfileImage": "images/read-party.jpg"
+    { "eventName": "Afternoon Reading Session", "eventStartTime": "12:30", "eventEndTime": "16:30", "eventDate": "May 27th, 2022",
+      "orgName": "Read To Me", "eventDescription": "Come and read stories to kids of all ages in group session or one on one",
+      "owner": "readtome@foo.com", "eventAddress": "222 Banana Rd.", "eventCardImage": "read-to-me-logo.png", "eventCity": "Honolulu",
+      "eventZip": "96815", "eventState": "HI", "eventProfileImage": "images/read-party.jpg"
     },
-    { "eventName": "Donation Box Yeller", "eventStartTime": "8:30", "eventEndTime": "20:30", "eventDate": "May 27th, 2022", "orgName": "Salvation Army", "eventDescription": "Ring bells, yell at people for donation", "owner": "nah@foo.com", "eventAddress": "222 Banana Rd.", "eventCardImage": "salvation-army-logo.png", "eventCity": "Honolulu", "eventZip": "96815", "eventState": "HI", "eventProfileImage": "images/salvation-army-bell.jpg"
+    { "eventName": "Donation Box Yeller", "eventStartTime": "8:30", "eventEndTime": "20:30", "eventDate": "May 27th, 2022",
+      "orgName": "Salvation Army", "eventDescription": "Ring bells, yell at people for donation",
+      "owner": "salvationarmy@foo.com", "eventAddress": "222 Banana Rd.", "eventCardImage": "salvation-army-logo.png", "eventCity": "Honolulu",
+      "eventZip": "96815", "eventState": "HI", "eventProfileImage": "images/salvation-army-bell.jpg"
     },
-    { "eventName": "Food Donation", "eventStartTime": "10:30", "eventEndTime": "16:30", "eventDate": "June 18th, 2022", "orgName": "The Pantry", "eventDescription": "Volunteer needed to stock and organize food products", "owner": "nah@foo.com", "eventAddress": "222 Banana Rd.", "eventCardImage": "the-pantry-logo.png", "eventCity": "Honolulu", "eventZip": "96815", "eventState": "HI", "eventProfileImage": "images/pantry-food.jpg"
+    { "eventName": "Food Donation", "eventStartTime": "10:30", "eventEndTime": "16:30", "eventDate": "June 18th, 2022",
+      "orgName": "The Pantry", "eventDescription": "Volunteer needed to stock and organize food products",
+      "owner": "thepantry@foo.com", "eventAddress": "222 Banana Rd.", "eventCardImage": "the-pantry-logo.png", "eventCity": "Honolulu",
+      "eventZip": "96815", "eventState": "HI", "eventProfileImage": "images/pantry-food.jpg"
     },
-    { "eventName": "Youth Surf Camp", "eventStartTime": "7:30", "eventEndTime": "12:30", "eventDate": "May 10th, 2022", "orgName": "Surf Rider", "eventDescription": "Catch some waves with the younglings", "owner": "nah@foo.com", "eventAddress": "222 Banana Rd.", "eventCardImage": "surf-rider-logo.png", "eventCity": "Honolulu", "eventZip": "96815", "eventState": "HI", "eventProfileImage": "images/read-party.jpg"
+    { "eventName": "Youth Surf Camp", "eventStartTime": "7:30", "eventEndTime": "12:30", "eventDate": "May 10th, 2022",
+      "orgName": "Surf Rider", "eventDescription": "Catch some waves with the younglings",
+      "owner": "surfrider@foo.com", "eventAddress": "222 Banana Rd.", "eventCardImage": "surf-rider-logo.png", "eventCity": "Honolulu",
+      "eventZip": "96815", "eventState": "HI", "eventProfileImage": "images/read-party.jpg"
     }
   ],
 
