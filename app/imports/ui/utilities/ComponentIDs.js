@@ -82,7 +82,7 @@ export const COMPONENT_IDS = {
   ORGANIZATION_SIGNUP_FORM_SUBMIT: 'organization-signup-form-submit',
   VOLUNTEER_PROFILE: 'volunteer-profile',
   ORGANIZATION_PROFILE: 'organization-profile',
-  VOLUNTEER_HOUR_EVENT_FORM_CHECKBOX_CHECK_ALL: 'volunteer-hour-event-form-checkbox-check=all',
+  VOLUNTEER_HOUR_EVENT_FORM_CHECKBOX_CHECK_ALL: 'volunteer-hour-event-form-checkbox-check-all',
   ADD_EVENT_NAME: 'add-event-name',
   ADD_EVENT_ORGANIZATION_NAME: 'add-event-organization',
   ADD_EVENT_DATE: 'add-event-date',
@@ -101,4 +101,6 @@ export const COMPONENT_IDS = {
   EVENT_CARD: 'event-card',
   INBOX: 'inbox',
   ORGANIZATION_LIB_CARD: 'organization-library-card-1',
+  ADMIN_VIEW_EVENT_HOUR_BUTTON: 'view-event-hour-button-1',
+  VOLUNTEER_LIST_FOR_EVENT_CONFIRM_BUTTON: 'volunteer-list-for-event-confirm-button',
 };
