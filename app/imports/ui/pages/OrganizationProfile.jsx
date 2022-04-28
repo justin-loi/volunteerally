@@ -1,6 +1,6 @@
 import React from 'react';
 import { Meteor } from 'meteor/meteor';
-import { Grid, Image, Loader, Button, Segment, Divider, Header, Icon, Card } from 'semantic-ui-react';
+import { Grid, Image, Loader, Button, Segment, Divider, Header, Icon, Card, Label } from 'semantic-ui-react';
 import PropTypes from 'prop-types';
 import { withTracker } from 'meteor/react-meteor-data';
 import { _ } from 'meteor/underscore';
@@ -17,41 +17,78 @@ import { Events } from '../../api/event/EventCollection';
 const OrganizationProfile = ({ orgProfile, events, ready }) => ((ready) ? (
   <Grid id={PAGE_IDS.ORGANIZATION_PROFILE} container centered>
     <Grid.Row>
-      {(Meteor.userId() && Roles.userIsInRole(Meteor.userId(), [ROLE.ORGANIZATION])) ? (
-        <Button as={NavLink} exact to={`/edit-organization-profile/${orgProfile._id}`}>Edit Profile</Button>
-      ) : ''}
-      <Button as={NavLink} exact to={`/volunteer-send-email/${orgProfile._id}`}>Send an email</Button>
+      <Image src="images/event_card_default_image.png" size='big' />
+    </Grid.Row>
+    <Grid.Row >
+      <Button as={NavLink} exact to={`/edit-volunteer-profile/${orgProfile._id}`}>Edit Profile</Button>
+      <Grid.Row>
+        {(Meteor.userId() && Roles.userIsInRole(Meteor.userId(), [ROLE.ORGANIZATION])) ? (
+          <Button as={NavLink} exact to={`/edit-organization-profile/${orgProfile._id}`}>Edit Profile</Button>
+        ) : ''}
+        <Button as={NavLink} exact to={`/volunteer-send-email/${orgProfile._id}`}>Send an email</Button>
+      </Grid.Row>
     </Grid.Row>
     <Grid.Row columns={2}>
       <Grid.Column>
-        <Image src={orgProfile.logoImage} size='medium' centered />
+        <Label size='massive' ribbon>
+          {`${(orgProfile.organizationName)}`}
+        </Label>
+        <Image src={orgProfile.logoImage} size='medium' circular centered />
+        <Divider/>
+        <Segment>
+          <Header as="h3">
+            <Icon name="book"/>
+            <Header.Content>Contact Info</Header.Content>
+          </Header>
+          <p>
+            Primary Contact Name: {orgProfile.firstName} {orgProfile.lastName}
+            <br/>
+            Primary Contact Email: {orgProfile.primaryContactEmail} <br/>
+            Phone Number: {orgProfile.phoneNumber} <br/>
+          </p>
+        </Segment>
+        <Segment>
+          <Header as="h3">
+            <Icon name="star"/>
+            <Header.Content>Address</Header.Content>
+          </Header>
+          <p>
+            {orgProfile.primaryAddress} <br/>
+            {orgProfile.city}, {orgProfile.state} {orgProfile.zipcode}<br/>
+          </p>
+        </Segment>
       </Grid.Column>
       <Grid.Column>
-        <Segment vertical>
+        <Segment>
           <Header as="h3">
-            <Icon name="home"/>Organization Name
+            <Icon name="bolt"/>
+            <Header.Content>
+              Our Mission!
+            </Header.Content>
+            <p>
+              {orgProfile.missionStatement}
+            </p>
           </Header>
-          <p>{orgProfile.organizationName}</p>
+        </Segment>
+        <Segment>
           <Header as="h3">
-            <Icon name="phone"/>Phone Number
+            <Icon name="globe"/> Gallery
           </Header>
-          <p>{orgProfile.primaryContactPhone}</p>
+          <Image src="images/young-people.jpg"/>
+        </Segment>
+        <Segment>
           <Header as="h3">
-            <Icon name="tag"/>Mission Statement
+            <Icon name="calendar outline"/> Upcoming Events
           </Header>
-          <p>{orgProfile.missionStatement}</p>
+          <Card.Group centered>
+            {
+              events.map((event) => <EventCard key={event._id} event={event}/>)
+            }
+          </Card.Group>
         </Segment>
       </Grid.Column>
     </Grid.Row>
     <Divider/>
-    <Grid.Row>
-      <Header>{`${orgProfile.organizationName}'s events:`}</Header>
-    </Grid.Row>
-    <Card.Group centered>
-      {
-        events.map((event) => <EventCard key={event._id} event={event}/>)
-      }
-    </Card.Group>
   </Grid>
 ) : <Loader active>Getting data</Loader>);
 
