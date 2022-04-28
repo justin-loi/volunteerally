@@ -100,8 +100,8 @@ const AddEvent = ({ location, ready, interestsArray, skillsArray, environmentalA
         setEnvironmentalPreference('');
         setImage('');
         swal({
-          title: 'Signed Up',
-          text: 'You now have an account. Next you need to login.',
+          title: 'Opportunity Created!',
+          text: 'This opportunity will now be visible.',
           icon: 'success',
           timer: 1500,
         });
