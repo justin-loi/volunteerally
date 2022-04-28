@@ -10,6 +10,8 @@ import { eventProfilePage } from './eventprofile.page';
 import { inboxPage } from './inbox.page';
 import { addOppPage } from './addopportunity.page';
 import { organizationLibraryPage } from './organizationlibrary.page';
+import { adminManageBoardPage } from './adminmanageboard.page';
+import { t } from 'testcafe';
 
 /* global fixture:false, test:false */
 
@@ -114,4 +116,16 @@ test('Test the organization library', async () => {
   await navBar.gotoOrganizationLibraryPage();
   await organizationLibraryPage.isDisplayed();
   await organizationLibraryPage.isOrgCardDisplayed();
+});
+
+test('Test the admin tracker hours page', async () => {
+  await navBar.gotoSigninPage();
+  await signInPage.signin(adminCredentials.username, adminCredentials.password);
+  await navBar.gotoAdminVolunteerAndEventPage();
+  await adminManageBoardPage.isDisplayed();
+  await adminManageBoardPage.changeToEventTap();
+  await adminManageBoardPage.clickEventHourButton();
+  await adminManageBoardPage.clickVolunteerListForEventConfirmButton();
+  const waitTime = 15;
+  await t.wait(waitTime * 100);
 });

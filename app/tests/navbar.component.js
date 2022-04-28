@@ -95,6 +95,12 @@ class NavBar {
     await t.expect(Selector(`#${COMPONENT_IDS.NAVBAR_ORGANIZATION_LIBRARY}`).exists).ok();
     await t.click(`#${COMPONENT_IDS.NAVBAR_ORGANIZATION_LIBRARY}`);
   }
+
+  /** Go to the admin page. */
+  async gotoAdminVolunteerAndEventPage() {
+    await t.expect(Selector(`#${COMPONENT_IDS.NAVBAR_LIST_STUFF_ADMIN}`).exists).ok();
+    await t.click(`#${COMPONENT_IDS.NAVBAR_LIST_STUFF_ADMIN}`);
+  }
 }
 
 export const navBar = new NavBar();

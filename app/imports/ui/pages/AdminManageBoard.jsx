@@ -11,7 +11,7 @@ import ListEventsAdmin from '../components/ListEventsAdmin';
 
 /** Renders a table containing all of the Stuff documents. Use <StuffItem> to render each row. */
 const AdminManageBoard = ({ ready, volunteers, events }) => ((ready) ? (
-  <Tab menu={{ fluid: true, vertical: true, tabular: true }} panes={
+  <Tab id={PAGE_IDS.LIST_STUFF_ADMIN} menu={{ fluid: true, vertical: true, tabular: true }} panes={
     // eslint-disable-next-line react/display-name
     [{ menuItem: 'Volunteers', render: () => <Tab.Pane>
       <Container id={PAGE_IDS.LIST_STUFF_ADMIN}>
@@ -46,7 +46,7 @@ const AdminManageBoard = ({ ready, volunteers, events }) => ((ready) ? (
             </Table.Row>
           </Table.Header>
           <Table.Body>
-            {events.map((event) => <ListEventsAdmin key={event._id} event={event} />)}
+            {events.map((event, index) => <ListEventsAdmin index={index} key={event._id} event={event} />)}
           </Table.Body>
         </Table>
       </Container>
