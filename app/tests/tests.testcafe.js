@@ -85,7 +85,7 @@ test('Test that event profile works', async () => {
   await eventProfilePage.isDisplayed();
 });
 
-test.only('Test that every role has the inbox pages', async () => {
+test('Test that every role has the inbox pages', async () => {
   await navBar.gotoSigninPage();
   await signInPage.signin(adminCredentials.username, adminCredentials.password);
   await navBar.goToInboxPage();
