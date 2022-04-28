@@ -69,6 +69,22 @@ class NavBar {
     await t.expect(Selector(`#${COMPONENT_IDS.VOLUNTEER_PROFILE}`).exists).ok();
     await t.click(`#${COMPONENT_IDS.VOLUNTEER_PROFILE}`);
   }
+
+  async gotoBrowseOpportunityPage() {
+    await t.click(`#${COMPONENT_IDS.NAVBAR_BROWSE_DROPDOWN}`);
+    await t.click(`#${COMPONENT_IDS.NAVBAR_BROWSE_OPPORTUNITIES}`);
+  }
+
+  async gotoEventProfilePage() {
+    await t.click(`#${COMPONENT_IDS.NAVBAR_BROWSE_DROPDOWN}`);
+    await t.click(`#${COMPONENT_IDS.NAVBAR_BROWSE_OPPORTUNITIES}`);
+    await t.click(`#${COMPONENT_IDS.EVENT_CARD}`);
+  }
+
+  async goToInboxPage() {
+    await t.click(`#${COMPONENT_IDS.NAVBAR_CURRENT_USER}`);
+    await t.click(`#${COMPONENT_IDS.INBOX}`);
+  }
 }
 
 export const navBar = new NavBar();

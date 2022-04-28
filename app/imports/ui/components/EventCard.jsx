@@ -17,6 +17,7 @@ import { EventSkill } from '../../api/special_skills/EventSkillCollection';
 import { Events } from '../../api/event/EventCollection';
 import { Interests } from '../../api/interest/InterestCollection';
 import { Environmental } from '../../api/environmental_preference/EnvironmentalPreferenceCollection';
+import { COMPONENT_IDS } from '../utilities/ComponentIDs';
 
 const shareUrl = 'http://165.22.207.71/#/browse_opportunities';
 const title = 'VolunteerAlly';
@@ -76,8 +77,7 @@ const EventCard = ({ event }) => {
   };
 
   return (
-
-    <Card as={NavLink} exact to={`/details/${event._id}`}>
+    <Card id={COMPONENT_IDS.EVENT_CARD} as={NavLink} exact to={`/details/${event._id}`}>
       <Image src='images/event_card_default_image.png' wrapped ui={false}/>
       <Card.Content>
         <Card.Header> {event.eventName}</Card.Header>

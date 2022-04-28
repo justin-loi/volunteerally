@@ -4,10 +4,12 @@ import PropTypes from 'prop-types';
 import { withTracker } from 'meteor/react-meteor-data';
 import EventCard from '../components/EventCard';
 import { Events } from '../../api/event/EventCollection';
+import { PAGE_IDS } from '../utilities/PageIDs';
+import { COMPONENT_IDS } from '../utilities/ComponentIDs';
 
 /* Renders a list of events. Use <EventCard> to render each event card. */
 const BrowseOpportunities = ({ events }) => (
-  <Container>
+  <Container id={PAGE_IDS.BROWSE_OPPORTUNITIES}>
     <div className="browse-opportunity-header">
       <Header as="h1" textAlign="center" inverted>Browse Opportunities</Header>
     </div>

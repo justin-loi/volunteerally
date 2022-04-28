@@ -5,11 +5,15 @@ import { volunteerSignupPage } from './volunteersignup.page';
 import { landingPage } from './landing.page';
 import { volunteerProfilePage } from './volunteerporfile.page';
 import { editVolunteerProfilePage } from './editvolunteerporfile.page';
+import { browseOpportunityPage } from './browseopport.page';
+import { eventProfilePage } from './eventprofile.page';
+import { inboxPage } from './inbox.page';
 
 /* global fixture:false, test:false */
 
 /** Credentials for one of the sample users defined in settings.development.json. */
 const credentials = { username: 'john@foo.com', password: 'changeme' };
+const orgCredentials = { username: 'nah@foo.com', password: 'changeme' };
 const adminCredentials = { username: 'admin@foo.com', password: 'changeme' };
 const newCredentials = { username: 'janefonda@foo.com', password: 'changeme' };
 const volunteer = { username: 'jerry@foo.com', password: 'changeme' };
@@ -65,4 +69,32 @@ test('Test that edit volunteer profile pages work', async () => {
   await editVolunteerProfilePage.isDisplayed();
   await editVolunteerProfilePage.changeData();
   await editVolunteerProfilePage.clickSubmitButton();
+});
+
+test('Test that browse opportunity works', async () => {
+  await navBar.gotoBrowseOpportunityPage();
+  await browseOpportunityPage.isDisplayed();
+});
+
+test('Test that event profile works', async () => {
+  await navBar.gotoEventProfilePage();
+  await eventProfilePage.isDisplayed();
+});
+
+test.only('Test that every role has the inbox pages', async () => {
+  await navBar.gotoSigninPage();
+  await signInPage.signin(adminCredentials.username, adminCredentials.password);
+  await navBar.goToInboxPage();
+  await inboxPage.isDisplayed();
+  await navBar.logout();
+  await navBar.gotoSigninPage();
+  await signInPage.signin(orgCredentials.username, orgCredentials.password);
+  await navBar.goToInboxPage();
+  await inboxPage.isDisplayed();
+  await navBar.logout();
+  await navBar.gotoSigninPage();
+  await signInPage.signin(credentials.username, credentials.password);
+  await navBar.goToInboxPage();
+  await inboxPage.isDisplayed();
+  await navBar.logout();
 });

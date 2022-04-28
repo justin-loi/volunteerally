@@ -101,7 +101,7 @@ const NavBar = ({ currentUser, colorUsage, events }) => {
                 {Roles.userIsInRole(Meteor.userId(), [ROLE.ORGANIZATION]) ? (
                   <Dropdown.Item id={COMPONENT_IDS.ORGANIZATION_PROFILE} icon="user" text="My Profile" as={NavLink} exact to="/organization-profile/user" />
                 ) : ''}
-                <Dropdown.Item as={NavLink}
+                <Dropdown.Item id={COMPONENT_IDS.INBOX} as={NavLink}
                   exact
                   to="/inbox">
                   <Icon name={'mail'}/>

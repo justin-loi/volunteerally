@@ -1,6 +1,18 @@
 import React, { useState } from 'react';
 import { Meteor } from 'meteor/meteor';
-import { Container, Button, Header, Form, Divider, Loader, Grid, Icon, Segment, Image, Label } from 'semantic-ui-react';
+import {
+  Container,
+  Button,
+  Header,
+  Form,
+  Divider,
+  Loader,
+  Grid,
+  Icon,
+  Segment,
+  Image,
+  Label,
+} from 'semantic-ui-react';
 import { withTracker } from 'meteor/react-meteor-data';
 import { NavLink } from 'react-router-dom';
 import PropTypes from 'prop-types';
@@ -15,6 +27,7 @@ import { Interests } from '../../api/interest/InterestCollection';
 import { Environmental } from '../../api/environmental_preference/EnvironmentalPreferenceCollection';
 import { OrganizationEvent } from '../../api/event/OrganizationEventCollection';
 import { createNewMessageMethod } from '../../api/message/MessageCollection.methods';
+import { PAGE_IDS } from '../utilities/PageIDs';
 // import { ROLE } from '../../api/role/Role';
 
 // Renders a Event Info page that connects with the current Event collection.
@@ -123,7 +136,7 @@ const EventProfile = ({ currentUser, event, orgProfile, skills, environments, in
 
   return (
     ((ready) ? (
-      <div>
+      <div id={PAGE_IDS.EVENT_PROFILE} >
         <Grid stackable container verticalAlign="bottom" textAlign='center' columns={3}>
           <Grid.Row>
             <Image src={event.eventProfileImage} fluid/>
