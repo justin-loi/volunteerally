@@ -25,17 +25,17 @@ const OrganizationLibrary = ({ ready, organizations }) => ((ready) ? (
       <Header as="h3" textAlign="center">
 Join over 20 organizations already finding the help they need with Volunteer Ally.
       </Header>
-        <Container textAlign="left">
-      <p>There are thousands of active volunteers waiting for opportunities to work with qualified organizations.
+      <Container textAlign="left">
+        <p>There are thousands of active volunteers waiting for opportunities to work with qualified organizations.
             Make sure your organization is volunteer-ready with Volunteer Ally.
             Our system allows you to easily post your volunteer opportunities and have them easily found
             by qualified volunteers – all for free! <br/> </p>
-      <p>Here are some of the great features you’ll find with Volunteer Ally</p>
-      <Icon color='blue' name ='check'/> Access to hundreds of volunteers with a wide range of skills and availability <br/>
-      <Icon color='blue' name ='check'/> Direct opportunity RSVPs to your inbox <br/>
-      <Icon color='blue' name ='check'/> Database of volunteers and opportunities <br/>
-      <Icon color='blue' name ='check'/> Integration-ready <br/>
-        </Container>
+        <p>Here are some of the great features you’ll find with Volunteer Ally</p>
+        <Icon color='blue' name ='check'/> Access to hundreds of volunteers with a wide range of skills and availability <br/>
+        <Icon color='blue' name ='check'/> Direct opportunity RSVPs to your inbox <br/>
+        <Icon color='blue' name ='check'/> Database of volunteers and opportunities <br/>
+        <Icon color='blue' name ='check'/> Integration-ready <br/>
+      </Container>
     </Grid.Row>
   </Grid>
 ) : <Loader active>Getting data</Loader>);

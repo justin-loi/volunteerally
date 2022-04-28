@@ -96,4 +96,6 @@ export const COMPONENT_IDS = {
   NAVBAR_BROWSE_OPPORTUNITIES: 'browse-opportunities',
   NAVBAR_FILTER_OPPORTUNITIES: 'filter-opportunities',
   NAVBAR_BROWSE_DROPDOWN: 'browse-dropdown',
+  EDIT_VOLUNTEER_BUTTON: 'edit-volunteer-page-button',
+  EDIT_VOLUNTEER_ADDRESS: 'edit-volunteer-page-address',
 };

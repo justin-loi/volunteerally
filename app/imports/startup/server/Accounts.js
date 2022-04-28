@@ -19,7 +19,7 @@ function createUser(email, role, firstName, lastName, password) {
 function createVolunteer(email, role, firstName, lastName, password, username, gender, dob, address, city, state, code, phoneNumber, image) {
   console.log(`  Creating user username: ${username} email: ${email} with role ${role}.`);
   if (role === ROLE.VOLUNTEER) {
-    VolunteerProfiles.define({ email, firstName, lastName, password, username, gender, dob, address, city, state, code, phoneNumber, image });
+    VolunteerProfiles.define({ email, firstName, lastName, password, username: email, gender, dob, address, city, state, code, phoneNumber, image });
   }
 }
 

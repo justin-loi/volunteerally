@@ -21,6 +21,7 @@ import { VolunteerInterest } from '../../api/interest/VolunteerInterestCollectio
 import { VolunteerSkill } from '../../api/special_skills/VolunteerSkillCollection';
 import { VolunteerEnvironmental } from '../../api/environmental_preference/VolunteerEnvironmentalCollection';
 import { VolunteerAvailability } from '../../api/availability/VolunteerAvailabilityCollection';
+import { COMPONENT_IDS } from '../utilities/ComponentIDs';
 
 const formSchema = new SimpleSchema({
   firstName: { type: String, optional: true },
@@ -145,7 +146,7 @@ const EditVolunteerProfile = ({ location, volunteer, volInterests, volSkills, vo
                 />
               ))}
             </Form.Group>
-            <TextField name='address' placeholder='1234 Example Street' iconLeft='map marker alternate'/>
+            <TextField id={COMPONENT_IDS.EDIT_VOLUNTEER_ADDRESS} name='address' placeholder='1234 Example Street' iconLeft='map marker alternate'/>
             <div className="two fields">
               <div className="field">
                 <TextField name='city' placeholder='Honolulu' iconLeft='map marker alternate'/>

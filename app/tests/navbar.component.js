@@ -61,6 +61,14 @@ class NavBar {
     await t.click(`#${COMPONENT_IDS.NAVBAR_MANAGE_DROPDOWN}`);
     await t.click(`#${COMPONENT_IDS.NAVBAR_MANAGE_DROPDOWN_DATABASE}`);
   }
+
+  /** Go to the list stuff page. */
+  async gotoVolunteerProfilePage() {
+    await t.expect(Selector(`#${COMPONENT_IDS.NAVBAR_CURRENT_USER}`).exists).ok();
+    await t.click(`#${COMPONENT_IDS.NAVBAR_CURRENT_USER}`);
+    await t.expect(Selector(`#${COMPONENT_IDS.VOLUNTEER_PROFILE}`).exists).ok();
+    await t.click(`#${COMPONENT_IDS.VOLUNTEER_PROFILE}`);
+  }
 }
 
 export const navBar = new NavBar();

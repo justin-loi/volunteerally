@@ -3,6 +3,8 @@ import { signInPage } from './signin.page';
 import { navBar } from './navbar.component';
 import { volunteerSignupPage } from './volunteersignup.page';
 import { landingPage } from './landing.page';
+import { volunteerProfilePage } from './volunteerporfile.page';
+import { editVolunteerProfilePage } from './editvolunteerporfile.page';
 
 /* global fixture:false, test:false */
 
@@ -10,11 +12,12 @@ import { landingPage } from './landing.page';
 const credentials = { username: 'john@foo.com', password: 'changeme' };
 const adminCredentials = { username: 'admin@foo.com', password: 'changeme' };
 const newCredentials = { username: 'janefonda@foo.com', password: 'changeme' };
+const volunteer = { username: 'jerry@foo.com', password: 'changeme' };
 
 fixture('matrp localhost test with default db')
   .page('http://localhost:3000');
 
-test.only('Test that landing page shows up', async () => {
+test('Test that landing page shows up', async () => {
   await landingPage.isDisplayed();
 });
 
@@ -43,4 +46,23 @@ test('Test that admin pages show up', async () => {
   await navBar.gotoSigninPage();
   await signInPage.signin(adminCredentials.username, adminCredentials.password);
   await navBar.isLoggedIn(adminCredentials.username);
+});
+
+test('Test that volunteer profile pages show up', async () => {
+  await navBar.gotoSigninPage();
+  await signInPage.signin(volunteer.username, volunteer.password);
+  await navBar.isLoggedIn(volunteer.username);
+  await navBar.gotoVolunteerProfilePage();
+  await volunteerProfilePage.isDisplayed();
+});
+
+test('Test that edit volunteer profile pages work', async () => {
+  await navBar.gotoSigninPage();
+  await signInPage.signin(volunteer.username, volunteer.password);
+  await navBar.isLoggedIn(volunteer.username);
+  await navBar.gotoVolunteerProfilePage();
+  await volunteerProfilePage.clickEditVolunteerButton();
+  await editVolunteerProfilePage.isDisplayed();
+  await editVolunteerProfilePage.changeData();
+  await editVolunteerProfilePage.clickSubmitButton();
 });
