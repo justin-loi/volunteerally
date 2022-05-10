@@ -46,7 +46,14 @@ const EventCard = ({ event }) => {
   };
 
   const convertTime = (time) => {
-    const splitArray = time.split(':');
+    const splitArray = [''];
+    for (let i = 0; i < time.length; i++) {
+      if (time[i] !== ':') {
+        splitArray[splitArray.length - 1] += time[i];
+      } else if (splitArray[splitArray.length - 1]) {
+        splitArray.push('');
+      }
+    }
     if (splitArray[0] > 12) {
       splitArray[0] -= 12;
       splitArray[3] = ' PM';
@@ -61,7 +68,15 @@ const EventCard = ({ event }) => {
   const convertDate = (date) => {
     let returnValue;
     let setter = false;
-    const splitArray = date.split('-');
+    const splitArray = [''];
+
+    for (let i = 0; i < date.length; i++) {
+      if (date[i] !== '-') {
+        splitArray[splitArray.length - 1] += date[i];
+      } else if (splitArray[splitArray.length - 1]) {
+        splitArray.push('');
+      }
+    }
     if (splitArray[0] > 0) {
       setter = true;
       const months = ['January', 'February', 'March', 'April', 'May', 'June',
