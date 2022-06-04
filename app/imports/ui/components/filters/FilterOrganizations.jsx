@@ -19,7 +19,6 @@ const makeOrganizationSchema = (allOrganizations) => new SimpleSchema({
 
 /** Renders the Profile Collection as a set of Cards. */
 const FilterOrganizations = ({ ready }) => {
-  console.log(ready);
   const [organizations, setOrganizations] = useState([]);
   const allOrganizations = _.pluck(OrganizationProfiles.find({}, {}).fetch(), 'organizationName');
   const organizationFormSchema = makeOrganizationSchema(allOrganizations);

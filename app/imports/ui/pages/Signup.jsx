@@ -9,7 +9,9 @@ import { COMPONENT_IDS } from '../utilities/ComponentIDs';
 /**
  * Signup component is similar to signin component, but we create a new user instead.
  */
-const Signup = ({ location }) => {
+const Signup = (props) => {
+  const { location } = props;
+  console.log(props);
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');

@@ -394,8 +394,13 @@ export default withTracker(({ match }) => {
   const subscription7 = Environmental.subscribe();
   const subscription8 = OrganizationProfiles.subscribe();
   const subscription9 = OrganizationEvent.subscribe();
+
   const ready = subscription1.ready() && subscription2.ready() && subscription3.ready() && subscription4.ready() &&
     subscription5.ready() && subscription6.ready() && subscription7.ready() && subscription8.ready() && subscription9.ready();
+  if (!ready) {
+    return null;
+  }
+  
   const event = Events.find({ _id: eventID }).fetch()[0];
   const orgProfile = OrganizationProfiles.findOne({ email: event.owner }, {});
   const skillPairs = EventSkill.find({ eventID: eventID }, {}).fetch();

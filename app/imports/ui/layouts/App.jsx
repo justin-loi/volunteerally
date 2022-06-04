@@ -45,7 +45,6 @@ class App extends React.Component {
         <div>
           <NavBar/>
           <Switch>
-            <Route exact path="/" component={Landing}/>
             <Route path="/signin" component={Signin}/>
             <Route path="/volunteer_signup" component={VolunteerSignUp}/>
             <VolProtectedRoute path="/edit-volunteer-profile/:_id" component={EditVolunteerProfile}/>
@@ -79,6 +78,7 @@ class App extends React.Component {
             <AdminProtectedRoute path="/admin" component={ListStuffAdmin}/>
             <AdminProtectedRoute path="/manage-database" component={ManageDatabase}/>
             <Route path='/volunteer-list-for-event/:_id' component={VolunteerListForEvent}/>
+            <Route exact path="/" component={Landing}/>
             <Route component={NotFound}/>
           </Switch>
           <Footer/>
